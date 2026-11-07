@@ -1,0 +1,11 @@
+{
+  "name": "airon-native",
+  "private": true,
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "build": "npm --prefix website run build",
+    "test": "npm --prefix website test"
+  }
+}

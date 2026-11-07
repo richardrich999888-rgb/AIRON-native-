@@ -1,0 +1,11 @@
+node_modules/
+dist/
+outputs/
+.env*
+.vercel/
+.netlify/
+__pycache__/
+*.pyc
+records/
+*.tsbuildinfo
+.DS_Store
