@@ -1,0 +1,76 @@
+[submodule "third_party/training/soup"]
+	path = third_party/training/soup
+	url = https://github.com/MakazhanAlpamys/Soup.git
+	shallow = true
+[submodule "third_party/training/unsloth"]
+	path = third_party/training/unsloth
+	url = https://github.com/unslothai/unsloth.git
+	shallow = true
+[submodule "third_party/training/llama-factory"]
+	path = third_party/training/llama-factory
+	url = https://github.com/hiyouga/LlamaFactory.git
+	shallow = true
+[submodule "third_party/training/axolotl"]
+	path = third_party/training/axolotl
+	url = https://github.com/axolotl-ai-cloud/axolotl.git
+	shallow = true
+[submodule "third_party/training/peft"]
+	path = third_party/training/peft
+	url = https://github.com/huggingface/peft.git
+	shallow = true
+[submodule "third_party/training/trl"]
+	path = third_party/training/trl
+	url = https://github.com/huggingface/trl.git
+	shallow = true
+[submodule "third_party/training/litgpt"]
+	path = third_party/training/litgpt
+	url = https://github.com/Lightning-AI/litgpt.git
+	shallow = true
+[submodule "third_party/inference/llama-cpp"]
+	path = third_party/inference/llama-cpp
+	url = https://github.com/ggml-org/llama.cpp.git
+	shallow = true
+[submodule "third_party/inference/mlx-lm"]
+	path = third_party/inference/mlx-lm
+	url = https://github.com/ml-explore/mlx-lm.git
+	shallow = true
+[submodule "third_party/knowledge/docling"]
+	path = third_party/knowledge/docling
+	url = https://github.com/docling-project/docling.git
+	shallow = true
+[submodule "third_party/knowledge/chroma"]
+	path = third_party/knowledge/chroma
+	url = https://github.com/chroma-core/chroma.git
+	shallow = true
+[submodule "third_party/knowledge/haystack"]
+	path = third_party/knowledge/haystack
+	url = https://github.com/deepset-ai/haystack.git
+	shallow = true
+[submodule "third_party/evaluation/lm-evaluation-harness"]
+	path = third_party/evaluation/lm-evaluation-harness
+	url = https://github.com/EleutherAI/lm-evaluation-harness.git
+	shallow = true
+[submodule "third_party/evaluation/evidently"]
+	path = third_party/evaluation/evidently
+	url = https://github.com/evidentlyai/evidently.git
+	shallow = true
+[submodule "third_party/lifecycle/mlflow"]
+	path = third_party/lifecycle/mlflow
+	url = https://github.com/mlflow/mlflow.git
+	shallow = true
+[submodule "third_party/lifecycle/dvc"]
+	path = third_party/lifecycle/dvc
+	url = https://github.com/treeverse/dvc.git
+	shallow = true
+[submodule "third_party/security/modelscan"]
+	path = third_party/security/modelscan
+	url = https://github.com/protectai/modelscan.git
+	shallow = true
+[submodule "third_party/security/cosign"]
+	path = third_party/security/cosign
+	url = https://github.com/sigstore/cosign.git
+	shallow = true
+[submodule "third_party/orchestration/langgraph"]
+	path = third_party/orchestration/langgraph
+	url = https://github.com/langchain-ai/langgraph.git
+	shallow = true
