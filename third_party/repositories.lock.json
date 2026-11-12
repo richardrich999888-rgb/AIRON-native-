@@ -1,0 +1,1024 @@
+{
+  "schema_version": 1,
+  "task": "P0-053",
+  "scope": "Source acquisition and preservation only; no integration or functionality validation.",
+  "generated_at_utc": "2026-11-12T18:27:29.028804+00:00",
+  "generated_at_ist": "2026-11-12T23:57:29.028804+05:30",
+  "airon_repository_url": "https://github.com/richardrich999888-rgb/AIRON-native-",
+  "preservation_branch": "research/p0-053-opensource-capability-library",
+  "base_default_branch": "main",
+  "base_commit_sha": "04a84e64fc2be36fe03fc73006c9a42285617a02",
+  "storage_strategy": "Exact-commit Git submodules. Upstream source blobs are not vendored into AIRON history.",
+  "history_policy": "Top-level submodules were cloned with depth 1; .gitmodules recommends shallow clones. Gitlinks pin immutable commits, not moving branch heads.",
+  "external_artifact_policy": "GIT_LFS_SKIP_SMUDGE=1; no git lfs pull, model downloads, dataset downloads, dependency installation, builds or upstream code execution. Files already tracked by upstream remain unchanged in their submodules.",
+  "priority_legend": {
+    "P1": "First future review candidate",
+    "P2": "Secondary or alternative future review candidate",
+    "P3": "Platform-specific future review candidate",
+    "INHERITED_ONLY": "Restored because an upstream commit pins it; no independent integration priority"
+  },
+  "license_inventory_scope": "Declared root licences plus observed component-specific exceptions; tracked licence/notice blobs are hashed and preserved in upstream checkouts. For symlinks, sha256 hashes the Git blob (link target), and resolved_content_sha256 hashes the resolved licence text. This is not a claim of full transitive dependency or file-header licence clearance.",
+  "repository_count": 19,
+  "successful_clone_count": 19,
+  "failed_repositories": [],
+  "gitmodules_sha256": "b2fadd2713579cceb6fcad5816468b3d40e1805b377033ad7a5b2be556fe9d28",
+  "gitlink_pins_sha256": "1b46b6e3e5f6e91a1f6bd06810b7d046b44242bad387b1b7e6a70f4da1b5acc6",
+  "verification": {
+    "status": "PASS",
+    "verified_at_utc": "2026-11-12T18:27:27.567926+00:00",
+    "clean_checkout_recursive_update_exit_code": 0,
+    "verified_direct_submodules": 19,
+    "verified_transitive_submodules": 1,
+    "verified_license_notice_paths_per_workspace": 71,
+    "existing_airon_tree_unchanged": true,
+    "all_upstream_working_trees_clean": true,
+    "gitmodules_sha256": "b2fadd2713579cceb6fcad5816468b3d40e1805b377033ad7a5b2be556fe9d28",
+    "gitlink_pins_sha256": "1b46b6e3e5f6e91a1f6bd06810b7d046b44242bad387b1b7e6a70f4da1b5acc6",
+    "added_parent_blob_paths": [
+      ".gitmodules",
+      "third_party/MANIFEST.md",
+      "third_party/repositories.lock.json",
+      "third_party/CLONE_STATUS.md"
+    ],
+    "added_blob_limit_bytes": 1048576,
+    "credential_pattern_matches_in_added_parent_blobs": 0,
+    "source_restoration_only": true
+  },
+  "repositories": [
+    {
+      "name": "Soup",
+      "github_url": "https://github.com/MakazhanAlpamys/Soup",
+      "clone_url": "https://github.com/MakazhanAlpamys/Soup.git",
+      "default_branch": "main",
+      "local_directory": "third_party/training/soup",
+      "commit_sha": "527314a446d52ffdeb2975c8dcd2c849a5d534b5",
+      "tree_sha": "eed367ba45a392184e69b2e93aa157dcd7d89245",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 3867,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:34.572435+00:00",
+      "declared_license": "Apache-2.0",
+      "intended_integration_priority": "P1",
+      "primary_capability": "Local fine-tuning workflows and memory-efficient adaptation research.",
+      "additional_restrictions_and_notes": "Root Apache-2.0 terms and NOTICE are preserved. README explicitly calls out retaining LICENSE/NOTICE and limits on using the Soup name.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "size_bytes": 11358,
+          "kind": "file"
+        },
+        {
+          "path": "NOTICE",
+          "sha256": "255803a9703667f05fa0d0b093499b83c63561b2bd5baa7c92288b88a773ba0f",
+          "size_bytes": 63,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 3867,
+        "tracked_blob_bytes": 71344125,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "Unsloth",
+      "github_url": "https://github.com/unslothai/unsloth",
+      "clone_url": "https://github.com/unslothai/unsloth.git",
+      "default_branch": "main",
+      "local_directory": "third_party/training/unsloth",
+      "commit_sha": "d9827dc39670816e0cc6b94b94d4c3c0a4a25f79",
+      "tree_sha": "1177ca1b0b58d5804b1f3a47fd691b819d42faf9",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 10734,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:34.730890+00:00",
+      "declared_license": "Apache-2.0 core; AGPL-3.0 components",
+      "intended_integration_priority": "P2",
+      "primary_capability": "Efficient adapter training and model adaptation research.",
+      "additional_restrictions_and_notes": "Do not treat the entire checkout as Apache-2.0. README identifies Apache-2.0 core and AGPL-3.0 optional components; COPYING, studio/LICENSE.AGPL-3.0, unsloth/kernels/moe/LICENSE and unsloth/kernels/moe/grouped_gemm/LICENSE contain AGPL-3.0 terms. Component scope must be checked before future reuse. Other vendored licences and notices are retained.",
+      "license_notice_files": [
+        {
+          "path": "COPYING",
+          "sha256": "4c5cff5c6011f8773f358bd083148fec38aa55b58d553c06e3e22f9fadd64403",
+          "size_bytes": 34676,
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "40e0b458a68b557560def38b106a1a0da1aac57685536dcb882f1c78c647e4d3",
+          "size_bytes": 11550,
+          "kind": "file"
+        },
+        {
+          "path": "docker/NOTICE",
+          "sha256": "234bb1bffc64778d289f1b2ac80ec71d338a2db3d2e5886975e079833ca448dd",
+          "size_bytes": 2106,
+          "kind": "file"
+        },
+        {
+          "path": "studio/LICENSE.AGPL-3.0",
+          "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+          "size_bytes": 34523,
+          "kind": "file"
+        },
+        {
+          "path": "studio/backend/assets/docs_ui/LICENSE.redoc",
+          "sha256": "d3026d549cf68ab7355bcfa85877bf8f845b3334a7efbfdc63936432fb34ff0e",
+          "size_bytes": 1091,
+          "kind": "file"
+        },
+        {
+          "path": "studio/backend/assets/docs_ui/LICENSE.swagger-ui",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "size_bytes": 11358,
+          "kind": "file"
+        },
+        {
+          "path": "studio/backend/assets/docs_ui/NOTICE.swagger-ui",
+          "sha256": "0d20d1adef18aee3f40dd258172155521ce702ac445cb5f7b7d60ed32dad2fb2",
+          "size_bytes": 55,
+          "kind": "file"
+        },
+        {
+          "path": "studio/backend/assets/docs_ui/swagger-ui-bundle.js.LICENSE.txt",
+          "sha256": "2c633ccf3dfb8cf4e1638eff47e55496cb3a869d7389975cc3862a3badb9a570",
+          "size_bytes": 3326,
+          "kind": "file"
+        },
+        {
+          "path": "studio/backend/vendor/LICENSE",
+          "sha256": "33be7b7e8fa4fd19b1760e1a8ed8a668bdab852c91b692dd41424bcb725a9fca",
+          "size_bytes": 1086,
+          "kind": "file"
+        },
+        {
+          "path": "studio/backend/vendor/LICENSE.diffusers",
+          "sha256": "f9e2070c247517b1ddf65f7b11b393484a18da91a958fd18a97bd0f241c3125c",
+          "size_bytes": 11357,
+          "kind": "file"
+        },
+        {
+          "path": "studio/backend/vendor/LICENSE.laya",
+          "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+          "size_bytes": 10173,
+          "kind": "file"
+        },
+        {
+          "path": "unsloth/_vendor/clef/LICENSE",
+          "sha256": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a",
+          "size_bytes": 11544,
+          "kind": "file"
+        },
+        {
+          "path": "unsloth/kernels/moe/LICENSE",
+          "sha256": "20b067f86de375aae6db0f283ab2e65de24d537733b89bd58432c101259d84cf",
+          "size_bytes": 34522,
+          "kind": "file"
+        },
+        {
+          "path": "unsloth/kernels/moe/grouped_gemm/LICENSE",
+          "sha256": "20b067f86de375aae6db0f283ab2e65de24d537733b89bd58432c101259d84cf",
+          "size_bytes": 34522,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 10734,
+        "tracked_blob_bytes": 189615421,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "LLaMA-Factory",
+      "github_url": "https://github.com/hiyouga/LlamaFactory",
+      "clone_url": "https://github.com/hiyouga/LlamaFactory.git",
+      "default_branch": "main",
+      "local_directory": "third_party/training/llama-factory",
+      "commit_sha": "6d1059c727450a4f58e56ad204d01a71abad7781",
+      "tree_sha": "9ccd1e5a1402ae8ce5cd3bb571dfe37d1a0993d9",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 632,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:34.707791+00:00",
+      "declared_license": "Apache-2.0",
+      "intended_integration_priority": "P2",
+      "primary_capability": "Alternative configurable fine-tuning workflows.",
+      "additional_restrictions_and_notes": "No additional project-specific restriction identified in the reviewed root licence and declarations. Separately licensed dependencies, services, models and data are outside this root-licence label; any bundled notices remain intact.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "50e6751797c50dedd75ef1b8a0d9e42f5f8472e9fbce91f34718e9f97b0c780a",
+          "size_bytes": 11324,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 632,
+        "tracked_blob_bytes": 13971138,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "Axolotl",
+      "github_url": "https://github.com/axolotl-ai-cloud/axolotl",
+      "clone_url": "https://github.com/axolotl-ai-cloud/axolotl.git",
+      "default_branch": "main",
+      "local_directory": "third_party/training/axolotl",
+      "commit_sha": "27bb23ce38373105027470b0d718f5ba87a01cb7",
+      "tree_sha": "d439a14ad17fadcaa50c84518517ac1d18f8ecd1",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 2412,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:34.909342+00:00",
+      "declared_license": "Apache-2.0 root; Axolotl Community License integrations",
+      "intended_integration_priority": "P2",
+      "primary_capability": "Alternative training orchestration and configuration research.",
+      "additional_restrictions_and_notes": "Root Apache-2.0 does not describe every subtree. src/axolotl/integrations/LICENSE.md defines a separate Axolotl Community License covering that directory and its subdirectories: section 3.1 restricts commercial activity offering third-party model fine-tuning services/platforms, whether free or paid; section 3.2 includes reverse-engineering and notice-removal restrictions. This is a restricted source-available component. cut_cross_entropy/LICENSE has separate Apple terms and refers to ACKNOWLEDGEMENTS.md. All nested licences/notices remain intact.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "size_bytes": 11358,
+          "kind": "file"
+        },
+        {
+          "path": "packages/tree-recurrence/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "size_bytes": 11358,
+          "kind": "file"
+        },
+        {
+          "path": "src/axolotl/core/trainers/prm/LICENSE",
+          "sha256": "1bf614b1fdc40fbd344aa58d00d17d5fd0d252ea333a05be018a38959c8b2998",
+          "size_bytes": 11355,
+          "kind": "file"
+        },
+        {
+          "path": "src/axolotl/core/trainers/prm/NOTICE",
+          "sha256": "eb05a2bbda6894b51b3e758282a63aeacfc9a963566ee12edc4055dc0816f970",
+          "size_bytes": 461,
+          "kind": "file"
+        },
+        {
+          "path": "src/axolotl/integrations/LICENSE.md",
+          "sha256": "923851cf4bbc3e20df8be464d3215c6f5a30118650217adf2f16796ef52f93d1",
+          "size_bytes": 4949,
+          "kind": "file"
+        },
+        {
+          "path": "src/axolotl/integrations/cut_cross_entropy/ACKNOWLEDGEMENTS.md",
+          "sha256": "2fececc3e8819466cc24ec67e6b31d78e9be708671b5bb38ac18006f0cee929c",
+          "size_bytes": 16775,
+          "kind": "file"
+        },
+        {
+          "path": "src/axolotl/integrations/cut_cross_entropy/LICENSE",
+          "sha256": "4862c77f9bf843ff8fca191ae1d124a94849105dba5891bc33aa934440732600",
+          "size_bytes": 2684,
+          "kind": "file"
+        },
+        {
+          "path": "src/axolotl/integrations/diffusion_decision/vendored/DJEV_LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "size_bytes": 11357,
+          "kind": "file"
+        },
+        {
+          "path": "src/axolotl/integrations/grokfast/LICENSE",
+          "sha256": "2dfc3f3c6948a28a963ca95c7a14423d6a27eee4cf0a0935c918d3a7db23e20d",
+          "size_bytes": 1110,
+          "kind": "file"
+        },
+        {
+          "path": "src/axolotl/integrations/liger/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "size_bytes": 11358,
+          "kind": "file"
+        },
+        {
+          "path": "src/axolotl/integrations/spectrum/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "size_bytes": 11358,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 2412,
+        "tracked_blob_bytes": 20705954,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "Hugging Face PEFT",
+      "github_url": "https://github.com/huggingface/peft",
+      "clone_url": "https://github.com/huggingface/peft.git",
+      "default_branch": "main",
+      "local_directory": "third_party/training/peft",
+      "commit_sha": "249e46b32eaad2068fdc62e696dcde14892406ae",
+      "tree_sha": "d0a2237c78e5ab428bcdf9c662f589a698ed440e",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 1044,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:41.033006+00:00",
+      "declared_license": "Apache-2.0",
+      "intended_integration_priority": "P1",
+      "primary_capability": "Parameter-efficient adapters for local model adaptation.",
+      "additional_restrictions_and_notes": "No additional project-specific restriction identified in the reviewed root licence and declarations. Separately licensed dependencies, services, models and data are outside this root-licence label; any bundled notices remain intact.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "size_bytes": 11357,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 1044,
+        "tracked_blob_bytes": 26153294,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "Hugging Face TRL",
+      "github_url": "https://github.com/huggingface/trl",
+      "clone_url": "https://github.com/huggingface/trl.git",
+      "default_branch": "main",
+      "local_directory": "third_party/training/trl",
+      "commit_sha": "eb5a93fd86f3eb76c195d0c37521671a44a26ddb",
+      "tree_sha": "cb01dadb27a24bbe5a633c756bd1f13a15402f8c",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 614,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:41.004474+00:00",
+      "declared_license": "Apache-2.0",
+      "intended_integration_priority": "P2",
+      "primary_capability": "Supervised and preference-based post-training research.",
+      "additional_restrictions_and_notes": "No additional project-specific restriction identified in the reviewed root licence and declarations. Separately licensed dependencies, services, models and data are outside this root-licence label; any bundled notices remain intact.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "1bf614b1fdc40fbd344aa58d00d17d5fd0d252ea333a05be018a38959c8b2998",
+          "size_bytes": 11355,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 614,
+        "tracked_blob_bytes": 10091675,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "LitGPT",
+      "github_url": "https://github.com/Lightning-AI/litgpt",
+      "clone_url": "https://github.com/Lightning-AI/litgpt.git",
+      "default_branch": "main",
+      "local_directory": "third_party/training/litgpt",
+      "commit_sha": "5341568a65e918a85cb284fac038de2157eebf3f",
+      "tree_sha": "c63e5fc2960747ef9de68552860ba4652be392b2",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 252,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:40.992879+00:00",
+      "declared_license": "Apache-2.0",
+      "intended_integration_priority": "P2",
+      "primary_capability": "Alternative lightweight training and fine-tuning workflows.",
+      "additional_restrictions_and_notes": "No additional project-specific restriction identified in the reviewed root licence and declarations. Separately licensed dependencies, services, models and data are outside this root-licence label; any bundled notices remain intact.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "ab89ceca19ca531005699095ca542f982fac92efd82f954f49ac17aa99a37cda",
+          "size_bytes": 11344,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 252,
+        "tracked_blob_bytes": 2857525,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "llama.cpp",
+      "github_url": "https://github.com/ggml-org/llama.cpp",
+      "clone_url": "https://github.com/ggml-org/llama.cpp.git",
+      "default_branch": "master",
+      "local_directory": "third_party/inference/llama-cpp",
+      "commit_sha": "2a4daf0e08d6a9b6993ee0d4a9a3cfc35a6f405c",
+      "tree_sha": "445f2b6c9555e93c2e2c526d68497d8f47d97a1d",
+      "observed_default_ref": "refs/heads/master",
+      "tracked_files": 4176,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:41.077948+00:00",
+      "declared_license": "MIT",
+      "intended_integration_priority": "P1",
+      "primary_capability": "Local quantized model inference.",
+      "additional_restrictions_and_notes": "Root MIT terms are retained. Vendored components retain their separate MIT, BSD and other notices; these are inventoried below. External model licences are separate.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d",
+          "size_bytes": 1078,
+          "kind": "file"
+        },
+        {
+          "path": "gguf-py/LICENSE",
+          "sha256": "ef78c7e6659e34c798194f0d344e807c722de70cbca1359ef54772661e11ca38",
+          "size_bytes": 1072,
+          "kind": "file"
+        },
+        {
+          "path": "licenses/LICENSE-jsonhpp",
+          "sha256": "c0d068392ea65358b798b8c165103560f06e9e3b38c4ab4e2d8810a7b931af86",
+          "size_bytes": 1075,
+          "kind": "file"
+        },
+        {
+          "path": "tools/ui/src/lib/vendors/big-integer/LICENSE",
+          "sha256": "e9b0e94f628e00b5ed98046cfa041696ff89eebbbdd54108ee350625bc6d0363",
+          "size_bytes": 1234,
+          "kind": "file"
+        },
+        {
+          "path": "tools/ui/src/lib/vendors/decimal.js/LICENCE.md",
+          "sha256": "3108b546bcff5d346923a82f48b2d252ca722f9088076db6d145f6b67757ad6c",
+          "size_bytes": 1104,
+          "kind": "file"
+        },
+        {
+          "path": "tools/ui/src/lib/vendors/nerdamer-prime/LICENSE",
+          "sha256": "c9f52548869a0a2e63a7100055c54cebf36b9327c8fc2da7cf9ca8dddc2f1cca",
+          "size_bytes": 1073,
+          "kind": "file"
+        },
+        {
+          "path": "vendor/cpp-httplib/LICENSE",
+          "sha256": "4b45cbe16d7b71b89ae6127e26e0d90a029198ca5e958ad8e3d0b8bbed364d8b",
+          "size_bytes": 1075,
+          "kind": "file"
+        },
+        {
+          "path": "vendor/hash/rotate-bits/LICENSE.md",
+          "sha256": "ca0b44aec101afb6b46f4c39b23369fa06a64fb9c0add37c2689d702156fee55",
+          "size_bytes": 1088,
+          "kind": "file"
+        },
+        {
+          "path": "vendor/hash/sha256/LICENSE",
+          "sha256": "b81d0022ca6367918c67b57e9647d3513ee58809fd4b0ef0b3492f1356bced25",
+          "size_bytes": 41,
+          "kind": "file"
+        },
+        {
+          "path": "vendor/hash/xxhash/LICENSE",
+          "sha256": "6ffedbc0f7878612d2b23589f1ff2ab15633e1df7963a5d9fc750ec5500c7e7a",
+          "size_bytes": 1389,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 4176,
+        "tracked_blob_bytes": 184232076,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "MLX LM",
+      "github_url": "https://github.com/ml-explore/mlx-lm",
+      "clone_url": "https://github.com/ml-explore/mlx-lm.git",
+      "default_branch": "main",
+      "local_directory": "third_party/inference/mlx-lm",
+      "commit_sha": "56230fa02b8ff8330daf26dc95c28480423ed5fe",
+      "tree_sha": "e61d1d4293ecd5d5cfa7a74a06adbccd5b9556e6",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 267,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:49.256463+00:00",
+      "declared_license": "MIT",
+      "intended_integration_priority": "P3",
+      "primary_capability": "Apple Silicon local inference and adaptation research.",
+      "additional_restrictions_and_notes": "No additional project-specific restriction identified in the reviewed root licence and declarations. Separately licensed dependencies, services, models and data are outside this root-licence label; any bundled notices remain intact.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "ccfab7ccb2ea306f71531c8ca77bb55507606cd90768b1e32b8b52ab5b48cf01",
+          "size_bytes": 1066,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 267,
+        "tracked_blob_bytes": 2670035,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "Docling",
+      "github_url": "https://github.com/docling-project/docling",
+      "clone_url": "https://github.com/docling-project/docling.git",
+      "default_branch": "main",
+      "local_directory": "third_party/knowledge/docling",
+      "commit_sha": "336e9dde255237a3bf68abaea727d9782f7417a9",
+      "tree_sha": "9021eecda7b43c63482444d16c56e24138277c46",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 1993,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:49.582305+00:00",
+      "declared_license": "MIT",
+      "intended_integration_priority": "P1",
+      "primary_capability": "Local document conversion and extraction for retrieval.",
+      "additional_restrictions_and_notes": "README states the codebase is MIT and that individual models have their own licences. No external model packages or weights were acquired. The checkout also preserves the separately licensed bundled material.",
+      "license_notice_files": [
+        {
+          "path": ".agents/skills/dignified-python/LICENSE",
+          "sha256": "e25b0c5be442bdf543e3f179ef0ae6a5edef5f5c70524fce00a2a657f5d3ed9d",
+          "size_bytes": 11348,
+          "kind": "file"
+        },
+        {
+          "path": ".github/license-header.txt",
+          "sha256": "40bc16245e04f90ce232fb017653eade19772e345dc014f5923c915983ff94bc",
+          "size_bytes": 78,
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "edb765d1e3e60d0c7a7d5fba5f2bb2c3c29f7465cecb5c22cf1185c884954e4c",
+          "size_bytes": 1072,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 1993,
+        "tracked_blob_bytes": 218138859,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "Chroma",
+      "github_url": "https://github.com/chroma-core/chroma",
+      "clone_url": "https://github.com/chroma-core/chroma.git",
+      "default_branch": "main",
+      "local_directory": "third_party/knowledge/chroma",
+      "commit_sha": "1a3ac2c7c623adbd03ed2508dc27b98cdf26016d",
+      "tree_sha": "c8b5b11916e24ef82cce2a4e17c71a35b00c9e68",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 2188,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:49.300386+00:00",
+      "declared_license": "Apache-2.0",
+      "intended_integration_priority": "P1",
+      "primary_capability": "Local vector storage and retrieval.",
+      "additional_restrictions_and_notes": "No additional project-specific restriction identified in the reviewed root licence and declarations. Separately licensed dependencies, services, models and data are outside this root-licence label; any bundled notices remain intact.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "size_bytes": 11357,
+          "kind": "file"
+        },
+        {
+          "path": "clients/js/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "size_bytes": 11357,
+          "kind": "file"
+        },
+        {
+          "path": "clients/new-js/packages/chromadb/LICENSE",
+          "sha256": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
+          "size_bytes": 11356,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 2188,
+        "tracked_blob_bytes": 47982855,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "Haystack",
+      "github_url": "https://github.com/deepset-ai/haystack",
+      "clone_url": "https://github.com/deepset-ai/haystack.git",
+      "default_branch": "main",
+      "local_directory": "third_party/knowledge/haystack",
+      "commit_sha": "104a83f8799b1b8d9d18a88eb9a08305133aea2d",
+      "tree_sha": "8f1173021de74918171eb366e865262a887e015e",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 13590,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:49.989276+00:00",
+      "declared_license": "Apache-2.0",
+      "intended_integration_priority": "P2",
+      "primary_capability": "Retrieval and document-processing pipeline research.",
+      "additional_restrictions_and_notes": "No additional project-specific restriction identified in the reviewed root licence and declarations. Separately licensed dependencies, services, models and data are outside this root-licence label; any bundled notices remain intact.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "3f0a3af7e9b0f3b6358aaa3c7501ab522a67dc5483b870e9a8b3db41ea42e249",
+          "size_bytes": 11343,
+          "kind": "file"
+        },
+        {
+          "path": "license-header.txt",
+          "sha256": "a7b7a927961e276ff7065c14cd3c7f3ea547a4c844ac8072be40245c69daacc6",
+          "size_bytes": 128,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 13590,
+        "tracked_blob_bytes": 120629294,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "LM Evaluation Harness",
+      "github_url": "https://github.com/EleutherAI/lm-evaluation-harness",
+      "clone_url": "https://github.com/EleutherAI/lm-evaluation-harness.git",
+      "default_branch": "main",
+      "local_directory": "third_party/evaluation/lm-evaluation-harness",
+      "commit_sha": "d6de81643928d653435c431bae19945d41d32520",
+      "tree_sha": "b4b7c5d7c16a287b1025906d61720c77fb70fb8b",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 16415,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:57.810421+00:00",
+      "declared_license": "MIT",
+      "intended_integration_priority": "P1",
+      "primary_capability": "Future reproducible language-model evaluation.",
+      "additional_restrictions_and_notes": "Root MIT terms are retained. Referenced benchmarks/datasets and model weights have their own terms; none were separately downloaded or executed.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "a806e42547620dffbc2ec0333322c8b3523b4af11e059be14ef81aa5b1ae021f",
+          "size_bytes": 1067,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 16415,
+        "tracked_blob_bytes": 13907399,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "Evidently",
+      "github_url": "https://github.com/evidentlyai/evidently",
+      "clone_url": "https://github.com/evidentlyai/evidently.git",
+      "default_branch": "main",
+      "local_directory": "third_party/evaluation/evidently",
+      "commit_sha": "34771fe41c08ca074d96a52aaf4a45cd640cbaf5",
+      "tree_sha": "9bfc7e3613198dc8e16905501c09c363f69a7978",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 1238,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:57.555564+00:00",
+      "declared_license": "Apache-2.0",
+      "intended_integration_priority": "P2",
+      "primary_capability": "Future model, data-quality and drift reporting.",
+      "additional_restrictions_and_notes": "No additional project-specific restriction identified in the reviewed root licence and declarations. Separately licensed dependencies, services, models and data are outside this root-licence label; any bundled notices remain intact.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "379054a067cbe8e134e084287550e9391d2804636687c4723f80a2c58a463f0e",
+          "size_bytes": 11353,
+          "kind": "file"
+        },
+        {
+          "path": "src/evidently/nbextension/static/index.js.LICENSE.txt",
+          "sha256": "213909f422d5d73f9e825e8248f9b032534bbf9b5ded561f2bbc5c83455720aa",
+          "size_bytes": 2238,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 1238,
+        "tracked_blob_bytes": 42490240,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "MLflow",
+      "github_url": "https://github.com/mlflow/mlflow",
+      "clone_url": "https://github.com/mlflow/mlflow.git",
+      "default_branch": "master",
+      "local_directory": "third_party/lifecycle/mlflow",
+      "commit_sha": "c980e95c1c349820b42031e1f9e6f34365fc57a3",
+      "tree_sha": "92a64490a0ba2efcaaeff018268b074b9663b986",
+      "observed_default_ref": "refs/heads/master",
+      "tracked_files": 10399,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:58.540714+00:00",
+      "declared_license": "Apache-2.0",
+      "intended_integration_priority": "P2",
+      "primary_capability": "Experiment records and model lifecycle tracking.",
+      "additional_restrictions_and_notes": "Root Apache-2.0 terms are retained. The upstream-pinned mlflow/assistant/skills submodule is included recursively and separately inventoried.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "6395355de6f391afff35996a30fb41b189b4991a4cb54993ace35ab69a0bfa28",
+          "size_bytes": 11382,
+          "kind": "file"
+        },
+        {
+          "path": "libs/skinny/LICENSE.txt",
+          "sha256": "47b4bab490cf1dab7c926d903070946d325feaad1d33ae7a07fa7012c3e5fd83",
+          "size_bytes": 17,
+          "kind": "symlink",
+          "symlink_target": "../../LICENSE.txt",
+          "resolved_content_sha256": "6395355de6f391afff35996a30fb41b189b4991a4cb54993ace35ab69a0bfa28"
+        },
+        {
+          "path": "libs/tracing/LICENSE.txt",
+          "sha256": "47b4bab490cf1dab7c926d903070946d325feaad1d33ae7a07fa7012c3e5fd83",
+          "size_bytes": 17,
+          "kind": "symlink",
+          "symlink_target": "../../LICENSE.txt",
+          "resolved_content_sha256": "6395355de6f391afff35996a30fb41b189b4991a4cb54993ace35ab69a0bfa28"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 10398,
+        "tracked_blob_bytes": 389034675,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": [
+          {
+            "path": "mlflow/assistant/skills",
+            "commit_sha": "6a505d8f30b7fbf93533cdf4e7d88fc30d66ba8b"
+          }
+        ]
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "DVC",
+      "github_url": "https://github.com/treeverse/dvc",
+      "clone_url": "https://github.com/treeverse/dvc.git",
+      "default_branch": "main",
+      "local_directory": "third_party/lifecycle/dvc",
+      "commit_sha": "b59add99ee667f2b352cc1be337619f965fe3fea",
+      "tree_sha": "a7efbc5a1bf4e0b20d82e1fa2d07b257e501564f",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 591,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:21:57.510094+00:00",
+      "declared_license": "Apache-2.0",
+      "intended_integration_priority": "P2",
+      "primary_capability": "Versioned data/model references and reproducible pipelines.",
+      "additional_restrictions_and_notes": "No additional project-specific restriction identified in the reviewed root licence and declarations. Separately licensed dependencies, services, models and data are outside this root-licence label; any bundled notices remain intact.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "e817a2cc039b0cf9902431510648773913ccc942dc01a07697cd6f88cf479e15",
+          "size_bytes": 11340,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 591,
+        "tracked_blob_bytes": 3061136,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "ModelScan",
+      "github_url": "https://github.com/protectai/modelscan",
+      "clone_url": "https://github.com/protectai/modelscan.git",
+      "default_branch": "main",
+      "local_directory": "third_party/security/modelscan",
+      "commit_sha": "61fcec9c2a37c24c1fb12d84ede30fe248a364bd",
+      "tree_sha": "e6210e4fe2680134117e63c98bf4cfb63cb437a4",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 78,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:22:05.590152+00:00",
+      "declared_license": "Apache-2.0",
+      "intended_integration_priority": "P1",
+      "primary_capability": "Future static inspection of model serialization artifacts.",
+      "additional_restrictions_and_notes": "Root Apache-2.0 terms and the separate modelscan/tools/LICENSE notice are retained. Upstream test fixtures remain unchanged inside the submodule; no scanner or fixture was executed.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "bc192103a215fbcbd041214e62a08658a2785b31ad545ca84171652f5850517d",
+          "size_bytes": 10754,
+          "kind": "file"
+        },
+        {
+          "path": "modelscan/tools/LICENSE",
+          "sha256": "0c3201e0f230ae84a1d961a4ae6fa2b1576bd73fe60b2d22fda3669a8f7307bf",
+          "size_bytes": 2591,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 78,
+        "tracked_blob_bytes": 5001331,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "Sigstore Cosign",
+      "github_url": "https://github.com/sigstore/cosign",
+      "clone_url": "https://github.com/sigstore/cosign.git",
+      "default_branch": "main",
+      "local_directory": "third_party/security/cosign",
+      "commit_sha": "195ab76b789923862345f5fa9bfe3fac6c453927",
+      "tree_sha": "483e05ce112b7cfe2ccccf2ef9aa5ffd3c54a12a",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 490,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:22:05.595121+00:00",
+      "declared_license": "Apache-2.0",
+      "intended_integration_priority": "P1",
+      "primary_capability": "Artifact signature and provenance verification research.",
+      "additional_restrictions_and_notes": "Root Apache-2.0 terms and COPYRIGHT.txt are retained. Source acquisition does not perform signing, key generation or service registration.",
+      "license_notice_files": [
+        {
+          "path": "COPYRIGHT.txt",
+          "sha256": "6622d1d495e7d3a0e574c65e872f823cecbe585e25708d2223a28db016229119",
+          "size_bytes": 563,
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "size_bytes": 11357,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 490,
+        "tracked_blob_bytes": 4063224,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    },
+    {
+      "name": "LangGraph",
+      "github_url": "https://github.com/langchain-ai/langgraph",
+      "clone_url": "https://github.com/langchain-ai/langgraph.git",
+      "default_branch": "main",
+      "local_directory": "third_party/orchestration/langgraph",
+      "commit_sha": "a054ed08dcee7ecc4105706d38c0b4aa0b3c3c32",
+      "tree_sha": "32f22c6e11a95d41f75b344ff6198f10cf4cc3e9",
+      "observed_default_ref": "refs/heads/main",
+      "tracked_files": 706,
+      "clone_status": "SUCCESS",
+      "cloned_at_utc": "2026-11-12T18:22:05.618508+00:00",
+      "declared_license": "MIT",
+      "intended_integration_priority": "P2",
+      "primary_capability": "Stateful agent workflow orchestration research.",
+      "additional_restrictions_and_notes": "No additional project-specific restriction identified in the reviewed root licence and declarations. Separately licensed dependencies, services, models and data are outside this root-licence label; any bundled notices remain intact.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "d9bb52f2e3540d60ff50d8f0f5b6ba649b7fd346948c4c3d086c8afb120763c7",
+          "size_bytes": 1072,
+          "kind": "file"
+        },
+        {
+          "path": "libs/checkpoint-postgres/LICENSE",
+          "sha256": "d9bb52f2e3540d60ff50d8f0f5b6ba649b7fd346948c4c3d086c8afb120763c7",
+          "size_bytes": 1072,
+          "kind": "file"
+        },
+        {
+          "path": "libs/checkpoint-sqlite/LICENSE",
+          "sha256": "d9bb52f2e3540d60ff50d8f0f5b6ba649b7fd346948c4c3d086c8afb120763c7",
+          "size_bytes": 1072,
+          "kind": "file"
+        },
+        {
+          "path": "libs/checkpoint/LICENSE",
+          "sha256": "d9bb52f2e3540d60ff50d8f0f5b6ba649b7fd346948c4c3d086c8afb120763c7",
+          "size_bytes": 1072,
+          "kind": "file"
+        },
+        {
+          "path": "libs/cli/LICENSE",
+          "sha256": "d9bb52f2e3540d60ff50d8f0f5b6ba649b7fd346948c4c3d086c8afb120763c7",
+          "size_bytes": 1072,
+          "kind": "file"
+        },
+        {
+          "path": "libs/cli/js-examples/LICENSE",
+          "sha256": "a01dcffdc1291b4043f2a81d249a9f3e45c9036f2308c9cdfeefe18371371e80",
+          "size_bytes": 1066,
+          "kind": "file"
+        },
+        {
+          "path": "libs/langgraph/LICENSE",
+          "sha256": "d9bb52f2e3540d60ff50d8f0f5b6ba649b7fd346948c4c3d086c8afb120763c7",
+          "size_bytes": 1072,
+          "kind": "file"
+        },
+        {
+          "path": "libs/prebuilt/LICENSE",
+          "sha256": "d9bb52f2e3540d60ff50d8f0f5b6ba649b7fd346948c4c3d086c8afb120763c7",
+          "size_bytes": 1072,
+          "kind": "file"
+        },
+        {
+          "path": "libs/sdk-py/LICENSE",
+          "sha256": "d9bb52f2e3540d60ff50d8f0f5b6ba649b7fd346948c4c3d086c8afb120763c7",
+          "size_bytes": 1072,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 706,
+        "tracked_blob_bytes": 14614199,
+        "is_shallow_repository": true,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    }
+  ],
+  "transitive_submodules": [
+    {
+      "name": "MLflow skills (upstream transitive submodule)",
+      "github_url": "https://github.com/mlflow/skills",
+      "clone_url": "https://github.com/mlflow/skills",
+      "default_branch": "main",
+      "local_directory": "third_party/lifecycle/mlflow/mlflow/assistant/skills",
+      "parent_directory": "third_party/lifecycle/mlflow",
+      "commit_sha": "6a505d8f30b7fbf93533cdf4e7d88fc30d66ba8b",
+      "tree_sha": "f03aad299677ec62c17bb6424e287f47661f978e",
+      "declared_license": "Apache-2.0",
+      "clone_status": "SUCCESS",
+      "primary_capability": "Upstream MLflow assistant skill source; retained only to reproduce the recursive source checkout.",
+      "intended_integration_priority": "INHERITED_ONLY",
+      "additional_restrictions_and_notes": "Root Apache-2.0 terms retained. No skill installation or execution performed.",
+      "license_notice_files": [
+        {
+          "path": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "size_bytes": 11357,
+          "kind": "file"
+        }
+      ],
+      "source_snapshot": {
+        "tracked_file_count": 106,
+        "tracked_blob_bytes": 413002,
+        "is_shallow_repository": false,
+        "lfs_pointer_paths": [],
+        "nested_gitlinks": []
+      },
+      "upstream_source_modified": false
+    }
+  ]
+}
