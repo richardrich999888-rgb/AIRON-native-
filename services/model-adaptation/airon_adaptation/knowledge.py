@@ -18,7 +18,7 @@ def validate_documents(docs):
             raise Rejected("Invalid or duplicate document identity")
         ids.add(doc["id"])
         for field in ("title", "category", "version", "body"):
-            if not isinstance(doc[field], str) or not 1 <= len(doc[field]) <= 1000:
+            if not isinstance(doc[field], str) or not 1 <= len(doc[field].strip()) <= 1000:
                 raise Rejected("Invalid document text")
         if not isinstance(doc["roles"], list) or not doc["roles"] or any(
                 role not in {"analyst", "operator", "admin"} for role in doc["roles"]):

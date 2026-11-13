@@ -374,7 +374,7 @@ class Controller:
                   "dataset_digest": self._get(job["dataset_id"], "dataset")["digest"],
                   "base_digest": self._get(job["base_id"], "model")["digest"], "config_digest": job["config_digest"],
                   "metrics": metrics, "knowledge": knowledge_result, "passed": passed, "run_path": run.relative_to(self.root).as_posix(),
-                  "policy": "strict-improvement-no-regression-v1"}
+                  "policy": "strict-improvement-knowledge-preservation-v2"}
         self._put(ident, "evaluation", report)
         self._event(actor, "candidate_evaluated", report)
         return report
@@ -400,6 +400,10 @@ class Controller:
         evaluation = self._get(evaluation_id, "evaluation")
         if not evaluation["passed"] or evaluation["candidate_id"] != candidate_id or evaluation["candidate_digest"] != candidate["digest"]:
             raise Rejected("Matching passing evaluation required")
+        if self._all("knowledge") and (not evaluation.get("knowledge")
+                or not evaluation["knowledge"]["candidate_match"]
+                or evaluation["policy"] != "strict-improvement-knowledge-preservation-v2"):
+            raise Rejected("Current knowledge qualification is required")
         ident = self._new("approval")
         obj = {"id": ident, "candidate_id": candidate_id, "evaluation_id": evaluation_id,
                "evaluation_digest": digest(evaluation), "requested_by": actor, "decision": "PENDING",
@@ -428,6 +432,10 @@ class Controller:
         evaluation = self._get(approval["evaluation_id"], "evaluation")
         if digest(evaluation) != approval["evaluation_digest"] or not evaluation["passed"]:
             raise Rejected("Evaluation changed after approval")
+        if self._all("knowledge") and (not evaluation.get("knowledge")
+                or not evaluation["knowledge"]["candidate_match"]
+                or evaluation["policy"] != "strict-improvement-knowledge-preservation-v2"):
+            raise Rejected("Current knowledge qualification is required")
         if evaluation.get("knowledge") is not None:
             knowledge = self._get("knowledge", "knowledge")
             verify_tree(self.root/"knowledge", knowledge["manifest"])

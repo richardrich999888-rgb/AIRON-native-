@@ -409,9 +409,9 @@ def test_benchmark_gain_cannot_hide_knowledge_regression(lab):
     docs = json.loads((ctl.root/"knowledge"/"documents.json").read_text())
     metrics = {"test": {"count": 1, "baseline_accuracy": 0., "candidate_accuracy": 1.},
                "regression": {"count": 1, "baseline_accuracy": 1., "candidate_accuracy": 1.}}
-    outputs = [(Path("fixture"), metrics),
-               (Path("fixture"), {"text": docs[0]["body"], "generation_seconds": .1}),
-               (Path("fixture"), {"text": "K7", "generation_seconds": .1})]
+    outputs = [(ctl.root/"jobs"/"fixture", metrics),
+               (ctl.root/"jobs"/"fixture", {"text": docs[0]["body"], "generation_seconds": .1}),
+               (ctl.root/"jobs"/"fixture", {"text": "K7", "generation_seconds": .1})]
     with patch.object(ctl, "_execute", side_effect=outputs):
         evaluation = call(ctl, "evaluate_candidate", candidate_id=candidate["id"])
     assert not evaluation["passed"]
@@ -429,3 +429,12 @@ def test_retention_training_does_not_contain_frozen_document_answers():
         if row["split"] == "train":
             assert all(doc["body"] not in row["prompt"]+row["answer"] for doc in documents)
             assert all(q not in row["prompt"] for doc in documents for q in doc["questions"])
+
+
+def test_legacy_approval_cannot_bypass_new_document_gate(lab):
+    ctl = lab[0]
+    _, _, approval = approved_fixture(lab)
+    knowledge_fixture(ctl)
+    with pytest.raises(Rejected, match="knowledge qualification"):
+        review(ctl, "activate_model", approval_id=approval["id"])
+    assert ctl._get("deployment", "deployment")["active"] is None
