@@ -78,10 +78,16 @@ try:
         time.sleep(.2)
     if failed["status"] != "FAILED":
         raise RuntimeError("Malformed model did not fail in the actual loader")
+    failure_log = (ctl.root/failed["run_path"]/"worker.log").read_text(errors="replace")
+    loader_errors = [line for line in failure_log.splitlines()
+                     if "safetensors._safetensors_rust.SafetensorError:" in line]
+    if not loader_errors:
+        raise RuntimeError("Worker failed without the expected safetensors parser rejection")
     if invoke("status")["candidate"] or invoke("status")["deployment"][0]["active"] is not None:
         raise RuntimeError("Fault test affected candidate/deployment state")
     report["checks"]["real_malformed_model_rejection"] = {"passed": True, "status": failed["status"],
-                                                        "error": failed.get("error")}
+                                                        "error": failed.get("error"),
+                                                        "loader_error": loader_errors[-1]}
     report["passed"] = True
 except Exception as exc:
     report["failure"] = str(exc)

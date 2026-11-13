@@ -19,14 +19,16 @@ def test_empty_namespace_route_representations_accepted_only_with_failed_connect
 
 
 def test_same_network_namespace_rejected():
-    with patch("airon_adaptation.worker.os.readlink", return_value="net:[1]"), \
+    with patch("airon_adaptation.worker._trace_probe_marker"), \
+         patch("airon_adaptation.worker.os.readlink", return_value="net:[1]"), \
          patch("airon_adaptation.worker.Path.read_text", return_value=""):
         with pytest.raises(Rejected):
             isolation_probe("net:[1]")
 
 
 def test_external_route_rejected():
-    with patch("airon_adaptation.worker.os.readlink", return_value="net:[2]"), \
+    with patch("airon_adaptation.worker._trace_probe_marker"), \
+         patch("airon_adaptation.worker.os.readlink", return_value="net:[2]"), \
          patch("airon_adaptation.worker.Path.read_text", return_value="Iface Destination\neth0 00000000\n"):
         with pytest.raises(Rejected):
             isolation_probe("net:[1]")
