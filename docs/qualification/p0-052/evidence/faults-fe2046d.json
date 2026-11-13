@@ -1,0 +1,324 @@
+{
+  "schema": "airon-real-fault-check/v1",
+  "fixture": false,
+  "checks": {
+    "real_training_cancellation": {
+      "passed": true,
+      "observed_optimizer_progress": true,
+      "process_returncode": -9
+    },
+    "real_malformed_model_rejection": {
+      "passed": true,
+      "status": "FAILED",
+      "error": "Isolated worker failed with exit 1; inspect job log"
+    }
+  },
+  "passed": true,
+  "evidence": {
+    "public_key_hex": "d0ee8e6374def3b083540073216a3deb72fd845e757abbaa1455212a6f45c1e9",
+    "records": [
+      {
+        "payload": {
+          "action": "base_registered",
+          "actor": "provisioner",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794536451.36495,
+          "details": {
+            "digest": "d3e811c46e2449c014a6d2fb453f5b421015af08360b32c4a3af2d67ea28e9f4",
+            "id": "model-4494072319ea479c",
+            "identifier": "HuggingFaceTB/SmolLM2-135M-Instruct",
+            "license": "Apache-2.0",
+            "manifest": {
+              "README.md": {
+                "bytes": 6772,
+                "sha256": "4f97533ad95b1b2fea15fbc075c01b94578ebdd7c8138888fa43fa3abd530dc4"
+              },
+              "config.json": {
+                "bytes": 861,
+                "sha256": "8eb740e8bbe4cff95ea7b4588d17a2432deb16e8075bc5828ff7ba9be94d982a"
+              },
+              "generation_config.json": {
+                "bytes": 132,
+                "sha256": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013"
+              },
+              "merges.txt": {
+                "bytes": 466391,
+                "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510"
+              },
+              "model.safetensors": {
+                "bytes": 269060552,
+                "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+              },
+              "special_tokens_map.json": {
+                "bytes": 655,
+                "sha256": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52"
+              },
+              "tokenizer.json": {
+                "bytes": 2104556,
+                "sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c"
+              },
+              "tokenizer_config.json": {
+                "bytes": 3764,
+                "sha256": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df"
+              },
+              "vocab.json": {
+                "bytes": 800662,
+                "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+              }
+            },
+            "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "GENESIS",
+          "schema": "airon-model-change/v1",
+          "sequence": 1
+        },
+        "sha256": "1a706118b7c780f675914f76d414c087a7e48a0d326e75f947e08ef3bb27b153",
+        "signature": "huGRFiBB+3kOhukpHvjhW07WG7zK8SBOOFWtj3AIY2YCA9ZUrARuetBqW1xnMUGTL1px8vTVFhj3NsYePvA5Dg=="
+      },
+      {
+        "payload": {
+          "action": "dataset_authorized",
+          "actor": "synthetic-fault-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794536451.3688004,
+          "details": {
+            "authorization": {
+              "approved_for_training": true,
+              "license": "CC0-1.0",
+              "synthetic": true
+            },
+            "authorized_by": "synthetic-fault-operator",
+            "counts": {
+              "regression": 6,
+              "test": 6,
+              "train": 30
+            },
+            "digest": "197187f89732f043ee2d15d6aa5fe65c9e3ca59eb4e64c4b51ec8fcf88442c91",
+            "id": "dataset-adb2b5caffdef31a",
+            "manifest": {
+              "records.json": {
+                "bytes": 9151,
+                "sha256": "f754382bcd4af90a308a6be4f0803bd49f3882470fca36d6d2c2550206b922a4"
+              },
+              "train.jsonl": {
+                "bytes": 8549,
+                "sha256": "74e590648e3a4b79541c992cadc682b413051d52ef179a0921084eede4da50ee"
+              }
+            }
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "fa670a768c102edd8c2afc396a9c42fbd4faebb4df7b2ce1098a5260e7d381e0",
+          "schema": "airon-model-change/v1",
+          "sequence": 2
+        },
+        "sha256": "2fc0fe787f348af9a3c4b4a57055998a6bfd1f0152b2349d4e02a7cbbc90c9a5",
+        "signature": "AE9yyxV1lgP+/yaltIs770kHCluXxYiDBzqJVWtA7mL8/ApU+otcbEc6xmB7ItPb4r6jHPniMgollzVbHD6aAw=="
+      },
+      {
+        "payload": {
+          "action": "training_authorized",
+          "actor": "synthetic-fault-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794536451.3712711,
+          "details": {
+            "authorized_by": "synthetic-fault-operator",
+            "base_id": "model-4494072319ea479c",
+            "config": {
+              "epochs": 12,
+              "lr": 0.001,
+              "rank": 8,
+              "seed": 52
+            },
+            "config_digest": "6a38cef625120b758c683addc2123078ccd52dcea17e0b723ac2d8ebe7403e09",
+            "dataset_id": "dataset-adb2b5caffdef31a",
+            "id": "job-e2a615186cec4bff",
+            "status": "CREATED"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "03d088bb66ea2eeaa755168a79bf9eee91df421bac61f0d36eff7d24119fae5e",
+          "schema": "airon-model-change/v1",
+          "sequence": 3
+        },
+        "sha256": "267a6d9e31bd6e50d66f23802c4cfd5b6965afc7f7a6a6e59e9f5caf700215b8",
+        "signature": "VCjiP9zw8w7jRdSB8Pokj6ohrfWFkbyHykdqfN0Q7uvVPR1kBOCjnbfPhl9xBxSbNcavXD3CNyxSsdgAhIehBg=="
+      },
+      {
+        "payload": {
+          "action": "training_started",
+          "actor": "synthetic-fault-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794536451.6014483,
+          "details": {
+            "job_id": "job-e2a615186cec4bff"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "3011ef36baa954c296b155cb6c20e039d7e448dfd18e99aed36673ea096e3c7e",
+          "schema": "airon-model-change/v1",
+          "sequence": 4
+        },
+        "sha256": "cb8ea17c38c1b59ce8087871b8f2da5c28c222e3501e634982c9f8c2de2d40fb",
+        "signature": "L2iNw+21FgCEWuMopUo1ve+m8/SNruGWOBE+aJ2j+XmO+tagnGyM9BduqBeuWVtfgQAcqf43nZRTtFP3Q0/+Cw=="
+      },
+      {
+        "payload": {
+          "action": "training_cancelled",
+          "actor": "synthetic-fault-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794536457.6820571,
+          "details": {
+            "job_id": "job-e2a615186cec4bff"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "b12783d9702e758a3ff80f6b10627bce2d84caaa364ec6190a59f1bad984152e",
+          "schema": "airon-model-change/v1",
+          "sequence": 5
+        },
+        "sha256": "c019b6e01662463413dfcede83241e6619cce5d533a48377ebffe6d7b09f2067",
+        "signature": "/8z94M95G0BVnAqUloDjCYbmFUzcD7H/qDke5cgFvHyFwtdR69X9/FN2P/8mcBG9aU/frQZouef9xgyxTJ5kAA=="
+      },
+      {
+        "payload": {
+          "action": "base_registered",
+          "actor": "provisioner",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794536458.0398006,
+          "details": {
+            "digest": "637123ee074f0f652d539c5857c3b1578d1237b9f2802084fbe54e5b039f4307",
+            "id": "model-09e205dbcd8acc82",
+            "identifier": "synthetic-malformed-test",
+            "license": "Apache-2.0",
+            "manifest": {
+              "README.md": {
+                "bytes": 6772,
+                "sha256": "4f97533ad95b1b2fea15fbc075c01b94578ebdd7c8138888fa43fa3abd530dc4"
+              },
+              "config.json": {
+                "bytes": 861,
+                "sha256": "8eb740e8bbe4cff95ea7b4588d17a2432deb16e8075bc5828ff7ba9be94d982a"
+              },
+              "generation_config.json": {
+                "bytes": 132,
+                "sha256": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013"
+              },
+              "merges.txt": {
+                "bytes": 466391,
+                "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510"
+              },
+              "model.safetensors": {
+                "bytes": 39,
+                "sha256": "53c39c384d727c11a656b93f209eca0e4f2e41287e732a42b99ee01465bc9b62"
+              },
+              "special_tokens_map.json": {
+                "bytes": 655,
+                "sha256": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52"
+              },
+              "tokenizer.json": {
+                "bytes": 2104556,
+                "sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c"
+              },
+              "tokenizer_config.json": {
+                "bytes": 3764,
+                "sha256": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df"
+              },
+              "vocab.json": {
+                "bytes": 800662,
+                "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+              }
+            },
+            "revision": "intentional-corruption"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "b06b8823a11bb7b2616aeef0bdcaaf78212d70feaf9744c70012822665a93dcc",
+          "schema": "airon-model-change/v1",
+          "sequence": 6
+        },
+        "sha256": "88067c736872b383c055be47212a1cef926be153e397051ce3d5d4650bdf3af2",
+        "signature": "015uxWGoNhUL9DlSKT8CN4BxV+yQ5MgMMjT8Vc643lzVywiVzp2iz4vnkPTAENZM2tWWHXpkCmIMPfcLOigOBg=="
+      },
+      {
+        "payload": {
+          "action": "training_authorized",
+          "actor": "synthetic-fault-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794536458.0427547,
+          "details": {
+            "authorized_by": "synthetic-fault-operator",
+            "base_id": "model-09e205dbcd8acc82",
+            "config": {
+              "epochs": 1,
+              "lr": 0.001,
+              "rank": 8,
+              "seed": 52
+            },
+            "config_digest": "e0518348e6836707c2c58ffb8ea6faf7fbdbd52a06a0193c78f437d72aa8f72f",
+            "dataset_id": "dataset-adb2b5caffdef31a",
+            "id": "job-5c20bcbad6aa95c9",
+            "status": "CREATED"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "4bc2891b220adde6d9bed8229040e02d51655abcf9a41480123825e631e190f3",
+          "schema": "airon-model-change/v1",
+          "sequence": 7
+        },
+        "sha256": "e234eeff297e35d52a94f5d8a354524881f63357c748e19d0268f5453eea77b7",
+        "signature": "OAYY+1V0TXMdIZcjVhJFdHnMcC49b81wYMILVODfcsIc6RLWdUXV0cbp26aFYpFmIrs2m9okwJc/TzixlQ/cBw=="
+      },
+      {
+        "payload": {
+          "action": "training_started",
+          "actor": "synthetic-fault-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794536458.0951512,
+          "details": {
+            "job_id": "job-5c20bcbad6aa95c9"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "6986ec659fbd54e91874b9a90b2d5cef9255fe00d1bf29929a62e6741d38869f",
+          "schema": "airon-model-change/v1",
+          "sequence": 8
+        },
+        "sha256": "72388eb689818466cf8a28aa00997a1a956c7f3561a34fc4718e105ab1d2e53d",
+        "signature": "YWHPWUH0dxpZEj0JcQNMbwD0cMK282PflJzadKChjEgUY3v7zoSTriNyTocxsAjuMUQQkC1QUCQ1+t+bb9BpBw=="
+      },
+      {
+        "payload": {
+          "action": "training_failed",
+          "actor": "synthetic-fault-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794536461.971886,
+          "details": {
+            "error": "Isolated worker failed with exit 1; inspect job log",
+            "job_id": "job-5c20bcbad6aa95c9"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "88c83f26e2f8e58aca3a91585a39c8755a46cc62a7c5b36cc613cb67a1d634bc",
+          "schema": "airon-model-change/v1",
+          "sequence": 9
+        },
+        "sha256": "5a15bff79cf09b8408b3fb4f9581e4465736323428d3094a93bbb0f26821ea5b",
+        "signature": "hiX/QaGbqwQtMLFcKyo/960SVotco8rkYqYhDpAS/WADwwOL2Ws41nEWKRFNBOJn4zK1n9astAL9P0Zhbo6vBQ=="
+      }
+    ],
+    "verification": {
+      "valid": true,
+      "events": 9,
+      "head": "4bbcb6d8790a2a1dc7c15a4ac3738db9a0d3822b02751bc04bb48cf07455e075",
+      "level": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE",
+      "truncation_checked": false
+    },
+    "aip_integration": "CONTRACT_ONLY",
+    "sniffer_dog": "NOT_INTEGRATED"
+  }
+}
+

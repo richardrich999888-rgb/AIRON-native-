@@ -1,0 +1,869 @@
+{
+  "schema": "airon-measured-trial-comparison/v1",
+  "note": "Derived display report; original signed evidence remains in the referenced files. Historical-policy passes do not authorize current deployment. Six routing and six factual questions; development set reuse, not statistical generalization. Worker RSS is not total host peak memory.",
+  "trials": [
+    {
+      "source": {
+        "head": "53976dce1fbffe00b28ca9c2c7232f143510a36e",
+        "actions_checkout": "5a44c652a3325bc513aa1b4064769f252122a72a"
+      },
+      "report": "cpu-53976dc.json",
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "fixture": false,
+      "hardware": {
+        "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+        "python": "3.12.16",
+        "cpu_model": "AMD EPYC 7763 64-Core Processor",
+        "logical_cpus": 4,
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "mem_total": "MemTotal:       16372448 kB",
+        "worker_threads": 2,
+        "gpu_used": false
+      },
+      "policy": "strict-improvement-no-regression-v1",
+      "policy_passed": true,
+      "training": {
+        "steps": 27,
+        "changed_parameters": 120,
+        "training_seconds": 42.933714097999996,
+        "wall_seconds": 56.89565506200006,
+        "peak_rss_kib": 1415008,
+        "training_parameter_dtypes": [
+          "torch.float32"
+        ],
+        "observed_torch_threads": 2
+      },
+      "routing": {
+        "baseline_accuracy": 0.16666666666666666,
+        "baseline_mean_latency_seconds": 3.1604475785000354,
+        "candidate_accuracy": 0.5,
+        "candidate_mean_latency_seconds": 3.4978625186666363,
+        "count": 6
+      },
+      "factual": {
+        "baseline_accuracy": 0.5,
+        "baseline_mean_latency_seconds": 2.5524425835000293,
+        "candidate_accuracy": 0.8333333333333334,
+        "candidate_mean_latency_seconds": 2.8283609471666673,
+        "count": 6
+      },
+      "knowledge": null,
+      "base_weight_bytes": 269060552,
+      "adapter_weight_bytes": 1858776,
+      "adapter_total_bytes": 5388704,
+      "export_total_bytes": 272585007,
+      "rollback_verified": true,
+      "assurance": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE"
+    },
+    {
+      "source": {
+        "actions_checkout": "5f708fd17baeb07bdb10dca25e5bdb126880e33d",
+        "head": "c1f9ad7b92ebc7574d41c707b9f2fde21899e8e2"
+      },
+      "report": "offline-c1f9ad7.json",
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "fixture": false,
+      "hardware": {
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+        "gpu_used": false,
+        "logical_cpus": 4,
+        "mem_total": "MemTotal:       16372444 kB",
+        "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+        "python": "3.12.16",
+        "worker_threads": 2
+      },
+      "policy": "strict-improvement-no-regression-v1",
+      "policy_passed": true,
+      "training": {
+        "steps": 27,
+        "changed_parameters": 120,
+        "training_seconds": 35.59626380399993,
+        "wall_seconds": 46.38807753700007,
+        "peak_rss_kib": 1380696,
+        "training_parameter_dtypes": [
+          "torch.float32"
+        ],
+        "observed_torch_threads": 2
+      },
+      "routing": {
+        "baseline_accuracy": 0.16666666666666666,
+        "baseline_mean_latency_seconds": 2.6540056121666757,
+        "candidate_accuracy": 0.5,
+        "candidate_mean_latency_seconds": 2.9018625998333314,
+        "count": 6
+      },
+      "factual": {
+        "baseline_accuracy": 0.5,
+        "baseline_mean_latency_seconds": 2.158858414166673,
+        "candidate_accuracy": 0.8333333333333334,
+        "candidate_mean_latency_seconds": 2.3169127601666637,
+        "count": 6
+      },
+      "knowledge": null,
+      "base_weight_bytes": 269060552,
+      "adapter_weight_bytes": 1858776,
+      "adapter_total_bytes": 5388704,
+      "export_total_bytes": 272585007,
+      "rollback_verified": true,
+      "assurance": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE"
+    },
+    {
+      "source": {
+        "head": "921f111e31d44a5a60eb1f164e7375c1db69cf5d",
+        "actions_checkout": "001c1aa6cf979a82111c36e23953804fbcc1d725"
+      },
+      "report": "rejected-retention-921f111.json",
+      "outcome": "INCOMPLETE",
+      "fixture": false,
+      "hardware": {
+        "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+        "python": "3.12.16",
+        "cpu_model": "AMD EPYC 7763 64-Core Processor",
+        "logical_cpus": 4,
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "mem_total": "MemTotal:       16372448 kB",
+        "worker_threads": 2,
+        "gpu_used": false
+      },
+      "policy": "strict-improvement-knowledge-preservation-v2",
+      "policy_passed": false,
+      "training": {
+        "steps": 45,
+        "changed_parameters": 120,
+        "training_seconds": 97.22975531700001,
+        "wall_seconds": 111.864620748,
+        "peak_rss_kib": 1678476,
+        "training_parameter_dtypes": [
+          "torch.float32"
+        ],
+        "observed_torch_threads": 2
+      },
+      "routing": {
+        "baseline_accuracy": 0.16666666666666666,
+        "baseline_mean_latency_seconds": 3.238979077833316,
+        "candidate_accuracy": 0.5,
+        "candidate_mean_latency_seconds": 3.6144052813333096,
+        "count": 6
+      },
+      "factual": {
+        "baseline_accuracy": 0.5,
+        "baseline_mean_latency_seconds": 2.593181418333321,
+        "candidate_accuracy": 0.0,
+        "candidate_mean_latency_seconds": 2.8858142053333418,
+        "count": 6
+      },
+      "knowledge": {
+        "source_id": "OPS-001",
+        "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+        "question_digest": "e5a6616ad48d5d3864aa8e474f5ea3c6c387c06dea68d40db67a65231788ac59",
+        "source_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "baseline_match": true,
+        "candidate_match": true,
+        "baseline_generation_seconds": 3.9290260880000005,
+        "candidate_generation_seconds": 2.7914296970000123,
+        "baseline_output_digest": "d70a5bf37a570c0b1f05f7865740c650eaab70de032e6bc5af126681d33f4a07",
+        "candidate_output_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b"
+      },
+      "base_weight_bytes": 269060552,
+      "adapter_weight_bytes": 1858776,
+      "adapter_total_bytes": 5388704,
+      "export_total_bytes": null,
+      "rollback_verified": false,
+      "assurance": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE"
+    },
+    {
+      "source": {
+        "head": "fe2046d724b7e35eaf9bfe91932aacbf42355f97",
+        "actions_checkout": "4882c0ae9f48f98a1d4596f63004222b3b634f10"
+      },
+      "report": "rejected-retention-fe2046d.json",
+      "outcome": "INCOMPLETE",
+      "fixture": false,
+      "hardware": {
+        "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+        "python": "3.12.16",
+        "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+        "logical_cpus": 4,
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "mem_total": "MemTotal:       16372448 kB",
+        "worker_threads": 2,
+        "gpu_used": false
+      },
+      "policy": "strict-improvement-knowledge-preservation-v2",
+      "policy_passed": false,
+      "training": {
+        "steps": 45,
+        "changed_parameters": 120,
+        "training_seconds": 77.826620133,
+        "wall_seconds": 89.128310941,
+        "peak_rss_kib": 1711396,
+        "training_parameter_dtypes": [
+          "torch.float32"
+        ],
+        "observed_torch_threads": 2
+      },
+      "routing": {
+        "baseline_accuracy": 0.16666666666666666,
+        "baseline_mean_latency_seconds": 2.596062493666674,
+        "candidate_accuracy": 0.3333333333333333,
+        "candidate_mean_latency_seconds": 2.863414793500008,
+        "count": 6
+      },
+      "factual": {
+        "baseline_accuracy": 0.5,
+        "baseline_mean_latency_seconds": 2.0950131991666487,
+        "candidate_accuracy": 1.0,
+        "candidate_mean_latency_seconds": 2.3470497068333125,
+        "count": 6
+      },
+      "knowledge": {
+        "source_id": "OPS-001",
+        "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+        "question_digest": "e5a6616ad48d5d3864aa8e474f5ea3c6c387c06dea68d40db67a65231788ac59",
+        "source_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "baseline_match": true,
+        "candidate_match": false,
+        "baseline_generation_seconds": 3.9665436270000214,
+        "candidate_generation_seconds": 0.8645189300000311,
+        "baseline_output_digest": "d70a5bf37a570c0b1f05f7865740c650eaab70de032e6bc5af126681d33f4a07",
+        "candidate_output_digest": "e5a6616ad48d5d3864aa8e474f5ea3c6c387c06dea68d40db67a65231788ac59"
+      },
+      "base_weight_bytes": 269060552,
+      "adapter_weight_bytes": 1858776,
+      "adapter_total_bytes": 5388704,
+      "export_total_bytes": null,
+      "rollback_verified": false,
+      "assurance": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE"
+    },
+    {
+      "source": {
+        "actions_checkout": "ce00fda1f36416ed6fe45ddf60646ef89184e0c5",
+        "head": "a29733297c0d022b700ffa260750ed40a4d2e48a"
+      },
+      "report": "offline-a297332.json",
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "fixture": false,
+      "hardware": {
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cpu_model": "AMD EPYC 7763 64-Core Processor",
+        "gpu_used": false,
+        "logical_cpus": 4,
+        "mem_total": "MemTotal:       16372448 kB",
+        "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+        "python": "3.12.16",
+        "worker_threads": 2
+      },
+      "policy": "strict-improvement-knowledge-preservation-v2",
+      "policy_passed": true,
+      "training": {
+        "steps": 45,
+        "changed_parameters": 120,
+        "training_seconds": 99.93132043100013,
+        "wall_seconds": 114.53155528400009,
+        "peak_rss_kib": 1726268,
+        "training_parameter_dtypes": [
+          "torch.float32"
+        ],
+        "observed_torch_threads": 2
+      },
+      "routing": {
+        "baseline_accuracy": 0.16666666666666666,
+        "baseline_mean_latency_seconds": 3.34806471316665,
+        "candidate_accuracy": 0.3333333333333333,
+        "candidate_mean_latency_seconds": 3.8870087315000696,
+        "count": 6
+      },
+      "factual": {
+        "baseline_accuracy": 0.5,
+        "baseline_mean_latency_seconds": 2.669106253666655,
+        "candidate_accuracy": 0.5,
+        "candidate_mean_latency_seconds": 3.1323740901667256,
+        "count": 6
+      },
+      "knowledge": {
+        "baseline_generation_seconds": 4.528443574999983,
+        "baseline_match": true,
+        "baseline_output_digest": "d70a5bf37a570c0b1f05f7865740c650eaab70de032e6bc5af126681d33f4a07",
+        "candidate_generation_seconds": 4.792901343999802,
+        "candidate_match": true,
+        "candidate_output_digest": "d70a5bf37a570c0b1f05f7865740c650eaab70de032e6bc5af126681d33f4a07",
+        "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+        "question_digest": "e5a6616ad48d5d3864aa8e474f5ea3c6c387c06dea68d40db67a65231788ac59",
+        "source_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "source_id": "OPS-001"
+      },
+      "base_weight_bytes": 269060552,
+      "adapter_weight_bytes": 1858776,
+      "adapter_total_bytes": 5388704,
+      "export_total_bytes": 272585007,
+      "rollback_verified": true,
+      "assurance": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE"
+    },
+    {
+      "source": {
+        "head": "14ef5317954d3ed38df87ea3bd5d5d4f0bc123eb",
+        "actions_checkout": "e561171dea4650db8051e4f42e32787b3445368f"
+      },
+      "report": "rejected-routing-14ef531.json",
+      "outcome": "INCOMPLETE",
+      "fixture": false,
+      "hardware": {
+        "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+        "python": "3.12.16",
+        "cpu_model": "Intel(R) Xeon(R) 6973P-C",
+        "logical_cpus": 4,
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "mem_total": "MemTotal:       16371440 kB",
+        "worker_threads": 2,
+        "gpu_used": false
+      },
+      "policy": "minimum-accuracy-knowledge-preservation-v3",
+      "policy_passed": false,
+      "training": {
+        "steps": 153,
+        "changed_parameters": 120,
+        "training_seconds": 139.47009838399998,
+        "wall_seconds": 152.258124207,
+        "peak_rss_kib": 1804324,
+        "training_parameter_dtypes": [
+          "torch.float32"
+        ],
+        "observed_torch_threads": 2
+      },
+      "routing": {
+        "baseline_accuracy": 0.16666666666666666,
+        "baseline_mean_latency_seconds": 1.4194163196666523,
+        "candidate_accuracy": 0.16666666666666666,
+        "candidate_mean_latency_seconds": 1.5949386983333416,
+        "count": 6
+      },
+      "factual": {
+        "baseline_accuracy": 0.5,
+        "baseline_mean_latency_seconds": 1.036739035166666,
+        "candidate_accuracy": 0.6666666666666666,
+        "candidate_mean_latency_seconds": 1.1191783676666585,
+        "count": 6
+      },
+      "knowledge": {
+        "source_id": "OPS-001",
+        "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+        "question_digest": "e5a6616ad48d5d3864aa8e474f5ea3c6c387c06dea68d40db67a65231788ac59",
+        "source_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "baseline_match": true,
+        "candidate_match": true,
+        "baseline_generation_seconds": 5.46720314800001,
+        "candidate_generation_seconds": 3.2684577559999752,
+        "baseline_output_digest": "d70a5bf37a570c0b1f05f7865740c650eaab70de032e6bc5af126681d33f4a07",
+        "candidate_output_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b"
+      },
+      "base_weight_bytes": 269060552,
+      "adapter_weight_bytes": 1858776,
+      "adapter_total_bytes": 5388704,
+      "export_total_bytes": null,
+      "rollback_verified": false,
+      "assurance": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE"
+    },
+    {
+      "source": {
+        "head": "060ff1de6cf8f6f607baca4cb1be245e13dac0bf",
+        "actions_checkout": "78de6d5c9b21f2ea9d9fbf3702e2744f6b7f7f96"
+      },
+      "report": "rejected-forgetting-060ff1d.json",
+      "outcome": "INCOMPLETE",
+      "fixture": false,
+      "hardware": {
+        "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+        "python": "3.12.16",
+        "cpu_model": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+        "logical_cpus": 4,
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "mem_total": "MemTotal:       16371436 kB",
+        "worker_threads": 2,
+        "gpu_used": false
+      },
+      "policy": "minimum-accuracy-knowledge-preservation-v3",
+      "policy_passed": false,
+      "training": {
+        "steps": 153,
+        "changed_parameters": 420,
+        "training_seconds": 222.74141719700015,
+        "wall_seconds": 236.48757023000007,
+        "peak_rss_kib": 2020080,
+        "training_parameter_dtypes": [
+          "torch.float32"
+        ],
+        "observed_torch_threads": 2
+      },
+      "routing": {
+        "baseline_accuracy": 0.16666666666666666,
+        "baseline_mean_latency_seconds": 1.7669352838333527,
+        "candidate_accuracy": 0.5,
+        "candidate_mean_latency_seconds": 2.633636214833359,
+        "count": 6
+      },
+      "factual": {
+        "baseline_accuracy": 0.5,
+        "baseline_mean_latency_seconds": 1.65922982366673,
+        "candidate_accuracy": 0.0,
+        "candidate_mean_latency_seconds": 2.407211125999993,
+        "count": 6
+      },
+      "knowledge": {
+        "source_id": "OPS-001",
+        "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+        "question_digest": "e5a6616ad48d5d3864aa8e474f5ea3c6c387c06dea68d40db67a65231788ac59",
+        "source_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "baseline_match": true,
+        "candidate_match": true,
+        "baseline_generation_seconds": 5.8864005329999145,
+        "candidate_generation_seconds": 4.439845387000105,
+        "baseline_output_digest": "d70a5bf37a570c0b1f05f7865740c650eaab70de032e6bc5af126681d33f4a07",
+        "candidate_output_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b"
+      },
+      "base_weight_bytes": 269060552,
+      "adapter_weight_bytes": 9823216,
+      "adapter_total_bytes": 13353221,
+      "export_total_bytes": null,
+      "rollback_verified": false,
+      "assurance": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE"
+    },
+    {
+      "source": {
+        "actions_checkout": "09d691161b52037d6e4d9afaedf15e68075f0084",
+        "head": "692a129addfbc09dd867b2018afd55f61aa23f1a"
+      },
+      "report": "cpu-692a129.json",
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "fixture": false,
+      "hardware": {
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+        "gpu_used": false,
+        "logical_cpus": 4,
+        "mem_total": "MemTotal:       16372448 kB",
+        "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+        "python": "3.12.16",
+        "worker_threads": 2
+      },
+      "policy": "minimum-accuracy-knowledge-preservation-v3",
+      "policy_passed": true,
+      "training": {
+        "steps": 189,
+        "changed_parameters": 420,
+        "training_seconds": 343.578647207,
+        "wall_seconds": 355.00911873,
+        "peak_rss_kib": 2011460,
+        "training_parameter_dtypes": [
+          "torch.float32"
+        ],
+        "observed_torch_threads": 2,
+        "training_dataset_counts": {
+          "mixed_rows": 126,
+          "primary_rows": 102,
+          "replay_rows": 24
+        },
+        "resource_limits": {
+          "address_space_bytes": 6442450944,
+          "cpu_seconds": 900
+        }
+      },
+      "routing": {
+        "baseline_accuracy": 0.16666666666666666,
+        "baseline_mean_latency_seconds": 2.571721387166652,
+        "candidate_accuracy": 0.8333333333333334,
+        "candidate_mean_latency_seconds": 3.529615398833338,
+        "count": 6
+      },
+      "factual": {
+        "baseline_accuracy": 0.5,
+        "baseline_mean_latency_seconds": 2.0661235115000145,
+        "candidate_accuracy": 1.0,
+        "candidate_mean_latency_seconds": 2.8821886213333414,
+        "count": 6
+      },
+      "knowledge": {
+        "baseline_generation_seconds": 3.9517992920000324,
+        "baseline_match": true,
+        "baseline_output_digest": "d70a5bf37a570c0b1f05f7865740c650eaab70de032e6bc5af126681d33f4a07",
+        "candidate_generation_seconds": 3.001112455999987,
+        "candidate_match": true,
+        "candidate_output_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+        "question_digest": "e5a6616ad48d5d3864aa8e474f5ea3c6c387c06dea68d40db67a65231788ac59",
+        "source_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "source_id": "OPS-001"
+      },
+      "base_weight_bytes": 269060552,
+      "adapter_weight_bytes": 9823216,
+      "adapter_total_bytes": 13353221,
+      "export_total_bytes": 272585007,
+      "rollback_verified": true,
+      "assurance": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE"
+    },
+    {
+      "source": {
+        "actions_checkout": "09d691161b52037d6e4d9afaedf15e68075f0084",
+        "head": "692a129addfbc09dd867b2018afd55f61aa23f1a"
+      },
+      "report": "offline-692a129.json",
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "fixture": false,
+      "hardware": {
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+        "gpu_used": false,
+        "logical_cpus": 4,
+        "mem_total": "MemTotal:       16372448 kB",
+        "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+        "python": "3.12.16",
+        "worker_threads": 2
+      },
+      "policy": "minimum-accuracy-knowledge-preservation-v3",
+      "policy_passed": true,
+      "training": {
+        "steps": 189,
+        "changed_parameters": 420,
+        "training_seconds": 344.3664809950001,
+        "wall_seconds": 355.494574158,
+        "peak_rss_kib": 1983160,
+        "training_parameter_dtypes": [
+          "torch.float32"
+        ],
+        "observed_torch_threads": 2,
+        "training_dataset_counts": {
+          "mixed_rows": 126,
+          "primary_rows": 102,
+          "replay_rows": 24
+        },
+        "resource_limits": {
+          "address_space_bytes": 6442450944,
+          "cpu_seconds": 900
+        }
+      },
+      "routing": {
+        "baseline_accuracy": 0.16666666666666666,
+        "baseline_mean_latency_seconds": 2.566497783666667,
+        "candidate_accuracy": 0.8333333333333334,
+        "candidate_mean_latency_seconds": 3.5529159504999748,
+        "count": 6
+      },
+      "factual": {
+        "baseline_accuracy": 0.5,
+        "baseline_mean_latency_seconds": 2.0463793741666527,
+        "candidate_accuracy": 1.0,
+        "candidate_mean_latency_seconds": 2.918799025833285,
+        "count": 6
+      },
+      "knowledge": {
+        "baseline_generation_seconds": 4.02331791000006,
+        "baseline_match": true,
+        "baseline_output_digest": "d70a5bf37a570c0b1f05f7865740c650eaab70de032e6bc5af126681d33f4a07",
+        "candidate_generation_seconds": 3.003327489000185,
+        "candidate_match": true,
+        "candidate_output_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+        "question_digest": "e5a6616ad48d5d3864aa8e474f5ea3c6c387c06dea68d40db67a65231788ac59",
+        "source_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "source_id": "OPS-001"
+      },
+      "base_weight_bytes": 269060552,
+      "adapter_weight_bytes": 9823216,
+      "adapter_total_bytes": 13353221,
+      "export_total_bytes": 272585007,
+      "rollback_verified": true,
+      "assurance": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE"
+    },
+    {
+      "source": {
+        "actions_checkout": "0138e04b53e68591304ddce5d714c8df7ed03af7",
+        "head": "3ce3cfeb6658ae30aa8bd4c3eb39858abf2ea1a8"
+      },
+      "report": "offline-3ce3cfe.json",
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "fixture": false,
+      "hardware": {
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+        "gpu_used": false,
+        "logical_cpus": 4,
+        "mem_total": "MemTotal:       16371432 kB",
+        "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+        "python": "3.12.16",
+        "worker_threads": 2
+      },
+      "policy": "minimum-accuracy-knowledge-preservation-v3",
+      "policy_passed": true,
+      "training": {
+        "steps": 189,
+        "changed_parameters": 420,
+        "training_seconds": 242.744375182,
+        "wall_seconds": 257.21176333799997,
+        "peak_rss_kib": 1991320,
+        "training_parameter_dtypes": [
+          "torch.float32"
+        ],
+        "observed_torch_threads": 2,
+        "training_dataset_counts": {
+          "mixed_rows": 126,
+          "primary_rows": 102,
+          "replay_rows": 24
+        },
+        "resource_limits": {
+          "address_space_bytes": 6442450944,
+          "cpu_seconds": 900
+        }
+      },
+      "routing": {
+        "baseline_accuracy": 0.16666666666666666,
+        "baseline_mean_latency_seconds": 1.5813351188333324,
+        "candidate_accuracy": 0.8333333333333334,
+        "candidate_mean_latency_seconds": 2.330749596833319,
+        "count": 6
+      },
+      "factual": {
+        "baseline_accuracy": 0.5,
+        "baseline_mean_latency_seconds": 1.067774704499982,
+        "candidate_accuracy": 1.0,
+        "candidate_mean_latency_seconds": 1.690350819999973,
+        "count": 6
+      },
+      "knowledge": {
+        "baseline_generation_seconds": 5.834533987999976,
+        "baseline_match": true,
+        "baseline_output_digest": "d70a5bf37a570c0b1f05f7865740c650eaab70de032e6bc5af126681d33f4a07",
+        "candidate_generation_seconds": 4.106269864999831,
+        "candidate_match": true,
+        "candidate_output_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+        "question_digest": "e5a6616ad48d5d3864aa8e474f5ea3c6c387c06dea68d40db67a65231788ac59",
+        "source_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "source_id": "OPS-001"
+      },
+      "base_weight_bytes": 269060552,
+      "adapter_weight_bytes": 9823216,
+      "adapter_total_bytes": 13353221,
+      "export_total_bytes": 272585007,
+      "rollback_verified": true,
+      "assurance": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE"
+    },
+    {
+      "source": {
+        "actions_checkout": "f9ca8ba54070182d43760a235fef7cdb03aca315",
+        "head": "6077c9a104c42e024ae343aafdc2cc4a91181663"
+      },
+      "report": "cpu-6077c9a.json",
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "fixture": false,
+      "hardware": {
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cpu_model": "AMD EPYC 7763 64-Core Processor",
+        "gpu_used": false,
+        "logical_cpus": 4,
+        "mem_total": "MemTotal:       16372448 kB",
+        "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+        "python": "3.12.16",
+        "worker_threads": 2
+      },
+      "policy": "minimum-accuracy-knowledge-preservation-v3",
+      "policy_passed": true,
+      "training": {
+        "steps": 189,
+        "changed_parameters": 420,
+        "training_seconds": 432.22861801199997,
+        "wall_seconds": 446.83488803599994,
+        "peak_rss_kib": 2024276,
+        "training_parameter_dtypes": [
+          "torch.float32"
+        ],
+        "observed_torch_threads": 2,
+        "training_dataset_counts": {
+          "mixed_rows": 126,
+          "primary_rows": 102,
+          "replay_rows": 24
+        },
+        "resource_limits": {
+          "address_space_bytes": 6442450944,
+          "cpu_seconds": 900
+        }
+      },
+      "routing": {
+        "baseline_accuracy": 0.16666666666666666,
+        "baseline_mean_latency_seconds": 3.1815710660000227,
+        "candidate_accuracy": 0.8333333333333334,
+        "candidate_mean_latency_seconds": 4.472793598333321,
+        "count": 6
+      },
+      "factual": {
+        "baseline_accuracy": 0.5,
+        "baseline_mean_latency_seconds": 2.5587521713333294,
+        "candidate_accuracy": 1.0,
+        "candidate_mean_latency_seconds": 3.607980951833383,
+        "count": 6
+      },
+      "knowledge": {
+        "baseline_generation_seconds": 3.9420225329999994,
+        "baseline_match": true,
+        "baseline_output_digest": "d70a5bf37a570c0b1f05f7865740c650eaab70de032e6bc5af126681d33f4a07",
+        "candidate_generation_seconds": 3.224084135000112,
+        "candidate_match": true,
+        "candidate_output_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+        "question_digest": "e5a6616ad48d5d3864aa8e474f5ea3c6c387c06dea68d40db67a65231788ac59",
+        "source_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "source_id": "OPS-001"
+      },
+      "base_weight_bytes": 269060552,
+      "adapter_weight_bytes": 9823216,
+      "adapter_total_bytes": 13353221,
+      "export_total_bytes": 272585007,
+      "rollback_verified": true,
+      "assurance": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE"
+    },
+    {
+      "source": {
+        "actions_checkout": "f9ca8ba54070182d43760a235fef7cdb03aca315",
+        "head": "6077c9a104c42e024ae343aafdc2cc4a91181663"
+      },
+      "report": "offline-6077c9a.json",
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "fixture": false,
+      "hardware": {
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "cpu_model": "AMD EPYC 7763 64-Core Processor",
+        "gpu_used": false,
+        "logical_cpus": 4,
+        "mem_total": "MemTotal:       16372448 kB",
+        "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+        "python": "3.12.16",
+        "worker_threads": 2
+      },
+      "policy": "minimum-accuracy-knowledge-preservation-v3",
+      "policy_passed": true,
+      "training": {
+        "steps": 189,
+        "changed_parameters": 420,
+        "training_seconds": 437.5439559449999,
+        "wall_seconds": 452.42949209999983,
+        "peak_rss_kib": 2004656,
+        "training_parameter_dtypes": [
+          "torch.float32"
+        ],
+        "observed_torch_threads": 2,
+        "training_dataset_counts": {
+          "mixed_rows": 126,
+          "primary_rows": 102,
+          "replay_rows": 24
+        },
+        "resource_limits": {
+          "address_space_bytes": 6442450944,
+          "cpu_seconds": 900
+        }
+      },
+      "routing": {
+        "baseline_accuracy": 0.16666666666666666,
+        "baseline_mean_latency_seconds": 3.1808483676667265,
+        "candidate_accuracy": 0.8333333333333334,
+        "candidate_mean_latency_seconds": 4.462567435999972,
+        "count": 6
+      },
+      "factual": {
+        "baseline_accuracy": 0.5,
+        "baseline_mean_latency_seconds": 2.5768398478332983,
+        "candidate_accuracy": 1.0,
+        "candidate_mean_latency_seconds": 3.6604648235000163,
+        "count": 6
+      },
+      "knowledge": {
+        "baseline_generation_seconds": 4.0345183819999875,
+        "baseline_match": true,
+        "baseline_output_digest": "d70a5bf37a570c0b1f05f7865740c650eaab70de032e6bc5af126681d33f4a07",
+        "candidate_generation_seconds": 3.2817547259999174,
+        "candidate_match": true,
+        "candidate_output_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+        "question_digest": "e5a6616ad48d5d3864aa8e474f5ea3c6c387c06dea68d40db67a65231788ac59",
+        "source_digest": "e833b710fda7b5ceee40e29da684b2bef8a6d291b5732063832ef6b859b6d73b",
+        "source_id": "OPS-001"
+      },
+      "base_weight_bytes": 269060552,
+      "adapter_weight_bytes": 9823216,
+      "adapter_total_bytes": 13353221,
+      "export_total_bytes": 272585007,
+      "rollback_verified": true,
+      "assurance": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE"
+    }
+  ]
+}

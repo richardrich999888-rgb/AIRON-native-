@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/app/airon_adaptation/worker.py", line 269, in <module>
+    main()
+  File "/app/airon_adaptation/worker.py", line 230, in main
+    identity, isolation = upstream_identity(), isolation_probe(request["parent_netns"])
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/airon_adaptation/worker.py", line 46, in isolation_probe
+    _trace_probe_marker("begin")
+  File "/app/airon_adaptation/worker.py", line 41, in _trace_probe_marker
+    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as marker:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py", line 233, in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+PermissionError: [Errno 1] Operation not permitted
