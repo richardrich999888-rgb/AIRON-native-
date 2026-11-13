@@ -198,6 +198,92 @@
         "truncation_checked": true
       },
       "public_key_hex": "3097de9e6fcd3667fc287b3fbc0180db143a47912a62f1cf61a4a457bd648401"
+    },
+    {
+      "path": "adapter-artifact-a297332.json",
+      "sha256": "da4cfdd26196c6abc2f3fbc9853257cdae3c96259eb3038f3b0047611ee766a0",
+      "source": "a29733297c0d022b700ffa260750ed40a4d2e48a",
+      "outcome": true,
+      "verification": null
+    },
+    {
+      "path": "console-a297332.json",
+      "sha256": "3b62b98a1b80e813426228c6a652f67ef391e9106a11a25ef1a424fbb0a55f8b",
+      "source": null,
+      "outcome": true,
+      "verification": null
+    },
+    {
+      "path": "diagnostic-0f46ef0.json",
+      "sha256": "885377d153485e3f2c91e6b57b1a027369f795e264d019d839712f71ba8b344d",
+      "source": "0f46ef0cec0450f28c0112f4746a8501c2ca1386",
+      "outcome": "RECORDED_DIAGNOSTICS",
+      "verification": null
+    },
+    {
+      "path": "failed-training-0f46ef0.json",
+      "sha256": "efb7e16e67ceff17f47def15878ece64f08864f1d0151762d6b687d9d82bd6e4",
+      "source": {
+        "head": "0f46ef0cec0450f28c0112f4746a8501c2ca1386",
+        "actions_checkout": "72ac7cf861d8acf4e4bc19f5cca2daadc7fc2dc2"
+      },
+      "outcome": "INCOMPLETE",
+      "verification": {
+        "valid": true,
+        "events": 10,
+        "head": "952b5672e64e2b2593207c706d768517a3d521284132ad48bf6b0d1dfb8733f5",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "3e378f3712cdf48e81ce5d605d26f03e80983efafd4549185e380a9f804bf0d9"
+    },
+    {
+      "path": "faults-a297332.json",
+      "sha256": "1ab66305e94c28df250797c839e550a38fd6317e937aa219ee6f593b8ad75fc6",
+      "source": null,
+      "outcome": true,
+      "verification": {
+        "valid": true,
+        "events": 9,
+        "head": "4fefdadc8ab678b1c244d1d58b78c5af55cc0c2fe7cd960aad7c8336fa44909c",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "a8d61f7a3af67f4f4f8b20f41528f0839a8f9d2265d0297cd2e1ff4e199636f7"
+    },
+    {
+      "path": "network-a297332.json",
+      "sha256": "cdc683e3d97670fda284827f851cc3e640a296da42caa8b8ac017a15d432af22",
+      "source": null,
+      "outcome": true,
+      "verification": null
+    },
+    {
+      "path": "offline-a297332.json",
+      "sha256": "171f0588077a72daf37e042acc8bbb0a74d331c2429d5d4b3e81d287645b6bfe",
+      "source": {
+        "actions_checkout": "ce00fda1f36416ed6fe45ddf60646ef89184e0c5",
+        "head": "a29733297c0d022b700ffa260750ed40a4d2e48a"
+      },
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "verification": {
+        "valid": true,
+        "events": 20,
+        "head": "8a3aba2cc997707e8f84ce711e28c0f63fe3ed6f0efe480b0c932916d5dfd496",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "b158cfa44259286c8c4be9c1bc2456a385cc703def0d616d5d6d8d88da45c1ac"
+    },
+    {
+      "path": "runtime-a297332.json",
+      "sha256": "b1951f375687de63e80435fbedda1551709873b1a4feac1343b9d23b42f81817",
+      "source": null,
+      "outcome": "RECORDED_DIAGNOSTICS",
+      "verification": null
     }
   ]
 }

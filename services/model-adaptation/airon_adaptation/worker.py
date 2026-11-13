@@ -210,7 +210,10 @@ def answer_knowledge(request):
 
 def main():
     faulthandler.enable()
-    faulthandler.dump_traceback_later(120, repeat=True)
+    # Keep fatal-signal diagnostics, but do not asynchronously walk a live
+    # training stack. The 102-row trial died with SIGSEGV mid-way through that
+    # diagnostic's 120-second dump (retained trace: failed-training-0f46ef0).
+    # The external process wall timeout and OS resource limits still apply.
     resource.setrlimit(resource.RLIMIT_AS, (6*1024**3, 6*1024**3))
     resource.setrlimit(resource.RLIMIT_CPU, (600, 600))
     resource.setrlimit(resource.RLIMIT_FSIZE, (1024**3, 1024**3))
