@@ -343,6 +343,7 @@ class Controller:
             if scores.get("count") != self._get(job["dataset_id"], "dataset")["counts"][split]:
                 raise Rejected("Evaluation did not cover frozen split")
         passed = (metrics["test"]["candidate_accuracy"] > metrics["test"]["baseline_accuracy"]
+                  and metrics["regression"]["baseline_accuracy"] > 0
                   and metrics["regression"]["candidate_accuracy"] >= metrics["regression"]["baseline_accuracy"])
         ident = self._new("evaluation")
         report = {"id": ident, "candidate_id": candidate_id, "candidate_digest": candidate["digest"],

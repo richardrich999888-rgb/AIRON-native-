@@ -53,3 +53,5 @@ Training identity, authorizing actor, dataset/base/config digests, adapter diges
 Incremental adapter training, merge parity beyond the selected helper, replay buffers, drift alarms and automatic monitoring remain research items. The current controller accepts only fresh LoRA jobs. Each cycle requires new authorized data, frozen evaluation and separate approval. No user-conversation harvesting, model-written control-plane changes or autonomous promotion exists.
 
 Bundle preparation is a separate trusted operation: bundle.py reuses Soup assembly, signs the archive digest, verifies every regular member against the manifest and rejects undeclared bytes. It never extracts an archive or claims dependency closure from a filename alone.
+
+The regression gate also requires a nonzero baseline regression score. A suite on which the baseline gets every case wrong cannot qualify preservation. The initial four arithmetic prompts produced 0/4; they were replaced, before acceptance, with a fixed six-question factual suite. Historical failure evidence is retained. The routing training and test prompts were not changed.

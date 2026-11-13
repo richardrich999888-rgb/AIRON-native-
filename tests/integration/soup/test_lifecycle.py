@@ -313,3 +313,23 @@ def test_training_worker_cannot_forge_approval_through_output(lab):
             thread.join(timeout=3)
     assert call(ctl, "status")["approval"] == []
     assert call(ctl, "status")["deployment"][0]["active"] is None
+
+
+def test_standard_tokenizer_template_accepted_but_arbitrary_scripts_denied(tmp_path):
+    write_json(tmp_path/"config.json", {"model_type": "llama"})
+    (tmp_path/"model.safetensors").write_bytes(b"FIXTURE")
+    (tmp_path/"chat_template.jinja").write_text("{{ messages }}")
+    assert "chat_template.jinja" in manifest(tmp_path, model=True)
+    (tmp_path/"arbitrary.jinja").write_text("unapproved")
+    with pytest.raises(Rejected):
+        manifest(tmp_path, model=True)
+
+
+def test_zero_baseline_regression_score_cannot_qualify_preservation(lab):
+    ctl = lab[0]
+    candidate = candidate_fixture(lab)
+    metrics = {"test": {"count": 1, "baseline_accuracy": 0., "candidate_accuracy": 1.},
+               "regression": {"count": 1, "baseline_accuracy": 0., "candidate_accuracy": 0.}}
+    with patch.object(ctl, "_execute", return_value=(ctl.root/"jobs"/"fixture", metrics)):
+        report = call(ctl, "evaluate_candidate", candidate_id=candidate["id"])
+    assert report["passed"] is False

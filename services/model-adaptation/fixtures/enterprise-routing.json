@@ -120,23 +120,33 @@
     "split": "test"
   },
   {
-    "prompt": "Answer with the number only. What is two plus two?",
-    "answer": "4",
+    "prompt": "Answer with one word only. What is the capital of France?",
+    "answer": "Paris",
     "split": "regression"
   },
   {
-    "prompt": "Answer with the number only. What is three plus three?",
-    "answer": "6",
+    "prompt": "Answer with one word only. What color is a ripe banana?",
+    "answer": "yellow",
     "split": "regression"
   },
   {
-    "prompt": "Answer with the number only. What is one plus one?",
-    "answer": "2",
+    "prompt": "Answer with one word only. What do bees make?",
+    "answer": "honey",
     "split": "regression"
   },
   {
-    "prompt": "Answer with the number only. What is five minus one?",
-    "answer": "4",
+    "prompt": "Answer with one word only. What is frozen water called?",
+    "answer": "ice",
+    "split": "regression"
+  },
+  {
+    "prompt": "Answer with one word only. What is the opposite of hot?",
+    "answer": "cold",
+    "split": "regression"
+  },
+  {
+    "prompt": "Answer with one word only. What is the capital of Japan?",
+    "answer": "Tokyo",
     "split": "regression"
   }
 ]

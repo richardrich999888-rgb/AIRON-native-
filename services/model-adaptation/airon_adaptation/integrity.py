@@ -65,9 +65,9 @@ def manifest(root, *, model=False):
         if p.stat().st_nlink != 1:
             raise Rejected("Hard links forbidden")
         name = p.relative_to(root).as_posix()
-        if model and (p.suffix not in {".json", ".safetensors", ".txt", ".model", ".md"}
+        if model and ((p.suffix not in {".json", ".safetensors", ".txt", ".model", ".md"} and name != "chat_template.jinja")
                       or any(part.startswith(".") for part in p.relative_to(root).parts)):
-            raise Rejected("Only data-only model files are accepted")
+            raise Rejected("Unapproved model artifact format: " + name)
         if model and p.suffix == ".json":
             if p.stat().st_size > 32 * 1024 * 1024:
                 raise Rejected("Metadata too large")
