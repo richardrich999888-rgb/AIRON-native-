@@ -17,7 +17,7 @@ From the repository root, with Python 3.12, git, bubblewrap and util-linux/unsha
 
 Use fresh asset and state directories for independent experiments. Provisioning downloads only the enumerated model/tokenizer files at a fixed revision, verifies the model card's declared licence, preserves the card, creates a synthetic approved dataset with fixed splits, and prepares a bounded training job. Never put customer material into this demonstration.
 
-The requirements file selects an audited Soup VCS revision and core ML versions. Transitive versions must be frozen and their licences reviewed for the deployment. Provisioning records actual installed distributions, licence metadata and pip freeze. The preparation script additionally builds a hash-locked platform-specific wheelhouse and inventories packaged notices. See ../../docs/qualification/p0-052/REPRODUCE.md for the fresh offline installation and full isolation procedure. Runtime redistribution still requires reviewing the exact dependency/native-platform terms.
+The requirements file selects an audited Soup VCS revision and a constrained CPU dependency stack. The preparation step freezes actual platform-specific wheels and retains their licence/notice files; review their terms for the intended deployment. Provisioning records actual installed distributions, licence metadata and pip freeze. The preparation script additionally builds a hash-locked platform-specific wheelhouse and inventories packaged notices. See ../../docs/qualification/p0-052/REPRODUCE.md for the fresh offline installation and full isolation procedure. Runtime redistribution still requires reviewing the exact dependency/native-platform terms.
 
 ## Guided local console
 

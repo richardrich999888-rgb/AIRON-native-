@@ -4,20 +4,20 @@ Updated 13 November 2026. Status applies to the exact cited evidence, not every 
 
 | Work item | Status | Code reference | Test evidence | Blocker / next action |
 |---|---|---|---|---|
-| Inspect current AIRON | DONE | Base 04a84e6 | Clone, branch/history/manifests/source inspection | No adaptation existed at base |
-| Pin/audit Soup | DONE, scoped | UPSTREAM_AUDIT.md; requirements-training.txt | af2f5d5; source-tree digest checked by real worker | Full native redistribution review |
-| Inspect AIP | DONE, no runtime dependency | ARCHITECTURE.md | 872dbf3 raw crypto/README; P0-048 reference | Ownership decision and executed bridge contract |
-| Controller/API/adversarial suite | PASS | tests/integration/soup | 63 tests at 34d150c; equivalent suite at 53976dc passed | Production identity/key custody remain outside demo |
-| Existing demonstrations | PASS | website/offline; website | 15 gateway tests, 8 website cases and build | Original hosted/Ollama behavior unchanged |
-| Real Soup operation/training | PASS | worker.py | 53976dc: 27 steps, 120 tensors, FP32 measured | One small CPU model only |
-| Candidate lifecycle | PASS, scoped | controller.py | Real evaluation, export, activation, rollback | Scripted reviewer is not independent human approval |
-| Knowledge access integration | CONTROLS PASS | knowledge.py; query_knowledge | Denial, unknown-question abstention, local generation | Real source-copy answers currently abstain |
-| Offline wheelhouse | PARTIAL | prepare_wheelhouse.py | 63 wheels; fresh isolated install at 3444026 | Correct top-level metadata selection; rerun full workflow |
-| Complete offline operation | INCOMPLETE | offline_acceptance.py; audit_network.py | Individual workers isolated; full fresh-runtime run failed previously | Require full lifecycle plus classified syscall trace |
-| Evidence verification | PASS, application level | evidence.py; verify_evidence.py | Real retained 15-event chain externally anchored in CI | Independent observer/anchor custody not integrated |
-| Real process fault checks | IMPLEMENTED, PENDING | run_fault_acceptance.py | Upcoming actual in-flight cancellation and malformed safetensors load | No fixture substitution |
-| Guided console | IMPLEMENTED, PENDING browser check | ui/; check_console.py | Upcoming browser check against real completed workspace | Document answer quality open |
-| Review delivery | DRAFT PR #2 | Target main | Commits and branch preserved via GitHub API | Do not merge without review |
+| Inspect existing sources | DONE, scoped | UPSTREAM_AUDIT.md | Exact AIRON/Soup/AIP/model pins, source/manifests/history inspection | No claim of exhaustive upstream security audit |
+| Bounded control plane | PASS | controller.py, sandbox.py, server.py | 93 checks at 7b964cd, local and CI | Trusted single OS account; aggregate quotas and enterprise identity open |
+| Existing demonstrations | PASS | website/offline; website | 15 gateway tests, 8 website cases and build at 7b964cd | Original runtime unchanged |
+| Genuine training | PASS, recorded source | worker.py | a297332: 45 optimizer steps, 120 tensors, separately inspected real adapter | Stronger 102-record candidate under test |
+| Model-quality gate | IMPLEMENTED, v3 trial pending | controller.evaluate_candidate | Actual rejected retention candidates; current minimum 50% routing | Need a v3 passing candidate |
+| Candidate lifecycle | PASS under v2 | registry, approval, activation, rollback | a297332 complete real workflow and restored predictions | Scripted reviewer is not independent human identity |
+| Knowledge controls | PASS, recorded source | knowledge.py, query_knowledge | Actual full-source generation, denial and abstention at a297332 | Synthetic exact-question corpus only |
+| Offline dependencies | PASS on tested platform | prepare_wheelhouse.py | 63-wheel hash-locked fresh isolated installation; all notices retained | Full OS/native redistribution review before shipping runtime |
+| Complete offline operation | PASS under v2 | offline_acceptance.py, audit_network.py | a297332 full lifecycle; 11 probe windows, no violations | New v3 candidate requires complete rerun; customer hardware separate |
+| Evidence | PASS at application level | evidence.py, EVIDENCE_INDEX.json | Signed chains, source-reviewed anchors and downloaded artifact checks | Independent identity/key custody and external anchoring open |
+| Actual fault checks | PASS | run_fault_acceptance.py | a297332: optimizer-progress cancellation -9; malformed safetensors parser rejection | Broader recovery/resource faults remain unqualified |
+| Guided console | PASS, recorded source | ui/, check_console.py | Actual workspace, raw downloaded chain, reviewer denial, mobile/desktop | Quality claim limited to displayed benchmark |
+| Diagnostic crash | FOLLOW-UP RUNNING | worker.main | 0f46ef0 SIGSEGV during periodic stack dump; 7b964cd removes only that diagnostic | Await controlled rerun; no unproven root-cause claim |
+| Review delivery | DRAFT PR #2 | Target main | Pinned commits, source/evidence/history retained | Do not merge without review |
 
 ## Observed failures and fixes
 
@@ -35,7 +35,7 @@ Updated 13 November 2026. Status applies to the exact cited evidence, not every 
 
 ## Next highest-value task
 
-Complete the fresh offline workflow with full syscall classification and browser inspection; then execute real cancellation/corrupt-model checks. Preserve the observed document abstention as an open quality result rather than weakening the release validation.
+Complete the unchanged-evaluation 102-record trial under the current v3 gate, then repeat its fresh offline lifecycle and artifact verification. Preserve every rejection and runtime failure. The earlier v2 workflow remains reproducible but its weak routing score is insufficient for the current gate.
 
 ## Controlled retention iteration (pending real results)
 
@@ -64,3 +64,5 @@ b4b9505 completed the full isolated workflow and browser check: 45 steps, 120 ch
 Although the lifecycle worked, 2/6 routing is only the constant-label reference score for the balanced three-class suite. It is not an adequate investor quality claim. Policy v3 now additionally requires at least 50% routing accuracy and rejects prior-policy approvals. The next trial retains the original evaluation questions and knowledge corpus, expands authorised routing training from 18 to 90 distinct records, retains the twelve disjoint copy records, and aligns their system instruction with runtime generation. Total training records: 102; 153 expected steps at three epochs, rank 8, LR .0003, seed 52. No passing result is assumed. The local suite passed 85 checks, including all newly retained signed reports.
 
 The 102-row trial at 0f46ef0 (run 43358210167) reached step 92/153 and exited 139 during the periodic 120-second faulthandler traceback. The external strace recorded SIGSEGV in that diagnostic thread, and the log ends mid-stack. This is observed correlation, not an established CPython/root-cause diagnosis. No adapter registered or activated. The next controlled trial removes only the asynchronous periodic stack walk; fatal-signal reporting, the 300-second external wall timeout and all OS limits remain. Dataset, training configuration and quality gates are unchanged. Complete failure report and hashed diagnostic excerpt retained.
+
+The 7b964cd diagnostic ablation reached 149/153 optimizer steps on an AMD EPYC runner, then the 300-second external wall limit killed it. No candidate registered or activated; the complete signed failure report is retained. The previous segmentation fault did not recur in this run, but a root-cause proof is not claimed. The larger, authorised dataset now receives a bounded 480-second training-only wall limit and 900 CPU-seconds; other operations retain 300/600 seconds and every operation retains the 6 GiB address-space limit. Worker reports record the applied OS CPU/address-space limits. Dataset, model, learning rate, epochs and quality gates remain unchanged.

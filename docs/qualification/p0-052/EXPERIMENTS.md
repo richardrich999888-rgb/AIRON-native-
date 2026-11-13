@@ -13,7 +13,10 @@ All runs below used the same pinned SmolLM2-135M-Instruct base and Soup source. 
 | 921f111 / 43349342064 | Add 12 disjoint source-copy training records; LR .001; 45 steps | Real full-source answer; routing 3/6; factual 0/6; 97.230 s training/save | Current policy rejected factual regression before deployment |
 | 1669945 / 43350087374 | Repeat same candidate; independent fault harness | Quality rejection repeated; actual cancellation and malformed model rejection passed | No promotion |
 | fe2046d / 43350750912 | Same 30 records, LR .0003; 45 steps | Routing 2/6; factual 6/6; candidate source-copy failed; 77.827 s training/save; 1,711,396 KiB peak RSS | Current policy rejected lost document behavior before deployment |
-| b4b9505 / 43354134754 | Same 30 records, LR .0001 | Pending at entry creation; read STATUS.md and exact run | No advance pass claim |
+| b4b9505 / 43354134754 | Same 30 records, LR .0001 | Offline 45 steps; 95.782 s; routing 2/6; factual 3/6; full-source answer; isolated workflow/browser passed | Lifecycle v2 passed; stricter fault-harness diagnostic failed |
+| a297332 / 43356140596 | Failed-job diagnostics fixed; actual adapter artifacts retained | Entire workflow passed; offline 99.931 s, 1,726,268 KiB; 120 changed tensors; real faults and signed browser download passed | v2 passed; 2/6 routing insufficient under later v3 |
+| 0f46ef0 / 43358210167 | 102 train records; aligned copy instruction; LR .0003; v3 minimum 50% routing | Reached 92/153 steps; SIGSEGV during asynchronous 120-second diagnostic dump | No registration or activation; quality not evaluated |
+| 7b964cd / 43359489727 | Remove periodic diagnostic stack walk only | Reached 149/153 steps; stopped at 300 seconds by external wall limit; no recurrence of diagnostic SIGSEGV | No candidate or activation; next trial changes training-only time budget |
 
 The twelve copy-training records exclude the approved document corpus and frozen question. Both evaluation data and acceptance thresholds remain unchanged across the retention trials. Candidate failures are retained with signed events, model/dataset/config hashes and real scores in evidence/. No rejected candidate was activated. An automated synthetic-test reviewer is expressly labelled and does not establish independent human authorization.
 

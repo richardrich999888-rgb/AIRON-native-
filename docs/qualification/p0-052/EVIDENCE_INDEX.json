@@ -201,7 +201,7 @@
     },
     {
       "path": "adapter-artifact-a297332.json",
-      "sha256": "da4cfdd26196c6abc2f3fbc9853257cdae3c96259eb3038f3b0047611ee766a0",
+      "sha256": "92c27f14403918fdbb165c2fe517ec764a402776a6d8e50056003251d7d0188a",
       "source": "a29733297c0d022b700ffa260750ed40a4d2e48a",
       "outcome": true,
       "verification": null
@@ -284,6 +284,24 @@
       "source": null,
       "outcome": "RECORDED_DIAGNOSTICS",
       "verification": null
+    },
+    {
+      "path": "failed-timeout-7b964cd.json",
+      "sha256": "a14f8181d8a7036ffbb4603de0a166f5147a74a59b7739a148c6833cf57628e1",
+      "source": {
+        "head": "7b964cd4950a1edbadd1115e704c1170d17ef55e",
+        "actions_checkout": "74c7ae35adf243d4eb6f49d79629de15f21188d0"
+      },
+      "outcome": "INCOMPLETE",
+      "verification": {
+        "valid": true,
+        "events": 10,
+        "head": "aa8e480ac4ccb7c59fda4195999077e600ef2c38400681b6b7fd2db667adf1d5",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "866c8979f904a849431f50dea8dd5f2fecbcada56b6a17fc5671b7e61d96f536"
     }
   ]
 }

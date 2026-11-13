@@ -215,13 +215,14 @@ def main():
     # diagnostic's 120-second dump (retained trace: failed-training-0f46ef0).
     # The external process wall timeout and OS resource limits still apply.
     resource.setrlimit(resource.RLIMIT_AS, (6*1024**3, 6*1024**3))
-    resource.setrlimit(resource.RLIMIT_CPU, (600, 600))
     resource.setrlimit(resource.RLIMIT_FSIZE, (1024**3, 1024**3))
     resource.setrlimit(resource.RLIMIT_NOFILE, (128, 128))
     resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
     os.umask(0o077)
     start = time.perf_counter()
     request = json.loads(Path("/request.json").read_text())
+    cpu_limit = 900 if request["operation"] == "train" else 600
+    resource.setrlimit(resource.RLIMIT_CPU, (cpu_limit, cpu_limit))
     identity, isolation = upstream_identity(), isolation_probe(request["parent_netns"])
     operation = request["operation"]
     if operation == "probe":
@@ -253,7 +254,9 @@ def main():
         else:
             raise Rejected("Unknown worker operation")
     result.update(wall_seconds=time.perf_counter()-start, peak_rss_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
-                  soup=identity, isolation=isolation, cpu_threads=2, gpu_used=False)
+                  soup=identity, isolation=isolation, cpu_threads=2, gpu_used=False,
+                  resource_limits={"cpu_seconds": resource.getrlimit(resource.RLIMIT_CPU)[0],
+                                   "address_space_bytes": resource.getrlimit(resource.RLIMIT_AS)[0]})
     write_json("/output/result.json", result)
 
 

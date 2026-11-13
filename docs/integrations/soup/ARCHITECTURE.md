@@ -27,7 +27,7 @@ POST /api/operation with Authorization: Bearer TOKEN and JSON {"operation": "...
 | query_knowledge | question, enabled document IDs | Server-bound document role, manifest verification, supported-question retrieval, isolated active-model generation and exact-source release validation |
 | status / evidence | none | Read signed state / export signed chain |
 
-Model import is an administrative Python provisioning operation, intentionally absent from HTTP. Example row: {"prompt":"Route this invoice", "answer":"K7", "split":"train"}. Dataset authorization must exactly equal {"synthetic":true,"approved_for_training":true,"license":"CC0-1.0"}. Training config example: {"epochs":3,"lr":0.001,"rank":8,"seed":52}.
+Model import is an administrative Python provisioning operation, intentionally absent from HTTP. Example row: {"prompt":"Route this invoice", "answer":"K7", "split":"train"}. Dataset authorization must exactly equal {"synthetic":true,"approved_for_training":true,"license":"CC0-1.0"}. Current qualification configuration: {"epochs":3,"lr":0.0003,"rank":8,"seed":52}.
 
 ## State and crash behavior
 
@@ -39,7 +39,7 @@ Activation changes the experimental runtime's model pointer. It does not mutate 
 
 The host OS administrator and same OS account are trusted. Filesystem checks are not a defense against an administrator racing filesystem operations, altering the Python environment, replacing the signing key, rolling back the entire database or generating false records. Tokens are bearer credentials for a single-workstation demonstration, not enterprise identity, two independent human identities or multi-tenant isolation.
 
-Jobs have per-process address-space (6 GiB), CPU (600 seconds), file (1 GiB/file), descriptor and wall-clock (300 seconds per worker) limits. These are not cgroup aggregate memory/disk quotas. Production deployment requires a distinct service user, signed supply-chain artifacts, independent approver identity, key custody, external event anchoring and measured target-hardware resource controls.
+Jobs have per-process address-space (6 GiB), CPU (900 seconds for training, 600 for other operations), file (1 GiB/file), descriptor and wall-clock (480 seconds for training, 300 for other workers) limits. These are not cgroup aggregate memory/disk quotas. Production deployment requires a distinct service user, signed supply-chain artifacts, independent approver identity, key custody, external event anchoring and measured target-hardware resource controls.
 
 ## Assurance interface
 
@@ -55,7 +55,7 @@ Incremental adapter training, merge parity beyond the selected helper, replay bu
 
 Bundle preparation is a separate trusted operation: bundle.py reuses Soup assembly, signs the archive digest, verifies every regular member against the manifest and rejects undeclared bytes. It never extracts an archive or claims dependency closure from a filename alone.
 
-The regression gate also requires a nonzero baseline regression score. A suite on which the baseline gets every case wrong cannot qualify preservation. The initial four arithmetic prompts produced 0/4; they were replaced, before acceptance, with a fixed six-question factual suite. Historical failure evidence is retained. The routing training and test prompts were not changed.
+The regression gate also requires a nonzero baseline regression score. A suite on which the baseline gets every case wrong cannot qualify preservation. The initial four arithmetic prompts produced 0/4; they were replaced, before acceptance, with a fixed six-question factual suite. Historical failure evidence is retained. The six routing test prompts were not changed. Routing training later expanded from eighteen to ninety records; those additions and the stricter v3 gate are explicit in EXPERIMENTS.md.
 
 ## Knowledge and CPU precision
 

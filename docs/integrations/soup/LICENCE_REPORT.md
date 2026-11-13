@@ -1,6 +1,6 @@
 # Licence evidence and remaining review
 
-Evidence date: 13 November 2026. dependencies.resolved.json retains the initial installed Python 3.12 inventory from Actions run 43337947734. licences.wheels.c1f9ad7.json and wheels.c1f9ad7.json contain the later actual 63-wheel notice/hash inventory from run 43347812566, whose fresh offline installation and model lifecycle passed. These establish observed artifacts and declared terms, not blanket legal clearance.
+Evidence date: 13 November 2026. dependencies.resolved.json retains the initial installed Python 3.12 inventory from Actions run 43337947734. licences.wheels.c1f9ad7.json and wheels.c1f9ad7.json contain the later actual 63-wheel notice/hash inventory from run 43347812566, whose fresh offline installation and model lifecycle passed. The later licences.wheels.b4b9505.json and wheels.b4b9505.json retain the corrected 63-wheel inventory: every wheel has packaged or explicitly sourced supplemental notices. These establish observed artifacts and declared terms, not blanket legal clearance.
 
 - Soup 0.77.2 was built from af2f5d5000f7baec6386a72a6d16e82383eb5303. The observed wheel SHA-256 was e7285d5077da078c5e1fed5de8617d2feec4055c340c657793e2cd48d4319042. This identifies that build, not all future wheel builds.
 - Exact upstream Apache-2.0 LICENSE and NOTICE are retained under third_party/. No upstream source changes were made.

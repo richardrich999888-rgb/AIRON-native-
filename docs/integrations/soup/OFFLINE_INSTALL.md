@@ -56,3 +56,5 @@ In a trusted preparation process whose current directory contains all input/outp
 The wheelhouse must include wheel files and requirements.lock. File presence does not prove that the wheel files are valid or that the lock covers every dependency; the verifier explicitly reports REQUIRES_FRESH_OFFLINE_INSTALL_TEST. Retain the archive, detached attestation, trusted public key, exact preparation/runtime versions and qualification results separately. Never include the controller's signing.key or state database in a redistribution bundle.
 
 A reviewer must trust the public key independently of the archive. An archive and a matching attacker-supplied key establish no provenance.
+
+The a29733297c0d022b700ffa260750ed40a4d2e48a run (43356140596) subsequently passed the full eleven-window workflow, full-source document answer, raw signed browser download, real cancellation and malformed-model rejection. Its routing score remained 2/6. Policy v3 now requires at least 50%; current qualification belongs to STATUS.md, not that historical pass.

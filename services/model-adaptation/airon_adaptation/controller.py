@@ -265,7 +265,8 @@ class Controller:
                 if self._get(job["id"], "job")["status"] == "CANCELLED":
                     sandbox.stop(proc)
         try:
-            sandbox.run(sandbox.command(path, model, data, adapter), path/"worker.log", on_start=started)
+            sandbox.run(sandbox.command(path, model, data, adapter), path/"worker.log", on_start=started,
+                        timeout=480 if operation == "train" else 300)
             result = json.loads(safe_path(path, "output/result.json").read_text())
             return path, result
         finally:
