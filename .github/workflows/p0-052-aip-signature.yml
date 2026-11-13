@@ -1,0 +1,39 @@
+name: P0-052 AIP raw signature contract
+on:
+  pull_request:
+    paths:
+      - 'tests/integration/aip-signature/**'
+      - '.github/workflows/p0-052-aip-signature.yml'
+permissions:
+  contents: read
+jobs:
+  raw-signature-contract:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: richardrich999888-rgb/AIP-agent-identity-protocol-
+          ref: 872dbf375838cff464eb019488c63d948015e9b8
+          path: _aip-source
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Prepare pinned test-only crypto dependency
+        run: |
+          python -m pip install 'cryptography==50.0.2' ./services/model-adaptation
+          rustup toolchain install 1.90.0 --profile minimal
+          cargo +1.90.0 build --locked --manifest-path _aip-source/aip-standalone/Cargo.toml -p aip-crypto
+          rustc +1.90.0 --edition=2021 tests/integration/aip-signature/contract.rs --extern aip_crypto=_aip-source/aip-standalone/target/debug/libaip_crypto.rlib -L dependency=_aip-source/aip-standalone/target/debug/deps -o "$RUNNER_TEMP/aip-contract"
+          python tests/integration/aip-signature/contract.py prepare --root "$RUNNER_TEMP/aip-vectors" --report docs/qualification/p0-052/evidence/offline-a297332.json --index docs/qualification/p0-052/EVIDENCE_INDEX.json
+      - name: Verify real records and bidirectional byte contract offline
+        run: |
+          AIRON_HOST_NETNS=$(readlink /proc/self/ns/net)
+          unshare --user --map-root-user --net python tests/integration/aip-signature/contract.py finish --root "$RUNNER_TEMP/aip-vectors" --binary "$RUNNER_TEMP/aip-contract" --aip "$GITHUB_WORKSPACE/_aip-source" --parent-netns "$AIRON_HOST_NETNS" --output aip-contract-report.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: p0-052-aip-signature-contract
+          path: aip-contract-report.json

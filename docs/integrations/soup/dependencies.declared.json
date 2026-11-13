@@ -1,0 +1,26 @@
+{
+  "source_sha": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+  "manifest_blob_sha": "b97c93275f4a8a6997c7590e27e043dd1fb7579c",
+  "core": [
+    "typer>=0.15.4,<0.28",
+    "click>=8.0.0,<8.5",
+    "rich>=13.0.0",
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+    "huggingface-hub>=0.16.0",
+    "plotext>=5.2.0",
+    "packaging>=21.0"
+  ],
+  "train": [
+    "torch>=2.6.0",
+    "transformers>=5.16.1,<6.0.0",
+    "peft>=0.20.0,<1.0.0",
+    "trl>=0.29.0,<1.0.0",
+    "requests>=2.32.2",
+    "datasets>=2.14.0",
+    "bitsandbytes>=0.41.0",
+    "accelerate>=0.27.0"
+  ],
+  "resolution": "Source-declared ranges; not a resolved install inventory",
+  "license_review": "Transitive dependency licences remain to be reviewed"
+}

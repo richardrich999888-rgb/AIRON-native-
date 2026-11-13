@@ -1,0 +1,553 @@
+{
+  "source": "GitHub Actions run 43337947734 / provisioning step",
+  "commit": "dd8f3b93adab119c7cd51539a205273f7aa36dab",
+  "scope": "Installed Python environment; declared package metadata, not legal clearance or complete OS SBOM",
+  "packages": [
+    {
+      "name": "accelerate",
+      "version": "1.15.0",
+      "license": "Apache",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "airon-adaptation",
+      "version": "0.1.0",
+      "license": "",
+      "license_files": []
+    },
+    {
+      "name": "annotated-doc",
+      "version": "0.0.6",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "anyio",
+      "version": "4.16.0",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23",
+      "license": "MPL-2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "cffi",
+      "version": "2.1.1",
+      "license": "MIT-0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "click",
+      "version": "8.4.2",
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "cryptography",
+      "version": "50.0.2",
+      "license": "Apache-2.0 OR BSD-3-Clause",
+      "license_files": [
+        "LICENSE",
+        "LICENSE.APACHE",
+        "LICENSE.BSD"
+      ]
+    },
+    {
+      "name": "datasets",
+      "version": "5.2.0",
+      "license": "Apache 2.0",
+      "license_files": [
+        "LICENSE",
+        "AUTHORS"
+      ]
+    },
+    {
+      "name": "dill",
+      "version": "0.4.1",
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "filelock",
+      "version": "4.2.4",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0",
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "hf-xet",
+      "version": "1.8.0",
+      "license": "Apache-2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9",
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1",
+      "license": "BSD-3-Clause",
+      "license_files": []
+    },
+    {
+      "name": "huggingface_hub",
+      "version": "1.33.0",
+      "license": "Apache-2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE.md"
+      ]
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6",
+      "license": "",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.3.0",
+      "license": "",
+      "license_files": [
+        "LICENSE",
+        "LICENSE.markdown-it"
+      ]
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.3",
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2",
+      "license": "",
+      "license_files": []
+    },
+    {
+      "name": "mpmath",
+      "version": "1.3.0",
+      "license": "BSD",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "multiprocess",
+      "version": "0.70.19",
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE",
+        "COPYING"
+      ]
+    },
+    {
+      "name": "networkx",
+      "version": "3.7",
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "numpy",
+      "version": "2.5.4",
+      "license": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
+      "license_files": [
+        "LICENSE.txt",
+        "numpy/_core/include/numpy/libdivide/LICENSE.txt",
+        "numpy/_core/src/common/pythoncapi-compat/COPYING",
+        "numpy/_core/src/highway/LICENSE",
+        "numpy/_core/src/multiarray/dragon4_LICENSE.txt",
+        "numpy/_core/src/npysort/x86-simd-sort/LICENSE.md",
+        "numpy/_core/src/umath/svml/LICENSE",
+        "numpy/fft/pocketfft/LICENSE.md",
+        "numpy/linalg/lapack_lite/LICENSE.txt",
+        "numpy/ma/LICENSE",
+        "numpy/random/LICENSE.md",
+        "numpy/random/src/distributions/LICENSE.md",
+        "numpy/random/src/mt19937/LICENSE.md",
+        "numpy/random/src/pcg64/LICENSE.md",
+        "numpy/random/src/philox/LICENSE.md",
+        "numpy/random/src/sfc64/LICENSE.md",
+        "numpy/random/src/splitmix64/LICENSE.md"
+      ]
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "license_files": [
+        "LICENSE",
+        "LICENSE.APACHE",
+        "LICENSE.BSD"
+      ]
+    },
+    {
+      "name": "pandas",
+      "version": "3.1.1",
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE",
+        "LICENSES/BOTTLENECK_LICENCE",
+        "LICENSES/DATEUTIL_LICENSE",
+        "LICENSES/HAVEN_LICENSE",
+        "LICENSES/HAVEN_MIT",
+        "LICENSES/KLIB_LICENSE",
+        "LICENSES/MUSL_LICENSE",
+        "LICENSES/NUMPY_LICENSE",
+        "LICENSES/PACKAGING_LICENSE",
+        "LICENSES/PSF_LICENSE",
+        "LICENSES/PYPERCLIP_LICENSE",
+        "LICENSES/PYUPGRADE_LICENSE",
+        "LICENSES/SAS7BDAT_LICENSE",
+        "LICENSES/STATSBASE_JL_LICENSE",
+        "LICENSES/ULTRAJSON_LICENSE",
+        "LICENSES/XSIMD_LICENSE",
+        "subprojects/fast_float-8.2.10/LICENSE-APACHE",
+        "subprojects/fast_float-8.2.10/LICENSE-BOOST",
+        "subprojects/fast_float-8.2.10/LICENSE-MIT"
+      ]
+    },
+    {
+      "name": "peft",
+      "version": "0.20.0",
+      "license": "Apache",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pip",
+      "version": "25.0.1",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE.txt",
+        "AUTHORS.txt"
+      ]
+    },
+    {
+      "name": "plotext",
+      "version": "6.1.0",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "psutil",
+      "version": "7.2.2",
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pyarrow",
+      "version": "26.0.1",
+      "license": "Apache-2.0",
+      "license_files": [
+        "LICENSE.txt",
+        "NOTICE.txt"
+      ]
+    },
+    {
+      "name": "pycparser",
+      "version": "3.12",
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.3",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.50.4",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "Pygments",
+      "version": "2.21.0",
+      "license": "BSD-2-Clause",
+      "license_files": [
+        "AUTHORS",
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "pytest",
+      "version": "9.2.0",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "python-dateutil",
+      "version": "4.0.0",
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "AUTHORS.md",
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "PyYAML",
+      "version": "6.0.3",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "regex",
+      "version": "2026.11.9",
+      "license": "Apache-2.0 AND CNRI-Python",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2",
+      "license": "Apache-2.0",
+      "license_files": [
+        "LICENSE",
+        "NOTICE"
+      ]
+    },
+    {
+      "name": "rich",
+      "version": "15.0.0",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "safetensors",
+      "version": "0.8.0",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "setuptools",
+      "version": "78.1.0",
+      "license": "",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "shellingham",
+      "version": "1.5.4",
+      "license": "ISC License",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "soup-cli",
+      "version": "0.77.2",
+      "license": "Apache-2.0",
+      "license_files": [
+        "LICENSE",
+        "NOTICE"
+      ]
+    },
+    {
+      "name": "sympy",
+      "version": "1.14.0",
+      "license": "BSD",
+      "license_files": [
+        "LICENSE",
+        "AUTHORS"
+      ]
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.23.3",
+      "license": "",
+      "license_files": []
+    },
+    {
+      "name": "torch",
+      "version": "2.9.1+cpu",
+      "license": "BSD-3-Clause",
+      "license_files": [
+        "LICENSE",
+        "NOTICE"
+      ]
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1",
+      "license": "MPL-2.0 AND MIT",
+      "license_files": [
+        "LICENCE"
+      ]
+    },
+    {
+      "name": "transformers",
+      "version": "5.16.1",
+      "license": "Apache 2.0 License",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "trl",
+      "version": "0.29.1",
+      "license": "Apache-2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "typer",
+      "version": "0.27.3",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.5",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0",
+      "license": "PSF-2.0",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.6",
+      "license": "Apache-2.0",
+      "license_files": [
+        "LICENSE",
+        "licenses/LICENSE_APACHE"
+      ]
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0",
+      "license": "MIT",
+      "license_files": [
+        "LICENSE.txt"
+      ]
+    },
+    {
+      "name": "xxhash",
+      "version": "4.1.0",
+      "license": "BSD-2-Clause",
+      "license_files": [
+        "LICENSE"
+      ]
+    }
+  ]
+}
