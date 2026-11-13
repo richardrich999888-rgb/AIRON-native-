@@ -2,7 +2,11 @@ name: P0-052 adaptation qualification
 on:
   pull_request:
     paths:
-      - 'services/model-adaptation/**'
+      - 'services/model-adaptation/**/*.py'
+      - 'services/model-adaptation/**/*.json'
+      - 'services/model-adaptation/**/*.toml'
+      - 'services/model-adaptation/requirements*.txt'
+      - 'services/model-adaptation/airon_adaptation/ui/**'
       - 'tests/integration/soup/**'
       - '.github/workflows/p0-052.yml'
 env:

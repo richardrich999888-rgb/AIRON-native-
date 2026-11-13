@@ -40,7 +40,7 @@ def command(job, model, data, adapter=None):
     return args
 
 
-def run(args, logfile, *, on_start=lambda process: None, timeout=900):
+def run(args, logfile, *, on_start=lambda process: None, timeout=300):
     with open(logfile, "xb", buffering=0) as log:
         proc = subprocess.Popen(args, stdin=subprocess.DEVNULL, stdout=log, stderr=log,
                                 start_new_session=True, close_fds=True,

@@ -34,7 +34,10 @@ def main():
                         "actions_checkout": os.environ.get("GITHUB_SHA")}
     ctl = Controller(args.root)
     def invoke(operation, **params):
-        return ctl.call(operation, params, actor="local-operator", role="operator")
+        print("ACCEPTANCE_STEP="+operation, flush=True)
+        value = ctl.call(operation, params, actor="local-operator", role="operator")
+        write_json(report_path.with_suffix(".progress.json"), {"last_completed": operation, "gates": report["gates"]})
+        return value
     def review(operation, **params):
         return ctl.call(operation, params, actor="synthetic-test-reviewer", role="reviewer")
     code = 2

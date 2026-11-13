@@ -86,7 +86,7 @@ class Controller:
                         (ident, kind, canonical(seal(value, self.key)).decode()))
 
     def _get(self, ident, kind):
-        if ident != "deployment" and (not isinstance(ident, str) or not ID.fullmatch(ident)):
+        if ident not in ("deployment", "knowledge") and (not isinstance(ident, str) or not ID.fullmatch(ident)):
             raise Rejected("Invalid object identifier")
         row = self.db.execute("SELECT record FROM objects WHERE id=? AND kind=?", (ident, kind)).fetchone()
         if row is None:

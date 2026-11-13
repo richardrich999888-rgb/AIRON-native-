@@ -1,4 +1,5 @@
 """Fixed worker operations, executed only inside the namespace/mount sandbox."""
+import faulthandler
 import hashlib
 import importlib.metadata
 import json
@@ -196,6 +197,8 @@ def answer_knowledge(request):
 
 
 def main():
+    faulthandler.enable()
+    faulthandler.dump_traceback_later(120, repeat=True)
     resource.setrlimit(resource.RLIMIT_AS, (6*1024**3, 6*1024**3))
     resource.setrlimit(resource.RLIMIT_CPU, (600, 600))
     resource.setrlimit(resource.RLIMIT_FSIZE, (1024**3, 1024**3))
