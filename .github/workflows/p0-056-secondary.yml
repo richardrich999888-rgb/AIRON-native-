@@ -1,0 +1,60 @@
+name: P0-056 real fault and console qualification
+on:
+  push:
+    branches: [codex/p0-056-unified-airon-runtime]
+    paths: ['.github/workflows/p0-056-secondary.yml', 'services/unified-runtime/airon_runtime/ui/**']
+permissions:
+  contents: read
+jobs:
+  fault-and-console:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    env:
+      AIRON_SOURCE_COMMIT: ${{ github.sha }}
+      PYTHONPATH: ${{ github.workspace }}/services/unified-runtime:${{ github.workspace }}/services/model-adaptation:${{ github.workspace }}/services/unified-runtime/scripts
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Prepare pinned baseline and real native binaries
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y bubblewrap strace
+          python -m venv .venv
+          .venv/bin/python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.9.1
+          .venv/bin/python -m pip install -r services/model-adaptation/requirements-training.txt
+          .venv/bin/python -m pip install 'docling-slim[format-markdown]==2.150.0' 'playwright==1.61.0'
+          git clone --no-checkout https://github.com/richardrich999888-rgb/AIP-agent-identity-protocol-.git "$RUNNER_TEMP/aip"
+          git -C "$RUNNER_TEMP/aip" checkout --detach f1ba9fc2072dac1431543fd4961baaa2762b8ea9
+          rustup toolchain install 1.99.1 --profile minimal
+          cargo +1.99.1 build --locked --manifest-path "$RUNNER_TEMP/aip/Cargo.toml" -p syntriass-runtime --bins
+          .venv/bin/python services/model-adaptation/scripts/provision.py --root "$RUNNER_TEMP/baseline" --assets "$RUNNER_TEMP/assets" --approve-synthetic-data
+      - name: Real optimizer interruption and corrupted model rejection
+        run: |
+          mkdir -p qualification
+          strace -ff -e trace=network -o qualification/fault-network unshare --user --map-root-user --net taskset -c 0,1 .venv/bin/python services/model-adaptation/scripts/run_fault_acceptance.py --source-root "$RUNNER_TEMP/baseline" --root "$RUNNER_TEMP/faults" --report qualification/faults.json --authorize-synthetic-fault-tests
+      - name: Create a real approved console procedure
+        run: |
+          .venv/bin/python services/unified-runtime/scripts/provision.py --root "$RUNNER_TEMP/console" --assets "$RUNNER_TEMP/assets" --aip-dir "$RUNNER_TEMP/aip" --bin-dir "$RUNNER_TEMP/aip/target/debug" --approve-synthetic-data
+          .venv/bin/python - <<'PY'
+          import json,os
+          from pathlib import Path
+          from airon_runtime.core import Core
+          from run_demo import signed_suite,FIXTURES
+          c=Core(Path(os.environ['RUNNER_TEMP'])/'console');p=c.principal('operator');r=c.principal('reviewer')
+          c.call(p,'ingest',{'text':(FIXTURES/'maintenance.md').read_text().strip(),'doc_id':'maintenance','title':'Synthetic maintenance manual','classification':'restricted'})
+          h=c.call(p,'capability',{'action':'propose','payload':{'capability':json.loads((FIXTURES/'cooling-capability.json').read_text())}})[0]['hash']
+          assert c.call(p,'capability',{'action':'validate','payload':{'hash':h,'suite':signed_suite(c)}})[0]['passed']
+          for action in ['approve','activate']:c.call(r,'capability',{'action':action,'payload':{'hash':h}})
+          c.close()
+          PY
+      - name: Browser and HTTP authorization checks
+        run: |
+          .venv/bin/python services/unified-runtime/scripts/qualify_console.py --root "$RUNNER_TEMP/console" --output qualification/console
+          .venv/bin/python docs/qualification/p0-056/helpers/audit_egress.py --prefix qualification/fault-network --expected-probes 3 --report qualification/fault-network-audit.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: p0-056-secondary-qualification
+          path: qualification/

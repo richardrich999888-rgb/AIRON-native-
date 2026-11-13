@@ -1,0 +1,115 @@
+name: P0-056 unified runtime qualification
+on:
+  push:
+    branches: [codex/p0-056-unified-airon-runtime]
+    paths: ['services/unified-runtime/**', 'tests/integration/unified/**', '.github/workflows/p0-056.yml']
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 50
+    env:
+      AIRON_SOURCE_COMMIT: ${{ github.sha }}
+      P056_AIP_COMMIT: f1ba9fc2072dac1431543fd4961baaa2762b8ea9
+      PYTHONPATH: ${{ github.workspace }}/services/unified-runtime
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Prepare pinned dependencies and native interface
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y bubblewrap strace cmake
+          python -m venv .venv
+          .venv/bin/python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.9.1
+          .venv/bin/python -m pip install -r services/model-adaptation/requirements-training.txt
+          .venv/bin/python -m pip install 'docling-slim[format-markdown]==2.150.0' sentencepiece 'pip==26.2' 'setuptools==84.2.1'
+          .venv/bin/python -m pip install ./services/model-adaptation
+          git clone --no-checkout https://github.com/richardrich999888-rgb/AIP-agent-identity-protocol-.git "$RUNNER_TEMP/aip"
+          git -C "$RUNNER_TEMP/aip" checkout --detach "$P056_AIP_COMMIT"
+          rustup toolchain install 1.99.1 --profile minimal
+          cargo +1.99.1 build --locked --manifest-path "$RUNNER_TEMP/aip/Cargo.toml" -p syntriass-runtime --bins
+          cargo +1.99.1 test --locked --manifest-path "$RUNNER_TEMP/aip/Cargo.toml" -p syntriass-runtime
+      - name: Provision approved model and build pinned llama.cpp
+        run: |
+          .venv/bin/python services/model-adaptation/scripts/provision.py --root "$RUNNER_TEMP/baseline" --assets "$RUNNER_TEMP/assets" --approve-synthetic-data
+          git init "$RUNNER_TEMP/llama"
+          git -C "$RUNNER_TEMP/llama" fetch --depth 1 https://github.com/ggml-org/llama.cpp.git 2a4daf0e08d6a9b6993ee0d4a9a3cfc35a6f405c
+          git -C "$RUNNER_TEMP/llama" checkout --detach FETCH_HEAD
+          cmake -S "$RUNNER_TEMP/llama" -B "$RUNNER_TEMP/llama-build" -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF -DLLAMA_BUILD_TESTS=OFF -DCMAKE_BUILD_TYPE=Release
+          cmake --build "$RUNNER_TEMP/llama-build" --target llama-completion -j 2
+          PYTHONPATH="$RUNNER_TEMP/llama/gguf-py" .venv/bin/python "$RUNNER_TEMP/llama/convert_hf_to_gguf.py" "$RUNNER_TEMP/assets" --outfile "$RUNNER_TEMP/135m.gguf" --outtype f16
+      - name: Real integration and preserved baseline tests
+        env:
+          P056_ASSETS: ${{ runner.temp }}/assets
+          P056_AIP_SOURCE: ${{ runner.temp }}/aip
+          P056_AIP_BIN: ${{ runner.temp }}/aip/target/debug
+        run: |
+          mkdir -p qualification
+          .venv/bin/python -m pytest -q tests/integration/soup tests/integration/unified --junitxml=qualification/tests.xml
+          python -m unittest discover -s website/offline -p test_server.py
+      - name: Execute complete slice with four CPUs, 8 GiB and no external route
+        run: |
+          .venv/bin/python services/unified-runtime/scripts/provision.py --root "$RUNNER_TEMP/unified" --assets "$RUNNER_TEMP/assets" --aip-dir "$RUNNER_TEMP/aip" --bin-dir "$RUNNER_TEMP/aip/target/debug" --llama "$RUNNER_TEMP/llama-build/bin/llama-completion" --gguf "$RUNNER_TEMP/135m.gguf" --approve-synthetic-data
+          sudo mkdir /sys/fs/cgroup/airon-p056
+          echo 8589934592 | sudo tee /sys/fs/cgroup/airon-p056/memory.max
+          echo '400000 100000' | sudo tee /sys/fs/cgroup/airon-p056/cpu.max
+          qualification_status=0
+          sudo env P056_PROFILE=full P056_UID="$(id -u)" P056_GID="$(id -g)" AIRON_SOURCE_COMMIT="$AIRON_SOURCE_COMMIT" PYTHONPATH="$PYTHONPATH" \
+            bash docs/qualification/p0-056/helpers/enter_cgroup.sh \
+            strace -ff -e trace=network -o qualification/network \
+            taskset -c 0-3 unshare --user --map-root-user --net \
+            .venv/bin/python services/unified-runtime/scripts/run_demo.py --root "$RUNNER_TEMP/unified" --report qualification/demo.json --backend llama --approve-synthetic-test-deployment || qualification_status=$?
+          cp /sys/fs/cgroup/airon-p056/memory.peak qualification/cgroup-memory-peak.txt
+          cp /sys/fs/cgroup/airon-p056/memory.events qualification/cgroup-memory-events.txt
+          cp /sys/fs/cgroup/airon-p056/cpu.stat qualification/cgroup-cpu-stat.txt
+          .venv/bin/python docs/qualification/p0-056/helpers/check_cgroup.py --prefix qualification/cgroup --cpus 4 --membership '0::/airon-p056' --report qualification/resource-accounting.json
+          test "$qualification_status" -eq 0
+          .venv/bin/python docs/qualification/p0-056/helpers/audit_egress.py --prefix qualification/network --expected-probes 7 --report qualification/network-audit.json
+      - name: Prepare complete local wheelhouse
+        if: always()
+        run: .venv/bin/python services/unified-runtime/scripts/prepare_offline.py --output "$RUNNER_TEMP/wheels"
+      - name: Fresh offline install and serving under two CPUs and 8 GiB
+        run: |
+          python -m venv "$RUNNER_TEMP/offline"
+          unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" -m pip install --no-index --find-links "$RUNNER_TEMP/wheels" --require-hashes -r "$RUNNER_TEMP/wheels/requirements.lock"
+          unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" -m pip check
+          sudo mkdir /sys/fs/cgroup/airon-p056-minimum
+          echo 8589934592 | sudo tee /sys/fs/cgroup/airon-p056-minimum/memory.max
+          echo '200000 100000' | sudo tee /sys/fs/cgroup/airon-p056-minimum/cpu.max
+          smoke_status=0
+          sudo env P056_PROFILE=minimum P056_UID="$(id -u)" P056_GID="$(id -g)" AIRON_SOURCE_COMMIT="$AIRON_SOURCE_COMMIT" \
+            bash docs/qualification/p0-056/helpers/enter_cgroup.sh \
+            strace -ff -e trace=network -o qualification/install-network \
+            taskset -c 0,1 unshare --user --map-root-user --net env -u PYTHONPATH \
+            "$RUNNER_TEMP/offline/bin/python" services/unified-runtime/scripts/installed_smoke.py --root "$RUNNER_TEMP/unified" --report qualification/offline-install.json --verify-adaptation || smoke_status=$?
+          cp /sys/fs/cgroup/airon-p056-minimum/memory.peak qualification/minimum-cgroup-memory-peak.txt
+          cp /sys/fs/cgroup/airon-p056-minimum/memory.events qualification/minimum-cgroup-memory-events.txt
+          cp /sys/fs/cgroup/airon-p056-minimum/cpu.stat qualification/minimum-cgroup-cpu-stat.txt
+          .venv/bin/python docs/qualification/p0-056/helpers/check_cgroup.py --prefix qualification/minimum-cgroup --cpus 2 --membership '0::/airon-p056-minimum' --report qualification/minimum-resource-accounting.json
+          test "$smoke_status" -eq 0
+          .venv/bin/python docs/qualification/p0-056/helpers/audit_egress.py --prefix qualification/install-network --expected-probes 1 --report qualification/install-network-audit.json
+          .venv/bin/python docs/qualification/p0-056/helpers/export_public_snapshot.py --root "$RUNNER_TEMP/unified" --demo qualification/demo.json --output qualification/public-snapshot.json
+          unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" docs/qualification/p0-056/helpers/verify_snapshot.py --snapshot qualification/public-snapshot.json --report qualification/snapshot-verification.json
+      - name: Preserve nonsecret raw evidence
+        if: always()
+        run: |
+          mkdir -p qualification/logs
+          if [ -d "$RUNNER_TEMP/unified/adaptation/jobs" ]; then
+            find "$RUNNER_TEMP/unified/adaptation/jobs" -name worker.log -exec cp --parents {} qualification/logs/ \;
+          fi
+          if [ -d "$RUNNER_TEMP/unified/adaptation/candidates" ]; then
+            cp -r "$RUNNER_TEMP/unified/adaptation/candidates" qualification/candidates
+          fi
+          if [ -f "$RUNNER_TEMP/wheels/requirements.lock" ]; then
+            cp "$RUNNER_TEMP/wheels/requirements.lock" qualification/
+            cp "$RUNNER_TEMP/wheels/wheelhouse.json" qualification/
+            cp "$RUNNER_TEMP/wheels/licences.json" qualification/
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: p0-056-qualification
+          path: qualification/

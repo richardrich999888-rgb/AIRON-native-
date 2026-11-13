@@ -1,0 +1,57 @@
+{
+  "checked_at_utc": "2026-11-13T08:38:38.625686+00:00",
+  "protected_branches": {
+    "airon": {
+      "codex/p0-052-airon-soup-offline-adaptation": {
+        "initial": "1d4a2255549a0ffd881fde26add190a2d8cf4c64",
+        "current": "1d4a2255549a0ffd881fde26add190a2d8cf4c64",
+        "unchanged": true
+      },
+      "main": {
+        "initial": "04a84e64fc2be36fe03fc73006c9a42285617a02",
+        "current": "04a84e64fc2be36fe03fc73006c9a42285617a02",
+        "unchanged": true
+      },
+      "research/p0-053-opensource-capability-library": {
+        "initial": "c85205d6cfa4572261046bd549a397ca6cfcf0a7",
+        "current": "c85205d6cfa4572261046bd549a397ca6cfcf0a7",
+        "unchanged": true
+      }
+    },
+    "aip": {
+      "claude/syntriass-airgap-intelligence": {
+        "initial": "a04b864e187609838ee85076cc7048abf9fd113b",
+        "current": "a04b864e187609838ee85076cc7048abf9fd113b",
+        "unchanged": true
+      },
+      "feature/airon-teach-demo": {
+        "initial": "93c65bcdc293aa950552f1a11515c4b21a553e8e",
+        "current": "93c65bcdc293aa950552f1a11515c4b21a553e8e",
+        "unchanged": true
+      },
+      "feature/syntriass-intelligence-runtime-v01": {
+        "initial": "7bf697b8bb7d10b90b07bfebcb45425802fae690",
+        "current": "7bf697b8bb7d10b90b07bfebcb45425802fae690",
+        "unchanged": true
+      },
+      "feature/syntriass-runtime-v02": {
+        "initial": "2883da7bf5b8591a31bf24789c1d0722f83a6624",
+        "current": "2883da7bf5b8591a31bf24789c1d0722f83a6624",
+        "unchanged": true
+      },
+      "main": {
+        "initial": "872dbf375838cff464eb019488c63d948015e9b8",
+        "current": "872dbf375838cff464eb019488c63d948015e9b8",
+        "unchanged": true
+      },
+      "research/syntriass-compute-memory": {
+        "initial": "9f88335f5f2364793f7b05b6f97eabd0bb5249eb",
+        "current": "9f88335f5f2364793f7b05b6f97eabd0bb5249eb",
+        "unchanged": true
+      }
+    }
+  },
+  "p052_selected_paths": "BYTE_IDENTICAL",
+  "native_worktree": "",
+  "status": "PASS"
+}

@@ -1,0 +1,626 @@
+{
+  "schema": "airon-benchmark-protocol/v1",
+  "families": [
+    {
+      "id": "cooling",
+      "capability": {
+        "id": "airon.cooling.inspection",
+        "version": 1,
+        "intended_task": "Classify a synthetic cooling assembly maintenance report; take no physical action",
+        "outcomes": [
+          "INSPECT",
+          "STOP_AND_NOTIFY",
+          "CONTINUE",
+          "OUT_OF_SCOPE",
+          "INSUFFICIENT_INPUT"
+        ],
+        "applicability": {
+          "any_terms": [
+            "cooling"
+          ],
+          "min_inputs_present": 1
+        },
+        "procedure": {
+          "inputs": [
+            {
+              "name": "hours",
+              "kind": "cued",
+              "cues": [
+                "hours"
+              ]
+            },
+            {
+              "name": "vibration",
+              "kind": "cued",
+              "cues": [
+                "vibration"
+              ]
+            }
+          ],
+          "text_guards": [
+            {
+              "any_terms": [
+                "compressor"
+              ],
+              "outcome": "OUT_OF_SCOPE"
+            }
+          ],
+          "numeric_guards": [
+            {
+              "when": "vibration > 4.5",
+              "outcome": "STOP_AND_NOTIFY"
+            }
+          ],
+          "missing_input_outcome": "INSUFFICIENT_INPUT",
+          "derive": [],
+          "rules": [
+            {
+              "when": "hours >= 200",
+              "outcome": "INSPECT"
+            }
+          ],
+          "default_outcome": "CONTINUE"
+        },
+        "required": {
+          "tenant": "synthetic-plant",
+          "min_clearance": "restricted",
+          "security_domain": "airon-local"
+        },
+        "dependencies": {
+          "knowledge": {
+            "maintenance": "BOUND_BY_NATIVE_PROPOSAL"
+          },
+          "policy_version": "airon-maintenance-v1",
+          "execution_model_sha256": null
+        },
+        "evidence_refs": [
+          "maintenance"
+        ],
+        "failure_conditions": [
+          "Missing or ambiguous readings require an expert"
+        ],
+        "tests": [],
+        "proposed_by": "operator"
+      },
+      "manual": "Inspect the cooling assembly every 200 operating hours. Record the inspection in the maintenance register. If vibration exceeds 4.5 mm/s, stop the equipment and notify the shift supervisor. Reports outside cooling are NOT_APPLICABLE. Compressor reports are OUT_OF_SCOPE. Missing hours or vibration is INSUFFICIENT_INPUT. Otherwise CONTINUE.",
+      "development": [
+        {
+          "id": "dev-01",
+          "text": "cooling hours 199 vibration 4.5",
+          "expected": "CONTINUE",
+          "counterexample": true
+        },
+        {
+          "id": "dev-02",
+          "text": "cooling hours 200 vibration 4.5",
+          "expected": "INSPECT",
+          "counterexample": true
+        },
+        {
+          "id": "dev-03",
+          "text": "cooling hours 201 vibration 4.5",
+          "expected": "INSPECT",
+          "counterexample": false
+        },
+        {
+          "id": "dev-04",
+          "text": "cooling hours 10 vibration 4.6",
+          "expected": "STOP_AND_NOTIFY",
+          "counterexample": true
+        },
+        {
+          "id": "dev-05",
+          "text": "cooling hours 250 vibration 5",
+          "expected": "STOP_AND_NOTIFY",
+          "counterexample": true
+        },
+        {
+          "id": "dev-06",
+          "text": "cooling hours 0 vibration 0",
+          "expected": "CONTINUE",
+          "counterexample": false
+        },
+        {
+          "id": "dev-07",
+          "text": "cooling compressor hours 250 vibration 5",
+          "expected": "OUT_OF_SCOPE",
+          "counterexample": true
+        },
+        {
+          "id": "dev-08",
+          "text": "cooling hours 150",
+          "expected": "INSUFFICIENT_INPUT",
+          "counterexample": true
+        },
+        {
+          "id": "dev-09",
+          "text": "cooling vibration 2",
+          "expected": "INSUFFICIENT_INPUT",
+          "counterexample": true
+        },
+        {
+          "id": "dev-10",
+          "text": "battery hours 250 vibration 5",
+          "expected": "NOT_APPLICABLE",
+          "counterexample": true
+        },
+        {
+          "id": "dev-11",
+          "text": "cooling hours 50 vibration 1",
+          "expected": "CONTINUE",
+          "counterexample": false
+        },
+        {
+          "id": "dev-12",
+          "text": "cooling hours 300 vibration 3",
+          "expected": "INSPECT",
+          "counterexample": false
+        }
+      ]
+    },
+    {
+      "id": "inventory",
+      "capability": {
+        "id": "airon.inventory.classification",
+        "version": 1,
+        "intended_task": "Classify synthetic inventory reports; take no physical action",
+        "outcomes": [
+          "REORDER",
+          "ENOUGH",
+          "OUT_OF_SCOPE",
+          "INSUFFICIENT_INPUT"
+        ],
+        "applicability": {
+          "any_terms": [
+            "inventory"
+          ],
+          "min_inputs_present": 1
+        },
+        "procedure": {
+          "inputs": [
+            {
+              "name": "stock",
+              "kind": "cued",
+              "cues": [
+                "stock"
+              ]
+            },
+            {
+              "name": "minimum",
+              "kind": "cued",
+              "cues": [
+                "minimum"
+              ]
+            }
+          ],
+          "text_guards": [
+            {
+              "any_terms": [
+                "expired"
+              ],
+              "outcome": "OUT_OF_SCOPE"
+            }
+          ],
+          "numeric_guards": [],
+          "missing_input_outcome": "INSUFFICIENT_INPUT",
+          "derive": [],
+          "rules": [
+            {
+              "when": "stock < minimum",
+              "outcome": "REORDER"
+            }
+          ],
+          "default_outcome": "ENOUGH"
+        },
+        "required": {
+          "tenant": "synthetic-plant",
+          "min_clearance": "restricted",
+          "security_domain": "airon-local"
+        },
+        "dependencies": {
+          "knowledge": {
+            "inventory": "BOUND_BY_NATIVE_PROPOSAL"
+          },
+          "policy_version": "airon-maintenance-v1",
+          "execution_model_sha256": null
+        },
+        "evidence_refs": [
+          "inventory"
+        ],
+        "failure_conditions": [
+          "Missing or ambiguous readings require an expert"
+        ],
+        "tests": [],
+        "proposed_by": "operator"
+      },
+      "manual": "For inventory reports, REORDER when stock is below minimum; otherwise ENOUGH. Missing stock or minimum means INSUFFICIENT_INPUT. An expired item is OUT_OF_SCOPE. Other families are NOT_APPLICABLE.",
+      "development": [
+        {
+          "id": "inventory-dev-0",
+          "text": "inventory stock 0 minimum 1",
+          "expected": "REORDER",
+          "counterexample": true
+        },
+        {
+          "id": "inventory-dev-1",
+          "text": "inventory stock 10 minimum 10",
+          "expected": "ENOUGH",
+          "counterexample": true
+        },
+        {
+          "id": "inventory-dev-2",
+          "text": "inventory stock 11 minimum 10",
+          "expected": "ENOUGH",
+          "counterexample": true
+        },
+        {
+          "id": "inventory-dev-3",
+          "text": "inventory stock 99 minimum 100",
+          "expected": "REORDER",
+          "counterexample": true
+        },
+        {
+          "id": "inventory-dev-4",
+          "text": "inventory stock 30 minimum 0",
+          "expected": "ENOUGH",
+          "counterexample": true
+        },
+        {
+          "id": "inventory-dev-5",
+          "text": "inventory stock 0 minimum 0",
+          "expected": "ENOUGH",
+          "counterexample": true
+        },
+        {
+          "id": "inventory-dev-6",
+          "text": "inventory stock 10",
+          "expected": "INSUFFICIENT_INPUT",
+          "counterexample": true
+        },
+        {
+          "id": "inventory-dev-7",
+          "text": "inventory expired stock 80 minimum 80",
+          "expected": "OUT_OF_SCOPE",
+          "counterexample": true
+        },
+        {
+          "id": "inventory-dev-8",
+          "text": "unrelated stock 10 minimum 10",
+          "expected": "NOT_APPLICABLE",
+          "counterexample": true
+        }
+      ]
+    },
+    {
+      "id": "battery",
+      "capability": {
+        "id": "airon.battery.classification",
+        "version": 1,
+        "intended_task": "Classify synthetic battery reports; take no physical action",
+        "outcomes": [
+          "RECHARGE",
+          "READY",
+          "OUT_OF_SCOPE",
+          "INSUFFICIENT_INPUT",
+          "STOP"
+        ],
+        "applicability": {
+          "any_terms": [
+            "battery"
+          ],
+          "min_inputs_present": 1
+        },
+        "procedure": {
+          "inputs": [
+            {
+              "name": "temperature",
+              "kind": "cued",
+              "cues": [
+                "temperature"
+              ]
+            },
+            {
+              "name": "charge",
+              "kind": "cued",
+              "cues": [
+                "charge"
+              ]
+            }
+          ],
+          "text_guards": [
+            {
+              "any_terms": [
+                "damaged"
+              ],
+              "outcome": "OUT_OF_SCOPE"
+            }
+          ],
+          "numeric_guards": [
+            {
+              "when": "temperature > 60",
+              "outcome": "STOP"
+            }
+          ],
+          "missing_input_outcome": "INSUFFICIENT_INPUT",
+          "derive": [],
+          "rules": [
+            {
+              "when": "charge < 20",
+              "outcome": "RECHARGE"
+            }
+          ],
+          "default_outcome": "READY"
+        },
+        "required": {
+          "tenant": "synthetic-plant",
+          "min_clearance": "restricted",
+          "security_domain": "airon-local"
+        },
+        "dependencies": {
+          "knowledge": {
+            "battery": "BOUND_BY_NATIVE_PROPOSAL"
+          },
+          "policy_version": "airon-maintenance-v1",
+          "execution_model_sha256": null
+        },
+        "evidence_refs": [
+          "battery"
+        ],
+        "failure_conditions": [
+          "Missing or ambiguous readings require an expert"
+        ],
+        "tests": [],
+        "proposed_by": "operator"
+      },
+      "manual": "For battery reports, STOP if temperature exceeds 60 Celsius. Otherwise RECHARGE if charge is below 20 percent; otherwise READY. Missing temperature or charge means INSUFFICIENT_INPUT. A damaged battery is OUT_OF_SCOPE. Other families are NOT_APPLICABLE.",
+      "development": [
+        {
+          "id": "battery-dev-0",
+          "text": "battery temperature 61 charge 50",
+          "expected": "STOP",
+          "counterexample": true
+        },
+        {
+          "id": "battery-dev-1",
+          "text": "battery temperature 60 charge 20",
+          "expected": "READY",
+          "counterexample": true
+        },
+        {
+          "id": "battery-dev-2",
+          "text": "battery temperature 59 charge 19",
+          "expected": "RECHARGE",
+          "counterexample": true
+        },
+        {
+          "id": "battery-dev-3",
+          "text": "battery temperature 0 charge 100",
+          "expected": "READY",
+          "counterexample": true
+        },
+        {
+          "id": "battery-dev-4",
+          "text": "battery temperature 80 charge 0",
+          "expected": "STOP",
+          "counterexample": true
+        },
+        {
+          "id": "battery-dev-5",
+          "text": "battery temperature 60 charge 0",
+          "expected": "RECHARGE",
+          "counterexample": true
+        },
+        {
+          "id": "battery-dev-6",
+          "text": "battery temperature 10",
+          "expected": "INSUFFICIENT_INPUT",
+          "counterexample": true
+        },
+        {
+          "id": "battery-dev-7",
+          "text": "battery damaged temperature 80 charge 80",
+          "expected": "OUT_OF_SCOPE",
+          "counterexample": true
+        },
+        {
+          "id": "battery-dev-8",
+          "text": "unrelated temperature 10 charge 10",
+          "expected": "NOT_APPLICABLE",
+          "counterexample": true
+        }
+      ]
+    }
+  ],
+  "holdout": [
+    {
+      "id": "holdout-cooling-00",
+      "family": "cooling",
+      "text": "cooling report: hours 15; vibration 3.",
+      "expected": "CONTINUE"
+    },
+    {
+      "id": "holdout-cooling-01",
+      "family": "cooling",
+      "text": "cooling report: hours 199.9; vibration 4.5.",
+      "expected": "CONTINUE"
+    },
+    {
+      "id": "holdout-cooling-02",
+      "family": "cooling",
+      "text": "cooling report: hours 200.1; vibration 4.49.",
+      "expected": "INSPECT"
+    },
+    {
+      "id": "holdout-cooling-03",
+      "family": "cooling",
+      "text": "cooling report: hours 450; vibration 1.",
+      "expected": "INSPECT"
+    },
+    {
+      "id": "holdout-cooling-04",
+      "family": "cooling",
+      "text": "cooling report: hours 12; vibration 4.51.",
+      "expected": "STOP_AND_NOTIFY"
+    },
+    {
+      "id": "holdout-cooling-05",
+      "family": "cooling",
+      "text": "cooling report: hours 222; vibration 7.",
+      "expected": "STOP_AND_NOTIFY"
+    },
+    {
+      "id": "holdout-cooling-06",
+      "family": "cooling",
+      "text": "cooling report: hours 36; vibration 0.2.",
+      "expected": "CONTINUE"
+    },
+    {
+      "id": "holdout-cooling-07",
+      "family": "cooling",
+      "text": "cooling report: hours 760; vibration 4.5.",
+      "expected": "INSPECT"
+    },
+    {
+      "id": "holdout-cooling-08",
+      "family": "cooling",
+      "text": "cooling report: hours 102; vibration 4.9.",
+      "expected": "STOP_AND_NOTIFY"
+    },
+    {
+      "id": "holdout-cooling-09",
+      "family": "cooling",
+      "text": "cooling report: hours 201; vibration 0.",
+      "expected": "INSPECT"
+    },
+    {
+      "id": "holdout-inventory-00",
+      "family": "inventory",
+      "text": "inventory report: stock 7; minimum 8.",
+      "expected": "REORDER"
+    },
+    {
+      "id": "holdout-inventory-01",
+      "family": "inventory",
+      "text": "inventory report: stock 8; minimum 7.",
+      "expected": "ENOUGH"
+    },
+    {
+      "id": "holdout-inventory-02",
+      "family": "inventory",
+      "text": "inventory report: stock 45; minimum 45.",
+      "expected": "ENOUGH"
+    },
+    {
+      "id": "holdout-inventory-03",
+      "family": "inventory",
+      "text": "inventory report: stock 302; minimum 303.",
+      "expected": "REORDER"
+    },
+    {
+      "id": "holdout-inventory-04",
+      "family": "inventory",
+      "text": "inventory report: stock 2; minimum 8.",
+      "expected": "REORDER"
+    },
+    {
+      "id": "holdout-inventory-05",
+      "family": "inventory",
+      "text": "inventory report: stock 88; minimum 8.",
+      "expected": "ENOUGH"
+    },
+    {
+      "id": "holdout-inventory-06",
+      "family": "inventory",
+      "text": "inventory report: stock 5; minimum 50.",
+      "expected": "REORDER"
+    },
+    {
+      "id": "holdout-inventory-07",
+      "family": "inventory",
+      "text": "inventory report: stock 50; minimum 5.",
+      "expected": "ENOUGH"
+    },
+    {
+      "id": "holdout-inventory-08",
+      "family": "inventory",
+      "text": "inventory report: stock 32; minimum 32.",
+      "expected": "ENOUGH"
+    },
+    {
+      "id": "holdout-inventory-09",
+      "family": "inventory",
+      "text": "inventory report: stock 1; minimum 99.",
+      "expected": "REORDER"
+    },
+    {
+      "id": "holdout-battery-00",
+      "family": "battery",
+      "text": "battery report: temperature 60.1; charge 90.",
+      "expected": "STOP"
+    },
+    {
+      "id": "holdout-battery-01",
+      "family": "battery",
+      "text": "battery report: temperature 59.9; charge 19.9.",
+      "expected": "RECHARGE"
+    },
+    {
+      "id": "holdout-battery-02",
+      "family": "battery",
+      "text": "battery report: temperature 20; charge 20.1.",
+      "expected": "READY"
+    },
+    {
+      "id": "holdout-battery-03",
+      "family": "battery",
+      "text": "battery report: temperature 45; charge 10.",
+      "expected": "RECHARGE"
+    },
+    {
+      "id": "holdout-battery-04",
+      "family": "battery",
+      "text": "battery report: temperature 100; charge 100.",
+      "expected": "STOP"
+    },
+    {
+      "id": "holdout-battery-05",
+      "family": "battery",
+      "text": "battery report: temperature 17; charge 89.",
+      "expected": "READY"
+    },
+    {
+      "id": "holdout-battery-06",
+      "family": "battery",
+      "text": "battery report: temperature 60; charge 19.",
+      "expected": "RECHARGE"
+    },
+    {
+      "id": "holdout-battery-07",
+      "family": "battery",
+      "text": "battery report: temperature 60; charge 50.",
+      "expected": "READY"
+    },
+    {
+      "id": "holdout-battery-08",
+      "family": "battery",
+      "text": "battery report: temperature 61; charge 19.",
+      "expected": "STOP"
+    },
+    {
+      "id": "holdout-battery-09",
+      "family": "battery",
+      "text": "battery report: temperature 0; charge 0.",
+      "expected": "RECHARGE"
+    }
+  ],
+  "repeats": 2,
+  "max_tokens": 24,
+  "seed": 56,
+  "interpretation": "Same-author separated holdout; cases and thresholds frozen before first execution; no autonomous acquisition claim. All tasks classify synthetic data without tool actions. B4 is reported separately on its original frozen routing task.",
+  "metrics": {
+    "accuracy": "Exact single output label; ambiguous or extraneous labels count as abstention",
+    "incorrect_positive": "Wrong non-abstaining label",
+    "ci": "Wilson 95% interval across unique task cases, not repeated rows",
+    "latency": "p50/p95 only when >=30 measured rows; process cold and filesystem-cache warm (model reloaded every call)"
+  }
+}

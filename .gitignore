@@ -9,3 +9,6 @@ __pycache__/
 records/
 *.tsbuildinfo
 .DS_Store
+
+*.egg-info/
+services/*/build/

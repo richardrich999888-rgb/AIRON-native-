@@ -1,0 +1,498 @@
+{
+  "schema": "airon-p056-network-policy/v1",
+  "passed": true,
+  "expected_worker_probes": 7,
+  "observed_worker_probes": 7,
+  "trace_sha256": {
+    "network.6091": "0fa143f8cf778c6cd68e58183f6bf54522a3dc6effaea85045b57d8d0cbac23f",
+    "network.6092": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6093": "3954db8fc54bda07bcb12823b212277e3324e39b99f313f2c07a5ef03ccbc941",
+    "network.6094": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6095": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6096": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6098": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6099": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6100": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6101": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6102": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6103": "6d2b4afec87e07054c00e10a1a688d9477b25f8faebd7ec254cbaa2c6f215be5",
+    "network.6104": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6105": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6106": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6108": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6110": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6111": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6112": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6113": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6114": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6115": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6116": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6117": "1ce4a8287804c270973dad47cf58ce6e1c45fcde251faf1ec6c04e0f0781455e",
+    "network.6118": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6119": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6121": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6122": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6123": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6124": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6125": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6126": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6127": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6128": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6129": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6130": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6134": "dd84558a6f0712aadad094feb7d1c4f1c2a69d774c85cbab92a23dda67adda2e",
+    "network.6135": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6136": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6137": "1ce4a8287804c270973dad47cf58ce6e1c45fcde251faf1ec6c04e0f0781455e",
+    "network.6139": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6140": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6141": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6142": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6143": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6144": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6145": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6146": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6149": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6174": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6175": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6176": "1ce4a8287804c270973dad47cf58ce6e1c45fcde251faf1ec6c04e0f0781455e",
+    "network.6177": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6178": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6180": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6181": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6182": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6183": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6184": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6185": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6186": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6187": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6188": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6189": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6195": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6196": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6197": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6198": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6199": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6200": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6201": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6202": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6206": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6207": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6208": "1ce4a8287804c270973dad47cf58ce6e1c45fcde251faf1ec6c04e0f0781455e",
+    "network.6209": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6210": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6211": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6212": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6213": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6214": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6215": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6216": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6217": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6218": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6219": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6220": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6223": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6224": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6225": "1ce4a8287804c270973dad47cf58ce6e1c45fcde251faf1ec6c04e0f0781455e",
+    "network.6226": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6227": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6228": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6229": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6230": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6231": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6232": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6233": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6234": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6235": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6236": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6238": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6239": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6240": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6241": "1ce4a8287804c270973dad47cf58ce6e1c45fcde251faf1ec6c04e0f0781455e",
+    "network.6242": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6243": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6244": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6245": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6246": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6247": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6248": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6249": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6250": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6251": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6252": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6253": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6257": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6258": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6259": "1ce4a8287804c270973dad47cf58ce6e1c45fcde251faf1ec6c04e0f0781455e",
+    "network.6260": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6262": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6267": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6268": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6269": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6270": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6271": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6272": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6273": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6274": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6275": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6276": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6278": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6279": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6280": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6281": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6282": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "network.6283": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31"
+  },
+  "allowed": [
+    {
+      "file": "network.6093",
+      "line": 5,
+      "syscall": "socket(AF_INET6, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6093",
+      "line": 6,
+      "syscall": "bind(3, {sa_family=AF_INET6, sin6_port=htons(0), sin6_flowinfo=htonl(0), inet_pton(AF_INET6, \"::1\", &sin6_addr), sin6_scope_id=0}, 28) = -1 EADDRNOTAVAIL (Cannot assign requested address)",
+      "kind": "failed_loopback_capability_probe"
+    },
+    {
+      "file": "network.6117",
+      "line": 3,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6117",
+      "line": 4,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr(\"198.51.100.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6117",
+      "line": 5,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6117",
+      "line": 6,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(11434), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6117",
+      "line": 11,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6117",
+      "line": 13,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6117",
+      "line": 14,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6117",
+      "line": 16,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6137",
+      "line": 3,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6137",
+      "line": 4,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr(\"198.51.100.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6137",
+      "line": 5,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6137",
+      "line": 6,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(11434), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6137",
+      "line": 11,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6137",
+      "line": 13,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6137",
+      "line": 14,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6137",
+      "line": 16,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6176",
+      "line": 3,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6176",
+      "line": 4,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr(\"198.51.100.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6176",
+      "line": 5,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6176",
+      "line": 6,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(11434), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6176",
+      "line": 11,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6176",
+      "line": 13,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6176",
+      "line": 14,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6176",
+      "line": 16,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6208",
+      "line": 3,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6208",
+      "line": 4,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr(\"198.51.100.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6208",
+      "line": 5,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6208",
+      "line": 6,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(11434), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6208",
+      "line": 11,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6208",
+      "line": 13,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6208",
+      "line": 14,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6208",
+      "line": 16,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6225",
+      "line": 3,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6225",
+      "line": 4,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr(\"198.51.100.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6225",
+      "line": 5,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6225",
+      "line": 6,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(11434), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6225",
+      "line": 11,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6225",
+      "line": 13,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6225",
+      "line": 14,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6225",
+      "line": 16,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6241",
+      "line": 3,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6241",
+      "line": 4,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr(\"198.51.100.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6241",
+      "line": 5,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6241",
+      "line": 6,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(11434), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6241",
+      "line": 11,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6241",
+      "line": 13,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6241",
+      "line": 14,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6241",
+      "line": 16,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6259",
+      "line": 3,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6259",
+      "line": 4,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr(\"198.51.100.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6259",
+      "line": 5,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6259",
+      "line": 6,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(11434), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6259",
+      "line": 11,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6259",
+      "line": 13,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "network.6259",
+      "line": 14,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "network.6259",
+      "line": 16,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    }
+  ],
+  "violations": [],
+  "scope": "No unclassified IP connection or packet send in captured processes. OS namespace plus labelled application probes; not independent agent attribution."
+}

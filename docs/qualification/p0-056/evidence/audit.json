@@ -1,0 +1,80 @@
+{
+  "airon": {
+    "branches": [
+      "origin 1d4a2255549a0ffd881fde26add190a2d8cf4c64 docs(p0-052): retain complete offline qualification and cancellation evidence [skip ci]",
+      "origin/codex/p0-052-airon-soup-offline-adaptation 1d4a2255549a0ffd881fde26add190a2d8cf4c64 docs(p0-052): retain complete offline qualification and cancellation evidence [skip ci]",
+      "origin/main 04a84e64fc2be36fe03fc73006c9a42285617a02 Add standalone AIRON Native website with Netlify and Vercel deployment",
+      "origin/research/p0-053-opensource-capability-library c85205d6cfa4572261046bd549a397ca6cfcf0a7 Preserve 19 upstream AI repositories as pinned research submodules"
+    ],
+    "head": "04a84e64fc2be36fe03fc73006c9a42285617a02",
+    "default_branch": "main"
+  },
+  "aip": {
+    "branches": [
+      "origin 872dbf375838cff464eb019488c63d948015e9b8 Merge PR #2: CI fixes, PostgreSQL backend, audit-export bundle, ownership",
+      "origin/anuj-testing 7d84df27df08fca3905f05a0e78fd6a4ef395923 Integrate hardened AIP installer and power-loss validation",
+      "origin/claude/aip-security-architecture-audit-zpf9b3 4ee05ea694a4ddf6de1f0f7477e0b19b31628711 Bring the defensibility record current, rather than write a fifth narrative",
+      "origin/claude/autonomous-accountability-skills-16-30 27610ad9d7e3c192afe4f4c859c903403758ee89 docs: Skill 20 evidence report and gate evaluation",
+      "origin/claude/codebase-production-readiness-wm6idp 4ee39f359430277a48c34b957609104d3cf781f6 feat(nexora): SD-10 \u2014 commit the signed verdict as its own leaf, verifiable offline",
+      "origin/claude/real-agent-acceptance-n5ysvd 2052a252f97ad19adf7773bc2574408214c26a12 fix(validation): repair the interference repro build path, and re-reproduce",
+      "origin/claude/release-completion-loop 104e19189239cb8afad096dd0b1e27a326683501 docs(release): A1 branch inventory of all 20 remote branches",
+      "origin/claude/skill-25-implementation-xbz0t3 061cebc975d81c8126d5f66d96f5384d11be0620 test(attribution): close four mutation survivors; matrix 34/34",
+      "origin/claude/strategic-validation-loop 504c15bf9b4b74ec606b9bfb778874acfe22bc1a validation(strategic): drain-interval tradeoff (1000/20/5 ms) with probe CPU cost",
+      "origin/claude/syntriass-airgap-intelligence a04b864e187609838ee85076cc7048abf9fd113b research(bittorrent-p2p): four iterations \u2014 speed, resume, integrity, authorization; GO/NO-GO",
+      "origin/claude/vanian-audit-maturity-addendum-n5ysvd e05ec3b2eb5989ed63e7c1c489e119f35c68d2b8 docs: open-source tooling survey \u2014 trust-path dependencies vs reference instruments",
+      "origin/claude/vanian-sovereign-slice1 60b75e965da32977b4dc562e0c34523fd1bffb43 fix(sovereign-eval): health-based readiness; errors never score as refusals; Phase A record",
+      "origin/claude/vanian-system-one 277136f84572c4f77fd5353e8b8b05c5845adb40 research(system-one): iteration 1 \u2014 decide vs interpret, measured on CPU-only hardware",
+      "origin/codex/accountability-test-gaps-2026-10-20 65eb9e6accdc7dce0893864bcbd6b2cfa9a7035c test: pin action timestamps to the clock and eliminate release timing failures",
+      "origin/codex/aip-v4-accountability 73bf70cf9e687d1b47709a8a6e8ea9c8eaa610e7 feat(aegis-tests): expand tests to 104 covering PQC, circuit-breaker, and integration validation",
+      "origin/codex/open-source-agents-nov1-validation 75e75bb0aae36def2ba13b18717b0a00b7ec2558 Publish reproducible governance evidence and portable offline replay",
+      "origin/codex/p0-048-snifferdog-enterprise-assurance 61dd73013d02ea7869de104d953f330098df1c32 test(assurance): retain live native qualification evidence",
+      "origin/codex/rbi-demo-preflight-2026-10-27 0991fb1eed1234403c1ff9683d010797ea073d39 Preserve workspace command invariant while enforcing locked dependencies",
+      "origin/codex/snifferdog-real-agent-swarm-validation 65b6ff7fdad5ae70546a57216a497399091c7dc7 fix(validation): bound audit capture before workload dispatch",
+      "origin/codex/val-ladder-sync ae46a3a2f4e28821facd19706d0e99c299c42651 Add Syntriass Labs website preview",
+      "origin/feature/airon-teach-demo 93c65bcdc293aa950552f1a11515c4b21a553e8e docs(p0-050): retain relocated reference regressions and acceptance limits",
+      "origin/feature/customer-service-delivery-model 52a18830f6607ac6677e6fcbb6f6a085ac5d413f docs(service): distinguish actual API posture report from network discovery",
+      "origin/feature/snifferdog-enterprise-integration bd15b8e627e5ef67ba259559ed81feb6894cde48 Record successful full-workspace debug and release CI",
+      "origin/feature/syntriass-intelligence-runtime-v01 7bf697b8bb7d10b90b07bfebcb45425802fae690 docs+demo: final pre-YC report, evidence summary, rendered offline demo",
+      "origin/feature/syntriass-runtime-v02 2883da7bf5b8591a31bf24789c1d0722f83a6624 runtime: S2 strongest-fit router and S1 evidence-bound execution",
+      "origin/feature/vanian-agent-governance-interoperability 9d52c68c93e634479dd82b012f7ef941b796d551 Correlate native ACS tool inputs with verified gateway receipts and retain genuine agent evidence",
+      "origin/feature/wow-demos 6ad92ae78806546948874812dc8e6161d24d9d67 harness: list changed files and do not count the rehearsal log as dirty; benchmark rerun + compare scripts; models README",
+      "origin/fix/aip-edge-distinct-corroboration 9b8109884455e37a61ca7abef1bb7d78a39a860d fix(sovereign): refuse when the sandbox namespaces cannot be created",
+      "origin/fix/chart-probe-seccomp a0b1045b80dbcd5aac33910361a4e67cfdd2f739 fix(sovereign): refuse when the sandbox namespaces cannot be created",
+      "origin/fix/ci-userns-sandbox-tests c39fc1f0431ddfaffa2d62199874e18e92087969 fix(sovereign): refuse when the sandbox namespaces cannot be created",
+      "origin/fix/model-resolver-and-setup 86f21056f2b4d7a1f3b84a642eef8e2d862629d4 fix(sovereign): refuse when the sandbox namespaces cannot be created",
+      "origin/fix/vanian-end-to-end-green 4d0ce1e32c8dedde4e3a930abc2becf1f56b864e Retain exact-source acceptance evidence and mark shared-root custody blocked",
+      "origin/import/orbitaltrust-accountability-layer 6cc439f190161ba28e76d46cea1901de8dd527ea Import the OrbitalTrust accountability layer from ASC-space",
+      "origin/integration/snifferdog-complete-enterprise-validation ab161597ea05d52813619d9962f8956811d2daf1 Include the complete original signed archive inventory",
+      "origin/integration/vanian-enterprise-service-delivery a933fdc327e8744dc8a8441ea3d5b2d75063b91f Retain registry HTTP, recovery, SDK distribution and blocked-host validation",
+      "origin/main 872dbf375838cff464eb019488c63d948015e9b8 Merge PR #2: CI fixes, PostgreSQL backend, audit-export bundle, ownership",
+      "origin/research/syntriass-compute-memory 9f88335f5f2364793f7b05b6f97eabd0bb5249eb research(compute-memory): full CPU measurement set and the 12 deliverables",
+      "origin/research/syntriass-generalization-r1-20261031 f610ff9ba349d7fc4562e4bb40dc7da9f0dae54c research: falsify evidence sufficiency and benchmark conventional uncertainty execution",
+      "origin/testing 1f2eb189a22affe843d8ed539a48ef2516c2a549 Add AIP console UI, WASM verifier crate, E2E suite and UI polish"
+    ],
+    "head": "93c65bcdc293aa950552f1a11515c4b21a553e8e",
+    "default_branch": "main"
+  },
+  "hardware": {
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "cpu_count": 9,
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "meminfo": "MemTotal:       10206472 kB\nMemFree:         3057648 kB\nMemAvailable:    9037852 kB\nBuffers:          139020 kB\nCached:          5440260 kB\nSwapCached:            0 kB\nActive:          1342132 kB\nInactive:        4251616 kB\nActive(anon):     129516 kB\nInactive(anon):   247748 kB\nActive(file):    1212616 kB\nInactive(file):  4003868 kB\nUnevictable:       29944 kB\nMlocked:               0 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nDirty:            586924 kB\nWriteback:             0 kB\nAnonPages:         44664 kB\nMapped:            62696 kB\nShmem:            332632 kB\nKReclaimable:    1077420 kB\nSlab:            1199424 kB\nSReclaimable:    1077420 kB\nSUnreclaim:       122004 kB\nKernelStack:        3436 kB\nPageTables:         3520 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:     5103236 kB\nCommitted_AS:     634508 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:        4728 kB\nVmallocChunk:          0 kB\nPercpu:             3888 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:    731136 kB\nFilePmdMapped:         0 kB\nBalloon:               0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      393216 kB\nDirectMap2M:    10971136 kB\nDirectMap1G:    15728640 kB\n",
+    "cpuinfo": "processor\t: 0\nvendor_id\t: AuthenticAMD\ncpu family\t: 25\nmodel\t\t: 17\nmodel name\t: AMD EPYC 9V74 80-Core Processor\nstepping\t: 1\nmicrocode\t: 0x1000065\ncpu MHz\t\t: 2596.148\ncache size\t: 1024 KB\nphysical id\t: 0\nsiblings\t: 9\ncore id\t\t: 0\ncpu cores\t: 9\napicid\t\t: 0\ninitial apicid\t: 0\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 28\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext cpuid_fault vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm arch_capabilities\nbugs\t\t: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass srso spectre_v2_user tsa\nbogomips\t: 5192.29\nTLB size\t: 3584 4K pages\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 46 bits physical, 48 bits virtual\npower management:"
+  },
+  "preservation": {
+    "main_modified": false,
+    "existing_untracked_services": "/workspace/scratch/244f77f94bff/AIRON-native-/services preserved in place",
+    "source_copies": "Exact P0-052 paths selected; no branch merge",
+    "failed_initial_aip_fetch": "pack has 77 unresolved deltas; separate remote clone succeeded"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "airon-p056-local-provenance/v1",
+  "benchmark": {
+    "recorded_local_commit": "853fd413090e6cdde8d41c6c793e6004b54ae22b",
+    "identical_published_tree_commit": "bb87ca5a914eec7ca39619498d376b822366f2c9",
+    "git_tree": "5387cdb98994f4f32f99ef6d54fc391afab82981"
+  },
+  "scale_and_harness": {
+    "recorded_base_commit": "853fd413090e6cdde8d41c6c793e6004b54ae22b",
+    "actual_script_revision": "d6b60b7e7609fdce8dbde437e856da27d532fad6",
+    "note": "Raw source_revision is the base label inherited by these tool runs; exact script blobs and package tree below identify the executed implementation. Raw records are preserved, not rewritten."
+  },
+  "initial_vertical_slice": {
+    "recorded_base": "WORKTREE-BASE-10aac32",
+    "scope": "Pre-publication runtime, actual source captured in initial implementation 16c6bd7; one earlier binary-hash mismatch attempt retained separately"
+  },
+  "native_revision": "f1ba9fc2072dac1431543fd4961baaa2762b8ea9",
+  "source_files": {
+    "services/unified-runtime/scripts/run_demo.py": "0cd3903a07e8f97be09148407805eb69e745f517b8878d4edff2ef449a62bcc7",
+    "services/unified-runtime/scripts/track_experiment.py": "5e675da041787947c017d3f7332893911e74c34818efe4049b9979e982e35f3a",
+    "services/unified-runtime/scripts/qualify_console.py": "33dfcb5fda2654ea2eac01edb03da9884ee377fadffa976d58ae87773b25bc3e",
+    "services/unified-runtime/scripts/provision.py": "6c5e53d90c650e057ef4a5059e45f60a5b194c89af7158c6b9163d34b7dda2de",
+    "services/unified-runtime/scripts/installed_smoke.py": "93c85c0219a92fff20bc60b75c2f7f9dabac35257fb96a33db6dd3d839e706bb",
+    "services/unified-runtime/scripts/provision_scale.py": "188b6e74fde2a880b798d2a5649688338f5dbdfacc77b7642e31a0d74093fbb7",
+    "services/unified-runtime/scripts/qualify_scale.py": "b9780d4bc315a1db9a99b15b2086ec56048915c054e5d8348340b48c757ce7a9",
+    "services/unified-runtime/scripts/qualify_harness.py": "bf1408659d9d35c7f53c82ca7002d2c57bef6f2cb16925a304561a1f65308177",
+    "services/unified-runtime/scripts/benchmark.py": "c51a1e4c935e061663e93a2e7e5271adb355fbfca5464a72be9f166de6d78ba6",
+    "services/unified-runtime/scripts/prepare_offline.py": "f8bbdb7db93028050dba7303ed6e88504de365c56f81cf1362bbc4efc61cf87d",
+    "services/unified-runtime/airon_runtime/learning.py": "6d3c1cb94a0cda9f981fad02b41dc5cfcd3edf047445e48321addeb0a6799184",
+    "services/unified-runtime/airon_runtime/native.py": "acf3fd6849cb65777e061593f670d1cdad30236dbd5e61e67ee59421314fe4cd",
+    "services/unified-runtime/airon_runtime/core.py": "1302c4ed765ac881d3444db6249f150dbc2cc37429d5c4c51604c20328852c0a",
+    "services/unified-runtime/airon_runtime/docling_worker.py": "811502e0b61092eb3e218c4c27cd28120cec01e4bc6995c7f6a4ef1c01114ab1",
+    "services/unified-runtime/airon_runtime/process.py": "012c9c38dd0c7da5d09391a5423db2c9f05b0202116ca307536ac3cb81064d2d",
+    "services/unified-runtime/airon_runtime/server.py": "13fb98c00727c44b11fb966a25d74e42b33c805e40377ffd93392839ebfcf1a0",
+    "services/unified-runtime/airon_runtime/inference.py": "f69381f8f52b962055a9a5761a1b974f58d3d02b048b8583624d3e748750e205",
+    "services/unified-runtime/airon_runtime/__init__.py": "12e94283dc1db74365998960aa600f8260f55aaac47edf7a5e3d6163eca6cd6a"
+  }
+}

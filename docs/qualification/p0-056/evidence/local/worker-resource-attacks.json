@@ -1,0 +1,46 @@
+{
+  "source_revision": "00bb5a74051fd58bfd556703228e96a941dd7dba",
+  "hardware": {
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "affinity": [
+      0,
+      1
+    ],
+    "meminfo": "MemTotal:       10206472 kB",
+    "gpu": false
+  },
+  "checks": {
+    "aggregate_memory": {
+      "rejected": true,
+      "reason": "Aggregate child memory policy exceeded",
+      "wall_s": 0.3335246740025468,
+      "remaining_children": [],
+      "passed": true
+    },
+    "deadline": {
+      "rejected": true,
+      "reason": "Child deadline exceeded: ",
+      "wall_s": 1.0125053899973864,
+      "remaining_children": [],
+      "passed": true
+    },
+    "output_limit": {
+      "rejected": true,
+      "reason": "Child failed (1): Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nOSError: [Errno 27] File too large\n",
+      "wall_s": 0.025385725995874964,
+      "remaining_children": [],
+      "passed": true
+    },
+    "recovery": {
+      "passed": true,
+      "measurement": {
+        "wall_s": 0.02077040000585839,
+        "peak_aggregate_rss_bytes": 21766144,
+        "sampled_cpu_s": 0.0,
+        "sampling_ms": 20
+      }
+    }
+  },
+  "status": "PASS",
+  "scope": "Actual sampled-RSS rejection, process deadline, output-size limit and child cleanup. Not a full-disk or kernel cgroup exhaustion test."
+}

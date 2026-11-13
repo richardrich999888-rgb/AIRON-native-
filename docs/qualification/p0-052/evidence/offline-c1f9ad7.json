@@ -1,0 +1,3021 @@
+{
+  "adapted_inference": {
+    "deployment": {
+      "active": "candidate-518a35dc1ba79130",
+      "base": "model-edfa40a0b55ac97c",
+      "history": [
+        null
+      ],
+      "version": 2
+    },
+    "result": {
+      "cpu_threads": 2,
+      "gpu_used": false,
+      "isolation": {
+        "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE",
+        "connect_probes": [
+          {
+            "address": [
+              "198.51.100.1",
+              443
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          },
+          {
+            "address": [
+              "127.0.0.1",
+              11434
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          }
+        ],
+        "dns_probe": {
+          "blocked": true,
+          "errno": -3
+        },
+        "net_namespace": "net:[4026532363]",
+        "route_count": 0
+      },
+      "model": "candidate",
+      "peak_rss_kib": 1117276,
+      "rows": [
+        {
+          "correct": false,
+          "expected": "K7",
+          "latency_seconds": 2.9965888820000828,
+          "predicted": "R2",
+          "prompt_sha256": "cdb81a475840932fb8b933d71a7193b4dc8272b5c1372d96c893fdb7728dd063",
+          "scores": {
+            "K7": -2.466459035873413,
+            "M4": -2.340071201324463,
+            "Paris": -11.440476417541504,
+            "R2": -2.1276493072509766,
+            "Tokyo": -7.491236448287964,
+            "cold": -14.505854606628418,
+            "honey": -8.617035388946533,
+            "ice": -14.37221908569336,
+            "yellow": -11.222098350524902
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "K7",
+          "latency_seconds": 2.9797122080000236,
+          "predicted": "R2",
+          "prompt_sha256": "dbedc32bc841b3a8a3abed1d5463f15e3e766890065f4ae88eea9976f6de13fe",
+          "scores": {
+            "K7": -2.4941192865371704,
+            "M4": -2.2803272008895874,
+            "Paris": -11.738104820251465,
+            "R2": -2.204852819442749,
+            "Tokyo": -7.8578901290893555,
+            "cold": -14.476964950561523,
+            "honey": -8.368931293487549,
+            "ice": -14.537373542785645,
+            "yellow": -11.257672309875488
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "M4",
+          "latency_seconds": 2.934387213999912,
+          "predicted": "R2",
+          "prompt_sha256": "5f4d46ede7808f80b69a6f7d976c2180a85705fb55c0bb9fdf1f5ffc1e5ab09d",
+          "scores": {
+            "K7": -2.5717579126358032,
+            "M4": -2.5322265625,
+            "Paris": -11.27963638305664,
+            "R2": -2.1955400705337524,
+            "Tokyo": -7.363868236541748,
+            "cold": -14.647035598754883,
+            "honey": -8.850654602050781,
+            "ice": -14.4509916305542,
+            "yellow": -11.593366622924805
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "M4",
+          "latency_seconds": 3.0109873000000107,
+          "predicted": "M4",
+          "prompt_sha256": "e8db25b4eb7a79d86880c17ff159a7f0ec74020a6b418af4cf8fa290eaf6fe07",
+          "scores": {
+            "K7": -2.462600350379944,
+            "M4": -2.1481921076774597,
+            "Paris": -11.607714653015137,
+            "R2": -2.1784255504608154,
+            "Tokyo": -7.728965997695923,
+            "cold": -14.397095680236816,
+            "honey": -8.59769582748413,
+            "ice": -14.4364595413208,
+            "yellow": -11.34438419342041
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "R2",
+          "latency_seconds": 2.9394163700000036,
+          "predicted": "R2",
+          "prompt_sha256": "cb0cb00db8d3e2b972d90bf5199fd658eded477bfe8320b8f8d09181036d462b",
+          "scores": {
+            "K7": -2.6090978384017944,
+            "M4": -2.23551869392395,
+            "Paris": -11.445901870727539,
+            "R2": -2.0186290740966797,
+            "Tokyo": -7.402926921844482,
+            "cold": -14.598176002502441,
+            "honey": -8.473119258880615,
+            "ice": -14.401458740234375,
+            "yellow": -11.237834930419922
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "R2",
+          "latency_seconds": 2.823404427000014,
+          "predicted": "R2",
+          "prompt_sha256": "d8e40eee9dbcb9fa80e070355d04202325f03459e4c7b45a8b061e5b27f39ef0",
+          "scores": {
+            "K7": -2.496047854423523,
+            "M4": -2.3780561685562134,
+            "Paris": -11.06877326965332,
+            "R2": -2.099314332008362,
+            "Tokyo": -7.5537495613098145,
+            "cold": -14.507536888122559,
+            "honey": -8.68358039855957,
+            "ice": -14.064720153808594,
+            "yellow": -11.065093994140625
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "Paris",
+          "latency_seconds": 2.3209175409999716,
+          "predicted": "Paris",
+          "prompt_sha256": "1097c2cdd4d0566a2668bf4a1e93ad3dcb9ab1c7f104b212d6cddc7d4b2d652f",
+          "scores": {
+            "K7": -6.720465183258057,
+            "M4": -4.85865843296051,
+            "Paris": -1.5617506504058838,
+            "R2": -6.868256211280823,
+            "Tokyo": -5.28450083732605,
+            "cold": -13.477572441101074,
+            "honey": -5.7915380001068115,
+            "ice": -15.109018325805664,
+            "yellow": -12.333673477172852
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "yellow",
+          "latency_seconds": 2.3464980019999757,
+          "predicted": "honey",
+          "prompt_sha256": "542ad54c1b4ff7d9cb89b287ceb675cfea8e5666ea6af8d7c4393a9a8c545d33",
+          "scores": {
+            "K7": -7.874728679656982,
+            "M4": -6.279961347579956,
+            "Paris": -11.314396858215332,
+            "R2": -8.627880573272705,
+            "Tokyo": -7.318114995956421,
+            "cold": -11.985516548156738,
+            "honey": -4.002798676490784,
+            "ice": -11.179165840148926,
+            "yellow": -4.517268180847168
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "honey",
+          "latency_seconds": 2.2843491339999673,
+          "predicted": "honey",
+          "prompt_sha256": "b4dba104918bb281ebf3f49e8e2483b35990bcff132f2c7c91a364aacb1fae47",
+          "scores": {
+            "K7": -8.84675407409668,
+            "M4": -6.908715009689331,
+            "Paris": -15.199110984802246,
+            "R2": -9.318238735198975,
+            "Tokyo": -7.60564661026001,
+            "cold": -14.539517402648926,
+            "honey": -2.1732621788978577,
+            "ice": -11.003045082092285,
+            "yellow": -12.57556438446045
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "ice",
+          "latency_seconds": 2.349367654000048,
+          "predicted": "ice",
+          "prompt_sha256": "d7b0b04903a1aec2ec874e3c718f117b3770acfb2fd287d81755a32c36d9ca29",
+          "scores": {
+            "K7": -7.803954601287842,
+            "M4": -7.5137529373168945,
+            "Paris": -12.4511137008667,
+            "R2": -7.619509220123291,
+            "Tokyo": -6.311902046203613,
+            "cold": -5.766934394836426,
+            "honey": -4.044967889785767,
+            "ice": -3.37503719329834,
+            "yellow": -12.405257225036621
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "cold",
+          "latency_seconds": 2.2833271959999593,
+          "predicted": "cold",
+          "prompt_sha256": "c2fdf7cd1f5491a5d0308f457ad6135193a7394d4e4e08a8f3dc95496a92564d",
+          "scores": {
+            "K7": -8.532365798950195,
+            "M4": -6.925856590270996,
+            "Paris": -9.599096298217773,
+            "R2": -8.299676895141602,
+            "Tokyo": -7.718408823013306,
+            "cold": -4.264892578125,
+            "honey": -6.382053971290588,
+            "ice": -8.268974304199219,
+            "yellow": -9.135356903076172
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "Tokyo",
+          "latency_seconds": 2.308698445999994,
+          "predicted": "Tokyo",
+          "prompt_sha256": "5257da2ca5b52e8e5962e147905ee46c368911a6a0d02a407575732ae1c99253",
+          "scores": {
+            "K7": -5.554360270500183,
+            "M4": -5.358131289482117,
+            "Paris": -9.88943862915039,
+            "R2": -7.429993629455566,
+            "Tokyo": -2.7528109550476074,
+            "cold": -14.075342178344727,
+            "honey": -7.350923538208008,
+            "ice": -14.170120239257812,
+            "yellow": -11.13302230834961
+          },
+          "split": "regression"
+        }
+      ],
+      "soup": {
+        "python_tree_sha256": "d87ec3624378b062095b71d68baa820bf88da5e641c623c6b9ead7a1e6a4a6b4",
+        "revision": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+        "version": "0.77.2"
+      },
+      "wall_seconds": 40.40226493299997
+    }
+  },
+  "baseline": {
+    "deployment": {
+      "active": null,
+      "base": "model-edfa40a0b55ac97c",
+      "history": [],
+      "version": 1
+    },
+    "result": {
+      "cpu_threads": 2,
+      "gpu_used": false,
+      "isolation": {
+        "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE",
+        "connect_probes": [
+          {
+            "address": [
+              "198.51.100.1",
+              443
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          },
+          {
+            "address": [
+              "127.0.0.1",
+              11434
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          }
+        ],
+        "dns_probe": {
+          "blocked": true,
+          "errno": -3
+        },
+        "net_namespace": "net:[4026532362]",
+        "route_count": 0
+      },
+      "metric": "closed-choice mean log likelihood",
+      "model": "baseline",
+      "peak_rss_kib": 1117512,
+      "rows": [
+        {
+          "correct": false,
+          "expected": "K7",
+          "latency_seconds": 2.6310937220000596,
+          "predicted": "R2",
+          "prompt_sha256": "cdb81a475840932fb8b933d71a7193b4dc8272b5c1372d96c893fdb7728dd063",
+          "scores": {
+            "K7": -7.334178924560547,
+            "M4": -8.146595001220703,
+            "Paris": -12.226188659667969,
+            "R2": -6.680365324020386,
+            "Tokyo": -9.573430061340332,
+            "cold": -15.628042221069336,
+            "honey": -6.86494255065918,
+            "ice": -13.894927978515625,
+            "yellow": -13.052797317504883
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "K7",
+          "latency_seconds": 2.551492256000074,
+          "predicted": "R2",
+          "prompt_sha256": "dbedc32bc841b3a8a3abed1d5463f15e3e766890065f4ae88eea9976f6de13fe",
+          "scores": {
+            "K7": -7.123396873474121,
+            "M4": -11.73420763015747,
+            "Paris": -13.5203218460083,
+            "R2": -6.284856081008911,
+            "Tokyo": -9.966314792633057,
+            "cold": -16.324373245239258,
+            "honey": -6.6089489459991455,
+            "ice": -14.0706148147583,
+            "yellow": -13.013091087341309
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "M4",
+          "latency_seconds": 2.6225617699999475,
+          "predicted": "R2",
+          "prompt_sha256": "5f4d46ede7808f80b69a6f7d976c2180a85705fb55c0bb9fdf1f5ffc1e5ab09d",
+          "scores": {
+            "K7": -6.845889091491699,
+            "M4": -8.071762561798096,
+            "Paris": -13.28386402130127,
+            "R2": -6.569077730178833,
+            "Tokyo": -9.748094081878662,
+            "cold": -16.273231506347656,
+            "honey": -7.193704128265381,
+            "ice": -13.830330848693848,
+            "yellow": -13.44945240020752
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "M4",
+          "latency_seconds": 2.5650607849999005,
+          "predicted": "K7",
+          "prompt_sha256": "e8db25b4eb7a79d86880c17ff159a7f0ec74020a6b418af4cf8fa290eaf6fe07",
+          "scores": {
+            "K7": -6.656241178512573,
+            "M4": -8.280259847640991,
+            "Paris": -13.333451271057129,
+            "R2": -7.00328516960144,
+            "Tokyo": -9.530562162399292,
+            "cold": -16.638835906982422,
+            "honey": -7.3369832038879395,
+            "ice": -13.811911582946777,
+            "yellow": -13.870951652526855
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "R2",
+          "latency_seconds": 2.6420047790001036,
+          "predicted": "R2",
+          "prompt_sha256": "cb0cb00db8d3e2b972d90bf5199fd658eded477bfe8320b8f8d09181036d462b",
+          "scores": {
+            "K7": -6.378607511520386,
+            "M4": -7.870755195617676,
+            "Paris": -12.140890121459961,
+            "R2": -6.32321572303772,
+            "Tokyo": -9.538076281547546,
+            "cold": -15.95170783996582,
+            "honey": -6.825280666351318,
+            "ice": -14.062210083007812,
+            "yellow": -13.140233993530273
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "R2",
+          "latency_seconds": 2.5865078580000045,
+          "predicted": "K7",
+          "prompt_sha256": "d8e40eee9dbcb9fa80e070355d04202325f03459e4c7b45a8b061e5b27f39ef0",
+          "scores": {
+            "K7": -6.275689601898193,
+            "M4": -8.059976577758789,
+            "Paris": -11.225647926330566,
+            "R2": -6.425027370452881,
+            "Tokyo": -9.424386024475098,
+            "cold": -15.314366340637207,
+            "honey": -6.802744388580322,
+            "ice": -13.170182228088379,
+            "yellow": -12.73791217803955
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "Paris",
+          "latency_seconds": 2.0945572770000354,
+          "predicted": "Paris",
+          "prompt_sha256": "1097c2cdd4d0566a2668bf4a1e93ad3dcb9ab1c7f104b212d6cddc7d4b2d652f",
+          "scores": {
+            "K7": -10.400920391082764,
+            "M4": -8.771507024765015,
+            "Paris": -4.008015155792236,
+            "R2": -9.920162916183472,
+            "Tokyo": -5.931433916091919,
+            "cold": -15.516225814819336,
+            "honey": -6.629425525665283,
+            "ice": -16.22581672668457,
+            "yellow": -13.550302505493164
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "yellow",
+          "latency_seconds": 2.0753857869999592,
+          "predicted": "honey",
+          "prompt_sha256": "542ad54c1b4ff7d9cb89b287ceb675cfea8e5666ea6af8d7c4393a9a8c545d33",
+          "scores": {
+            "K7": -11.606770992279053,
+            "M4": -10.38516616821289,
+            "Paris": -15.21903133392334,
+            "R2": -10.901560544967651,
+            "Tokyo": -7.977391481399536,
+            "cold": -16.76057243347168,
+            "honey": -6.61784815788269,
+            "ice": -15.702988624572754,
+            "yellow": -7.732070446014404
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "honey",
+          "latency_seconds": 2.091269536999903,
+          "predicted": "honey",
+          "prompt_sha256": "b4dba104918bb281ebf3f49e8e2483b35990bcff132f2c7c91a364aacb1fae47",
+          "scores": {
+            "K7": -10.300814151763916,
+            "M4": -8.578023910522461,
+            "Paris": -14.44725513458252,
+            "R2": -10.412124633789062,
+            "Tokyo": -7.177450180053711,
+            "cold": -15.379700660705566,
+            "honey": -3.7771394439041615,
+            "ice": -10.672266960144043,
+            "yellow": -12.359763145446777
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "ice",
+          "latency_seconds": 2.098669164999933,
+          "predicted": "Tokyo",
+          "prompt_sha256": "d7b0b04903a1aec2ec874e3c718f117b3770acfb2fd287d81755a32c36d9ca29",
+          "scores": {
+            "K7": -9.931828498840332,
+            "M4": -9.575685977935791,
+            "Paris": -14.632617950439453,
+            "R2": -9.333610534667969,
+            "Tokyo": -5.433125734329224,
+            "cold": -9.22105598449707,
+            "honey": -7.466575622558594,
+            "ice": -8.279029846191406,
+            "yellow": -13.876585006713867
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "cold",
+          "latency_seconds": 2.1144041599999355,
+          "predicted": "Tokyo",
+          "prompt_sha256": "c2fdf7cd1f5491a5d0308f457ad6135193a7394d4e4e08a8f3dc95496a92564d",
+          "scores": {
+            "K7": -12.254426956176758,
+            "M4": -9.558007717132568,
+            "Paris": -13.617033004760742,
+            "R2": -10.61241340637207,
+            "Tokyo": -6.097831726074219,
+            "cold": -9.304141998291016,
+            "honey": -8.29929780960083,
+            "ice": -12.43954086303711,
+            "yellow": -12.470115661621094
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "Tokyo",
+          "latency_seconds": 2.090511329000037,
+          "predicted": "Tokyo",
+          "prompt_sha256": "5257da2ca5b52e8e5962e147905ee46c368911a6a0d02a407575732ae1c99253",
+          "scores": {
+            "K7": -9.837388753890991,
+            "M4": -8.821147680282593,
+            "Paris": -10.71239948272705,
+            "R2": -10.961398363113403,
+            "Tokyo": -4.798104286193848,
+            "cold": -14.888041496276855,
+            "honey": -8.505921363830566,
+            "ice": -15.431960105895996,
+            "yellow": -12.349661827087402
+          },
+          "split": "regression"
+        }
+      ],
+      "soup": {
+        "python_tree_sha256": "d87ec3624378b062095b71d68baa820bf88da5e641c623c6b9ead7a1e6a4a6b4",
+        "revision": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+        "version": "0.77.2"
+      },
+      "wall_seconds": 36.58884099000011
+    }
+  },
+  "candidate": {
+    "base_id": "model-edfa40a0b55ac97c",
+    "dataset_id": "dataset-efaf88b1a5b80ff9",
+    "digest": "f3c6a008dd0b7e57e3d944bbbb32fb235e450454c66f53781718f3bed870c01c",
+    "id": "candidate-518a35dc1ba79130",
+    "job_id": "job-88ca42044c15094b",
+    "manifest": {
+      "README.md": {
+        "bytes": 5178,
+        "sha256": "8910116bc6d7c5dbce3859592325ff42675e7a43d7eaeb3bd380f07809f2cbd4"
+      },
+      "adapter_config.json": {
+        "bytes": 1060,
+        "sha256": "c91466f7f57bf9cb36a1c860974012905febf444d8ffcb3810a871c78ea8ead9"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 1858776,
+        "sha256": "6908f3bfe0627811a5a9ac80c7a5267117cbd4cdc82e3c6e77d75f11e051884f"
+      },
+      "chat_template.jinja": {
+        "bytes": 368,
+        "sha256": "872be49dbb638044ad01b60388f48d469ff2980e5f0dccdc22ec907db54d0788"
+      },
+      "tokenizer.json": {
+        "bytes": 3522871,
+        "sha256": "bf346d64f6f0fbcefb4c1b6928a98241467dff36c6fbae5fe1785c4ff90667f4"
+      },
+      "tokenizer_config.json": {
+        "bytes": 451,
+        "sha256": "61a6c7fcaf88a9f7e8cd21eebd10bccce6eb9b2a31c64d1efbdadfec5e86f97e"
+      }
+    }
+  },
+  "deployment": {
+    "active": "candidate-518a35dc1ba79130",
+    "base": "model-edfa40a0b55ac97c",
+    "history": [
+      null
+    ],
+    "version": 2
+  },
+  "evaluation": {
+    "base_digest": "d3e811c46e2449c014a6d2fb453f5b421015af08360b32c4a3af2d67ea28e9f4",
+    "candidate_digest": "f3c6a008dd0b7e57e3d944bbbb32fb235e450454c66f53781718f3bed870c01c",
+    "candidate_id": "candidate-518a35dc1ba79130",
+    "config_digest": "2dc4032497251b563eb030d382fcd6fecef300b33fa0b25145dabd2c3f9a1e84",
+    "dataset_digest": "0e95a1a3520c1eba6bb3bff403169b56c1a2347b22bebada1768987a5ebfe710",
+    "id": "evaluation-9b6c6e3a32d592e2",
+    "metrics": {
+      "baseline_rows": [
+        {
+          "correct": false,
+          "expected": "K7",
+          "latency_seconds": 2.688682080000035,
+          "predicted": "R2",
+          "prompt_sha256": "cdb81a475840932fb8b933d71a7193b4dc8272b5c1372d96c893fdb7728dd063",
+          "scores": {
+            "K7": -7.334178924560547,
+            "M4": -8.146595001220703,
+            "Paris": -12.226188659667969,
+            "R2": -6.680365324020386,
+            "Tokyo": -9.573430061340332,
+            "cold": -15.628042221069336,
+            "honey": -6.86494255065918,
+            "ice": -13.894927978515625,
+            "yellow": -13.052797317504883
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "K7",
+          "latency_seconds": 2.609260749999976,
+          "predicted": "R2",
+          "prompt_sha256": "dbedc32bc841b3a8a3abed1d5463f15e3e766890065f4ae88eea9976f6de13fe",
+          "scores": {
+            "K7": -7.123396873474121,
+            "M4": -11.73420763015747,
+            "Paris": -13.5203218460083,
+            "R2": -6.284856081008911,
+            "Tokyo": -9.966314792633057,
+            "cold": -16.324373245239258,
+            "honey": -6.6089489459991455,
+            "ice": -14.0706148147583,
+            "yellow": -13.013091087341309
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "M4",
+          "latency_seconds": 2.6371198379999896,
+          "predicted": "R2",
+          "prompt_sha256": "5f4d46ede7808f80b69a6f7d976c2180a85705fb55c0bb9fdf1f5ffc1e5ab09d",
+          "scores": {
+            "K7": -6.845889091491699,
+            "M4": -8.071762561798096,
+            "Paris": -13.28386402130127,
+            "R2": -6.569077730178833,
+            "Tokyo": -9.748094081878662,
+            "cold": -16.273231506347656,
+            "honey": -7.193704128265381,
+            "ice": -13.830330848693848,
+            "yellow": -13.44945240020752
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "M4",
+          "latency_seconds": 2.6430720370000245,
+          "predicted": "K7",
+          "prompt_sha256": "e8db25b4eb7a79d86880c17ff159a7f0ec74020a6b418af4cf8fa290eaf6fe07",
+          "scores": {
+            "K7": -6.656241178512573,
+            "M4": -8.280259847640991,
+            "Paris": -13.333451271057129,
+            "R2": -7.00328516960144,
+            "Tokyo": -9.530562162399292,
+            "cold": -16.638835906982422,
+            "honey": -7.3369832038879395,
+            "ice": -13.811911582946777,
+            "yellow": -13.870951652526855
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "R2",
+          "latency_seconds": 2.6881102730000066,
+          "predicted": "R2",
+          "prompt_sha256": "cb0cb00db8d3e2b972d90bf5199fd658eded477bfe8320b8f8d09181036d462b",
+          "scores": {
+            "K7": -6.378607511520386,
+            "M4": -7.870755195617676,
+            "Paris": -12.140890121459961,
+            "R2": -6.32321572303772,
+            "Tokyo": -9.538076281547546,
+            "cold": -15.95170783996582,
+            "honey": -6.825280666351318,
+            "ice": -14.062210083007812,
+            "yellow": -13.140233993530273
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "R2",
+          "latency_seconds": 2.657788695000022,
+          "predicted": "K7",
+          "prompt_sha256": "d8e40eee9dbcb9fa80e070355d04202325f03459e4c7b45a8b061e5b27f39ef0",
+          "scores": {
+            "K7": -6.275689601898193,
+            "M4": -8.059976577758789,
+            "Paris": -11.225647926330566,
+            "R2": -6.425027370452881,
+            "Tokyo": -9.424386024475098,
+            "cold": -15.314366340637207,
+            "honey": -6.802744388580322,
+            "ice": -13.170182228088379,
+            "yellow": -12.73791217803955
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "Paris",
+          "latency_seconds": 2.1529564860001074,
+          "predicted": "Paris",
+          "prompt_sha256": "1097c2cdd4d0566a2668bf4a1e93ad3dcb9ab1c7f104b212d6cddc7d4b2d652f",
+          "scores": {
+            "K7": -10.400920391082764,
+            "M4": -8.771507024765015,
+            "Paris": -4.008015155792236,
+            "R2": -9.920162916183472,
+            "Tokyo": -5.931433916091919,
+            "cold": -15.516225814819336,
+            "honey": -6.629425525665283,
+            "ice": -16.22581672668457,
+            "yellow": -13.550302505493164
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "yellow",
+          "latency_seconds": 2.162084727999968,
+          "predicted": "honey",
+          "prompt_sha256": "542ad54c1b4ff7d9cb89b287ceb675cfea8e5666ea6af8d7c4393a9a8c545d33",
+          "scores": {
+            "K7": -11.606770992279053,
+            "M4": -10.38516616821289,
+            "Paris": -15.21903133392334,
+            "R2": -10.901560544967651,
+            "Tokyo": -7.977391481399536,
+            "cold": -16.76057243347168,
+            "honey": -6.61784815788269,
+            "ice": -15.702988624572754,
+            "yellow": -7.732070446014404
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "honey",
+          "latency_seconds": 2.1527136519999885,
+          "predicted": "honey",
+          "prompt_sha256": "b4dba104918bb281ebf3f49e8e2483b35990bcff132f2c7c91a364aacb1fae47",
+          "scores": {
+            "K7": -10.300814151763916,
+            "M4": -8.578023910522461,
+            "Paris": -14.44725513458252,
+            "R2": -10.412124633789062,
+            "Tokyo": -7.177450180053711,
+            "cold": -15.379700660705566,
+            "honey": -3.7771394439041615,
+            "ice": -10.672266960144043,
+            "yellow": -12.359763145446777
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "ice",
+          "latency_seconds": 2.1477939579999656,
+          "predicted": "Tokyo",
+          "prompt_sha256": "d7b0b04903a1aec2ec874e3c718f117b3770acfb2fd287d81755a32c36d9ca29",
+          "scores": {
+            "K7": -9.931828498840332,
+            "M4": -9.575685977935791,
+            "Paris": -14.632617950439453,
+            "R2": -9.333610534667969,
+            "Tokyo": -5.433125734329224,
+            "cold": -9.22105598449707,
+            "honey": -7.466575622558594,
+            "ice": -8.279029846191406,
+            "yellow": -13.876585006713867
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "cold",
+          "latency_seconds": 2.1845721150000372,
+          "predicted": "Tokyo",
+          "prompt_sha256": "c2fdf7cd1f5491a5d0308f457ad6135193a7394d4e4e08a8f3dc95496a92564d",
+          "scores": {
+            "K7": -12.254426956176758,
+            "M4": -9.558007717132568,
+            "Paris": -13.617033004760742,
+            "R2": -10.61241340637207,
+            "Tokyo": -6.097831726074219,
+            "cold": -9.304141998291016,
+            "honey": -8.29929780960083,
+            "ice": -12.43954086303711,
+            "yellow": -12.470115661621094
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "Tokyo",
+          "latency_seconds": 2.1530295459999707,
+          "predicted": "Tokyo",
+          "prompt_sha256": "5257da2ca5b52e8e5962e147905ee46c368911a6a0d02a407575732ae1c99253",
+          "scores": {
+            "K7": -9.837388753890991,
+            "M4": -8.821147680282593,
+            "Paris": -10.71239948272705,
+            "R2": -10.961398363113403,
+            "Tokyo": -4.798104286193848,
+            "cold": -14.888041496276855,
+            "honey": -8.505921363830566,
+            "ice": -15.431960105895996,
+            "yellow": -12.349661827087402
+          },
+          "split": "regression"
+        }
+      ],
+      "candidate_rows": [
+        {
+          "correct": false,
+          "expected": "K7",
+          "latency_seconds": 2.9425720279999723,
+          "predicted": "R2",
+          "prompt_sha256": "cdb81a475840932fb8b933d71a7193b4dc8272b5c1372d96c893fdb7728dd063",
+          "scores": {
+            "K7": -2.466459035873413,
+            "M4": -2.340071201324463,
+            "Paris": -11.440476417541504,
+            "R2": -2.1276493072509766,
+            "Tokyo": -7.491236448287964,
+            "cold": -14.505854606628418,
+            "honey": -8.617035388946533,
+            "ice": -14.37221908569336,
+            "yellow": -11.222098350524902
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "K7",
+          "latency_seconds": 2.953564508999989,
+          "predicted": "R2",
+          "prompt_sha256": "dbedc32bc841b3a8a3abed1d5463f15e3e766890065f4ae88eea9976f6de13fe",
+          "scores": {
+            "K7": -2.4941192865371704,
+            "M4": -2.2803272008895874,
+            "Paris": -11.738104820251465,
+            "R2": -2.204852819442749,
+            "Tokyo": -7.8578901290893555,
+            "cold": -14.476964950561523,
+            "honey": -8.368931293487549,
+            "ice": -14.537373542785645,
+            "yellow": -11.257672309875488
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "M4",
+          "latency_seconds": 2.899785931999986,
+          "predicted": "R2",
+          "prompt_sha256": "5f4d46ede7808f80b69a6f7d976c2180a85705fb55c0bb9fdf1f5ffc1e5ab09d",
+          "scores": {
+            "K7": -2.5717579126358032,
+            "M4": -2.5322265625,
+            "Paris": -11.27963638305664,
+            "R2": -2.1955400705337524,
+            "Tokyo": -7.363868236541748,
+            "cold": -14.647035598754883,
+            "honey": -8.850654602050781,
+            "ice": -14.4509916305542,
+            "yellow": -11.593366622924805
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "M4",
+          "latency_seconds": 2.9112115870000252,
+          "predicted": "M4",
+          "prompt_sha256": "e8db25b4eb7a79d86880c17ff159a7f0ec74020a6b418af4cf8fa290eaf6fe07",
+          "scores": {
+            "K7": -2.462600350379944,
+            "M4": -2.1481921076774597,
+            "Paris": -11.607714653015137,
+            "R2": -2.1784255504608154,
+            "Tokyo": -7.728965997695923,
+            "cold": -14.397095680236816,
+            "honey": -8.59769582748413,
+            "ice": -14.4364595413208,
+            "yellow": -11.34438419342041
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "R2",
+          "latency_seconds": 2.8722492619999684,
+          "predicted": "R2",
+          "prompt_sha256": "cb0cb00db8d3e2b972d90bf5199fd658eded477bfe8320b8f8d09181036d462b",
+          "scores": {
+            "K7": -2.6090978384017944,
+            "M4": -2.23551869392395,
+            "Paris": -11.445901870727539,
+            "R2": -2.0186290740966797,
+            "Tokyo": -7.402926921844482,
+            "cold": -14.598176002502441,
+            "honey": -8.473119258880615,
+            "ice": -14.401458740234375,
+            "yellow": -11.237834930419922
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "R2",
+          "latency_seconds": 2.831792281000048,
+          "predicted": "R2",
+          "prompt_sha256": "d8e40eee9dbcb9fa80e070355d04202325f03459e4c7b45a8b061e5b27f39ef0",
+          "scores": {
+            "K7": -2.496047854423523,
+            "M4": -2.3780561685562134,
+            "Paris": -11.06877326965332,
+            "R2": -2.099314332008362,
+            "Tokyo": -7.5537495613098145,
+            "cold": -14.507536888122559,
+            "honey": -8.68358039855957,
+            "ice": -14.064720153808594,
+            "yellow": -11.065093994140625
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "Paris",
+          "latency_seconds": 2.295815103999985,
+          "predicted": "Paris",
+          "prompt_sha256": "1097c2cdd4d0566a2668bf4a1e93ad3dcb9ab1c7f104b212d6cddc7d4b2d652f",
+          "scores": {
+            "K7": -6.720465183258057,
+            "M4": -4.85865843296051,
+            "Paris": -1.5617506504058838,
+            "R2": -6.868256211280823,
+            "Tokyo": -5.28450083732605,
+            "cold": -13.477572441101074,
+            "honey": -5.7915380001068115,
+            "ice": -15.109018325805664,
+            "yellow": -12.333673477172852
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "yellow",
+          "latency_seconds": 2.2795112610000388,
+          "predicted": "honey",
+          "prompt_sha256": "542ad54c1b4ff7d9cb89b287ceb675cfea8e5666ea6af8d7c4393a9a8c545d33",
+          "scores": {
+            "K7": -7.874728679656982,
+            "M4": -6.279961347579956,
+            "Paris": -11.314396858215332,
+            "R2": -8.627880573272705,
+            "Tokyo": -7.318114995956421,
+            "cold": -11.985516548156738,
+            "honey": -4.002798676490784,
+            "ice": -11.179165840148926,
+            "yellow": -4.517268180847168
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "honey",
+          "latency_seconds": 2.350860840999985,
+          "predicted": "honey",
+          "prompt_sha256": "b4dba104918bb281ebf3f49e8e2483b35990bcff132f2c7c91a364aacb1fae47",
+          "scores": {
+            "K7": -8.84675407409668,
+            "M4": -6.908715009689331,
+            "Paris": -15.199110984802246,
+            "R2": -9.318238735198975,
+            "Tokyo": -7.60564661026001,
+            "cold": -14.539517402648926,
+            "honey": -2.1732621788978577,
+            "ice": -11.003045082092285,
+            "yellow": -12.57556438446045
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "ice",
+          "latency_seconds": 2.2714338890000363,
+          "predicted": "ice",
+          "prompt_sha256": "d7b0b04903a1aec2ec874e3c718f117b3770acfb2fd287d81755a32c36d9ca29",
+          "scores": {
+            "K7": -7.803954601287842,
+            "M4": -7.5137529373168945,
+            "Paris": -12.4511137008667,
+            "R2": -7.619509220123291,
+            "Tokyo": -6.311902046203613,
+            "cold": -5.766934394836426,
+            "honey": -4.044967889785767,
+            "ice": -3.37503719329834,
+            "yellow": -12.405257225036621
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "cold",
+          "latency_seconds": 2.392575989999955,
+          "predicted": "cold",
+          "prompt_sha256": "c2fdf7cd1f5491a5d0308f457ad6135193a7394d4e4e08a8f3dc95496a92564d",
+          "scores": {
+            "K7": -8.532365798950195,
+            "M4": -6.925856590270996,
+            "Paris": -9.599096298217773,
+            "R2": -8.299676895141602,
+            "Tokyo": -7.718408823013306,
+            "cold": -4.264892578125,
+            "honey": -6.382053971290588,
+            "ice": -8.268974304199219,
+            "yellow": -9.135356903076172
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "Tokyo",
+          "latency_seconds": 2.3112794759999815,
+          "predicted": "Tokyo",
+          "prompt_sha256": "5257da2ca5b52e8e5962e147905ee46c368911a6a0d02a407575732ae1c99253",
+          "scores": {
+            "K7": -5.554360270500183,
+            "M4": -5.358131289482117,
+            "Paris": -9.88943862915039,
+            "R2": -7.429993629455566,
+            "Tokyo": -2.7528109550476074,
+            "cold": -14.075342178344727,
+            "honey": -7.350923538208008,
+            "ice": -14.170120239257812,
+            "yellow": -11.13302230834961
+          },
+          "split": "regression"
+        }
+      ],
+      "cpu_threads": 2,
+      "gpu_used": false,
+      "isolation": {
+        "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE",
+        "connect_probes": [
+          {
+            "address": [
+              "198.51.100.1",
+              443
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          },
+          {
+            "address": [
+              "127.0.0.1",
+              11434
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          }
+        ],
+        "dns_probe": {
+          "blocked": true,
+          "errno": -3
+        },
+        "net_namespace": "net:[4026532362]",
+        "route_count": 0
+      },
+      "metric": "closed-choice mean log likelihood",
+      "peak_rss_kib": 1228828,
+      "regression": {
+        "baseline_accuracy": 0.5,
+        "baseline_mean_latency_seconds": 2.158858414166673,
+        "candidate_accuracy": 0.8333333333333334,
+        "candidate_mean_latency_seconds": 2.3169127601666637,
+        "count": 6
+      },
+      "soup": {
+        "python_tree_sha256": "d87ec3624378b062095b71d68baa820bf88da5e641c623c6b9ead7a1e6a4a6b4",
+        "revision": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+        "version": "0.77.2"
+      },
+      "test": {
+        "baseline_accuracy": 0.16666666666666666,
+        "baseline_mean_latency_seconds": 2.6540056121666757,
+        "candidate_accuracy": 0.5,
+        "candidate_mean_latency_seconds": 2.9018625998333314,
+        "count": 6
+      },
+      "wall_seconds": 69.44314320799992
+    },
+    "passed": true,
+    "policy": "strict-improvement-no-regression-v1",
+    "run_path": "jobs/run-9be25f00f1bd2708"
+  },
+  "evidence": {
+    "aip_integration": "CONTRACT_ONLY",
+    "public_key_hex": "7d62d92d2f48aa111efae3918b3f347adf0425bb668f23614c2f7766a143de3f",
+    "records": [
+      {
+        "payload": {
+          "action": "base_registered",
+          "actor": "provisioner",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535121.489717,
+          "details": {
+            "digest": "d3e811c46e2449c014a6d2fb453f5b421015af08360b32c4a3af2d67ea28e9f4",
+            "id": "model-edfa40a0b55ac97c",
+            "identifier": "HuggingFaceTB/SmolLM2-135M-Instruct",
+            "license": "Apache-2.0",
+            "manifest": {
+              "README.md": {
+                "bytes": 6772,
+                "sha256": "4f97533ad95b1b2fea15fbc075c01b94578ebdd7c8138888fa43fa3abd530dc4"
+              },
+              "config.json": {
+                "bytes": 861,
+                "sha256": "8eb740e8bbe4cff95ea7b4588d17a2432deb16e8075bc5828ff7ba9be94d982a"
+              },
+              "generation_config.json": {
+                "bytes": 132,
+                "sha256": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013"
+              },
+              "merges.txt": {
+                "bytes": 466391,
+                "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510"
+              },
+              "model.safetensors": {
+                "bytes": 269060552,
+                "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+              },
+              "special_tokens_map.json": {
+                "bytes": 655,
+                "sha256": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52"
+              },
+              "tokenizer.json": {
+                "bytes": 2104556,
+                "sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c"
+              },
+              "tokenizer_config.json": {
+                "bytes": 3764,
+                "sha256": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df"
+              },
+              "vocab.json": {
+                "bytes": 800662,
+                "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+              }
+            },
+            "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "GENESIS",
+          "schema": "airon-model-change/v1",
+          "sequence": 1
+        },
+        "sha256": "c0a38b1fdebfe24c63cbf4937db0c89400c447fc52199f509ef6de69c3b68ef0",
+        "signature": "Af0SFoh/7eHZm8aHkpR8KIHy2k/oVgAXObxObuzQrXBitJzhQXOcEqbaaPmxpF4cXDi5e2rQKYt7u5yy5mJ3Dg=="
+      },
+      {
+        "payload": {
+          "action": "knowledge_authorized",
+          "actor": "provisioner",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535121.4968414,
+          "details": {
+            "count": 4,
+            "id": "knowledge",
+            "manifest": {
+              "documents.json": {
+                "bytes": 1979,
+                "sha256": "b9a82b5d5d974558edf0cea09374c0b827db5dbc198309290d475b26c363ce7e"
+              }
+            },
+            "source_kind": "existing-AIRON-synthetic-fixture"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "cb997b4832c4b456f02fc37143a36679590dd094b99bf6c3833caba8858e9d62",
+          "schema": "airon-model-change/v1",
+          "sequence": 2
+        },
+        "sha256": "3dfa007940cf884c1b96f2d83bde74f5cbf884d2e1356e4b808621ea9d6ee23e",
+        "signature": "4XnEPpzRvLB3X4cpIjrWk3HDyCT8sA9rfGSnESuvU4UUJ7rjwmHeARZrs4zUwe034bH842UhGRhhFPMowgDIDQ=="
+      },
+      {
+        "payload": {
+          "action": "dataset_authorized",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535121.5034819,
+          "details": {
+            "authorization": {
+              "approved_for_training": true,
+              "license": "CC0-1.0",
+              "synthetic": true
+            },
+            "authorized_by": "local-operator",
+            "counts": {
+              "regression": 6,
+              "test": 6,
+              "train": 18
+            },
+            "digest": "0e95a1a3520c1eba6bb3bff403169b56c1a2347b22bebada1768987a5ebfe710",
+            "id": "dataset-efaf88b1a5b80ff9",
+            "manifest": {
+              "records.json": {
+                "bytes": 4578,
+                "sha256": "8d61274ac29045cd95f064e405ef44cbebeca49cf092fd4575e5793aa01cac30"
+              },
+              "train.jsonl": {
+                "bytes": 3544,
+                "sha256": "5f06ef43622589646adaa61e224055ea38d5a660ce359e8bf4c97481a94452db"
+              }
+            }
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "8af2e9c3025d2808444c18395ad93f60e0a00214542ccdfdf12bfc5a743feedb",
+          "schema": "airon-model-change/v1",
+          "sequence": 3
+        },
+        "sha256": "d5d4e96eb3bca0ecce089f00e84836e598ae4fe998a53fdbbb557b03dd4d2c39",
+        "signature": "ZyrW+1y41O4w7o+7uJavB47WfNsp2xDVnYIcBoYisHxpFtFsg5f+UC5lKblS4oGf+5o0Qpr+mTnzgtSyhXJgCA=="
+      },
+      {
+        "payload": {
+          "action": "training_authorized",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535121.5091178,
+          "details": {
+            "authorized_by": "local-operator",
+            "base_id": "model-edfa40a0b55ac97c",
+            "config": {
+              "epochs": 3,
+              "lr": 0.001,
+              "rank": 8,
+              "seed": 52
+            },
+            "config_digest": "2dc4032497251b563eb030d382fcd6fecef300b33fa0b25145dabd2c3f9a1e84",
+            "dataset_id": "dataset-efaf88b1a5b80ff9",
+            "id": "job-88ca42044c15094b",
+            "status": "CREATED"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "041ad6497d4aea490de6a5153ae7021b2aa96b473b6add7458b1a4434d70c500",
+          "schema": "airon-model-change/v1",
+          "sequence": 4
+        },
+        "sha256": "69e54aa89a3bbbef9da372a5abcc44da6f76997c46ad0cb564b16677e496e753",
+        "signature": "CX0+NsVGZ3T2/RGUg6KYicNGzw8qebjygB7vzPeHTRVHqRIFUSKeliE/dIoYkS/3bbaOxt/v6s6kDDp9+ufQCA=="
+      },
+      {
+        "payload": {
+          "action": "local_inference",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535160.2421358,
+          "details": {
+            "active": null,
+            "deployment_version": 1,
+            "result_digest": "cf6b0a724e0d17721b331e3ec99a61db48d7f56329d1c981679c8f3437c4e287"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "fab99dc49ace366a2f307818ee08b4820a537a62e26d1d5f3e62763017b5d6e8",
+          "schema": "airon-model-change/v1",
+          "sequence": 5
+        },
+        "sha256": "17d3c3df5a56e9af1e62ad56aaa4f87629d8c98723239f30ebcf629c9be444d1",
+        "signature": "hc4qROAqCaS+8+mYpvmcBT8DNHn4ObYELeGjxCNATJCIHKu+VTkAPqlWjhXOfA1eAoFgHGMmbbhyLdQTPB30Cw=="
+      },
+      {
+        "payload": {
+          "action": "knowledge_query",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535173.5663948,
+          "details": {
+            "access_role": "operator",
+            "deployment_version": 1,
+            "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+            "model_called": true,
+            "outcome": "ABSTAINED",
+            "question_digest": "e5a6616ad48d5d3864aa8e474f5ea3c6c387c06dea68d40db67a65231788ac59",
+            "result_digest": "316e996492017aed9030c5dc4ee728e57901999c17b3cbbc8f0591b35dc4d990"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "d72f1a6937b6ecae46e61c08482b5cd30b5c25891577fbafaaa7b52a307f75d2",
+          "schema": "airon-model-change/v1",
+          "sequence": 6
+        },
+        "sha256": "0cceac2578cf78ddeeba02aa150609ee49f89612288a4c3ad3dce126825069ca",
+        "signature": "jn4tL4/i7I0w9Bhxxt84UdLRBALyny7jlNDO4toALJHqykomY072gCqqhQg8c+/NotL3HedUO7RGYWhqQna5BA=="
+      },
+      {
+        "payload": {
+          "action": "knowledge_query",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535173.5712202,
+          "details": {
+            "access_role": "operator",
+            "deployment_version": 1,
+            "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+            "model_called": false,
+            "outcome": "DENIED",
+            "question_digest": "cc4845fe22867654b158ece22fa15b4079ffbc9140c5a671a41c41ec4da5b2ea",
+            "result_digest": "4fb046ee6f5a93745294f92b67dfa2843bf41efaa37f1397cc4cde831b0cab32"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "bbba3119e8522d5c171acba0d5d51361d34017025c5bf53c99eada23d1b917a0",
+          "schema": "airon-model-change/v1",
+          "sequence": 7
+        },
+        "sha256": "31a14563c05269dc49db98f8028b4f66b1be35ac1aa8e8a20fe99eb8e42d6fc3",
+        "signature": "H4NEU1QGMg8cbVQ4iN2/Yg0tfLb3OkCRjpfWNw1J2/3nq1e156v4AcA7YSsxt2WYhcdCoaXidVJtBFc4HzYyDg=="
+      },
+      {
+        "payload": {
+          "action": "knowledge_query",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535173.7052767,
+          "details": {
+            "access_role": "operator",
+            "deployment_version": 1,
+            "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+            "model_called": false,
+            "outcome": "ABSTAINED",
+            "question_digest": "289edb0d371ca154a07a68e01e688b2db7d1ae551a0c90fd41fa2605566cbcf8",
+            "result_digest": "857e855409abe39a8d08ffc21773c6ad48decc187caff351f3990075cd619fde"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "9534ef977fe5ba6c7e1702a995eca4bf1b51c977ae7b99a3047dffbf59ca4cf9",
+          "schema": "airon-model-change/v1",
+          "sequence": 8
+        },
+        "sha256": "d7826c4adecd3751f746f13a631e296903bf3fc460bc4bb0716ba5f207877f52",
+        "signature": "UTUB3SiTejHaFC/p5dD29ipEjT+bzERo1B60jnmVaeEHtQK458Dsdth2PIsKURTcpKrEEfpqzwOAP969ug9PBA=="
+      },
+      {
+        "payload": {
+          "action": "training_started",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535173.9560235,
+          "details": {
+            "job_id": "job-88ca42044c15094b"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "cc738a6fb1e2544fc5a7883d9e6bcf671201b4f409e7dd0b157f989dc1e2b3fd",
+          "schema": "airon-model-change/v1",
+          "sequence": 9
+        },
+        "sha256": "433d3b5648df95ca70d05b32a2c288c7fd47c20840be4db73dc41a12876ea530",
+        "signature": "nWiyShgLhrVA5BKd2lPl4lG/vVuq2QHYD1RNPaKBWHwIQz3ICbUUtI19LzNT/sNtGA/B/JHspCDgB/3JXaEODA=="
+      },
+      {
+        "payload": {
+          "action": "training_completed",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535222.054636,
+          "details": {
+            "checkpoint_digest": "f3c6a008dd0b7e57e3d944bbbb32fb235e450454c66f53781718f3bed870c01c",
+            "job_id": "job-88ca42044c15094b",
+            "result": {
+              "adapter_manifest": {
+                "README.md": {
+                  "bytes": 5178,
+                  "sha256": "8910116bc6d7c5dbce3859592325ff42675e7a43d7eaeb3bd380f07809f2cbd4"
+                },
+                "adapter_config.json": {
+                  "bytes": 1060,
+                  "sha256": "c91466f7f57bf9cb36a1c860974012905febf444d8ffcb3810a871c78ea8ead9"
+                },
+                "adapter_model.safetensors": {
+                  "bytes": 1858776,
+                  "sha256": "6908f3bfe0627811a5a9ac80c7a5267117cbd4cdc82e3c6e77d75f11e051884f"
+                },
+                "chat_template.jinja": {
+                  "bytes": 368,
+                  "sha256": "872be49dbb638044ad01b60388f48d469ff2980e5f0dccdc22ec907db54d0788"
+                },
+                "tokenizer.json": {
+                  "bytes": 3522871,
+                  "sha256": "bf346d64f6f0fbcefb4c1b6928a98241467dff36c6fbae5fe1785c4ff90667f4"
+                },
+                "tokenizer_config.json": {
+                  "bytes": 451,
+                  "sha256": "61a6c7fcaf88a9f7e8cd21eebd10bccce6eb9b2a31c64d1efbdadfec5e86f97e"
+                }
+              },
+              "backend": "Soup SFTTrainerWrapper / CPU float32 LoRA",
+              "changed_parameters": 120,
+              "cpu_threads": 2,
+              "final_loss": 0.5222952365875244,
+              "gpu_used": false,
+              "isolation": {
+                "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE",
+                "connect_probes": [
+                  {
+                    "address": [
+                      "198.51.100.1",
+                      443
+                    ],
+                    "errno": 101,
+                    "purpose": "deliberate isolation probe"
+                  },
+                  {
+                    "address": [
+                      "127.0.0.1",
+                      11434
+                    ],
+                    "errno": 101,
+                    "purpose": "deliberate isolation probe"
+                  }
+                ],
+                "dns_probe": {
+                  "blocked": true,
+                  "errno": -3
+                },
+                "net_namespace": "net:[4026532364]",
+                "route_count": 0
+              },
+              "loaded_parameter_dtypes": [
+                "torch.bfloat16",
+                "torch.float32"
+              ],
+              "observed_torch_threads": 2,
+              "peak_rss_kib": 1380696,
+              "real_training": true,
+              "soup": {
+                "python_tree_sha256": "d87ec3624378b062095b71d68baa820bf88da5e641c623c6b9ead7a1e6a4a6b4",
+                "revision": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+                "version": "0.77.2"
+              },
+              "steps": 27,
+              "trainable_tensors": 120,
+              "training_parameter_dtypes": [
+                "torch.float32"
+              ],
+              "training_seconds": 35.59626380399993,
+              "wall_seconds": 46.38807753700007
+            }
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "9edba333d021093d87aaef65c55fca4b26a543ef86e1dacedc2fef36c2e19590",
+          "schema": "airon-model-change/v1",
+          "sequence": 10
+        },
+        "sha256": "14f7edb97947b9b2d5211756e4865f4025e76710b82f930d4f6a0a4f875ae2a4",
+        "signature": "T9XoyNNiyUN/N2sxS73JppMR2/LGZy3PnFLb0BGLcwmYXvLDfsBhg8KuQunI8xiz9T7oKyHvfmoluO2dVDCvCA=="
+      },
+      {
+        "payload": {
+          "action": "candidate_registered",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535222.454182,
+          "details": {
+            "base_id": "model-edfa40a0b55ac97c",
+            "dataset_id": "dataset-efaf88b1a5b80ff9",
+            "digest": "f3c6a008dd0b7e57e3d944bbbb32fb235e450454c66f53781718f3bed870c01c",
+            "id": "candidate-518a35dc1ba79130",
+            "job_id": "job-88ca42044c15094b",
+            "manifest": {
+              "README.md": {
+                "bytes": 5178,
+                "sha256": "8910116bc6d7c5dbce3859592325ff42675e7a43d7eaeb3bd380f07809f2cbd4"
+              },
+              "adapter_config.json": {
+                "bytes": 1060,
+                "sha256": "c91466f7f57bf9cb36a1c860974012905febf444d8ffcb3810a871c78ea8ead9"
+              },
+              "adapter_model.safetensors": {
+                "bytes": 1858776,
+                "sha256": "6908f3bfe0627811a5a9ac80c7a5267117cbd4cdc82e3c6e77d75f11e051884f"
+              },
+              "chat_template.jinja": {
+                "bytes": 368,
+                "sha256": "872be49dbb638044ad01b60388f48d469ff2980e5f0dccdc22ec907db54d0788"
+              },
+              "tokenizer.json": {
+                "bytes": 3522871,
+                "sha256": "bf346d64f6f0fbcefb4c1b6928a98241467dff36c6fbae5fe1785c4ff90667f4"
+              },
+              "tokenizer_config.json": {
+                "bytes": 451,
+                "sha256": "61a6c7fcaf88a9f7e8cd21eebd10bccce6eb9b2a31c64d1efbdadfec5e86f97e"
+              }
+            }
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "31748edf6055c6363f8ae8e7c52abb22fdbadfbcad4f205d5c0439bbceaa8b9f",
+          "schema": "airon-model-change/v1",
+          "sequence": 11
+        },
+        "sha256": "56cf870162069115dac1ebaa88b18729b1ffc1631559f6f7bb841b5d9ac054c1",
+        "signature": "FR0OEE170q1Cs3rV0Q1LP3K/z5ubamjDeglR7Ak/RYhzl11wgVMKBnRA4gWsvVzm38I9yrm2OjKi9WF+moUGBw=="
+      },
+      {
+        "payload": {
+          "action": "candidate_evaluated",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535293.2687745,
+          "details": {
+            "base_digest": "d3e811c46e2449c014a6d2fb453f5b421015af08360b32c4a3af2d67ea28e9f4",
+            "candidate_digest": "f3c6a008dd0b7e57e3d944bbbb32fb235e450454c66f53781718f3bed870c01c",
+            "candidate_id": "candidate-518a35dc1ba79130",
+            "config_digest": "2dc4032497251b563eb030d382fcd6fecef300b33fa0b25145dabd2c3f9a1e84",
+            "dataset_digest": "0e95a1a3520c1eba6bb3bff403169b56c1a2347b22bebada1768987a5ebfe710",
+            "id": "evaluation-9b6c6e3a32d592e2",
+            "metrics": {
+              "baseline_rows": [
+                {
+                  "correct": false,
+                  "expected": "K7",
+                  "latency_seconds": 2.688682080000035,
+                  "predicted": "R2",
+                  "prompt_sha256": "cdb81a475840932fb8b933d71a7193b4dc8272b5c1372d96c893fdb7728dd063",
+                  "scores": {
+                    "K7": -7.334178924560547,
+                    "M4": -8.146595001220703,
+                    "Paris": -12.226188659667969,
+                    "R2": -6.680365324020386,
+                    "Tokyo": -9.573430061340332,
+                    "cold": -15.628042221069336,
+                    "honey": -6.86494255065918,
+                    "ice": -13.894927978515625,
+                    "yellow": -13.052797317504883
+                  },
+                  "split": "test"
+                },
+                {
+                  "correct": false,
+                  "expected": "K7",
+                  "latency_seconds": 2.609260749999976,
+                  "predicted": "R2",
+                  "prompt_sha256": "dbedc32bc841b3a8a3abed1d5463f15e3e766890065f4ae88eea9976f6de13fe",
+                  "scores": {
+                    "K7": -7.123396873474121,
+                    "M4": -11.73420763015747,
+                    "Paris": -13.5203218460083,
+                    "R2": -6.284856081008911,
+                    "Tokyo": -9.966314792633057,
+                    "cold": -16.324373245239258,
+                    "honey": -6.6089489459991455,
+                    "ice": -14.0706148147583,
+                    "yellow": -13.013091087341309
+                  },
+                  "split": "test"
+                },
+                {
+                  "correct": false,
+                  "expected": "M4",
+                  "latency_seconds": 2.6371198379999896,
+                  "predicted": "R2",
+                  "prompt_sha256": "5f4d46ede7808f80b69a6f7d976c2180a85705fb55c0bb9fdf1f5ffc1e5ab09d",
+                  "scores": {
+                    "K7": -6.845889091491699,
+                    "M4": -8.071762561798096,
+                    "Paris": -13.28386402130127,
+                    "R2": -6.569077730178833,
+                    "Tokyo": -9.748094081878662,
+                    "cold": -16.273231506347656,
+                    "honey": -7.193704128265381,
+                    "ice": -13.830330848693848,
+                    "yellow": -13.44945240020752
+                  },
+                  "split": "test"
+                },
+                {
+                  "correct": false,
+                  "expected": "M4",
+                  "latency_seconds": 2.6430720370000245,
+                  "predicted": "K7",
+                  "prompt_sha256": "e8db25b4eb7a79d86880c17ff159a7f0ec74020a6b418af4cf8fa290eaf6fe07",
+                  "scores": {
+                    "K7": -6.656241178512573,
+                    "M4": -8.280259847640991,
+                    "Paris": -13.333451271057129,
+                    "R2": -7.00328516960144,
+                    "Tokyo": -9.530562162399292,
+                    "cold": -16.638835906982422,
+                    "honey": -7.3369832038879395,
+                    "ice": -13.811911582946777,
+                    "yellow": -13.870951652526855
+                  },
+                  "split": "test"
+                },
+                {
+                  "correct": true,
+                  "expected": "R2",
+                  "latency_seconds": 2.6881102730000066,
+                  "predicted": "R2",
+                  "prompt_sha256": "cb0cb00db8d3e2b972d90bf5199fd658eded477bfe8320b8f8d09181036d462b",
+                  "scores": {
+                    "K7": -6.378607511520386,
+                    "M4": -7.870755195617676,
+                    "Paris": -12.140890121459961,
+                    "R2": -6.32321572303772,
+                    "Tokyo": -9.538076281547546,
+                    "cold": -15.95170783996582,
+                    "honey": -6.825280666351318,
+                    "ice": -14.062210083007812,
+                    "yellow": -13.140233993530273
+                  },
+                  "split": "test"
+                },
+                {
+                  "correct": false,
+                  "expected": "R2",
+                  "latency_seconds": 2.657788695000022,
+                  "predicted": "K7",
+                  "prompt_sha256": "d8e40eee9dbcb9fa80e070355d04202325f03459e4c7b45a8b061e5b27f39ef0",
+                  "scores": {
+                    "K7": -6.275689601898193,
+                    "M4": -8.059976577758789,
+                    "Paris": -11.225647926330566,
+                    "R2": -6.425027370452881,
+                    "Tokyo": -9.424386024475098,
+                    "cold": -15.314366340637207,
+                    "honey": -6.802744388580322,
+                    "ice": -13.170182228088379,
+                    "yellow": -12.73791217803955
+                  },
+                  "split": "test"
+                },
+                {
+                  "correct": true,
+                  "expected": "Paris",
+                  "latency_seconds": 2.1529564860001074,
+                  "predicted": "Paris",
+                  "prompt_sha256": "1097c2cdd4d0566a2668bf4a1e93ad3dcb9ab1c7f104b212d6cddc7d4b2d652f",
+                  "scores": {
+                    "K7": -10.400920391082764,
+                    "M4": -8.771507024765015,
+                    "Paris": -4.008015155792236,
+                    "R2": -9.920162916183472,
+                    "Tokyo": -5.931433916091919,
+                    "cold": -15.516225814819336,
+                    "honey": -6.629425525665283,
+                    "ice": -16.22581672668457,
+                    "yellow": -13.550302505493164
+                  },
+                  "split": "regression"
+                },
+                {
+                  "correct": false,
+                  "expected": "yellow",
+                  "latency_seconds": 2.162084727999968,
+                  "predicted": "honey",
+                  "prompt_sha256": "542ad54c1b4ff7d9cb89b287ceb675cfea8e5666ea6af8d7c4393a9a8c545d33",
+                  "scores": {
+                    "K7": -11.606770992279053,
+                    "M4": -10.38516616821289,
+                    "Paris": -15.21903133392334,
+                    "R2": -10.901560544967651,
+                    "Tokyo": -7.977391481399536,
+                    "cold": -16.76057243347168,
+                    "honey": -6.61784815788269,
+                    "ice": -15.702988624572754,
+                    "yellow": -7.732070446014404
+                  },
+                  "split": "regression"
+                },
+                {
+                  "correct": true,
+                  "expected": "honey",
+                  "latency_seconds": 2.1527136519999885,
+                  "predicted": "honey",
+                  "prompt_sha256": "b4dba104918bb281ebf3f49e8e2483b35990bcff132f2c7c91a364aacb1fae47",
+                  "scores": {
+                    "K7": -10.300814151763916,
+                    "M4": -8.578023910522461,
+                    "Paris": -14.44725513458252,
+                    "R2": -10.412124633789062,
+                    "Tokyo": -7.177450180053711,
+                    "cold": -15.379700660705566,
+                    "honey": -3.7771394439041615,
+                    "ice": -10.672266960144043,
+                    "yellow": -12.359763145446777
+                  },
+                  "split": "regression"
+                },
+                {
+                  "correct": false,
+                  "expected": "ice",
+                  "latency_seconds": 2.1477939579999656,
+                  "predicted": "Tokyo",
+                  "prompt_sha256": "d7b0b04903a1aec2ec874e3c718f117b3770acfb2fd287d81755a32c36d9ca29",
+                  "scores": {
+                    "K7": -9.931828498840332,
+                    "M4": -9.575685977935791,
+                    "Paris": -14.632617950439453,
+                    "R2": -9.333610534667969,
+                    "Tokyo": -5.433125734329224,
+                    "cold": -9.22105598449707,
+                    "honey": -7.466575622558594,
+                    "ice": -8.279029846191406,
+                    "yellow": -13.876585006713867
+                  },
+                  "split": "regression"
+                },
+                {
+                  "correct": false,
+                  "expected": "cold",
+                  "latency_seconds": 2.1845721150000372,
+                  "predicted": "Tokyo",
+                  "prompt_sha256": "c2fdf7cd1f5491a5d0308f457ad6135193a7394d4e4e08a8f3dc95496a92564d",
+                  "scores": {
+                    "K7": -12.254426956176758,
+                    "M4": -9.558007717132568,
+                    "Paris": -13.617033004760742,
+                    "R2": -10.61241340637207,
+                    "Tokyo": -6.097831726074219,
+                    "cold": -9.304141998291016,
+                    "honey": -8.29929780960083,
+                    "ice": -12.43954086303711,
+                    "yellow": -12.470115661621094
+                  },
+                  "split": "regression"
+                },
+                {
+                  "correct": true,
+                  "expected": "Tokyo",
+                  "latency_seconds": 2.1530295459999707,
+                  "predicted": "Tokyo",
+                  "prompt_sha256": "5257da2ca5b52e8e5962e147905ee46c368911a6a0d02a407575732ae1c99253",
+                  "scores": {
+                    "K7": -9.837388753890991,
+                    "M4": -8.821147680282593,
+                    "Paris": -10.71239948272705,
+                    "R2": -10.961398363113403,
+                    "Tokyo": -4.798104286193848,
+                    "cold": -14.888041496276855,
+                    "honey": -8.505921363830566,
+                    "ice": -15.431960105895996,
+                    "yellow": -12.349661827087402
+                  },
+                  "split": "regression"
+                }
+              ],
+              "candidate_rows": [
+                {
+                  "correct": false,
+                  "expected": "K7",
+                  "latency_seconds": 2.9425720279999723,
+                  "predicted": "R2",
+                  "prompt_sha256": "cdb81a475840932fb8b933d71a7193b4dc8272b5c1372d96c893fdb7728dd063",
+                  "scores": {
+                    "K7": -2.466459035873413,
+                    "M4": -2.340071201324463,
+                    "Paris": -11.440476417541504,
+                    "R2": -2.1276493072509766,
+                    "Tokyo": -7.491236448287964,
+                    "cold": -14.505854606628418,
+                    "honey": -8.617035388946533,
+                    "ice": -14.37221908569336,
+                    "yellow": -11.222098350524902
+                  },
+                  "split": "test"
+                },
+                {
+                  "correct": false,
+                  "expected": "K7",
+                  "latency_seconds": 2.953564508999989,
+                  "predicted": "R2",
+                  "prompt_sha256": "dbedc32bc841b3a8a3abed1d5463f15e3e766890065f4ae88eea9976f6de13fe",
+                  "scores": {
+                    "K7": -2.4941192865371704,
+                    "M4": -2.2803272008895874,
+                    "Paris": -11.738104820251465,
+                    "R2": -2.204852819442749,
+                    "Tokyo": -7.8578901290893555,
+                    "cold": -14.476964950561523,
+                    "honey": -8.368931293487549,
+                    "ice": -14.537373542785645,
+                    "yellow": -11.257672309875488
+                  },
+                  "split": "test"
+                },
+                {
+                  "correct": false,
+                  "expected": "M4",
+                  "latency_seconds": 2.899785931999986,
+                  "predicted": "R2",
+                  "prompt_sha256": "5f4d46ede7808f80b69a6f7d976c2180a85705fb55c0bb9fdf1f5ffc1e5ab09d",
+                  "scores": {
+                    "K7": -2.5717579126358032,
+                    "M4": -2.5322265625,
+                    "Paris": -11.27963638305664,
+                    "R2": -2.1955400705337524,
+                    "Tokyo": -7.363868236541748,
+                    "cold": -14.647035598754883,
+                    "honey": -8.850654602050781,
+                    "ice": -14.4509916305542,
+                    "yellow": -11.593366622924805
+                  },
+                  "split": "test"
+                },
+                {
+                  "correct": true,
+                  "expected": "M4",
+                  "latency_seconds": 2.9112115870000252,
+                  "predicted": "M4",
+                  "prompt_sha256": "e8db25b4eb7a79d86880c17ff159a7f0ec74020a6b418af4cf8fa290eaf6fe07",
+                  "scores": {
+                    "K7": -2.462600350379944,
+                    "M4": -2.1481921076774597,
+                    "Paris": -11.607714653015137,
+                    "R2": -2.1784255504608154,
+                    "Tokyo": -7.728965997695923,
+                    "cold": -14.397095680236816,
+                    "honey": -8.59769582748413,
+                    "ice": -14.4364595413208,
+                    "yellow": -11.34438419342041
+                  },
+                  "split": "test"
+                },
+                {
+                  "correct": true,
+                  "expected": "R2",
+                  "latency_seconds": 2.8722492619999684,
+                  "predicted": "R2",
+                  "prompt_sha256": "cb0cb00db8d3e2b972d90bf5199fd658eded477bfe8320b8f8d09181036d462b",
+                  "scores": {
+                    "K7": -2.6090978384017944,
+                    "M4": -2.23551869392395,
+                    "Paris": -11.445901870727539,
+                    "R2": -2.0186290740966797,
+                    "Tokyo": -7.402926921844482,
+                    "cold": -14.598176002502441,
+                    "honey": -8.473119258880615,
+                    "ice": -14.401458740234375,
+                    "yellow": -11.237834930419922
+                  },
+                  "split": "test"
+                },
+                {
+                  "correct": true,
+                  "expected": "R2",
+                  "latency_seconds": 2.831792281000048,
+                  "predicted": "R2",
+                  "prompt_sha256": "d8e40eee9dbcb9fa80e070355d04202325f03459e4c7b45a8b061e5b27f39ef0",
+                  "scores": {
+                    "K7": -2.496047854423523,
+                    "M4": -2.3780561685562134,
+                    "Paris": -11.06877326965332,
+                    "R2": -2.099314332008362,
+                    "Tokyo": -7.5537495613098145,
+                    "cold": -14.507536888122559,
+                    "honey": -8.68358039855957,
+                    "ice": -14.064720153808594,
+                    "yellow": -11.065093994140625
+                  },
+                  "split": "test"
+                },
+                {
+                  "correct": true,
+                  "expected": "Paris",
+                  "latency_seconds": 2.295815103999985,
+                  "predicted": "Paris",
+                  "prompt_sha256": "1097c2cdd4d0566a2668bf4a1e93ad3dcb9ab1c7f104b212d6cddc7d4b2d652f",
+                  "scores": {
+                    "K7": -6.720465183258057,
+                    "M4": -4.85865843296051,
+                    "Paris": -1.5617506504058838,
+                    "R2": -6.868256211280823,
+                    "Tokyo": -5.28450083732605,
+                    "cold": -13.477572441101074,
+                    "honey": -5.7915380001068115,
+                    "ice": -15.109018325805664,
+                    "yellow": -12.333673477172852
+                  },
+                  "split": "regression"
+                },
+                {
+                  "correct": false,
+                  "expected": "yellow",
+                  "latency_seconds": 2.2795112610000388,
+                  "predicted": "honey",
+                  "prompt_sha256": "542ad54c1b4ff7d9cb89b287ceb675cfea8e5666ea6af8d7c4393a9a8c545d33",
+                  "scores": {
+                    "K7": -7.874728679656982,
+                    "M4": -6.279961347579956,
+                    "Paris": -11.314396858215332,
+                    "R2": -8.627880573272705,
+                    "Tokyo": -7.318114995956421,
+                    "cold": -11.985516548156738,
+                    "honey": -4.002798676490784,
+                    "ice": -11.179165840148926,
+                    "yellow": -4.517268180847168
+                  },
+                  "split": "regression"
+                },
+                {
+                  "correct": true,
+                  "expected": "honey",
+                  "latency_seconds": 2.350860840999985,
+                  "predicted": "honey",
+                  "prompt_sha256": "b4dba104918bb281ebf3f49e8e2483b35990bcff132f2c7c91a364aacb1fae47",
+                  "scores": {
+                    "K7": -8.84675407409668,
+                    "M4": -6.908715009689331,
+                    "Paris": -15.199110984802246,
+                    "R2": -9.318238735198975,
+                    "Tokyo": -7.60564661026001,
+                    "cold": -14.539517402648926,
+                    "honey": -2.1732621788978577,
+                    "ice": -11.003045082092285,
+                    "yellow": -12.57556438446045
+                  },
+                  "split": "regression"
+                },
+                {
+                  "correct": true,
+                  "expected": "ice",
+                  "latency_seconds": 2.2714338890000363,
+                  "predicted": "ice",
+                  "prompt_sha256": "d7b0b04903a1aec2ec874e3c718f117b3770acfb2fd287d81755a32c36d9ca29",
+                  "scores": {
+                    "K7": -7.803954601287842,
+                    "M4": -7.5137529373168945,
+                    "Paris": -12.4511137008667,
+                    "R2": -7.619509220123291,
+                    "Tokyo": -6.311902046203613,
+                    "cold": -5.766934394836426,
+                    "honey": -4.044967889785767,
+                    "ice": -3.37503719329834,
+                    "yellow": -12.405257225036621
+                  },
+                  "split": "regression"
+                },
+                {
+                  "correct": true,
+                  "expected": "cold",
+                  "latency_seconds": 2.392575989999955,
+                  "predicted": "cold",
+                  "prompt_sha256": "c2fdf7cd1f5491a5d0308f457ad6135193a7394d4e4e08a8f3dc95496a92564d",
+                  "scores": {
+                    "K7": -8.532365798950195,
+                    "M4": -6.925856590270996,
+                    "Paris": -9.599096298217773,
+                    "R2": -8.299676895141602,
+                    "Tokyo": -7.718408823013306,
+                    "cold": -4.264892578125,
+                    "honey": -6.382053971290588,
+                    "ice": -8.268974304199219,
+                    "yellow": -9.135356903076172
+                  },
+                  "split": "regression"
+                },
+                {
+                  "correct": true,
+                  "expected": "Tokyo",
+                  "latency_seconds": 2.3112794759999815,
+                  "predicted": "Tokyo",
+                  "prompt_sha256": "5257da2ca5b52e8e5962e147905ee46c368911a6a0d02a407575732ae1c99253",
+                  "scores": {
+                    "K7": -5.554360270500183,
+                    "M4": -5.358131289482117,
+                    "Paris": -9.88943862915039,
+                    "R2": -7.429993629455566,
+                    "Tokyo": -2.7528109550476074,
+                    "cold": -14.075342178344727,
+                    "honey": -7.350923538208008,
+                    "ice": -14.170120239257812,
+                    "yellow": -11.13302230834961
+                  },
+                  "split": "regression"
+                }
+              ],
+              "cpu_threads": 2,
+              "gpu_used": false,
+              "isolation": {
+                "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE",
+                "connect_probes": [
+                  {
+                    "address": [
+                      "198.51.100.1",
+                      443
+                    ],
+                    "errno": 101,
+                    "purpose": "deliberate isolation probe"
+                  },
+                  {
+                    "address": [
+                      "127.0.0.1",
+                      11434
+                    ],
+                    "errno": 101,
+                    "purpose": "deliberate isolation probe"
+                  }
+                ],
+                "dns_probe": {
+                  "blocked": true,
+                  "errno": -3
+                },
+                "net_namespace": "net:[4026532362]",
+                "route_count": 0
+              },
+              "metric": "closed-choice mean log likelihood",
+              "peak_rss_kib": 1228828,
+              "regression": {
+                "baseline_accuracy": 0.5,
+                "baseline_mean_latency_seconds": 2.158858414166673,
+                "candidate_accuracy": 0.8333333333333334,
+                "candidate_mean_latency_seconds": 2.3169127601666637,
+                "count": 6
+              },
+              "soup": {
+                "python_tree_sha256": "d87ec3624378b062095b71d68baa820bf88da5e641c623c6b9ead7a1e6a4a6b4",
+                "revision": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+                "version": "0.77.2"
+              },
+              "test": {
+                "baseline_accuracy": 0.16666666666666666,
+                "baseline_mean_latency_seconds": 2.6540056121666757,
+                "candidate_accuracy": 0.5,
+                "candidate_mean_latency_seconds": 2.9018625998333314,
+                "count": 6
+              },
+              "wall_seconds": 69.44314320799992
+            },
+            "passed": true,
+            "policy": "strict-improvement-no-regression-v1",
+            "run_path": "jobs/run-9be25f00f1bd2708"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "1d6d2ab28c146dfc6f9af7fe3b718e3d5f0d59ed8f7a7e64b3b3c6a0aec97d74",
+          "schema": "airon-model-change/v1",
+          "sequence": 12
+        },
+        "sha256": "c8382b2bd3135d4f2321cc82f0710f513e0d7f7fa66da6891b89da1ef29740b2",
+        "signature": "wSyU2WQEj0T2vb3y7x2+uIqtdrGlKnp5IoAoejd7x1gAFatXqjNVIbVPZfbUlWlXssFqGBwe+C6VwsgNLjX7BQ=="
+      },
+      {
+        "payload": {
+          "action": "model_exported",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535304.7574098,
+          "details": {
+            "candidate_id": "candidate-518a35dc1ba79130",
+            "digest": "1d2cf549be80a27def5c354e453c5a992d01714e91e539b49e6e82cae78c56a5",
+            "format": "hf-safetensors",
+            "id": "export-f8d7289eabcc79bd",
+            "manifest": {
+              "chat_template.jinja": {
+                "bytes": 368,
+                "sha256": "872be49dbb638044ad01b60388f48d469ff2980e5f0dccdc22ec907db54d0788"
+              },
+              "config.json": {
+                "bytes": 905,
+                "sha256": "4814819f45aeb56445afedae90d98f589412703d71ca6908034251a17fcb0ca9"
+              },
+              "generation_config.json": {
+                "bytes": 132,
+                "sha256": "f0209ea5a3ea471f1859e4bfe712d49f912343f185723b067d8931d285d57d1f"
+              },
+              "model.safetensors": {
+                "bytes": 269060280,
+                "sha256": "f9ff9ba8b1935a42c0aa5992f6544a5438ffe103bbfd649add6e56e976bff8a4"
+              },
+              "tokenizer.json": {
+                "bytes": 3522871,
+                "sha256": "bf346d64f6f0fbcefb4c1b6928a98241467dff36c6fbae5fe1785c4ff90667f4"
+              },
+              "tokenizer_config.json": {
+                "bytes": 451,
+                "sha256": "61a6c7fcaf88a9f7e8cd21eebd10bccce6eb9b2a31c64d1efbdadfec5e86f97e"
+              }
+            },
+            "result": {
+              "cpu_threads": 2,
+              "format": "hf-safetensors",
+              "gpu_used": false,
+              "isolation": {
+                "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE",
+                "connect_probes": [
+                  {
+                    "address": [
+                      "198.51.100.1",
+                      443
+                    ],
+                    "errno": 101,
+                    "purpose": "deliberate isolation probe"
+                  },
+                  {
+                    "address": [
+                      "127.0.0.1",
+                      11434
+                    ],
+                    "errno": 101,
+                    "purpose": "deliberate isolation probe"
+                  }
+                ],
+                "dns_probe": {
+                  "blocked": true,
+                  "errno": -3
+                },
+                "net_namespace": "net:[4026532363]",
+                "route_count": 0
+              },
+              "manifest": {
+                "chat_template.jinja": {
+                  "bytes": 368,
+                  "sha256": "872be49dbb638044ad01b60388f48d469ff2980e5f0dccdc22ec907db54d0788"
+                },
+                "config.json": {
+                  "bytes": 905,
+                  "sha256": "4814819f45aeb56445afedae90d98f589412703d71ca6908034251a17fcb0ca9"
+                },
+                "generation_config.json": {
+                  "bytes": 132,
+                  "sha256": "f0209ea5a3ea471f1859e4bfe712d49f912343f185723b067d8931d285d57d1f"
+                },
+                "model.safetensors": {
+                  "bytes": 269060280,
+                  "sha256": "f9ff9ba8b1935a42c0aa5992f6544a5438ffe103bbfd649add6e56e976bff8a4"
+                },
+                "tokenizer.json": {
+                  "bytes": 3522871,
+                  "sha256": "bf346d64f6f0fbcefb4c1b6928a98241467dff36c6fbae5fe1785c4ff90667f4"
+                },
+                "tokenizer_config.json": {
+                  "bytes": 451,
+                  "sha256": "61a6c7fcaf88a9f7e8cd21eebd10bccce6eb9b2a31c64d1efbdadfec5e86f97e"
+                }
+              },
+              "peak_rss_kib": 863580,
+              "soup": {
+                "python_tree_sha256": "d87ec3624378b062095b71d68baa820bf88da5e641c623c6b9ead7a1e6a4a6b4",
+                "revision": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+                "version": "0.77.2"
+              },
+              "wall_seconds": 9.567924190999975
+            }
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "f618018a64d8db3e29f0931de51c8acbf5811298f8486082729bbcca4b07bbe9",
+          "schema": "airon-model-change/v1",
+          "sequence": 13
+        },
+        "sha256": "afa203229d8d374a4929b0dda57b428144e25223fb569ebb961d7081f42ec126",
+        "signature": "+giDqewZl0YdUCV26iyz4tatY8+AD344bAE+55fmgZCmgMTM/kp2ZLjeZfmFUHbvK0ENknjhquAaqsrd2EPLCw=="
+      },
+      {
+        "payload": {
+          "action": "deployment_requested",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535305.1050143,
+          "details": {
+            "candidate_id": "candidate-518a35dc1ba79130",
+            "decision": "PENDING",
+            "evaluation_digest": "2194261171a063e807b11093f2e73048391f8bb147cdfe805432d11afff24db2",
+            "evaluation_id": "evaluation-9b6c6e3a32d592e2",
+            "expected_version": 1,
+            "id": "approval-7b266995f0c20d29",
+            "requested_by": "local-operator"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "bdfc0f25c3fbaa62a1230d0c6c2c3825b07d55ecdc4de409db23b814cd259697",
+          "schema": "airon-model-change/v1",
+          "sequence": 14
+        },
+        "sha256": "45dce9be2557d537115e1816093bfd9cdd8ef9574d972563a05712a1f4a92c12",
+        "signature": "/LR9GVyIzq4/c80sAJPNpXyt1mXM8xMK141C+vPTeipdhXifREy3zWWt4jvtVDXYPSa+t0HUeZ9ZOfPtA3xADQ=="
+      },
+      {
+        "payload": {
+          "action": "approval_decision",
+          "actor": "synthetic-test-reviewer",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535305.1214817,
+          "details": {
+            "candidate_id": "candidate-518a35dc1ba79130",
+            "decided_by": "synthetic-test-reviewer",
+            "decision": "APPROVED",
+            "evaluation_digest": "2194261171a063e807b11093f2e73048391f8bb147cdfe805432d11afff24db2",
+            "evaluation_id": "evaluation-9b6c6e3a32d592e2",
+            "expected_version": 1,
+            "id": "approval-7b266995f0c20d29",
+            "requested_by": "local-operator"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "9046eded66ff31e5e50ce854478df13dd0851cccf55870b00394ab3d9f1d68ce",
+          "schema": "airon-model-change/v1",
+          "sequence": 15
+        },
+        "sha256": "8531bc51e71933e5fcdabe28e1557da2580d9db635c71f60d8fbc77e2d990108",
+        "signature": "w7GrDvCSqnlUAdmdJCcGFL3PuZBj6V47rddhy1RGMDoTdagaV5aOajYfJ8C3BoFpcXv8UuJlraZztDjLABMvBg=="
+      },
+      {
+        "payload": {
+          "action": "model_activated",
+          "actor": "synthetic-test-reviewer",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535305.4335928,
+          "details": {
+            "active": "candidate-518a35dc1ba79130",
+            "approval_id": "approval-7b266995f0c20d29",
+            "base": "model-edfa40a0b55ac97c",
+            "history": [
+              null
+            ],
+            "version": 2
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "8c74d7ab775164a8e947d75819fedf13a0ea392804220df96969a4822e43bf1c",
+          "schema": "airon-model-change/v1",
+          "sequence": 16
+        },
+        "sha256": "ed93be88c6289f9de3fa205301f9239b3af182c9f15ca52c1d7b4696259e4d30",
+        "signature": "2aV/7DnfseMCoMRdttfmurnvOfP66Jf3GlE1iGQGUHKouV8jF6YgniFfHOX2IqZUnoznoVUiYPwTA07Megk3Dw=="
+      },
+      {
+        "payload": {
+          "action": "local_inference",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535347.1395464,
+          "details": {
+            "active": "candidate-518a35dc1ba79130",
+            "deployment_version": 2,
+            "result_digest": "9b6f0c283b5a06eec424ae8fecabc2a1e621a079e83a529aff3f2e2cfbfb1352"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "2f79c90ac4d55596a6855f39008c7c3cecc71c8f2fb949cc0e5868c93697fdbd",
+          "schema": "airon-model-change/v1",
+          "sequence": 17
+        },
+        "sha256": "365b3be9adff13b2a0838643f354d78188554abaeb5d8f87492db17be52c90da",
+        "signature": "ECc6kyj/cpQ+Oh4W1mx7zsKYSYQbVGWAOdG6vre6fEB3HSVB4oA5ncSGSLUdM1nkXbZbdnU5ekIhW0zSKjZoBQ=="
+      },
+      {
+        "payload": {
+          "action": "knowledge_query",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535357.8954272,
+          "details": {
+            "access_role": "operator",
+            "deployment_version": 2,
+            "knowledge_manifest_digest": "c2e8dc214f31368aa907f62dac15edef9da7608f48015a66f6b28730187b595a",
+            "model_called": true,
+            "outcome": "ABSTAINED",
+            "question_digest": "e5a6616ad48d5d3864aa8e474f5ea3c6c387c06dea68d40db67a65231788ac59",
+            "result_digest": "4f4bfb409d4a0fe5e0793d90965e52854306f99826d67997c6393e41a0807b99"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "39a6a8a32db7db8103d42614d8c22258a200b4c7762277c0c6318fd50552cb58",
+          "schema": "airon-model-change/v1",
+          "sequence": 18
+        },
+        "sha256": "57829dc787bcb4446eb9a92238a8ac6c620b319b38c8e52727c4651fdaa9ab2f",
+        "signature": "oCOWOSz3yhhMk4/gZ3bOeYgw4lJ5/FewiACdqlrb77wt/91gBmipsFj2JcGtKI7/yzWe9GH/FoU20bNOnxZbBg=="
+      },
+      {
+        "payload": {
+          "action": "model_rolled_back",
+          "actor": "synthetic-test-reviewer",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535358.213146,
+          "details": {
+            "active": null,
+            "base": "model-edfa40a0b55ac97c",
+            "history": [],
+            "version": 3
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "fd325f0ac40e00124aaf14d7a174f0c2251ef4d3d4ffae8bbd435e80687b8ffb",
+          "schema": "airon-model-change/v1",
+          "sequence": 19
+        },
+        "sha256": "f286fa5c9144187ae2fd0cce57a93e0e824c9e2e1453a1deb472ed43267ccd58",
+        "signature": "YXleEtSEYMqwh8W3OQySII0NWZ0gH5Pfkxs4nxw72BkJFgi2OTbAwCAd/dRORzHk+OZe+F/6myD39ljHSZDHAw=="
+      },
+      {
+        "payload": {
+          "action": "local_inference",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794535395.4576662,
+          "details": {
+            "active": null,
+            "deployment_version": 3,
+            "result_digest": "b0461617c64ab6ae3e5c327cb1a1a89b77071086aee471d1b496935f1ee8e019"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "d487ea8442086dd67317fe528a51130c3ff08241207ef4d1551393d322ce54a8",
+          "schema": "airon-model-change/v1",
+          "sequence": 20
+        },
+        "sha256": "1593b24c5f677a2ab3f774c917af63fd767e77a7d040893e3a56cc7aca9cbf11",
+        "signature": "gLVVA18LFaAjy8oVcKbro4k+GUVPsobVIyL0ouhEU85pG+lUqITo/li6fNlSGR8+jLavqll2NnIODFpzZfXyCA=="
+      }
+    ],
+    "sniffer_dog": "NOT_INTEGRATED",
+    "verification": {
+      "events": 20,
+      "head": "a90fc6810761baddb79486c58bbbca2c37d0d192cc9d2cd999491140d7982e65",
+      "independent_execution": "CANNOT_PROVE",
+      "level": "APPLICATION_SIGNED",
+      "truncation_checked": false,
+      "valid": true
+    }
+  },
+  "export": {
+    "candidate_id": "candidate-518a35dc1ba79130",
+    "digest": "1d2cf549be80a27def5c354e453c5a992d01714e91e539b49e6e82cae78c56a5",
+    "format": "hf-safetensors",
+    "id": "export-f8d7289eabcc79bd",
+    "manifest": {
+      "chat_template.jinja": {
+        "bytes": 368,
+        "sha256": "872be49dbb638044ad01b60388f48d469ff2980e5f0dccdc22ec907db54d0788"
+      },
+      "config.json": {
+        "bytes": 905,
+        "sha256": "4814819f45aeb56445afedae90d98f589412703d71ca6908034251a17fcb0ca9"
+      },
+      "generation_config.json": {
+        "bytes": 132,
+        "sha256": "f0209ea5a3ea471f1859e4bfe712d49f912343f185723b067d8931d285d57d1f"
+      },
+      "model.safetensors": {
+        "bytes": 269060280,
+        "sha256": "f9ff9ba8b1935a42c0aa5992f6544a5438ffe103bbfd649add6e56e976bff8a4"
+      },
+      "tokenizer.json": {
+        "bytes": 3522871,
+        "sha256": "bf346d64f6f0fbcefb4c1b6928a98241467dff36c6fbae5fe1785c4ff90667f4"
+      },
+      "tokenizer_config.json": {
+        "bytes": 451,
+        "sha256": "61a6c7fcaf88a9f7e8cd21eebd10bccce6eb9b2a31c64d1efbdadfec5e86f97e"
+      }
+    },
+    "result": {
+      "cpu_threads": 2,
+      "format": "hf-safetensors",
+      "gpu_used": false,
+      "isolation": {
+        "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE",
+        "connect_probes": [
+          {
+            "address": [
+              "198.51.100.1",
+              443
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          },
+          {
+            "address": [
+              "127.0.0.1",
+              11434
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          }
+        ],
+        "dns_probe": {
+          "blocked": true,
+          "errno": -3
+        },
+        "net_namespace": "net:[4026532363]",
+        "route_count": 0
+      },
+      "manifest": {
+        "chat_template.jinja": {
+          "bytes": 368,
+          "sha256": "872be49dbb638044ad01b60388f48d469ff2980e5f0dccdc22ec907db54d0788"
+        },
+        "config.json": {
+          "bytes": 905,
+          "sha256": "4814819f45aeb56445afedae90d98f589412703d71ca6908034251a17fcb0ca9"
+        },
+        "generation_config.json": {
+          "bytes": 132,
+          "sha256": "f0209ea5a3ea471f1859e4bfe712d49f912343f185723b067d8931d285d57d1f"
+        },
+        "model.safetensors": {
+          "bytes": 269060280,
+          "sha256": "f9ff9ba8b1935a42c0aa5992f6544a5438ffe103bbfd649add6e56e976bff8a4"
+        },
+        "tokenizer.json": {
+          "bytes": 3522871,
+          "sha256": "bf346d64f6f0fbcefb4c1b6928a98241467dff36c6fbae5fe1785c4ff90667f4"
+        },
+        "tokenizer_config.json": {
+          "bytes": 451,
+          "sha256": "61a6c7fcaf88a9f7e8cd21eebd10bccce6eb9b2a31c64d1efbdadfec5e86f97e"
+        }
+      },
+      "peak_rss_kib": 863580,
+      "soup": {
+        "python_tree_sha256": "d87ec3624378b062095b71d68baa820bf88da5e641c623c6b9ead7a1e6a4a6b4",
+        "revision": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+        "version": "0.77.2"
+      },
+      "wall_seconds": 9.567924190999975
+    }
+  },
+  "fixture": false,
+  "gates": {
+    "activation_and_rollback": "PASS",
+    "baseline_inference": "PASS",
+    "export": "PASS",
+    "improvement_without_regression": "PASS",
+    "private_knowledge_controls": "PASS",
+    "real_training": "PASS"
+  },
+  "hardware": {
+    "allowed_cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+    "gpu_used": false,
+    "logical_cpus": 4,
+    "mem_total": "MemTotal:       16372444 kB",
+    "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35",
+    "python": "3.12.16",
+    "worker_threads": 2
+  },
+  "knowledge_abstained": {
+    "answer": "The approved documents do not support that question.",
+    "deployment_version": 1,
+    "model_called": false,
+    "outcome": "ABSTAINED",
+    "sources": []
+  },
+  "knowledge_adapted": {
+    "answer": "The local model did not reproduce the approved source. No answer released.",
+    "deployment_version": 2,
+    "generated_tokens": 9,
+    "generation_seconds": 0.921445753999933,
+    "isolation": {
+      "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE",
+      "connect_probes": [
+        {
+          "address": [
+            "198.51.100.1",
+            443
+          ],
+          "errno": 101,
+          "purpose": "deliberate isolation probe"
+        },
+        {
+          "address": [
+            "127.0.0.1",
+            11434
+          ],
+          "errno": 101,
+          "purpose": "deliberate isolation probe"
+        }
+      ],
+      "dns_probe": {
+        "blocked": true,
+        "errno": -3
+      },
+      "net_namespace": "net:[4026532363]",
+      "route_count": 0
+    },
+    "model_called": true,
+    "outcome": "ABSTAINED",
+    "output_validated": false,
+    "sources": []
+  },
+  "knowledge_answer_quality": "ABSTAINED",
+  "knowledge_baseline": {
+    "answer": "The local model did not reproduce the approved source. No answer released.",
+    "deployment_version": 1,
+    "generated_tokens": 69,
+    "generation_seconds": 4.209171081000022,
+    "isolation": {
+      "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE",
+      "connect_probes": [
+        {
+          "address": [
+            "198.51.100.1",
+            443
+          ],
+          "errno": 101,
+          "purpose": "deliberate isolation probe"
+        },
+        {
+          "address": [
+            "127.0.0.1",
+            11434
+          ],
+          "errno": 101,
+          "purpose": "deliberate isolation probe"
+        }
+      ],
+      "dns_probe": {
+        "blocked": true,
+        "errno": -3
+      },
+      "net_namespace": "net:[4026532363]",
+      "route_count": 0
+    },
+    "model_called": true,
+    "outcome": "ABSTAINED",
+    "output_validated": false,
+    "sources": []
+  },
+  "knowledge_denied": {
+    "answer": "Your session cannot access this document.",
+    "deployment_version": 1,
+    "model_called": false,
+    "outcome": "DENIED",
+    "sources": []
+  },
+  "limitations": [
+    "CPU synthetic classification only; no enterprise model quality claim",
+    "Application signatures are not independent execution attestations",
+    "No GPU, GGUF, Ollama adapter deployment or AIP integration qualification",
+    "Namespace isolation on this runner; not physical/customer-site air-gap accreditation"
+  ],
+  "overall": "PASS_SCOPED_CPU_EXPERIMENT",
+  "restored_inference": {
+    "deployment": {
+      "active": null,
+      "base": "model-edfa40a0b55ac97c",
+      "history": [],
+      "version": 3
+    },
+    "result": {
+      "cpu_threads": 2,
+      "gpu_used": false,
+      "isolation": {
+        "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE",
+        "connect_probes": [
+          {
+            "address": [
+              "198.51.100.1",
+              443
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          },
+          {
+            "address": [
+              "127.0.0.1",
+              11434
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          }
+        ],
+        "dns_probe": {
+          "blocked": true,
+          "errno": -3
+        },
+        "net_namespace": "net:[4026532364]",
+        "route_count": 0
+      },
+      "metric": "closed-choice mean log likelihood",
+      "model": "baseline",
+      "peak_rss_kib": 1117504,
+      "rows": [
+        {
+          "correct": false,
+          "expected": "K7",
+          "latency_seconds": 2.5915519060000634,
+          "predicted": "R2",
+          "prompt_sha256": "cdb81a475840932fb8b933d71a7193b4dc8272b5c1372d96c893fdb7728dd063",
+          "scores": {
+            "K7": -7.334178924560547,
+            "M4": -8.146595001220703,
+            "Paris": -12.226188659667969,
+            "R2": -6.680365324020386,
+            "Tokyo": -9.573430061340332,
+            "cold": -15.628042221069336,
+            "honey": -6.86494255065918,
+            "ice": -13.894927978515625,
+            "yellow": -13.052797317504883
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "K7",
+          "latency_seconds": 2.5879090219999625,
+          "predicted": "R2",
+          "prompt_sha256": "dbedc32bc841b3a8a3abed1d5463f15e3e766890065f4ae88eea9976f6de13fe",
+          "scores": {
+            "K7": -7.123396873474121,
+            "M4": -11.73420763015747,
+            "Paris": -13.5203218460083,
+            "R2": -6.284856081008911,
+            "Tokyo": -9.966314792633057,
+            "cold": -16.324373245239258,
+            "honey": -6.6089489459991455,
+            "ice": -14.0706148147583,
+            "yellow": -13.013091087341309
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "M4",
+          "latency_seconds": 2.5444885950000753,
+          "predicted": "R2",
+          "prompt_sha256": "5f4d46ede7808f80b69a6f7d976c2180a85705fb55c0bb9fdf1f5ffc1e5ab09d",
+          "scores": {
+            "K7": -6.845889091491699,
+            "M4": -8.071762561798096,
+            "Paris": -13.28386402130127,
+            "R2": -6.569077730178833,
+            "Tokyo": -9.748094081878662,
+            "cold": -16.273231506347656,
+            "honey": -7.193704128265381,
+            "ice": -13.830330848693848,
+            "yellow": -13.44945240020752
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "M4",
+          "latency_seconds": 2.5052502249999407,
+          "predicted": "K7",
+          "prompt_sha256": "e8db25b4eb7a79d86880c17ff159a7f0ec74020a6b418af4cf8fa290eaf6fe07",
+          "scores": {
+            "K7": -6.656241178512573,
+            "M4": -8.280259847640991,
+            "Paris": -13.333451271057129,
+            "R2": -7.00328516960144,
+            "Tokyo": -9.530562162399292,
+            "cold": -16.638835906982422,
+            "honey": -7.3369832038879395,
+            "ice": -13.811911582946777,
+            "yellow": -13.870951652526855
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "R2",
+          "latency_seconds": 2.572174529999984,
+          "predicted": "R2",
+          "prompt_sha256": "cb0cb00db8d3e2b972d90bf5199fd658eded477bfe8320b8f8d09181036d462b",
+          "scores": {
+            "K7": -6.378607511520386,
+            "M4": -7.870755195617676,
+            "Paris": -12.140890121459961,
+            "R2": -6.32321572303772,
+            "Tokyo": -9.538076281547546,
+            "cold": -15.95170783996582,
+            "honey": -6.825280666351318,
+            "ice": -14.062210083007812,
+            "yellow": -13.140233993530273
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "R2",
+          "latency_seconds": 2.561512477000065,
+          "predicted": "K7",
+          "prompt_sha256": "d8e40eee9dbcb9fa80e070355d04202325f03459e4c7b45a8b061e5b27f39ef0",
+          "scores": {
+            "K7": -6.275689601898193,
+            "M4": -8.059976577758789,
+            "Paris": -11.225647926330566,
+            "R2": -6.425027370452881,
+            "Tokyo": -9.424386024475098,
+            "cold": -15.314366340637207,
+            "honey": -6.802744388580322,
+            "ice": -13.170182228088379,
+            "yellow": -12.73791217803955
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "Paris",
+          "latency_seconds": 2.1369498250001016,
+          "predicted": "Paris",
+          "prompt_sha256": "1097c2cdd4d0566a2668bf4a1e93ad3dcb9ab1c7f104b212d6cddc7d4b2d652f",
+          "scores": {
+            "K7": -10.400920391082764,
+            "M4": -8.771507024765015,
+            "Paris": -4.008015155792236,
+            "R2": -9.920162916183472,
+            "Tokyo": -5.931433916091919,
+            "cold": -15.516225814819336,
+            "honey": -6.629425525665283,
+            "ice": -16.22581672668457,
+            "yellow": -13.550302505493164
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "yellow",
+          "latency_seconds": 2.098073119999981,
+          "predicted": "honey",
+          "prompt_sha256": "542ad54c1b4ff7d9cb89b287ceb675cfea8e5666ea6af8d7c4393a9a8c545d33",
+          "scores": {
+            "K7": -11.606770992279053,
+            "M4": -10.38516616821289,
+            "Paris": -15.21903133392334,
+            "R2": -10.901560544967651,
+            "Tokyo": -7.977391481399536,
+            "cold": -16.76057243347168,
+            "honey": -6.61784815788269,
+            "ice": -15.702988624572754,
+            "yellow": -7.732070446014404
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "honey",
+          "latency_seconds": 2.0923865969999724,
+          "predicted": "honey",
+          "prompt_sha256": "b4dba104918bb281ebf3f49e8e2483b35990bcff132f2c7c91a364aacb1fae47",
+          "scores": {
+            "K7": -10.300814151763916,
+            "M4": -8.578023910522461,
+            "Paris": -14.44725513458252,
+            "R2": -10.412124633789062,
+            "Tokyo": -7.177450180053711,
+            "cold": -15.379700660705566,
+            "honey": -3.7771394439041615,
+            "ice": -10.672266960144043,
+            "yellow": -12.359763145446777
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "ice",
+          "latency_seconds": 2.0723601549999557,
+          "predicted": "Tokyo",
+          "prompt_sha256": "d7b0b04903a1aec2ec874e3c718f117b3770acfb2fd287d81755a32c36d9ca29",
+          "scores": {
+            "K7": -9.931828498840332,
+            "M4": -9.575685977935791,
+            "Paris": -14.632617950439453,
+            "R2": -9.333610534667969,
+            "Tokyo": -5.433125734329224,
+            "cold": -9.22105598449707,
+            "honey": -7.466575622558594,
+            "ice": -8.279029846191406,
+            "yellow": -13.876585006713867
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "cold",
+          "latency_seconds": 2.074120960000073,
+          "predicted": "Tokyo",
+          "prompt_sha256": "c2fdf7cd1f5491a5d0308f457ad6135193a7394d4e4e08a8f3dc95496a92564d",
+          "scores": {
+            "K7": -12.254426956176758,
+            "M4": -9.558007717132568,
+            "Paris": -13.617033004760742,
+            "R2": -10.61241340637207,
+            "Tokyo": -6.097831726074219,
+            "cold": -9.304141998291016,
+            "honey": -8.29929780960083,
+            "ice": -12.43954086303711,
+            "yellow": -12.470115661621094
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "Tokyo",
+          "latency_seconds": 2.040259182999989,
+          "predicted": "Tokyo",
+          "prompt_sha256": "5257da2ca5b52e8e5962e147905ee46c368911a6a0d02a407575732ae1c99253",
+          "scores": {
+            "K7": -9.837388753890991,
+            "M4": -8.821147680282593,
+            "Paris": -10.71239948272705,
+            "R2": -10.961398363113403,
+            "Tokyo": -4.798104286193848,
+            "cold": -14.888041496276855,
+            "honey": -8.505921363830566,
+            "ice": -15.431960105895996,
+            "yellow": -12.349661827087402
+          },
+          "split": "regression"
+        }
+      ],
+      "soup": {
+        "python_tree_sha256": "d87ec3624378b062095b71d68baa820bf88da5e641c623c6b9ead7a1e6a4a6b4",
+        "revision": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+        "version": "0.77.2"
+      },
+      "wall_seconds": 36.279642445000036
+    }
+  },
+  "rollback": {
+    "active": null,
+    "base": "model-edfa40a0b55ac97c",
+    "history": [],
+    "version": 3
+  },
+  "schema": "airon-p0-052-acceptance/v1",
+  "source": {
+    "actions_checkout": "5f708fd17baeb07bdb10dca25e5bdb126880e33d",
+    "head": "c1f9ad7b92ebc7574d41c707b9f2fde21899e8e2"
+  },
+  "training": {
+    "authorized_by": "local-operator",
+    "base_id": "model-edfa40a0b55ac97c",
+    "checkpoint_manifest": {
+      "README.md": {
+        "bytes": 5178,
+        "sha256": "8910116bc6d7c5dbce3859592325ff42675e7a43d7eaeb3bd380f07809f2cbd4"
+      },
+      "adapter_config.json": {
+        "bytes": 1060,
+        "sha256": "c91466f7f57bf9cb36a1c860974012905febf444d8ffcb3810a871c78ea8ead9"
+      },
+      "adapter_model.safetensors": {
+        "bytes": 1858776,
+        "sha256": "6908f3bfe0627811a5a9ac80c7a5267117cbd4cdc82e3c6e77d75f11e051884f"
+      },
+      "chat_template.jinja": {
+        "bytes": 368,
+        "sha256": "872be49dbb638044ad01b60388f48d469ff2980e5f0dccdc22ec907db54d0788"
+      },
+      "tokenizer.json": {
+        "bytes": 3522871,
+        "sha256": "bf346d64f6f0fbcefb4c1b6928a98241467dff36c6fbae5fe1785c4ff90667f4"
+      },
+      "tokenizer_config.json": {
+        "bytes": 451,
+        "sha256": "61a6c7fcaf88a9f7e8cd21eebd10bccce6eb9b2a31c64d1efbdadfec5e86f97e"
+      }
+    },
+    "completed_at": 1794535222.0542107,
+    "config": {
+      "epochs": 3,
+      "lr": 0.001,
+      "rank": 8,
+      "seed": 52
+    },
+    "config_digest": "2dc4032497251b563eb030d382fcd6fecef300b33fa0b25145dabd2c3f9a1e84",
+    "dataset_id": "dataset-efaf88b1a5b80ff9",
+    "id": "job-88ca42044c15094b",
+    "result": {
+      "adapter_manifest": {
+        "README.md": {
+          "bytes": 5178,
+          "sha256": "8910116bc6d7c5dbce3859592325ff42675e7a43d7eaeb3bd380f07809f2cbd4"
+        },
+        "adapter_config.json": {
+          "bytes": 1060,
+          "sha256": "c91466f7f57bf9cb36a1c860974012905febf444d8ffcb3810a871c78ea8ead9"
+        },
+        "adapter_model.safetensors": {
+          "bytes": 1858776,
+          "sha256": "6908f3bfe0627811a5a9ac80c7a5267117cbd4cdc82e3c6e77d75f11e051884f"
+        },
+        "chat_template.jinja": {
+          "bytes": 368,
+          "sha256": "872be49dbb638044ad01b60388f48d469ff2980e5f0dccdc22ec907db54d0788"
+        },
+        "tokenizer.json": {
+          "bytes": 3522871,
+          "sha256": "bf346d64f6f0fbcefb4c1b6928a98241467dff36c6fbae5fe1785c4ff90667f4"
+        },
+        "tokenizer_config.json": {
+          "bytes": 451,
+          "sha256": "61a6c7fcaf88a9f7e8cd21eebd10bccce6eb9b2a31c64d1efbdadfec5e86f97e"
+        }
+      },
+      "backend": "Soup SFTTrainerWrapper / CPU float32 LoRA",
+      "changed_parameters": 120,
+      "cpu_threads": 2,
+      "final_loss": 0.5222952365875244,
+      "gpu_used": false,
+      "isolation": {
+        "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE",
+        "connect_probes": [
+          {
+            "address": [
+              "198.51.100.1",
+              443
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          },
+          {
+            "address": [
+              "127.0.0.1",
+              11434
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          }
+        ],
+        "dns_probe": {
+          "blocked": true,
+          "errno": -3
+        },
+        "net_namespace": "net:[4026532364]",
+        "route_count": 0
+      },
+      "loaded_parameter_dtypes": [
+        "torch.bfloat16",
+        "torch.float32"
+      ],
+      "observed_torch_threads": 2,
+      "peak_rss_kib": 1380696,
+      "real_training": true,
+      "soup": {
+        "python_tree_sha256": "d87ec3624378b062095b71d68baa820bf88da5e641c623c6b9ead7a1e6a4a6b4",
+        "revision": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+        "version": "0.77.2"
+      },
+      "steps": 27,
+      "trainable_tensors": 120,
+      "training_parameter_dtypes": [
+        "torch.float32"
+      ],
+      "training_seconds": 35.59626380399993,
+      "wall_seconds": 46.38807753700007
+    },
+    "run_path": "jobs/run-2e205e4cc7b83cdd",
+    "started_at": 1794535173.9556818,
+    "status": "SUCCEEDED"
+  },
+  "controller_isolation": {
+    "net_namespace": "net:[4026532303]",
+    "route_count": 0,
+    "dns_probe": {
+      "blocked": true,
+      "errno": -3
+    },
+    "connect_probes": [
+      {
+        "address": [
+          "198.51.100.1",
+          443
+        ],
+        "errno": 101,
+        "purpose": "deliberate isolation probe"
+      },
+      {
+        "address": [
+          "127.0.0.1",
+          11434
+        ],
+        "errno": 101,
+        "purpose": "deliberate isolation probe"
+      }
+    ],
+    "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE"
+  },
+  "offline_installed_soup": {
+    "revision": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+    "version": "0.77.2",
+    "python_tree_sha256": "d87ec3624378b062095b71d68baa820bf88da5e641c623c6b9ead7a1e6a4a6b4"
+  },
+  "runtime_prefix": "/home/runner/work/_temp/airon-offline-runtime",
+  "offline_install_evidence": "See fresh venv and --require-hashes install step in the same CI run"
+}

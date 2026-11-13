@@ -1,0 +1,21 @@
+# P0-056 known limitations
+
+Tested source: AIRON initial lifecycle `16c6bd745edacaa4ad7b435cc52de935e1d1802f`; final qualification target `0f4cd7e20f4c19577b5a73b9d1dacdc221f3085a`; native interface `f1ba9fc2072dac1431543fd4961baaa2762b8ea9`. See `BENCHMARKS.json` and `evidence/local/PROVENANCE.json` for per-run revisions. Local hardware: Linux 6.18.57, AMD EPYC 9V74, 9 visible CPUs, 10,206,472 KiB RAM, no GPU; inference comparisons restricted to CPUs 0–1. Hosted hardware: Ubuntu 22.04, Linux 6.8 Azure, 4 visible CPUs, 16,371,436 KiB RAM; the corrected two-CPU run enforced an 8 GiB cgroup limit but training timed out; separate four-CPU training and two-CPU serving qualification is in progress. No claim of independent administration.
+
+**Overall qualification remains incomplete even after a passing synthetic vertical slice.**
+
+1. Independent expert preparation, reviewer key custody, field validation and a separately administered target host require external participants. Automated distinct-key fixture approvals are not independent people.
+2. AIP/VANIAN ownership and deployment/redistribution permission remain unresolved. The original implementation stays in AIP behind a pinned interface. Consequential execution is disabled; independent AIP authorization/identity and Sniffer Dog observation are not connected.
+3. Documents currently qualify Markdown through real Docling. PDF/OCR/table/image processing and their local model artifacts need a separate measured qualification.
+4. Procedures are explicit expert-authored typed artifacts. The deterministic learning controller recommends routes; it does not autonomously acquire or approve skills. Historical v0.1/v0.2 efficiency results are preserved research, not newly reproduced broad claims.
+5. Neural adaptation is demonstrated only at 135M on the original small frozen P0-052 routing set. Its six test and six regression cases cannot support general performance claims. 0.5B and 1.5B runs establish inference only. Qwen2.5-3B's research licence leaves commercial use unresolved, so it was not provisioned. No GPU or larger-model training claim is made.
+6. The new 30-case, three-family procedural holdout was frozen before runs and never used for validation suites, but has the same author as the implementation. Strict model-label scoring yields weak model results and must not be relaxed after seeing them without a new exploratory evaluation.
+7. Local serving identity is an OS-owner console, not enterprise SSO. Compromise of the OS account/signing keys can replace trust roots and history. Recipients must pin keys and final event heads externally.
+8. Cross-store interrupted ingestion/lifecycle commits fail closed but do not yet provide an automated reconciliation UI. General verified-fact CRUD, credential rotation, multi-host recovery, and real full-disk/power-loss tests remain open.
+9. Worker RSS sampling may miss sub-20ms peaks and double-count shared pages. Use cgroup memory.peak for the capped hosted run. TTFT and resident-model throughput were not measured. Cold means fresh process; cache-warm runs still reload models.
+10. Full transitive/native vulnerability and redistribution review, independent reproducible native builds, and cross-distribution ABI portability remain open. A zero-result Python package scan is not an assurance about every dependency/source candidate.
+11. The offline bundle requires pre-provisioned system tools and the separately approved native AIP component. It does not contain customer data or private keys and is not a standalone operating-system image.
+
+These limitations do not invalidate the working local composition. They prevent declaring the full P0-056 programme, production deployment, independent qualification or defence certification complete.
+
+The additional Cosign binary scan (govulncheck v1.9.0, Go 1.27.4) returned three advisory IDs: GO-2026-4309, GO-2026-4529 and GO-2026-5932. Version-range/symbol matches and configured-feature reachability remain under review. The tested policy uses local public keys, no Rekor, X.509 chain or OpenPGP. This is not blanket clearance; Cosign is optional and is not included in the serving bundle. Full raw scan and the bounded review are retained in evidence/local.

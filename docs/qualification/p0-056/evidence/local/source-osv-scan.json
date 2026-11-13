@@ -1,0 +1,103 @@
+{
+  "checked_at_utc": "2026-11-13T08:29:58.413934+00:00",
+  "endpoint": "https://api.osv.dev/v1/querybatch",
+  "projects": [
+    {
+      "name": "Soup",
+      "commit": "527314a446d52ffdeb2975c8dcd2c849a5d534b5"
+    },
+    {
+      "name": "Hugging Face PEFT",
+      "commit": "249e46b32eaad2068fdc62e696dcde14892406ae"
+    },
+    {
+      "name": "Hugging Face TRL",
+      "commit": "eb5a93fd86f3eb76c195d0c37521671a44a26ddb"
+    },
+    {
+      "name": "llama.cpp",
+      "commit": "2a4daf0e08d6a9b6993ee0d4a9a3cfc35a6f405c"
+    },
+    {
+      "name": "Docling",
+      "commit": "336e9dde255237a3bf68abaea727d9782f7417a9"
+    },
+    {
+      "name": "LM Evaluation Harness",
+      "commit": "d6de81643928d653435c431bae19945d41d32520"
+    },
+    {
+      "name": "MLflow",
+      "commit": "c980e95c1c349820b42031e1f9e6f34365fc57a3"
+    },
+    {
+      "name": "Sigstore Cosign",
+      "commit": "195ab76b789923862345f5fa9bfe3fac6c453927"
+    },
+    {
+      "name": "Transformers",
+      "commit": "93c8b7b485963a10800c91f55304db6be211c2bd"
+    },
+    {
+      "name": "SQLite",
+      "commit": "815fb4e5694685106fa0f5f4c74099fe3e49b641"
+    },
+    {
+      "name": "Soup serving pin",
+      "commit": "af2f5d5000f7baec6386a72a6d16e82383eb5303"
+    }
+  ],
+  "request": {
+    "queries": [
+      {
+        "commit": "527314a446d52ffdeb2975c8dcd2c849a5d534b5"
+      },
+      {
+        "commit": "249e46b32eaad2068fdc62e696dcde14892406ae"
+      },
+      {
+        "commit": "eb5a93fd86f3eb76c195d0c37521671a44a26ddb"
+      },
+      {
+        "commit": "2a4daf0e08d6a9b6993ee0d4a9a3cfc35a6f405c"
+      },
+      {
+        "commit": "336e9dde255237a3bf68abaea727d9782f7417a9"
+      },
+      {
+        "commit": "d6de81643928d653435c431bae19945d41d32520"
+      },
+      {
+        "commit": "c980e95c1c349820b42031e1f9e6f34365fc57a3"
+      },
+      {
+        "commit": "195ab76b789923862345f5fa9bfe3fac6c453927"
+      },
+      {
+        "commit": "93c8b7b485963a10800c91f55304db6be211c2bd"
+      },
+      {
+        "commit": "815fb4e5694685106fa0f5f4c74099fe3e49b641"
+      },
+      {
+        "commit": "af2f5d5000f7baec6386a72a6d16e82383eb5303"
+      }
+    ]
+  },
+  "response": {
+    "results": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ]
+  },
+  "scope": "Direct source commit lookup only; zero results do not prove database coverage or transitive dependency safety"
+}

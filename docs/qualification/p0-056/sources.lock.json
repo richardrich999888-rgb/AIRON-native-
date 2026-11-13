@@ -1,0 +1,490 @@
+{
+  "schema": "airon-sources/v1",
+  "projects": [
+    {
+      "name": "Soup",
+      "url": "https://github.com/MakazhanAlpamys/Soup",
+      "commit": "527314a446d52ffdeb2975c8dcd2c849a5d534b5",
+      "tree": "eed367ba45a392184e69b2e93aa157dcd7d89245",
+      "license": "Apache-2.0",
+      "license_notices": [
+        {
+          "path": "LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "size_bytes": 11358,
+          "kind": "file"
+        },
+        {
+          "path": "NOTICE",
+          "sha256": "255803a9703667f05fa0d0b093499b83c63561b2bd5baa7c92288b88a773ba0f",
+          "size_bytes": 63,
+          "kind": "file"
+        }
+      ],
+      "preserved_by": "P0-053",
+      "dependencies": [
+        "pyproject.toml"
+      ],
+      "dirty": false,
+      "submodules": [],
+      "credential_pattern_files": [],
+      "credential_scan_scope": "Pattern scan only; matching upstream tests/fixtures require review; not a clean-secret guarantee"
+    },
+    {
+      "name": "Hugging Face PEFT",
+      "url": "https://github.com/huggingface/peft",
+      "commit": "249e46b32eaad2068fdc62e696dcde14892406ae",
+      "tree": "d0a2237c78e5ab428bcdf9c662f589a698ed440e",
+      "license": "Apache-2.0",
+      "license_notices": [
+        {
+          "path": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "size_bytes": 11357,
+          "kind": "file"
+        }
+      ],
+      "preserved_by": "P0-053",
+      "dependencies": [
+        "examples/arrow_multitask/requirements.txt",
+        "examples/boft_controlnet/requirements.txt",
+        "examples/boft_dreambooth/requirements.txt",
+        "examples/cartridge_self_study/requirements.txt",
+        "examples/causal_language_modeling/requirements.txt",
+        "examples/conditional_generation/requirements.txt",
+        "examples/feature_extraction/requirements.txt",
+        "examples/frod_finetuning/requirements.txt",
+        "examples/hra_dreambooth/requirements.txt",
+        "examples/int8_training/requirements.txt",
+        "examples/lora_dreambooth/requirements.txt",
+        "examples/lora_finetuning_transformer_engine/requirements.txt",
+        "examples/sequence_classification/requirements.txt",
+        "examples/sft/requirements.txt",
+        "examples/token_classification/requirements.txt",
+        "method_comparison/MetaMathQA/requirements.txt",
+        "method_comparison/image-gen/requirements.txt",
+        "method_comparison/peft-shop/requirements.txt",
+        "pyproject.toml",
+        "requirements.txt"
+      ],
+      "dirty": false,
+      "submodules": [],
+      "credential_pattern_files": [],
+      "credential_scan_scope": "Pattern scan only; matching upstream tests/fixtures require review; not a clean-secret guarantee"
+    },
+    {
+      "name": "Hugging Face TRL",
+      "url": "https://github.com/huggingface/trl",
+      "commit": "eb5a93fd86f3eb76c195d0c37521671a44a26ddb",
+      "tree": "cb01dadb27a24bbe5a633c756bd1f13a15402f8c",
+      "license": "Apache-2.0",
+      "license_notices": [
+        {
+          "path": "LICENSE",
+          "sha256": "1bf614b1fdc40fbd344aa58d00d17d5fd0d252ea333a05be018a38959c8b2998",
+          "size_bytes": 11355,
+          "kind": "file"
+        }
+      ],
+      "preserved_by": "P0-053",
+      "dependencies": [
+        "pyproject.toml"
+      ],
+      "dirty": false,
+      "submodules": [],
+      "credential_pattern_files": [],
+      "credential_scan_scope": "Pattern scan only; matching upstream tests/fixtures require review; not a clean-secret guarantee"
+    },
+    {
+      "name": "llama.cpp",
+      "url": "https://github.com/ggml-org/llama.cpp",
+      "commit": "2a4daf0e08d6a9b6993ee0d4a9a3cfc35a6f405c",
+      "tree": "445f2b6c9555e93c2e2c526d68497d8f47d97a1d",
+      "license": "MIT",
+      "license_notices": [
+        {
+          "path": "LICENSE",
+          "sha256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d",
+          "size_bytes": 1078,
+          "kind": "file"
+        },
+        {
+          "path": "gguf-py/LICENSE",
+          "sha256": "ef78c7e6659e34c798194f0d344e807c722de70cbca1359ef54772661e11ca38",
+          "size_bytes": 1072,
+          "kind": "file"
+        },
+        {
+          "path": "licenses/LICENSE-jsonhpp",
+          "sha256": "c0d068392ea65358b798b8c165103560f06e9e3b38c4ab4e2d8810a7b931af86",
+          "size_bytes": 1075,
+          "kind": "file"
+        },
+        {
+          "path": "tools/ui/src/lib/vendors/big-integer/LICENSE",
+          "sha256": "e9b0e94f628e00b5ed98046cfa041696ff89eebbbdd54108ee350625bc6d0363",
+          "size_bytes": 1234,
+          "kind": "file"
+        },
+        {
+          "path": "tools/ui/src/lib/vendors/decimal.js/LICENCE.md",
+          "sha256": "3108b546bcff5d346923a82f48b2d252ca722f9088076db6d145f6b67757ad6c",
+          "size_bytes": 1104,
+          "kind": "file"
+        },
+        {
+          "path": "tools/ui/src/lib/vendors/nerdamer-prime/LICENSE",
+          "sha256": "c9f52548869a0a2e63a7100055c54cebf36b9327c8fc2da7cf9ca8dddc2f1cca",
+          "size_bytes": 1073,
+          "kind": "file"
+        },
+        {
+          "path": "vendor/cpp-httplib/LICENSE",
+          "sha256": "4b45cbe16d7b71b89ae6127e26e0d90a029198ca5e958ad8e3d0b8bbed364d8b",
+          "size_bytes": 1075,
+          "kind": "file"
+        },
+        {
+          "path": "vendor/hash/rotate-bits/LICENSE.md",
+          "sha256": "ca0b44aec101afb6b46f4c39b23369fa06a64fb9c0add37c2689d702156fee55",
+          "size_bytes": 1088,
+          "kind": "file"
+        },
+        {
+          "path": "vendor/hash/sha256/LICENSE",
+          "sha256": "b81d0022ca6367918c67b57e9647d3513ee58809fd4b0ef0b3492f1356bced25",
+          "size_bytes": 41,
+          "kind": "file"
+        },
+        {
+          "path": "vendor/hash/xxhash/LICENSE",
+          "sha256": "6ffedbc0f7878612d2b23589f1ff2ab15633e1df7963a5d9fc750ec5500c7e7a",
+          "size_bytes": 1389,
+          "kind": "file"
+        }
+      ],
+      "preserved_by": "P0-053",
+      "dependencies": [
+        ".gitmodules",
+        "CMakeLists.txt",
+        "app/CMakeLists.txt",
+        "common/CMakeLists.txt",
+        "examples/CMakeLists.txt",
+        "examples/batched/CMakeLists.txt",
+        "examples/convert-llama2c-to-ggml/CMakeLists.txt",
+        "examples/debug/CMakeLists.txt",
+        "examples/diffusion/CMakeLists.txt",
+        "examples/embedding/CMakeLists.txt",
+        "examples/eval-callback/CMakeLists.txt",
+        "examples/gen-docs/CMakeLists.txt",
+        "examples/gguf-hash/CMakeLists.txt",
+        "examples/gguf/CMakeLists.txt",
+        "examples/idle/CMakeLists.txt",
+        "examples/llama.android/lib/src/main/cpp/CMakeLists.txt",
+        "examples/lookahead/CMakeLists.txt",
+        "examples/lookup/CMakeLists.txt",
+        "examples/model-conversion/requirements.txt",
+        "examples/parallel/CMakeLists.txt",
+        "examples/passkey/CMakeLists.txt",
+        "examples/retrieval/CMakeLists.txt",
+        "examples/simple-chat/CMakeLists.txt",
+        "examples/simple-cmake-pkg/CMakeLists.txt",
+        "examples/simple/CMakeLists.txt",
+        "examples/speculative-simple/CMakeLists.txt",
+        "examples/speculative/CMakeLists.txt",
+        "examples/sycl/CMakeLists.txt",
+        "examples/test-cmake/CMakeLists.txt",
+        "examples/training/CMakeLists.txt",
+        "ggml/CMakeLists.txt",
+        "ggml/src/CMakeLists.txt",
+        "ggml/src/ggml-blas/CMakeLists.txt",
+        "ggml/src/ggml-cann/CMakeLists.txt",
+        "ggml/src/ggml-cpu/CMakeLists.txt",
+        "ggml/src/ggml-cpu/kleidiai/CMakeLists.txt",
+        "ggml/src/ggml-cuda/CMakeLists.txt",
+        "ggml/src/ggml-et/CMakeLists.txt",
+        "ggml/src/ggml-et/et-kernels/CMakeLists.txt",
+        "ggml/src/ggml-hexagon/CMakeLists.txt",
+        "ggml/src/ggml-hexagon/htp/CMakeLists.txt",
+        "ggml/src/ggml-hip/CMakeLists.txt",
+        "ggml/src/ggml-metal/CMakeLists.txt",
+        "ggml/src/ggml-musa/CMakeLists.txt",
+        "ggml/src/ggml-opencl/CMakeLists.txt",
+        "ggml/src/ggml-openvino/CMakeLists.txt",
+        "ggml/src/ggml-rpc/CMakeLists.txt",
+        "ggml/src/ggml-sycl/CMakeLists.txt",
+        "ggml/src/ggml-virtgpu/CMakeLists.txt",
+        "ggml/src/ggml-virtgpu/backend/CMakeLists.txt",
+        "ggml/src/ggml-vulkan/CMakeLists.txt",
+        "ggml/src/ggml-vulkan/vulkan-shaders/CMakeLists.txt",
+        "ggml/src/ggml-webgpu/CMakeLists.txt",
+        "ggml/src/ggml-zdnn/CMakeLists.txt",
+        "ggml/src/ggml-zendnn/CMakeLists.txt",
+        "gguf-py/pyproject.toml",
+        "pocs/CMakeLists.txt",
+        "pocs/vdot/CMakeLists.txt",
+        "pyproject.toml",
+        "requirements.txt",
+        "scripts/jinja/requirements.txt",
+        "scripts/snapdragon/qdc/requirements.txt",
+        "src/CMakeLists.txt",
+        "tests/CMakeLists.txt",
+        "tools/CMakeLists.txt",
+        "tools/batched-bench/CMakeLists.txt",
+        "tools/cli/CMakeLists.txt",
+        "tools/completion/CMakeLists.txt",
+        "tools/connect/CMakeLists.txt",
+        "tools/cvector-generator/CMakeLists.txt",
+        "tools/export-lora/CMakeLists.txt",
+        "tools/fit-params/CMakeLists.txt",
+        "tools/gguf-split/CMakeLists.txt",
+        "tools/imatrix/CMakeLists.txt",
+        "tools/llama-bench/CMakeLists.txt",
+        "tools/mtmd/CMakeLists.txt",
+        "tools/mtmd/requirements.txt",
+        "tools/perplexity/CMakeLists.txt",
+        "tools/quantize/CMakeLists.txt",
+        "tools/results/CMakeLists.txt",
+        "tools/rpc/CMakeLists.txt",
+        "tools/server/CMakeLists.txt",
+        "tools/server/bench/requirements.txt",
+        "tools/server/bench/speed-bench/requirements.txt",
+        "tools/server/tests/requirements.txt",
+        "tools/tokenize/CMakeLists.txt",
+        "tools/tts/CMakeLists.txt",
+        "tools/tuning/CMakeLists.txt",
+        "tools/ui/CMakeLists.txt",
+        "vendor/CMakeLists.txt",
+        "vendor/cpp-httplib/CMakeLists.txt",
+        "vendor/hash/CMakeLists.txt",
+        "vendor/miniaudio/CMakeLists.txt",
+        "vendor/nlohmann/CMakeLists.txt",
+        "vendor/sheredom/CMakeLists.txt",
+        "vendor/stb/CMakeLists.txt"
+      ],
+      "dirty": false,
+      "submodules": [],
+      "credential_pattern_files": [],
+      "credential_scan_scope": "Pattern scan only; matching upstream tests/fixtures require review; not a clean-secret guarantee"
+    },
+    {
+      "name": "Docling",
+      "url": "https://github.com/docling-project/docling",
+      "commit": "336e9dde255237a3bf68abaea727d9782f7417a9",
+      "tree": "9021eecda7b43c63482444d16c56e24138277c46",
+      "license": "MIT",
+      "license_notices": [
+        {
+          "path": ".agents/skills/dignified-python/LICENSE",
+          "sha256": "e25b0c5be442bdf543e3f179ef0ae6a5edef5f5c70524fce00a2a657f5d3ed9d",
+          "size_bytes": 11348,
+          "kind": "file"
+        },
+        {
+          "path": ".github/license-header.txt",
+          "sha256": "40bc16245e04f90ce232fb017653eade19772e345dc014f5923c915983ff94bc",
+          "size_bytes": 78,
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "edb765d1e3e60d0c7a7d5fba5f2bb2c3c29f7465cecb5c22cf1185c884954e4c",
+          "size_bytes": 1072,
+          "kind": "file"
+        }
+      ],
+      "preserved_by": "P0-053",
+      "dependencies": [
+        "packages/docling-client/pyproject.toml",
+        "packages/docling/pyproject.toml",
+        "pyproject.toml"
+      ],
+      "dirty": false,
+      "submodules": [],
+      "credential_pattern_files": [
+        "HEAD:docling/datamodel/service/sources.py"
+      ],
+      "credential_scan_scope": "Pattern scan only; matching upstream tests/fixtures require review; not a clean-secret guarantee"
+    },
+    {
+      "name": "LM Evaluation Harness",
+      "url": "https://github.com/EleutherAI/lm-evaluation-harness",
+      "commit": "d6de81643928d653435c431bae19945d41d32520",
+      "tree": "b4b7c5d7c16a287b1025906d61720c77fb70fb8b",
+      "license": "MIT",
+      "license_notices": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "a806e42547620dffbc2ec0333322c8b3523b4af11e059be14ef81aa5b1ae021f",
+          "size_bytes": 1067,
+          "kind": "file"
+        }
+      ],
+      "preserved_by": "P0-053",
+      "dependencies": [
+        "lm_eval/tasks/japanese_leaderboard/requirements.txt",
+        "pyproject.toml"
+      ],
+      "dirty": false,
+      "submodules": [],
+      "credential_pattern_files": [],
+      "credential_scan_scope": "Pattern scan only; matching upstream tests/fixtures require review; not a clean-secret guarantee"
+    },
+    {
+      "name": "MLflow",
+      "url": "https://github.com/mlflow/mlflow",
+      "commit": "c980e95c1c349820b42031e1f9e6f34365fc57a3",
+      "tree": "92a64490a0ba2efcaaeff018268b074b9663b986",
+      "license": "Apache-2.0",
+      "license_notices": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "6395355de6f391afff35996a30fb41b189b4991a4cb54993ace35ab69a0bfa28",
+          "size_bytes": 11382,
+          "kind": "file"
+        },
+        {
+          "path": "libs/skinny/LICENSE.txt",
+          "sha256": "47b4bab490cf1dab7c926d903070946d325feaad1d33ae7a07fa7012c3e5fd83",
+          "size_bytes": 17,
+          "kind": "symlink",
+          "symlink_target": "../../LICENSE.txt",
+          "resolved_content_sha256": "6395355de6f391afff35996a30fb41b189b4991a4cb54993ace35ab69a0bfa28"
+        },
+        {
+          "path": "libs/tracing/LICENSE.txt",
+          "sha256": "47b4bab490cf1dab7c926d903070946d325feaad1d33ae7a07fa7012c3e5fd83",
+          "size_bytes": 17,
+          "kind": "symlink",
+          "symlink_target": "../../LICENSE.txt",
+          "resolved_content_sha256": "6395355de6f391afff35996a30fb41b189b4991a4cb54993ace35ab69a0bfa28"
+        }
+      ],
+      "preserved_by": "P0-053",
+      "dependencies": [
+        ".claude/skills/pyproject.toml",
+        ".gitmodules",
+        "dev/clint/pyproject.toml",
+        "dev/flavors/pyproject.toml",
+        "dev/pypi/pyproject.toml",
+        "dev/requirements.txt",
+        "examples/gateway/plugin/my-llm/pyproject.toml",
+        "examples/llama_index/workflow/pyproject.toml",
+        "examples/uv-dependency-management/pyproject.toml",
+        "examples/virtualenv/project/requirements.txt",
+        "libs/skinny/pyproject.toml",
+        "libs/tracing/pyproject.toml",
+        "pyproject.toml",
+        "tests/resources/example_mlflow_1x_sklearn_model/requirements.txt",
+        "tests/resources/example_mlflow_2.12_langchain_model/metadata/requirements.txt",
+        "tests/resources/example_mlflow_2.12_langchain_model/requirements.txt",
+        "tests/resources/example_virtualenv_no_python_env/requirements.txt",
+        "tests/resources/example_virtualenv_project/requirements.txt",
+        "tests/resources/mlflow-test-plugin/pyproject.toml",
+        "tests/resources/pyfunc_models/2.7.1/requirements.txt",
+        "tests/resources/pyfunc_models/2.8.1/requirements.txt"
+      ],
+      "dirty": false,
+      "submodules": [
+        " 6a505d8f30b7fbf93533cdf4e7d88fc30d66ba8b mlflow/assistant/skills (6a505d8)"
+      ],
+      "credential_pattern_files": [
+        "HEAD:mlflow/server/js/yarn/releases/yarn-4.12.0.cjs"
+      ],
+      "credential_scan_scope": "Pattern scan only; matching upstream tests/fixtures require review; not a clean-secret guarantee"
+    },
+    {
+      "name": "Sigstore Cosign",
+      "url": "https://github.com/sigstore/cosign",
+      "commit": "195ab76b789923862345f5fa9bfe3fac6c453927",
+      "tree": "483e05ce112b7cfe2ccccf2ef9aa5ffd3c54a12a",
+      "license": "Apache-2.0",
+      "license_notices": [
+        {
+          "path": "COPYRIGHT.txt",
+          "sha256": "6622d1d495e7d3a0e574c65e872f823cecbe585e25708d2223a28db016229119",
+          "size_bytes": 563,
+          "kind": "file"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "size_bytes": 11357,
+          "kind": "file"
+        }
+      ],
+      "preserved_by": "P0-053",
+      "dependencies": [
+        "go.mod",
+        "go.sum"
+      ],
+      "dirty": false,
+      "submodules": [],
+      "credential_pattern_files": [
+        "HEAD:pkg/cosign/keys_test.go",
+        "HEAD:test/fuzz/dictionaries/FuzzImportKeyPairLoadPrivateKey.dict",
+        "HEAD:test/helpers.go",
+        "HEAD:test/pkcs11_test.go"
+      ],
+      "credential_scan_scope": "Pattern scan only; matching upstream tests/fixtures require review; not a clean-secret guarantee"
+    },
+    {
+      "name": "Transformers",
+      "url": "https://github.com/huggingface/transformers",
+      "commit": "93c8b7b485963a10800c91f55304db6be211c2bd",
+      "tree": "a28d04294a6906b6619dcaa3892a751abfec67c3",
+      "license": "Apache-2.0",
+      "license_notices": [
+        {
+          "path": "LICENSE",
+          "sha256": "77fd4710def9ec3c0f6225800e0235f15a425abd4a8b03559127fcd782612049"
+        }
+      ],
+      "preserved_by": "P0-056",
+      "dirty": false,
+      "submodules": [],
+      "credential_pattern_files": [],
+      "credential_scan_scope": "Pattern scan only; matching upstream tests/fixtures require review; not a clean-secret guarantee"
+    },
+    {
+      "name": "SQLite",
+      "url": "https://github.com/sqlite/sqlite",
+      "commit": "815fb4e5694685106fa0f5f4c74099fe3e49b641",
+      "tree": "557fa9dd17b1270d0de03a5c851da0c14739dff7",
+      "license": "Public-domain dedication",
+      "license_notices": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "c9053892d578840a196d588ff68baa9bc0f5240eb215fb9cf91cd6b0b3209305"
+        }
+      ],
+      "preserved_by": "P0-056",
+      "dirty": false,
+      "submodules": [],
+      "credential_pattern_files": [],
+      "credential_scan_scope": "Pattern scan only; matching upstream tests/fixtures require review; not a clean-secret guarantee"
+    },
+    {
+      "name": "Soup serving pin",
+      "url": "https://github.com/MakazhanAlpamys/Soup",
+      "commit": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+      "tree": "de33f6de31ec26eea5626f5a3917a96f97d4c4dd",
+      "license": "Apache-2.0",
+      "license_notices": [
+        {
+          "path": "LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "path": "NOTICE",
+          "sha256": "255803a9703667f05fa0d0b093499b83c63561b2bd5baa7c92288b88a773ba0f"
+        }
+      ],
+      "preserved_by": "P0-052",
+      "dirty": false,
+      "submodules": [],
+      "credential_pattern_files": [],
+      "credential_scan_scope": "Pattern scan only; matching upstream tests/fixtures require review; not a clean-secret guarantee"
+    }
+  ]
+}

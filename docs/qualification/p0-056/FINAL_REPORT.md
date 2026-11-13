@@ -1,0 +1,19 @@
+# P0-056 final qualification report
+
+Tested source: AIRON initial lifecycle `16c6bd745edacaa4ad7b435cc52de935e1d1802f`; final qualification target `0f4cd7e20f4c19577b5a73b9d1dacdc221f3085a`; native interface `f1ba9fc2072dac1431543fd4961baaa2762b8ea9`. See `BENCHMARKS.json` and `evidence/local/PROVENANCE.json` for per-run revisions. Local hardware: Linux 6.18.57, AMD EPYC 9V74, 9 visible CPUs, 10,206,472 KiB RAM, no GPU; inference comparisons restricted to CPUs 0–1. Hosted hardware: Ubuntu 22.04, Linux 6.8 Azure, 4 visible CPUs, 16,371,436 KiB RAM; the corrected two-CPU run enforced an 8 GiB cgroup limit but training timed out; separate four-CPU training and two-CPU serving qualification is in progress. No claim of independent administration.
+
+A working unified synthetic vertical slice has been implemented and demonstrated. The full programme is **not complete**: independent human/host qualification, the proprietary deployment permission boundary and the scope limits in KNOWN_LIMITATIONS remain open.
+
+The runtime composes real Docling ingestion and native SQLite authorization with real local llama.cpp inference, the original SYNTRIASS typed capability lifecycle, and the unchanged Soup adaptation controller. It preserves source ownership and historical evidence. Separate review controls model and capability activation, and both can be rolled back. The console is backed by actual local services.
+
+Observed first hosted workflow: all lifecycle gates passed, including genuine 135M LoRA training (263.55 seconds, 420 changed parameter tensors), evaluation, approval, activation, candidate inference and restored predictions. The original six-case routing test improved from 1/6 to 5/6; the six-case regression set improved from 3/6 to 6/6. These are lifecycle smoke results, not generalization evidence. Packaging defects discovered after the workflow were fixed and repeated; final statuses are recorded in BENCHMARKS.json.
+
+The new frozen procedural comparison used 30 cases across cooling, inventory and battery classification, two repeats. Existing native B3 and unified B5 each answered 30/30 unique cases correctly with zero model calls. B5 median end-to-end latency was about 67 ms on the measured local host. The 135M model did not emit valid strict labels in B0/B1/B2; 0.5B/1.5B inference likewise showed imperfect accuracy. Raw outputs and intervals are retained, and thresholds were not adjusted to improve the score.
+
+141 Python integration/regression tests passed locally; 201 existing SYNTRIASS runtime tests passed. Actual hosted optimizer cancellation and malformed-model rejection passed. Local full adaptation remains blocked by the host's AF_UNIX policy; the unchanged hosted worker succeeds. A broader existing native ptrace test remains a local environment failure.
+
+Signed evidence is application evidence, not independent kernel observation. The public snapshot adds offline checks of sealed state, native audit and capability-file anchors without exposing private keys. Cosign distribution signatures and MLflow projections are optional supporting tools and do not confer deployment authority.
+
+Draft PRs: AIRON #4 and AIP #22. No merge was performed. P0-052, P0-053 and the original AIP branches remain preserved. Source audit, installation/reproduction instructions, raw failures, benchmark results and limitations accompany this report.
+
+Latest measured gate: run 43393285275 enforced two CPUs and 8 GiB, with aggregate memory peak 1,940,447,232 bytes and no OOM. Inference, retrieval, procedural lifecycle and baseline inference passed; training reached 169/189 steps before the unchanged 480-second deadline, so model promotion was blocked. Run 43395924701 now separates four-CPU training from two-CPU fresh-installed serving. It is IN PROGRESS, not a qualified pass.

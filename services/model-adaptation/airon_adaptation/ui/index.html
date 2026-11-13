@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AIRON Native — Private AI That Learns Locally</title><link rel="stylesheet" href="/style.css">
+<body><header><b class="brand"><span class="logo"><img src="/syntriass-logo.jpeg" alt="SYNTRIASS"></span>SYNTRIASS LABS</b><span>Experimental · local workstation</span></header><main>
+<p class="eyebrow">AIRON NATIVE</p><h1>Private AI.<br>Learning stays here.</h1>
+<p class="intro">Train a candidate. Inspect the result. Approve the change. Keep a way back.</p>
+<div class="notice">Experimental CPU workflow. Values below come from this workspace. Test results apply only to the measured model and machine; independent execution observation remains open.</div>
+<section><label for="token">Local session token</label><input id="token" type="password" autocomplete="off" placeholder="Paste operator or reviewer token"><button id="connect">Connect</button><p id="message" role="status">Start the local server and provision a model to begin.</p></section>
+<section aria-label="Experiment summary"><h2>What happened here</h2>
+<div class="metrics">
+<article><span>Training</span><strong id="training-state">Not loaded</strong><small id="training-detail">Connect to read this workspace.</small></article>
+<article><span>Routing questions</span><strong id="routing-score">Not evaluated</strong><small id="routing-detail">Baseline → candidate, frozen questions.</small></article>
+<article><span>Regression questions</span><strong id="regression-score">Not evaluated</strong><small id="regression-detail">Checks for lost capability on a small fixed set.</small></article>
+<article><span>Active model</span><strong id="active-model">Not loaded</strong><small id="deployment-detail">Activation requires review.</small></article>
+</div><p class="caption">Scores use closed-choice answer likelihood on synthetic data. They do not measure general answer quality.</p>
+<p id="knowledge-evaluation" class="caption">Document answer check not run.</p>
+<div id="review-summary" class="notice">No candidate review loaded.</div></section>
+<section><h2>Your experiment</h2><p>Use the prepared synthetic dataset and model. Full request schemas and provisioning commands are in the local README.</p>
+<ol>
+<li><b>Deploy</b><span>Inspect the preinstalled model and approved data.</span><button data-action="status">Refresh status</button></li>
+<li><b>Understand</b><span>Ask an approved private document. Access is checked before the local model runs.</span>
+<label for="question">Question for the synthetic corpus</label>
+<input id="question" value="When should we inspect the cooling assembly?" maxlength="500">
+<button data-action="query_knowledge">Ask approved documents</button>
+<p id="knowledge-answer" role="status">No document answer requested.</p>
+<button data-action="infer">Run frozen benchmark</button></li>
+<li><b>Identify limitations</b><span>Inspect predictions and expected answers in the results below.</span></li>
+<li><b>Adapt</b><span>Start the prepared training job. Training cannot activate a model.</span><button data-action="start_training">Train locally</button><button data-action="cancel_training">Cancel training</button></li>
+<li><b>Verify improvement</b><span>Register the checkpoint and compare the frozen evaluation sets.</span><button data-action="register_checkpoint">Register candidate</button><button data-action="evaluate_candidate">Compare models</button></li>
+<li><b>Authorise</b><span>Request review. Switch to the separate reviewer token to approve.</span><button data-action="request_deployment">Request review</button><button data-action="approve_deployment">Approve candidate</button></li>
+<li><b>Activate</b><span>Only a passing, approved candidate can become active in this experimental runtime.</span><button data-action="activate_model">Activate</button></li>
+<li><b>Inspect isolation</b><span>Check worker namespace and connectivity probe evidence. Full workflow qualification remains a separate gate.</span></li>
+<li><b>Inspect evidence</b><span>Application signatures attest to these records. Independent execution observation is not integrated.</span><button data-action="evidence">Verify records</button><button id="download-evidence">Download signed records</button><button data-action="export_model">Export candidate</button></li>
+<li><b>Roll back</b><span>Restore the previous experimental model version.</span><button data-action="rollback_model">Restore previous model</button></li>
+</ol></section><section><h2>Recorded results</h2><details id="details"><summary>Inspect exact records and verification details</summary><pre id="result">No results loaded.</pre></details></section>
+<p class="foot">This runtime uses the existing synthetic document corpus with its own approved model and adapter. Unknown questions abstain; restricted documents are denied. It does not change the hosted demonstration or Ollama's active model.</p>
+</main><script src="/app.js"></script></body></html>

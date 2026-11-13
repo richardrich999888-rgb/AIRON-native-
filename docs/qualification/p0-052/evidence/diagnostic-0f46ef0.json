@@ -1,0 +1,13 @@
+{
+  "source": "0f46ef0cec0450f28c0112f4746a8501c2ca1386",
+  "run_id": 43358210167,
+  "artifact_id": 14006669435,
+  "archive_sha256": "77bb4cc9248aa9897a0c6cb7bbe5441598b97267e112e8ed6da79e612ba37ae1",
+  "worker_log_sha256": "d42da7d12b2cadaa607039b90ae37e7927f7856550c7e2e47048866131bcd7d8",
+  "worker_exit": 139,
+  "last_observed_step": 92,
+  "expected_steps": 153,
+  "diagnostic_excerpt": "\nThread 0x00007fe3725fe640 (most recent call first):\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/threading.py\", line 359 in wait\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/threading.py\", line 655 in wait\n  File \"/env/lib/python3.12/site-packages/tqdm/_monitor.py\", line 69 in run\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/threading.py\", line 1075 in _bootstrap_inner\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/threading.py\", line 1032 in _bootstrap\n\nThread 0x00007fe3c1fa6c40 (most recent call first):\n  File \"/env/lib/python3.12/site-packages/torch/nn/modules/linear.py\", line 134 in forward\n  File \"/env/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1786 in _call_impl\n  File ",
+  "signal_trace": "--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x73} ---\n+++ killed by SIGSEGV (core dumped) +++\n",
+  "interpretation": "SIGSEGV observed during asynchronous faulthandler dump at 120 seconds. Root cause not established; next controlled trial removes periodic diagnostic stack walk only. External wall and resource limits remain unchanged."
+}
