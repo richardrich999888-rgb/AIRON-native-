@@ -22,9 +22,11 @@ Use the exact tested Linux/Python/CPU ABI. Prepare and independently approve:
 - Verifier source, trusted signer public key and independently retained expected chain head.
 - Installation commands, qualification scripts and previously observed results.
 
-Provisioning writes a runtime/dependency inventory and pip freeze. Source-declared ranges are not a reproducible offline lock. Build a wheelhouse on a matching connected staging host, record its hashes and install it into a *fresh* environment with --no-index --find-links and --require-hashes. Do not treat a successful online install or an already populated cache as evidence that dependency closure is complete.
+Provisioning writes a runtime/dependency inventory and pip freeze. requirements-training.txt uses constraints-cpu.txt for the observed CPU package versions. prepare_wheelhouse.py builds a platform-specific wheelhouse, records every wheel SHA-256 and writes requirements.lock, wheelhouse.json, licences.json and packaged notices. Install into a *fresh* environment with --no-index, --no-cache-dir, --find-links and --require-hashes. A source version constraint alone is not an artifact hash lock. Do not treat a successful online install or an already populated cache as evidence that dependency closure is complete.
 
-The present worker accepts Soup's immutable VCS-install provenance. Installing Soup from a generic wheel loses that provenance and will fail its check; a reviewed wheel-provenance bridge is still required for a clean offline installation. Do not bypass the pin check. A preprovisioned runtime whose package metadata and code remain intact can be used to test offline operation now.
+The worker checks Soup 0.77.2, any declared VCS revision, and the installed Python-source tree digest d87ec3624378b062095b71d68baa820bf88da5e641c623c6b9ead7a1e6a4a6b4. This permits the locally built pinned wheel after offline installation, without relying on direct_url.json surviving wheel packaging. Different Soup code is rejected before import. Wheel hashes separately bind the approved installation artifacts.
+
+A complete fresh offline lifecycle was observed at c1f9ad7b92ebc7574d41c707b9f2fde21899e8e2 in Actions run 43347812566: 63 wheels installed without networking; real inference, training, evaluation, export, scripted test approval, activation and rollback succeeded. The external syscall audit recorded nine complete probe windows across 141 trace files and zero unexpected IP/DNS violations. That historical candidate used the earlier routing-only corpus and abstained on document answers. Later source adds a mandatory adapted-document quality gate and two extra evaluation workers; it requires a new run with at least eleven probe windows. Consult STATUS.md and the exact evidence revision for the current result.
 
 ## Acceptance procedure
 
@@ -40,7 +42,7 @@ Do not mark M5 complete while only individual workers, fixture lifecycle tests o
 
 ## Upstream bundle finding
 
-Soup's utils/airgap_bundle.py contains a reusable model/dataset/wheel/kernel tar assembler and per-member SHA-256 manifest. Its inspected build path does not sign that manifest, despite the module-level description referring to a signed manifest. inspect_airgap_bundle reads metadata; it does not hash-check every payload member. AIRON's bundle.py now reuses the assembler and adds a detached Ed25519 whole-archive attestation, complete member inventory/hash checking, and rejection of links, traversal, duplicate members and undeclared bytes. It deliberately performs no extraction. Its tests use tiny fixture payloads and do not qualify a real offline installation. Safe extraction, wheel provenance, dependency closure and a fresh offline installation remain open.
+Soup's utils/airgap_bundle.py contains a reusable model/dataset/wheel/kernel tar assembler and per-member SHA-256 manifest. Its inspected build path does not sign that manifest, despite the module-level description referring to a signed manifest. inspect_airgap_bundle reads metadata; it does not hash-check every payload member. AIRON's bundle.py reuses the assembler and adds a detached Ed25519 whole-archive attestation, complete member inventory/hash checking, and rejection of links, traversal, duplicate members and undeclared bytes. It deliberately performs no extraction. Bundle API tests use tiny fixtures; they do not qualify a real installation or a safe extraction utility. The actual fresh wheelhouse installation and isolated workflow have their own evidence, separately from these archive tests.
 
 
 ## Bundle API

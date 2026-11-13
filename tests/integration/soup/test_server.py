@@ -6,6 +6,7 @@ from http.server import ThreadingHTTPServer
 import pytest
 from airon_adaptation.controller import Controller
 from airon_adaptation.server import Handler
+from airon_adaptation.evidence import verify_chain
 
 
 @pytest.fixture
@@ -44,3 +45,16 @@ def test_api_role_comes_from_session(server):
     with pytest.raises(urllib.error.HTTPError) as exc:
         urllib.request.urlopen(req)
     assert exc.value.code == 400
+
+
+def test_evidence_transport_preserves_signed_float_values(server):
+    server.controller._event("fixture", "numeric-fixture", {"score": 1.0, "zero": 0.0})
+    req = urllib.request.Request(f"http://127.0.0.1:{server.server_port}/api/operation",
+        data=b'{"operation":"evidence","params":{}}',
+        headers={"Content-Type": "application/json", "Authorization": "Bearer test-token"})
+    with urllib.request.urlopen(req) as response:
+        raw = response.read()
+    assert b'"score": 1.0' in raw and b'"zero": 0.0' in raw
+    exported = json.loads(raw)
+    assert verify_chain(exported["records"], server.controller.public_key,
+                        exported["verification"]["head"])["valid"]

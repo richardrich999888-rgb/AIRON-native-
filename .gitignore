@@ -6,6 +6,7 @@ outputs/
 .netlify/
 __pycache__/
 *.pyc
+*.egg-info/
 records/
 *.tsbuildinfo
 .DS_Store

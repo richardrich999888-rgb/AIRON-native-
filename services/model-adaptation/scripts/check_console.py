@@ -10,6 +10,7 @@ from playwright.sync_api import sync_playwright, expect
 from airon_adaptation.controller import Controller
 from airon_adaptation.server import Handler
 from airon_adaptation.integrity import write_json
+from airon_adaptation.evidence import verify_chain
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--root", required=True)
@@ -50,10 +51,21 @@ try:
         expect(page.locator("#message")).to_contain_text("not permitted")
         page.locator('[data-action="evidence"]').click()
         expect(page.locator("#result")).to_contain_text("APPLICATION_SIGNED")
+        expected = ctl.call("evidence", {}, actor="console-check-reviewer", role="reviewer")
+        with page.expect_download() as download_info:
+            page.locator('#download-evidence').click()
+        download_path = output/"downloaded-evidence.json"
+        download_info.value.save_as(download_path)
+        downloaded = json.loads(download_path.read_text())
+        verification = verify_chain(downloaded["records"], ctl.public_key,
+                                    expected["verification"]["head"])
+        assert verification["valid"] and verification["truncation_checked"]
         assert not errors and not external, (errors, external)
         result = {"passed": True, "real_workspace": True, "observed": observed,
                   "browser_errors": errors, "external_page_requests": external,
-                  "checks": ["load measured state", "reviewer training denied", "signed evidence display", "mobile width"]}
+                  "download_verification": verification,
+                  "checks": ["load measured state", "reviewer training denied", "signed evidence display",
+                             "downloaded signatures verified", "mobile width"]}
         write_json(output/"console-check.json", result)
         print("CONSOLE_CHECK="+json.dumps(result))
         print("CONSOLE_SCREENSHOT_BASE64="+base64.b64encode(desktop).decode())

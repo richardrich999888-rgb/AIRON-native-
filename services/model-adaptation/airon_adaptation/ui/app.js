@@ -83,5 +83,23 @@ async function act(operation) {
   finally { for (const button of document.querySelectorAll('button')) button.disabled = false; }
 }
 document.querySelector('#connect').addEventListener('click', () => act('status'));
+document.querySelector('#download-evidence').addEventListener('click', async () => {
+  try {
+    const response = await fetch('/api/operation', {
+      method: 'POST', headers: {'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + document.querySelector('#token').value},
+      body: JSON.stringify({operation: 'evidence', params: {}})
+    });
+    const raw = await response.text();
+    if (!response.ok) throw new Error(JSON.parse(raw).error || 'Evidence download failed');
+    // Preserve the server's signed JSON numeric representation; do not reserialize it.
+    const url = URL.createObjectURL(new Blob([raw], {type: 'application/json'}));
+    const link = document.createElement('a');
+    link.href = url; link.download = 'airon-evidence.json';
+    document.body.appendChild(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    message.textContent = 'Evidence downloaded. Verify it with separately approved public key and chain head.';
+  } catch (error) { message.textContent = error.message; }
+});
 for (const button of document.querySelectorAll('[data-action]'))
   button.addEventListener('click', () => act(button.dataset.action));

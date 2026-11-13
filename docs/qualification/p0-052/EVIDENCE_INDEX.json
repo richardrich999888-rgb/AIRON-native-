@@ -1,0 +1,145 @@
+{
+  "schema": "airon-retained-evidence-index/v1",
+  "trust_note": "Reverification against keys and heads retained in reviewed source reports; not independently provisioned signer identity. Deployment reviewers must retain approved anchors separately.",
+  "reports": [
+    {
+      "path": "cpu-28daa9b.json",
+      "sha256": "fff93e0bb66a39dea67818226511742faa85b29528d9e008af87f72561b3e11d",
+      "source": null,
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "verification": {
+        "valid": true,
+        "events": 15,
+        "head": "84b49c9b914d20fc596b4b4c776e22a6ff379f093c601e4291988e67eec691d6",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "29e42921f7e07fcf21babec55dbc38fcd0e1269f23bbb91eb9d5db138271addc"
+    },
+    {
+      "path": "cpu-53976dc.json",
+      "sha256": "7885d29cee9563e038556f2caa8c6e06e08774ee95685d881db4762b9dd5c6e8",
+      "source": {
+        "head": "53976dce1fbffe00b28ca9c2c7232f143510a36e",
+        "actions_checkout": "5a44c652a3325bc513aa1b4064769f252122a72a"
+      },
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "verification": {
+        "valid": true,
+        "events": 20,
+        "head": "d3c9759a351661a216a83e8c2fb71292700709c28a7d5ba90da7c7713dff117b",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "9707aeafba82c7084ee0be3c726331eeeb3005b7fd6e7c921d4a2609a8dcfa7b"
+    },
+    {
+      "path": "cpu-failure-e71de2e.json",
+      "sha256": "49a1c45db572b349eda4e9f64c1093712cb89c6a5c87eba5e80fcf5ced26c34c",
+      "source": null,
+      "outcome": "INCOMPLETE",
+      "verification": {
+        "valid": true,
+        "events": 6,
+        "head": "ce4247debd87c8603bff299a4e0ed2a424e957cabd9b59fff9178b4562648685",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "1f749309ac374293928564c61c6108537b3f04a1464278fe9dd4c22a28830902"
+    },
+    {
+      "path": "faults-fe2046d.json",
+      "sha256": "60ea4b1025e2fefd2112b68677dcb460d743b2f8cf7fd8d12882c91c42162560",
+      "source": null,
+      "outcome": true,
+      "verification": {
+        "valid": true,
+        "events": 9,
+        "head": "4bbcb6d8790a2a1dc7c15a4ac3738db9a0d3822b02751bc04bb48cf07455e075",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "d0ee8e6374def3b083540073216a3deb72fd845e757abbaa1455212a6f45c1e9"
+    },
+    {
+      "path": "network-c1f9ad7.json",
+      "sha256": "7377c979c75d1a225349d4d19a1c1962631b3614670efe37689450821947a630",
+      "source": null,
+      "outcome": true,
+      "verification": null
+    },
+    {
+      "path": "offline-c1f9ad7.json",
+      "sha256": "a1d2c2b4f864a95d941be5afc37ef9cf856b9763aa3ce70781665feb5c0b4464",
+      "source": {
+        "actions_checkout": "5f708fd17baeb07bdb10dca25e5bdb126880e33d",
+        "head": "c1f9ad7b92ebc7574d41c707b9f2fde21899e8e2"
+      },
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "verification": {
+        "valid": true,
+        "events": 20,
+        "head": "a90fc6810761baddb79486c58bbbca2c37d0d192cc9d2cd999491140d7982e65",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "7d62d92d2f48aa111efae3918b3f347adf0425bb668f23614c2f7766a143de3f"
+    },
+    {
+      "path": "offline-failure-3444026.json",
+      "sha256": "ad72cdd92cfe1f40ba1fb83fc8dde5fb416038700c9ac40015f5f63b0df0b13c",
+      "source": null,
+      "outcome": "INCOMPLETE",
+      "verification": {
+        "valid": true,
+        "events": 6,
+        "head": "7af07ab5b51f325d46a4b2cf6480d4d8ddbc3a2327a37269d8e62f6c10d23d1f",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "d3e50dddbafd7f95ccc1c331d4085bdf340dd8229d44e1e5f9f4a4d1b91e76e1"
+    },
+    {
+      "path": "rejected-retention-921f111.json",
+      "sha256": "c4a8dbed1630e3f37965eb129f5f7895ad445d890c93a43c468614ff9f1bdc25",
+      "source": {
+        "head": "921f111e31d44a5a60eb1f164e7375c1db69cf5d",
+        "actions_checkout": "001c1aa6cf979a82111c36e23953804fbcc1d725"
+      },
+      "outcome": "INCOMPLETE",
+      "verification": {
+        "valid": true,
+        "events": 12,
+        "head": "12da3e57b605af5a29e90a23b44d23a2072165387ed41a9cba4dbc3410c8b6c0",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "88b4bc5f77926c7bb792f0802da5e7776f1c433870e9a6a11d36eee657c59f5d"
+    },
+    {
+      "path": "rejected-retention-fe2046d.json",
+      "sha256": "1cc7c6e28da741158a0e63f088e7cd9646fe03977a6d237e30b6d7a4782e3719",
+      "source": {
+        "head": "fe2046d724b7e35eaf9bfe91932aacbf42355f97",
+        "actions_checkout": "4882c0ae9f48f98a1d4596f63004222b3b634f10"
+      },
+      "outcome": "INCOMPLETE",
+      "verification": {
+        "valid": true,
+        "events": 12,
+        "head": "15e534e40ce273f6b42196f9b8792e5661d70eea954ae1462282b8af9bc22e7f",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "3097de9e6fcd3667fc287b3fbc0180db143a47912a62f1cf61a4a457bd648401"
+    }
+  ]
+}

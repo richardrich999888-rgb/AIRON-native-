@@ -80,7 +80,9 @@ python services/model-adaptation/scripts/verify_evidence.py \
   --expected-head INDEPENDENTLY_RETAINED_CHAIN_HEAD
 ```
 
-Supply both anchors from a separate trusted record. Never trust a key merely because it accompanies the evidence. Verification proves the signed record chain under that key; it does not prove truthful execution or compromise resistance of the signer.
+Use Download signed records in the console to retain the original server response. Supply both anchors from a separate trusted record. Never trust a key merely because it accompanies the evidence. Verification proves the signed record chain under that key; it does not prove truthful execution or compromise resistance of the signer.
+
+The v1 signing format uses Python's sorted ASCII JSON representation, including float spelling. Preserve original JSON bytes; reformatting through JavaScript can change 1.0 to 1 and invalidate signatures. The console download retains the response bytes, while its rendered detail view is for inspection. AIP/cross-language canonicalization remains unqualified. EVIDENCE_INDEX.json pins the retained source reports and their observed keys/heads; CI verifies all of them. These source-reviewed anchors are not independent enterprise identity or custody.
 
 ## Tests and measurements
 

@@ -17,7 +17,7 @@ POST /api/operation with Authorization: Bearer TOKEN and JSON {"operation": "...
 | get_training_status | job_id | Persisted CREATED/RUNNING/SUCCEEDED/FAILED/CANCELLED/INTERRUPTED |
 | cancel_training | job_id | Revoke pending job or kill supervised process group |
 | register_checkpoint | job_id | Successful training only; fixed job output, rehash, data-only files, LoRA/base binding |
-| evaluate_candidate | candidate_id | Frozen baseline and candidate test/regression splits; finite metrics, exact row counts |
+| evaluate_candidate | candidate_id | Frozen baseline/candidate routing and factual suites plus real source-copy generation; require strict routing improvement, nonzero baseline factual score, no factual loss and a full approved candidate quote |
 | export_model | candidate_id | Isolated Soup _merge_adapter; HF safetensors only |
 | request_deployment | candidate_id, evaluation_id | Passing matching evaluation; bind its digest and current deployment version |
 | approve_deployment | approval_id, decision | Reviewer role; requester cannot approve own request |
@@ -47,7 +47,7 @@ AIRON exports an airon-model-change/v1 payload inside an Ed25519 envelope. Signe
 
 The AIP bridge contract is a payload sink/signature-provider boundary for future integration, not an implemented AIP EvidencePacket. AIP's inspected raw sign_ed25519_raw/verify_ed25519_raw functions could sign the same bytes, subject to licence/ownership decision and actual cross-language tests. AIRON uses cryptography Ed25519 independently today. Never label its records AUTHORITY_BOUND, COUNTERPARTY_SIGNED or kernel-observed.
 
-Training identity, authorizing actor, dataset/base/config digests, adapter digest, evaluation report, approval, deployment version and rollback appear across linked signed events. No secret material is exported. Sniffer Dog is not integrated. strace in acceptance CI provides a separate syscall trace for that runner; a trace is not cryptographically independent attestation.
+Training identity, authorizing actor, dataset/base/config digests, adapter digest, evaluation report, approval, deployment version and rollback appear across linked signed events. The worker records the complete resolved Soup configuration and its digest, not only the four operator inputs. No secret material is exported. Sniffer Dog is not integrated. strace in acceptance CI provides a separate syscall trace for that runner; a trace is not cryptographically independent attestation.
 
 ## Research decisions
 
@@ -59,6 +59,6 @@ The regression gate also requires a nonzero baseline regression score. A suite o
 
 ## Knowledge and CPU precision
 
-Knowledge import is an administrative operation in explicit synthetic provisioning. The HTTP client cannot set its document role: the operator session maps to document operator, and reviewer maps to analyst. Neither grants finance-admin access. Every query records source-manifest and result digests; no query is harvested into training data. A generated paraphrase is withheld under the intentionally strict exact-source policy. Support for arbitrary enterprise document ingestion remains outside this bounded fixture.
+Knowledge import is an administrative operation in explicit synthetic provisioning. The HTTP client cannot set its document role: the operator session maps to document operator, and reviewer maps to analyst. Neither grants finance-admin access. Every query records source-manifest and result digests; no query is harvested into training data. Release requires the entire approved source to appear contiguously in generated text, ignoring whitespace only; the controller returns the original source bytes and discards all model-added framing. Partial quotes, paraphrases and changed numbers are withheld. Evaluation binds the knowledge manifest to the approval; changed documents invalidate that qualification. Support for arbitrary enterprise document ingestion remains outside this bounded fixture.
 
 Soup's frozen-base loader preserves checkpoint precision by default. AIRON explicitly converts floating training parameters to FP32 after setup, checks every floating parameter dtype and records the loaded/actual dtypes plus torch's observed thread count. This is a wrapper policy, not a Soup source modification. Historical reports whose backend label said FP32 before this check did not measure every base tensor's dtype; do not use that label as precision evidence.

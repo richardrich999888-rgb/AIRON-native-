@@ -30,7 +30,7 @@
 <li><b>Authorise</b><span>Request review. Switch to the separate reviewer token to approve.</span><button data-action="request_deployment">Request review</button><button data-action="approve_deployment">Approve candidate</button></li>
 <li><b>Activate</b><span>Only a passing, approved candidate can become active in this experimental runtime.</span><button data-action="activate_model">Activate</button></li>
 <li><b>Inspect isolation</b><span>Check worker namespace and connectivity probe evidence. Full workflow qualification remains a separate gate.</span></li>
-<li><b>Inspect evidence</b><span>Application signatures attest to these records. Independent execution observation is not integrated.</span><button data-action="evidence">Verify records</button><button data-action="export_model">Export candidate</button></li>
+<li><b>Inspect evidence</b><span>Application signatures attest to these records. Independent execution observation is not integrated.</span><button data-action="evidence">Verify records</button><button id="download-evidence">Download signed records</button><button data-action="export_model">Export candidate</button></li>
 <li><b>Roll back</b><span>Restore the previous experimental model version.</span><button data-action="rollback_model">Restore previous model</button></li>
 </ol></section><section><h2>Recorded results</h2><details id="details"><summary>Inspect exact records and verification details</summary><pre id="result">No results loaded.</pre></details></section>
 <p class="foot">This runtime uses the existing synthetic document corpus with its own approved model and adapter. Unknown questions abstain; restricted documents are denied. It does not change the hosted demonstration or Ollama's active model.</p>
