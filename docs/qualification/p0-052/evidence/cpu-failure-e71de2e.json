@@ -1,0 +1,511 @@
+{
+  "schema": "airon-p0-052-acceptance/v1",
+  "overall": "INCOMPLETE",
+  "fixture": false,
+  "gates": {
+    "baseline_inference": "PASS"
+  },
+  "limitations": [
+    "CPU synthetic classification only; no enterprise model quality claim",
+    "Application signatures are not independent execution attestations",
+    "This driver does not prove isolated controller or complete wheelhouse installation",
+    "No GPU, GGUF, Ollama adapter deployment or AIP integration qualification"
+  ],
+  "baseline": {
+    "deployment": {
+      "active": null,
+      "base": "model-58333f2e36acfd3b",
+      "history": [],
+      "version": 1
+    },
+    "result": {
+      "cpu_threads": 2,
+      "gpu_used": false,
+      "isolation": {
+        "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE",
+        "connect_probes": [
+          {
+            "address": [
+              "198.51.100.1",
+              443
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          },
+          {
+            "address": [
+              "127.0.0.1",
+              11434
+            ],
+            "errno": 101,
+            "purpose": "deliberate isolation probe"
+          }
+        ],
+        "dns_probe": {
+          "blocked": true,
+          "errno": -3
+        },
+        "net_namespace": "net:[4026532254]",
+        "route_count": 0
+      },
+      "metric": "closed-choice mean log likelihood",
+      "model": "baseline",
+      "peak_rss_kib": 1116992,
+      "rows": [
+        {
+          "correct": false,
+          "expected": "K7",
+          "latency_seconds": 3.2398676239999986,
+          "predicted": "R2",
+          "prompt_sha256": "cdb81a475840932fb8b933d71a7193b4dc8272b5c1372d96c893fdb7728dd063",
+          "scores": {
+            "K7": -7.33416748046875,
+            "M4": -8.146586894989014,
+            "Paris": -12.226170539855957,
+            "R2": -6.68035626411438,
+            "Tokyo": -9.573411583900452,
+            "cold": -15.628033638000488,
+            "honey": -6.864934921264648,
+            "ice": -13.894923210144043,
+            "yellow": -13.05278491973877
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "K7",
+          "latency_seconds": 3.1659705520000045,
+          "predicted": "R2",
+          "prompt_sha256": "dbedc32bc841b3a8a3abed1d5463f15e3e766890065f4ae88eea9976f6de13fe",
+          "scores": {
+            "K7": -7.123392581939697,
+            "M4": -11.734199523925781,
+            "Paris": -13.520313262939453,
+            "R2": -6.2848474979400635,
+            "Tokyo": -9.966306686401367,
+            "cold": -16.324373245239258,
+            "honey": -6.608937740325928,
+            "ice": -14.070611953735352,
+            "yellow": -13.013082504272461
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "M4",
+          "latency_seconds": 3.1416097340000135,
+          "predicted": "R2",
+          "prompt_sha256": "5f4d46ede7808f80b69a6f7d976c2180a85705fb55c0bb9fdf1f5ffc1e5ab09d",
+          "scores": {
+            "K7": -6.845883846282959,
+            "M4": -8.071753978729248,
+            "Paris": -13.283843994140625,
+            "R2": -6.569074630737305,
+            "Tokyo": -9.748080134391785,
+            "cold": -16.273225784301758,
+            "honey": -7.1937010288238525,
+            "ice": -13.830322265625,
+            "yellow": -13.44943618774414
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "M4",
+          "latency_seconds": 3.0996326719999843,
+          "predicted": "K7",
+          "prompt_sha256": "e8db25b4eb7a79d86880c17ff159a7f0ec74020a6b418af4cf8fa290eaf6fe07",
+          "scores": {
+            "K7": -6.656235694885254,
+            "M4": -8.28024673461914,
+            "Paris": -13.333442687988281,
+            "R2": -7.003269672393799,
+            "Tokyo": -9.530547618865967,
+            "cold": -16.638826370239258,
+            "honey": -7.336972713470459,
+            "ice": -13.811904907226562,
+            "yellow": -13.870941162109375
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "R2",
+          "latency_seconds": 3.104374239000009,
+          "predicted": "R2",
+          "prompt_sha256": "cb0cb00db8d3e2b972d90bf5199fd658eded477bfe8320b8f8d09181036d462b",
+          "scores": {
+            "K7": -6.378597259521484,
+            "M4": -7.870744705200195,
+            "Paris": -12.140885353088379,
+            "R2": -6.323214530944824,
+            "Tokyo": -9.538056492805481,
+            "cold": -15.951703071594238,
+            "honey": -6.825284719467163,
+            "ice": -14.062207221984863,
+            "yellow": -13.140231132507324
+          },
+          "split": "test"
+        },
+        {
+          "correct": false,
+          "expected": "R2",
+          "latency_seconds": 3.145049642999993,
+          "predicted": "K7",
+          "prompt_sha256": "d8e40eee9dbcb9fa80e070355d04202325f03459e4c7b45a8b061e5b27f39ef0",
+          "scores": {
+            "K7": -6.275676727294922,
+            "M4": -8.059963703155518,
+            "Paris": -11.225627899169922,
+            "R2": -6.425018787384033,
+            "Tokyo": -9.424376845359802,
+            "cold": -15.314352035522461,
+            "honey": -6.802733421325684,
+            "ice": -13.170171737670898,
+            "yellow": -12.737903594970703
+          },
+          "split": "test"
+        },
+        {
+          "correct": true,
+          "expected": "Paris",
+          "latency_seconds": 2.5283532649999927,
+          "predicted": "Paris",
+          "prompt_sha256": "1097c2cdd4d0566a2668bf4a1e93ad3dcb9ab1c7f104b212d6cddc7d4b2d652f",
+          "scores": {
+            "K7": -10.4009108543396,
+            "M4": -8.771498203277588,
+            "Paris": -4.007998466491699,
+            "R2": -9.920151710510254,
+            "Tokyo": -5.931419610977173,
+            "cold": -15.516226768493652,
+            "honey": -6.629415512084961,
+            "ice": -16.225814819335938,
+            "yellow": -13.550299644470215
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "yellow",
+          "latency_seconds": 2.502175426000008,
+          "predicted": "honey",
+          "prompt_sha256": "542ad54c1b4ff7d9cb89b287ceb675cfea8e5666ea6af8d7c4393a9a8c545d33",
+          "scores": {
+            "K7": -11.606762886047363,
+            "M4": -10.385159015655518,
+            "Paris": -15.219016075134277,
+            "R2": -10.901546001434326,
+            "Tokyo": -7.977389335632324,
+            "cold": -16.760560989379883,
+            "honey": -6.617836833000183,
+            "ice": -15.702982902526855,
+            "yellow": -7.732047080993652
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "honey",
+          "latency_seconds": 2.483031684999986,
+          "predicted": "honey",
+          "prompt_sha256": "b4dba104918bb281ebf3f49e8e2483b35990bcff132f2c7c91a364aacb1fae47",
+          "scores": {
+            "K7": -10.300810813903809,
+            "M4": -8.578015089035034,
+            "Paris": -14.447246551513672,
+            "R2": -10.412110805511475,
+            "Tokyo": -7.177440404891968,
+            "cold": -15.379688262939453,
+            "honey": -3.77712769433856,
+            "ice": -10.672266006469727,
+            "yellow": -12.359758377075195
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "ice",
+          "latency_seconds": 2.549634487999981,
+          "predicted": "Tokyo",
+          "prompt_sha256": "d7b0b04903a1aec2ec874e3c718f117b3770acfb2fd287d81755a32c36d9ca29",
+          "scores": {
+            "K7": -9.931825160980225,
+            "M4": -9.575675964355469,
+            "Paris": -14.632613182067871,
+            "R2": -9.333603858947754,
+            "Tokyo": -5.433111190795898,
+            "cold": -9.221055030822754,
+            "honey": -7.466563582420349,
+            "ice": -8.279032707214355,
+            "yellow": -13.87657642364502
+          },
+          "split": "regression"
+        },
+        {
+          "correct": false,
+          "expected": "cold",
+          "latency_seconds": 2.522514914999988,
+          "predicted": "Tokyo",
+          "prompt_sha256": "c2fdf7cd1f5491a5d0308f457ad6135193a7394d4e4e08a8f3dc95496a92564d",
+          "scores": {
+            "K7": -12.254420280456543,
+            "M4": -9.558008670806885,
+            "Paris": -13.617026329040527,
+            "R2": -10.61240291595459,
+            "Tokyo": -6.097823619842529,
+            "cold": -9.30414867401123,
+            "honey": -8.299291133880615,
+            "ice": -12.439543724060059,
+            "yellow": -12.470112800598145
+          },
+          "split": "regression"
+        },
+        {
+          "correct": true,
+          "expected": "Tokyo",
+          "latency_seconds": 2.496560890000012,
+          "predicted": "Tokyo",
+          "prompt_sha256": "5257da2ca5b52e8e5962e147905ee46c368911a6a0d02a407575732ae1c99253",
+          "scores": {
+            "K7": -9.837388753890991,
+            "M4": -8.82114052772522,
+            "Paris": -10.712413787841797,
+            "R2": -10.961390256881714,
+            "Tokyo": -4.79810357093811,
+            "cold": -14.88804817199707,
+            "honey": -8.505919456481934,
+            "ice": -15.431966781616211,
+            "yellow": -12.349658966064453
+          },
+          "split": "regression"
+        }
+      ],
+      "soup": {
+        "python_tree_sha256": "d87ec3624378b062095b71d68baa820bf88da5e641c623c6b9ead7a1e6a4a6b4",
+        "revision": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+        "version": "0.77.2"
+      },
+      "wall_seconds": 45.24949714599998
+    }
+  },
+  "training": {
+    "authorized_by": "local-operator",
+    "base_id": "model-58333f2e36acfd3b",
+    "completed_at": 1794533428.3295069,
+    "config": {
+      "epochs": 3,
+      "lr": 0.001,
+      "rank": 8,
+      "seed": 52
+    },
+    "config_digest": "2dc4032497251b563eb030d382fcd6fecef300b33fa0b25145dabd2c3f9a1e84",
+    "dataset_id": "dataset-843ff8ea7b426aab",
+    "error": "Isolated worker failed with exit 137; inspect job log",
+    "id": "job-7b10a652705aebba",
+    "started_at": 1794532911.8793402,
+    "status": "FAILED"
+  },
+  "failure": "Training did not succeed: FAILED",
+  "evidence": {
+    "public_key_hex": "1f749309ac374293928564c61c6108537b3f04a1464278fe9dd4c22a28830902",
+    "records": [
+      {
+        "payload": {
+          "action": "base_registered",
+          "actor": "provisioner",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794532862.6475177,
+          "details": {
+            "digest": "d3e811c46e2449c014a6d2fb453f5b421015af08360b32c4a3af2d67ea28e9f4",
+            "id": "model-58333f2e36acfd3b",
+            "identifier": "HuggingFaceTB/SmolLM2-135M-Instruct",
+            "license": "Apache-2.0",
+            "manifest": {
+              "README.md": {
+                "bytes": 6772,
+                "sha256": "4f97533ad95b1b2fea15fbc075c01b94578ebdd7c8138888fa43fa3abd530dc4"
+              },
+              "config.json": {
+                "bytes": 861,
+                "sha256": "8eb740e8bbe4cff95ea7b4588d17a2432deb16e8075bc5828ff7ba9be94d982a"
+              },
+              "generation_config.json": {
+                "bytes": 132,
+                "sha256": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013"
+              },
+              "merges.txt": {
+                "bytes": 466391,
+                "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510"
+              },
+              "model.safetensors": {
+                "bytes": 269060552,
+                "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c"
+              },
+              "special_tokens_map.json": {
+                "bytes": 655,
+                "sha256": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52"
+              },
+              "tokenizer.json": {
+                "bytes": 2104556,
+                "sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c"
+              },
+              "tokenizer_config.json": {
+                "bytes": 3764,
+                "sha256": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df"
+              },
+              "vocab.json": {
+                "bytes": 800662,
+                "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+              }
+            },
+            "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "GENESIS",
+          "schema": "airon-model-change/v1",
+          "sequence": 1
+        },
+        "sha256": "0f08d3559e228b6c82263774969428a28aa9b96b76dc8e305342400882dc5b59",
+        "signature": "SHwcF/mfGIx1maWP8vzOsbfNiUk8dyyZ+4NxOKXwQvoX57iOpXZOYSuSW4gt1ii2j4oqcDu0BHptmXL6AA5vAA=="
+      },
+      {
+        "payload": {
+          "action": "dataset_authorized",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794532862.6517222,
+          "details": {
+            "authorization": {
+              "approved_for_training": true,
+              "license": "CC0-1.0",
+              "synthetic": true
+            },
+            "authorized_by": "local-operator",
+            "counts": {
+              "regression": 6,
+              "test": 6,
+              "train": 18
+            },
+            "digest": "0e95a1a3520c1eba6bb3bff403169b56c1a2347b22bebada1768987a5ebfe710",
+            "id": "dataset-843ff8ea7b426aab",
+            "manifest": {
+              "records.json": {
+                "bytes": 4578,
+                "sha256": "8d61274ac29045cd95f064e405ef44cbebeca49cf092fd4575e5793aa01cac30"
+              },
+              "train.jsonl": {
+                "bytes": 3544,
+                "sha256": "5f06ef43622589646adaa61e224055ea38d5a660ce359e8bf4c97481a94452db"
+              }
+            }
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "79adac83c283bf3c1539ff86d532f60367851af0e26c1b12ebadcffbcd36744e",
+          "schema": "airon-model-change/v1",
+          "sequence": 2
+        },
+        "sha256": "69df3ee032968791af870c6ed05df7934706efa254f421a4f3a5224876ee1f7b",
+        "signature": "hrj5Kzsecc6Y2C3FHYObRK737vrHtWG1Qcm6+TC1xqqmCBxWV5duBXvWTTdCcpSm5OUSbUc2bM3qESvqQS8rDw=="
+      },
+      {
+        "payload": {
+          "action": "training_authorized",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794532862.6541646,
+          "details": {
+            "authorized_by": "local-operator",
+            "base_id": "model-58333f2e36acfd3b",
+            "config": {
+              "epochs": 3,
+              "lr": 0.001,
+              "rank": 8,
+              "seed": 52
+            },
+            "config_digest": "2dc4032497251b563eb030d382fcd6fecef300b33fa0b25145dabd2c3f9a1e84",
+            "dataset_id": "dataset-843ff8ea7b426aab",
+            "id": "job-7b10a652705aebba",
+            "status": "CREATED"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "08b1fe1742bbf78362807f114d77937f9b05195e6c0d8702ddbd2aa440ee5add",
+          "schema": "airon-model-change/v1",
+          "sequence": 3
+        },
+        "sha256": "007e70f93307c61f7e08cc4dfd2370ddc3b4cd622cdde14c0c8e1c4f6ebe381c",
+        "signature": "jyDMS8rb9/QM9bQSOOO90jmBHsKcQXrfM2Zw5CaR7ZT1bId6kaS1X4DJxjWf8v/6+D6qUIrhG4WV2YsbM2fACQ=="
+      },
+      {
+        "payload": {
+          "action": "local_inference",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794532911.587943,
+          "details": {
+            "active": null,
+            "deployment_version": 1,
+            "result_digest": "8a5ff8ea1340b777b330229c90cb2bb801ae28c0e09e72085d2187f96b818e99"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "c96dc1306fa643780f3abc9c7288e9fc6233770b2bbc1b22ff812de5ac317298",
+          "schema": "airon-model-change/v1",
+          "sequence": 4
+        },
+        "sha256": "b5bf347b84693ee440cf21fa9ee602e4f2316bc536e88b331f99b079240c21d8",
+        "signature": "yMU+Tv6xHOz2GR5THO21U7KvOZ8OBmjP/GTOgIhfl6gE727HoCilXYfkVYaRFDGxflrNd5lXECnRNYn/Zu5aDQ=="
+      },
+      {
+        "payload": {
+          "action": "training_started",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794532911.8796933,
+          "details": {
+            "job_id": "job-7b10a652705aebba"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "a36957837f86c9d354828bc2470954eb56558733b09860915c2076b440228bcf",
+          "schema": "airon-model-change/v1",
+          "sequence": 5
+        },
+        "sha256": "9f4755fcbf5609f0151e11d0236dc230c93ea16b1904c5aa5dadfb13b9364173",
+        "signature": "u/mrDf6Ba2FFu82Zmo8hD+ndYrCruUGVgFWM3pFDpOjouiJY8C3CqZyn+ISTLdsNfZic5WqFWz2K3JkD5OymBA=="
+      },
+      {
+        "payload": {
+          "action": "training_failed",
+          "actor": "local-operator",
+          "assurance": "APPLICATION_SIGNED",
+          "at_unix": 1794533428.3297565,
+          "details": {
+            "error": "Isolated worker failed with exit 137; inspect job log",
+            "job_id": "job-7b10a652705aebba"
+          },
+          "independent_execution": "CANNOT_PROVE",
+          "policy": "local-two-role-v1",
+          "previous": "b62ee08a1e77b670a4d2c68658a28de09f905219d71b5ee5349615a6276d334a",
+          "schema": "airon-model-change/v1",
+          "sequence": 6
+        },
+        "sha256": "b5099a5cce38a9ad3900544ef2934328084188dfd8f92a6a5cad4d7657c1bf48",
+        "signature": "n0kqlcvwR60gXdEdPC/Ccy0qHGT1e8G3A7Cd+Un5rDN83iHuI5ld/W3usbE212i+zsb6Uk/k6o5YVq+6I25BDg=="
+      }
+    ],
+    "verification": {
+      "valid": true,
+      "events": 6,
+      "head": "ce4247debd87c8603bff299a4e0ed2a424e957cabd9b59fff9178b4562648685",
+      "level": "APPLICATION_SIGNED",
+      "independent_execution": "CANNOT_PROVE",
+      "truncation_checked": false
+    },
+    "aip_integration": "CONTRACT_ONLY",
+    "sniffer_dog": "NOT_INTEGRATED"
+  }
+}

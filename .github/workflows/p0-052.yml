@@ -41,6 +41,7 @@ jobs:
           name: p0-052-contract-results
           path: contract-results.xml
   real-cpu-experiment:
+    needs: contracts
     runs-on: ubuntu-22.04
     timeout-minutes: 35
     steps:

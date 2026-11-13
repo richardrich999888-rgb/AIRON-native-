@@ -136,6 +136,13 @@ def train(config):
                      "gradient_checkpointing": False, "optimizer": "adamw_torch"}})
     trainer = SFTTrainerWrapper(cfg, device="cpu", report_to="none", trust_remote_code=False)
     trainer.setup(load_dataset(cfg.data))
+    loaded_dtypes = sorted({str(p.dtype) for p in trainer.model.parameters() if p.is_floating_point()})
+    # Soup preserves checkpoint precision for frozen bases. Explicit FP32 avoids
+    # CPU-dependent BF16 emulation and matches our inference/evaluation precision.
+    trainer.model.float()
+    actual_dtypes = sorted({str(p.dtype) for p in trainer.model.parameters() if p.is_floating_point()})
+    if actual_dtypes != ["torch.float32"]:
+        raise Rejected("CPU experiment requires measured FP32 model parameters")
     before = {n: p.detach().clone() for n, p in trainer.model.named_parameters() if p.requires_grad}
     start = time.perf_counter()
     result = trainer.train()
@@ -150,7 +157,9 @@ def train(config):
     return {"steps": result["total_steps"], "changed_parameters": changed, "trainable_tensors": len(before),
             "training_seconds": time.perf_counter()-start, "final_loss": result["final_loss"],
             "adapter_manifest": manifest(target, model=True), "real_training": True,
-            "backend": "Soup SFTTrainerWrapper / CPU float32 LoRA"}
+            "backend": "Soup SFTTrainerWrapper / CPU float32 LoRA",
+            "loaded_parameter_dtypes": loaded_dtypes, "training_parameter_dtypes": actual_dtypes,
+            "observed_torch_threads": torch.get_num_threads()}
 
 
 def evaluation(has_adapter):
