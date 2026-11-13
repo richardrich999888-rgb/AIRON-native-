@@ -17,11 +17,11 @@ All runs below used the same pinned SmolLM2-135M-Instruct base and Soup source. 
 | a297332 / 43356140596 | Failed-job diagnostics fixed; actual adapter artifacts retained | Entire workflow passed; offline 99.931 s, 1,726,268 KiB; 120 changed tensors; real faults and signed browser download passed | v2 passed; 2/6 routing insufficient under later v3 |
 | 0f46ef0 / 43358210167 | 102 train records; aligned copy instruction; LR .0003; v3 minimum 50% routing | Reached 92/153 steps; SIGSEGV during asynchronous 120-second diagnostic dump | No registration or activation; quality not evaluated |
 | 7b964cd / 43359489727 | Remove periodic diagnostic stack walk only | Reached 149/153 steps; stopped at 300 seconds by external wall limit; no recurrence of diagnostic SIGSEGV | No candidate or activation; next trial changes training-only time budget |
-
 | 14ef531 / 43360855201 | 480-second training budget, unchanged q/v rank-8 LoRA | 153 steps; 139.470 s; 1,804,324 KiB RSS; routing 1/6; factual 4/6; full-source answer | v3 rejected routing; no activation |
-
 | ddde09b / 43361491412 | Repeat 102-row q/v-only configuration on AMD EPYC 9V45 | 153 steps; 166.715 s; routing 1/6; factual 4/6; full-source answer | Routing rejection reproduced |
 | 060ff1d / 43362170915 | Seven attention/MLP LoRA targets; all other learning inputs unchanged | 153 steps, 420 tensors; 222.741 s; 2,020,080 KiB; routing 3/6; factual 0/6; full-source answer | v3 rejected catastrophic forgetting |
+
+| 692a129 / 43364072232 | Native Soup rehearsal: 24 disjoint approved facts plus 102 primary rows; same learning configuration | 189 steps, 420 tensors; offline 344.366 s; 1,983,160 KiB RSS; routing 5/6, facts 6/6, full-source answer; complete isolated lifecycle/browser passed | v3 quality passed; workflow failed because fault harness omitted rehearsal from progress denominator |
 
 The twelve copy-training records exclude the approved document corpus and frozen question. Both evaluation data and acceptance thresholds remain unchanged across the retention trials. Candidate failures are retained with signed events, model/dataset/config hashes and real scores in evidence/. No rejected candidate was activated. An automated synthetic-test reviewer is expressly labelled and does not establish independent human authorization.
 

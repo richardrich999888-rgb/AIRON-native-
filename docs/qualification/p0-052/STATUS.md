@@ -2,7 +2,11 @@
 
 Updated 13 November 2026. Draft [PR #2](https://github.com/richardrich999888-rgb/AIRON-native-/pull/2); main is unchanged. This is an experimental qualification, not a production release.
 
-## Completed vertical slice
+## Latest experiment
+
+692a129addfbc09dd867b2018afd55f61aa23f1a / run 43364072232 passed genuine rehearsal training and the complete v3 offline lifecycle: routing 1/6→5/6, facts 3/6→6/6, full approved-source answer, export, explicit synthetic review, activation, rollback, fresh 63-wheel installation, network audit and browser checks. Offline training took 344.366 seconds and 1,983,160 KiB worker RSS. The overall workflow FAILED because its cancellation progress detector omitted rehearsal rows. This harness bug is now fixed with regression coverage; the real fault check must be rerun before the workflow is marked passed. Historical results below remain scoped to their cited source and will be reconciled after that rerun.
+
+## Historical completed vertical slice
 
 Source a29733297c0d022b700ffa260750ed40a4d2e48a completed [Actions run 43356140596](https://github.com/richardrich999888-rgb/AIRON-native-/actions/runs/43356140596) successfully, including both jobs and every real CPU step. It demonstrated baseline inference, approved private-document access, genuine Soup training, evaluation, scripted test approval, experimental activation, adapted inference, export, rollback, a fresh hash-locked offline installation, complete namespace isolation and syscall classification, browser evidence download, real cancellation and corrupt-model rejection.
 
