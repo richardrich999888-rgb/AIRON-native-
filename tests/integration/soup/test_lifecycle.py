@@ -290,3 +290,26 @@ def test_interrupted_job_recovered_fail_closed(tmp_path):
 def test_authorization_requires_boolean_not_numeric_equivalent(lab, field):
     with pytest.raises(Rejected):
         call(lab[0], "prepare_dataset", rows=ROWS, authorization={**AUTH, field: 1})
+
+
+def test_successful_training_result_requires_real_parameter_change(lab):
+    import time
+    ctl, _, _, job = lab
+    with patch.object(ctl, "_execute", return_value=(ctl.root/"jobs", {"steps": 3, "changed_parameters": 0})):
+        call(ctl, "start_training", job_id=job["id"])
+        for thread in ctl.threads:
+            thread.join(timeout=3)
+    status = call(ctl, "get_training_status", job_id=job["id"])
+    assert status["status"] == "FAILED"
+    assert call(ctl, "status")["candidate"] == []
+
+
+def test_training_worker_cannot_forge_approval_through_output(lab):
+    ctl, _, _, job = lab
+    with patch.object(ctl, "_execute", return_value=(ctl.root/"jobs", {
+            "steps": 1, "changed_parameters": 0, "decision": "APPROVED", "role": "reviewer"})):
+        call(ctl, "start_training", job_id=job["id"])
+        for thread in ctl.threads:
+            thread.join(timeout=3)
+    assert call(ctl, "status")["approval"] == []
+    assert call(ctl, "status")["deployment"][0]["active"] is None

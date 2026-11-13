@@ -29,7 +29,9 @@ def isolation_probe(parent_netns):
     routes = [line for line in Path("/proc/self/net/route").read_text().splitlines() if line.strip()]
     if namespace == parent_netns:
         raise Rejected("Worker retained controller network namespace: " + namespace)
-    if not routes or not routes[0].startswith("Iface") or len(routes) != 1:
+    # Some isolated procfs views expose an empty file, others a header-only table.
+    # Both contain zero routes. Namespace identity and live socket probes are also mandatory.
+    if routes and (not routes[0].startswith("Iface") or len(routes) != 1):
         raise Rejected("Worker route inspection failed: " + repr({"namespace": namespace, "parent": parent_netns, "routes": routes}))
     failures = []
     for address in (("198.51.100.1", 443), ("127.0.0.1", 11434)):

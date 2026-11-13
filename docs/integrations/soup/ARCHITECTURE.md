@@ -51,3 +51,5 @@ Training identity, authorizing actor, dataset/base/config digests, adapter diges
 ## Research decisions
 
 Incremental adapter training, merge parity beyond the selected helper, replay buffers, drift alarms and automatic monitoring remain research items. The current controller accepts only fresh LoRA jobs. Each cycle requires new authorized data, frozen evaluation and separate approval. No user-conversation harvesting, model-written control-plane changes or autonomous promotion exists.
+
+Bundle preparation is a separate trusted operation: bundle.py reuses Soup assembly, signs the archive digest, verifies every regular member against the manifest and rejects undeclared bytes. It never extracts an archive or claims dependency closure from a filename alone.

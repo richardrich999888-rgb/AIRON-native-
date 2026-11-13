@@ -40,4 +40,17 @@ Do not mark M5 complete while only individual workers, fixture lifecycle tests o
 
 ## Upstream bundle finding
 
-Soup's utils/airgap_bundle.py contains a reusable model/dataset/wheel/kernel tar assembler and per-member SHA-256 manifest. Its inspected build path does not sign that manifest, despite the module-level description referring to a signed manifest. inspect_airgap_bundle reads metadata; it does not hash-check every payload member. Before relying on an upstream bundle, AIRON needs complete member verification plus a separately trusted archive/manifest signature and tested safe extraction. This remains a named packaging gap; no counterfeit “air-gap-ready bundle” is shipped.
+Soup's utils/airgap_bundle.py contains a reusable model/dataset/wheel/kernel tar assembler and per-member SHA-256 manifest. Its inspected build path does not sign that manifest, despite the module-level description referring to a signed manifest. inspect_airgap_bundle reads metadata; it does not hash-check every payload member. AIRON's bundle.py now reuses the assembler and adds a detached Ed25519 whole-archive attestation, complete member inventory/hash checking, and rejection of links, traversal, duplicate members and undeclared bytes. It deliberately performs no extraction. Its tests use tiny fixture payloads and do not qualify a real offline installation. Safe extraction, wheel provenance, dependency closure and a fresh offline installation remain open.
+
+
+## Bundle API
+
+In a trusted preparation process whose current directory contains all input/output paths:
+
+    from airon_adaptation.bundle import build_bundle, verify_archive
+    result = build_bundle(model_dir, [dataset_dir], wheelhouse_dir, output_tar, signer_key)
+    verify_archive(output_tar, detached_attestation, externally_trusted_public_key)
+
+The wheelhouse must include wheel files and requirements.lock. File presence does not prove that the wheel files are valid or that the lock covers every dependency; the verifier explicitly reports REQUIRES_FRESH_OFFLINE_INSTALL_TEST. Retain the archive, detached attestation, trusted public key, exact preparation/runtime versions and qualification results separately. Never include the controller's signing.key or state database in a redistribution bundle.
+
+A reviewer must trust the public key independently of the archive. An archive and a matching attacker-supplied key establish no provenance.
