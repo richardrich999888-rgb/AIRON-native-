@@ -208,5 +208,365 @@
     "prompt": "Question: How is a late courier arrival recorded?\nApproved source text:\nRecord a late courier arrival in the reception register. Include the parcel count and arrival time. Notify the receiving clerk before handing over parcels.",
     "answer": "Record a late courier arrival in the reception register. Include the parcel count and arrival time. Notify the receiving clerk before handing over parcels.",
     "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the supplier invoice.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the vendor payment.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the expense reimbursement.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the accounts payable bill.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the purchase order billing.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the contractor payment.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the supplier invoice.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the vendor payment.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the expense reimbursement.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the accounts payable bill.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the purchase order billing.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the contractor payment.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the supplier invoice.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the vendor payment.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the expense reimbursement.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the accounts payable bill.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the purchase order billing.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the contractor payment.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the supplier invoice.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the vendor payment.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the expense reimbursement.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the accounts payable bill.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the purchase order billing.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the contractor payment.",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the employee login.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the password reset.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the internal portal sign-in.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the locked user account.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the authentication code.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the company account access.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the employee login.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the password reset.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the internal portal sign-in.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the locked user account.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the authentication code.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the company account access.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the employee login.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the password reset.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the internal portal sign-in.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the locked user account.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the authentication code.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the company account access.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the employee login.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the password reset.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the internal portal sign-in.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the locked user account.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the authentication code.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the company account access.",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the courier delivery.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the shipment tracking.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the missing parcel.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the package dispatch.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the transit delay.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please resolve the open issue with the damaged delivery box.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the courier delivery.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the shipment tracking.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the missing parcel.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the package dispatch.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the transit delay.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee requests assistance concerning the damaged delivery box.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the courier delivery.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the shipment tracking.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the missing parcel.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the package dispatch.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the transit delay.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: We need the responsible team to investigate the damaged delivery box.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the courier delivery.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the shipment tracking.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the missing parcel.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the package dispatch.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the transit delay.",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the damaged delivery box.",
+    "answer": "R2",
+    "split": "train"
   }
 ]

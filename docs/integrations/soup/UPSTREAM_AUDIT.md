@@ -34,6 +34,8 @@ Paths below are in Soup at the pinned revision. Source inspection is not an exec
 
 No upstream source modifications are made. AIRON calls a pinned public wrapper and one pinned private export helper; this API dependency is intentionally documented. Do not upgrade Soup silently.
 
+CONTINUAL_LEARNING_REVIEW.md maps each requested research topic to inspected source and executed evidence. In particular, the pinned schema describes several forgetting/checkpoint-intelligence fields as staged and unenforced during training. AIRON's release policy therefore relies on its actual independent post-training evaluation, not on those flags.
+
 ## Licence and redistribution
 
 The checked-out LICENSE is Apache-2.0 and NOTICE identifies Makazhan Alpamys and the Soup contributors. Exact copies are retained under third_party/. Keep both with redistributed Soup wheels/source and preserve attribution. If Soup is modified later, identify changed files and retain notices. The AIRON control plane remains governed by the repository's MIT licence; it does not rebrand upstream Soup as proprietary AIRON code.

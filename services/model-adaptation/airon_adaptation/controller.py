@@ -14,6 +14,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from . import sandbox
 from .evidence import seal, verify, verify_chain
 from .integrity import Rejected, canonical, digest, manifest, safe_path, verify_tree, write_json
+from .knowledge import training_messages
 
 POLICY = {
     "operator": {"prepare_dataset", "validate_dataset", "create_training_job", "start_training",
@@ -185,8 +186,7 @@ class Controller:
         with (path/"train.jsonl").open("x") as stream:
             for row in rows:
                 if row["split"] == "train":
-                    stream.write(canonical({"messages": [{"role": "user", "content": row["prompt"]},
-                                                          {"role": "assistant", "content": row["answer"]}]}).decode()+"\n")
+                    stream.write(canonical({"messages": training_messages(row)}).decode()+"\n")
         files = manifest(path)
         obj = {"id": ident, "counts": counts, "manifest": files, "digest": digest(files),
                "authorized_by": actor, "authorization": authorization}
@@ -373,6 +373,7 @@ class Controller:
                 "baseline_output_digest": digest(baseline.get("text")),
                 "candidate_output_digest": digest(adapted.get("text"))}
         passed = (metrics["test"]["candidate_accuracy"] > metrics["test"]["baseline_accuracy"]
+                  and metrics["test"]["candidate_accuracy"] >= 0.5
                   and metrics["regression"]["baseline_accuracy"] > 0
                   and metrics["regression"]["candidate_accuracy"] >= metrics["regression"]["baseline_accuracy"]
                   and (knowledge_result is None or knowledge_result["candidate_match"]))
@@ -381,7 +382,7 @@ class Controller:
                   "dataset_digest": self._get(job["dataset_id"], "dataset")["digest"],
                   "base_digest": self._get(job["base_id"], "model")["digest"], "config_digest": job["config_digest"],
                   "metrics": metrics, "knowledge": knowledge_result, "passed": passed, "run_path": run.relative_to(self.root).as_posix(),
-                  "policy": "strict-improvement-knowledge-preservation-v2"}
+                  "policy": "minimum-accuracy-knowledge-preservation-v3"}
         self._put(ident, "evaluation", report)
         self._event(actor, "candidate_evaluated", report)
         return report
@@ -407,9 +408,10 @@ class Controller:
         evaluation = self._get(evaluation_id, "evaluation")
         if not evaluation["passed"] or evaluation["candidate_id"] != candidate_id or evaluation["candidate_digest"] != candidate["digest"]:
             raise Rejected("Matching passing evaluation required")
+        if evaluation.get("policy") != "minimum-accuracy-knowledge-preservation-v3":
+            raise Rejected("Fresh evaluation under the current accuracy policy required")
         if self._all("knowledge") and (not evaluation.get("knowledge")
-                or not evaluation["knowledge"]["candidate_match"]
-                or evaluation["policy"] != "strict-improvement-knowledge-preservation-v2"):
+                or not evaluation["knowledge"]["candidate_match"]):
             raise Rejected("Current knowledge qualification is required")
         ident = self._new("approval")
         obj = {"id": ident, "candidate_id": candidate_id, "evaluation_id": evaluation_id,
@@ -439,9 +441,10 @@ class Controller:
         evaluation = self._get(approval["evaluation_id"], "evaluation")
         if digest(evaluation) != approval["evaluation_digest"] or not evaluation["passed"]:
             raise Rejected("Evaluation changed after approval")
+        if evaluation.get("policy") != "minimum-accuracy-knowledge-preservation-v3":
+            raise Rejected("Fresh evaluation under the current accuracy policy required")
         if self._all("knowledge") and (not evaluation.get("knowledge")
-                or not evaluation["knowledge"]["candidate_match"]
-                or evaluation["policy"] != "strict-improvement-knowledge-preservation-v2"):
+                or not evaluation["knowledge"]["candidate_match"]):
             raise Rejected("Current knowledge qualification is required")
         if evaluation.get("knowledge") is not None:
             knowledge = self._get("knowledge", "knowledge")

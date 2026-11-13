@@ -456,3 +456,38 @@ def test_legacy_approval_cannot_bypass_new_document_gate(lab):
     with pytest.raises(Rejected, match="knowledge qualification"):
         review(ctl, "activate_model", approval_id=approval["id"])
     assert ctl._get("deployment", "deployment")["active"] is None
+
+
+def test_small_score_gain_below_minimum_accuracy_is_not_deployable(lab):
+    ctl = lab[0]
+    candidate = candidate_fixture(lab)
+    metrics = {"test": {"count": 1, "baseline_accuracy": 0., "candidate_accuracy": .4},
+               "regression": {"count": 1, "baseline_accuracy": 1., "candidate_accuracy": 1.}}
+    with patch.object(ctl, "_execute", return_value=(ctl.root/"jobs"/"fixture", metrics)):
+        evaluation = call(ctl, "evaluate_candidate", candidate_id=candidate["id"])
+    assert not evaluation["passed"]
+    with pytest.raises(Rejected):
+        call(ctl, "request_deployment", candidate_id=candidate["id"], evaluation_id=evaluation["id"])
+
+
+def test_prior_quality_policy_requires_new_evaluation_even_without_documents(lab):
+    ctl = lab[0]
+    candidate, evaluation = evaluated_fixture(lab)
+    evaluation["policy"] = "strict-improvement-knowledge-preservation-v2"
+    with ctl.db:
+        ctl._put(evaluation["id"], "evaluation", evaluation)
+    with pytest.raises(Rejected, match="current accuracy policy"):
+        call(ctl, "request_deployment", candidate_id=candidate["id"], evaluation_id=evaluation["id"])
+
+
+def test_copy_retention_training_uses_the_runtime_instruction(lab):
+    from airon_adaptation.knowledge import SOURCE_COPY_INSTRUCTION
+    rows = copy.deepcopy(ROWS)
+    rows[0].update(prompt="Question: Where is the fixture?\nApproved source text:\nIn cabinet Z.",
+                   answer="In cabinet Z.")
+    ds = call(lab[0], "prepare_dataset", rows=rows, authorization=AUTH)
+    messages = [json.loads(line)["messages"] for line in
+                (lab[0].root/"datasets"/ds["id"]/"train.jsonl").read_text().splitlines()]
+    assert messages[0][0] == {"role": "system", "content": SOURCE_COPY_INSTRUCTION}
+    assert messages[0][-1]["content"] == "In cabinet Z."
+    assert [message["role"] for message in messages[1]] == ["user", "assistant"]

@@ -17,7 +17,7 @@ POST /api/operation with Authorization: Bearer TOKEN and JSON {"operation": "...
 | get_training_status | job_id | Persisted CREATED/RUNNING/SUCCEEDED/FAILED/CANCELLED/INTERRUPTED |
 | cancel_training | job_id | Revoke pending job or kill supervised process group |
 | register_checkpoint | job_id | Successful training only; fixed job output, rehash, data-only files, LoRA/base binding |
-| evaluate_candidate | candidate_id | Frozen baseline/candidate routing and factual suites plus real source-copy generation; require strict routing improvement, nonzero baseline factual score, no factual loss and a full approved candidate quote |
+| evaluate_candidate | candidate_id | Frozen baseline/candidate routing and factual suites plus real source-copy generation; require strict routing improvement, at least 50% routing accuracy, nonzero baseline factual score, no factual loss and a full approved candidate quote |
 | export_model | candidate_id | Isolated Soup _merge_adapter; HF safetensors only |
 | request_deployment | candidate_id, evaluation_id | Passing matching evaluation; bind its digest and current deployment version |
 | approve_deployment | approval_id, decision | Reviewer role; requester cannot approve own request |

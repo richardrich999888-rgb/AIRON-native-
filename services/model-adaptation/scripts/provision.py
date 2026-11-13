@@ -55,7 +55,7 @@ def main():
             "synthetic": True, "approved_for_training": True, "license": "CC0-1.0"}},
             actor="local-operator", role="operator")
         job = ctl.call("create_training_job", {"base_id": model["id"], "dataset_id": ds["id"],
-            "config": {"epochs": 3, "lr": 0.0001, "rank": 8, "seed": 52}},
+            "config": {"epochs": 3, "lr": 0.0003, "rank": 8, "seed": 52}},
             actor="local-operator", role="operator")
         write_json(ctl.root/"provisioning.json", {"source": source, "model": model, "dataset": ds, "job": job,
                                                  "dependencies": packages, "assets_manifest": manifest(assets, model=True)})

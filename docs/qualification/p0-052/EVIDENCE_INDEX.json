@@ -1,6 +1,6 @@
 {
   "schema": "airon-retained-evidence-index/v1",
-  "trust_note": "Reverification against keys and heads retained in reviewed source reports; not independently provisioned signer identity. Deployment reviewers must retain approved anchors separately.",
+  "trust_note": "Source-reviewed keys and heads; not independent identity or signer custody. Preserve original signed JSON numeric representation.",
   "reports": [
     {
       "path": "cpu-28daa9b.json",
@@ -36,6 +36,24 @@
       "public_key_hex": "9707aeafba82c7084ee0be3c726331eeeb3005b7fd6e7c921d4a2609a8dcfa7b"
     },
     {
+      "path": "cpu-b4b9505.json",
+      "sha256": "a19ad55550a8ebf86650c13f2ab20165db801cdbd0e809719963459172c1ce6a",
+      "source": {
+        "actions_checkout": "e142c1bbb972cd8d5904703120ffc1cd40de08a3",
+        "head": "b4b95050117a30c18af3b17d9ca54571e4c9666e"
+      },
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "verification": {
+        "valid": true,
+        "events": 20,
+        "head": "307216e70c4f7ef44c15ded3d7609243f298dd55cfbd5e8803aee858fc8b7286",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "c4a5429d08b20a6b20a389382f1553b17eb3de2b1ffb581c80282f09f0a3074f"
+    },
+    {
       "path": "cpu-failure-e71de2e.json",
       "sha256": "49a1c45db572b349eda4e9f64c1093712cb89c6a5c87eba5e80fcf5ced26c34c",
       "source": null,
@@ -49,6 +67,21 @@
         "truncation_checked": true
       },
       "public_key_hex": "1f749309ac374293928564c61c6108537b3f04a1464278fe9dd4c22a28830902"
+    },
+    {
+      "path": "faults-failure-b4b9505.json",
+      "sha256": "eeeba4a7e0f7064678ba7c2edd242aa077369f184959c69bd6d897b524f4cf5e",
+      "source": null,
+      "outcome": false,
+      "verification": {
+        "valid": true,
+        "events": 9,
+        "head": "c7f3edf972e2485f154a808a44e9f20c5ed8964df0bc6666daeeccd057588b7f",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "acf8a7fb212c94144193105d8be65047d9b97d7b3b0b3a793564cfd44e0adb37"
     },
     {
       "path": "faults-fe2046d.json",
@@ -66,11 +99,36 @@
       "public_key_hex": "d0ee8e6374def3b083540073216a3deb72fd845e757abbaa1455212a6f45c1e9"
     },
     {
+      "path": "network-b4b9505.json",
+      "sha256": "6d0107a37e47b2898356795d873f5313de8811aa063515bbfcc5bce0ad37e1e9",
+      "source": null,
+      "outcome": true,
+      "verification": null
+    },
+    {
       "path": "network-c1f9ad7.json",
       "sha256": "7377c979c75d1a225349d4d19a1c1962631b3614670efe37689450821947a630",
       "source": null,
       "outcome": true,
       "verification": null
+    },
+    {
+      "path": "offline-b4b9505.json",
+      "sha256": "75ed91b4fe1fd1d5d68cc6ecc5204ca06f16f0a063f820776d29ab6c86e44c53",
+      "source": {
+        "actions_checkout": "e142c1bbb972cd8d5904703120ffc1cd40de08a3",
+        "head": "b4b95050117a30c18af3b17d9ca54571e4c9666e"
+      },
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "verification": {
+        "valid": true,
+        "events": 20,
+        "head": "8973c19112007ac4e7f8c7d420d3545ecf79a5cf32b2ab6aaca6ad1e23a00ab5",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "b7b51e4ffd63c553cc56fb12fec7e0126e4f45933de6203f6161a588f30d498f"
     },
     {
       "path": "offline-c1f9ad7.json",

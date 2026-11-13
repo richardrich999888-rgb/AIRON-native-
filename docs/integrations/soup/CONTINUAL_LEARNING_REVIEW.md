@@ -1,0 +1,22 @@
+# Controlled learning: inspected support and observed limits
+
+Source: Soup af2f5d5000f7baec6386a72a6d16e82383eb5303. Findings distinguish inspected source from executed AIRON experiments. No upstream source changes are made.
+
+| Research topic | Verified upstream surface | AIRON decision and evidence |
+|---|---|---|
+| Incremental LoRA | SFTTrainerWrapper.train accepts resume_from_checkpoint; trainer resume branches exist | First slice uses fresh jobs only. Optimizer-state recovery and repeated adapter continuation are not qualified. Interrupted jobs cannot register or silently resume. |
+| Task specialisation | Pinned SFT wrapper and LoRA target/rank configuration | Genuine rank-8 q_proj/v_proj adaptation on a 135M pretrained model; 120 trainable tensors changed. One registered adapter active at a time. |
+| Continual-learning regression | Schema contains forgetting controls, but their descriptions explicitly mark them as staged and unenforced during training | AIRON independently evaluates fixed routing, factual and approved-document behavior before any approval. It does not infer protection from a configuration flag. |
+| Catastrophic forgetting | Replay-related DataConfig fields and compatibility checks exist | The real LR .001 retention trial lost factual performance (3/6→0/6); it was rejected. The lower-LR accepted demonstration preserves 3/6. This small suite cannot establish general absence of forgetting. |
+| Dataset contamination | Native loader/ChatML conversion reused | AIRON binds splits/manifests, rejects duplicate normalised prompts and keeps approved document questions/text out of the twelve copy-training records. Semantic overlap and development-set reuse remain explicit limits. |
+| Feedback poisoning | soup loop can harvest trace/preference data and a thumbs database when opted into its pre-wired stages | AIRON does not invoke harvesting. Only explicitly approved synthetic CC0 records enter this slice. Pattern quarantine is supplementary; it does not solve semantic poisoning. |
+| Model drift | Loop state/gate/canary and drift-alarm utilities exist | Not enabled. Frozen predeployment comparison and manual rollback are implemented; production drift monitoring is not claimed. |
+| Adapter merging | commands/export.py uses PEFT merge_and_unload through the pinned helper | Real HF safetensors export executed offline. The active demonstration uses the separately loaded adapter; merged-export numerical parity and GGUF conversion remain unqualified. |
+| Reproducible evaluation | Soup evaluation/gate surfaces inspected; AIRON owns its deployment policy | Same six routing and six factual prompts, one approved-source generation check, fixed seed/config and exact model/dataset hashes. Repeated development trials are not an untouched research holdout. |
+| Efficient retraining | LoRA, quantisation and streaming surfaces available upstream | CPU FP32, two torch threads, batch 2, context 256, 45 optimizer steps in the accepted 30-record demonstration. GPU/QLoRA/layer streaming are not measured. |
+
+Soup loop defaults and opt-in behavior matter: the inspected CLI exposes a pre-wired option that composes real harvest/train/gate/deploy stages; its module describes earlier no-op defaults. AIRON does not assume every loop invocation trains. It reuses the actual trainer, loader, merge helper and bundle assembler while retaining its own dataset authorization, evaluation policy, approval and rollback authority.
+
+Each AIRON cycle retains its base, dataset, input configuration and resolved Soup configuration, candidate manifest, evaluation, explicit approval and deployment/rollback records. Inference and feedback do not modify any weights or write training records. Model-generated content never chooses commands, filesystem paths, actors, roles or approval decisions. A trained worker cannot access the signing key, registry database or production inference service.
+
+The next model-quality research milestone is an independently prepared evaluation set and broader retention tasks on the target hardware. Expanding the benchmark must precede a broader quality claim; the successful synthetic workflow does not establish AGI or autonomous recursive self-improvement.
