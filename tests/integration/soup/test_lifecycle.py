@@ -203,6 +203,35 @@ def test_cancelled_job_cannot_start_or_register(lab):
         call(ctl, "register_checkpoint", job_id=job["id"])
 
 
+def test_cancelled_training_does_not_cancel_later_baseline_inference(lab):
+    ctl, base, ds, job = lab
+    call(ctl, "cancel_training", job_id=job["id"])
+    process = object()
+    def fixture_worker(args, logfile, on_start, **kwargs):
+        on_start(process)
+        write_json(Path(logfile).parent/"output/result.json", {"model": "baseline", "rows": []})
+    with patch("airon_adaptation.sandbox.run", side_effect=fixture_worker), \
+         patch("airon_adaptation.sandbox.stop") as stop:
+        result = call(ctl, "infer", dataset_id=ds["id"])
+        stop.assert_not_called()
+    assert result["deployment"]["base"] == base["id"] and result["deployment"]["active"] is None
+    assert call(ctl, "get_training_status", job_id=job["id"])["status"] == "CANCELLED"
+
+
+def test_training_cancelled_before_process_callback_still_stops(lab):
+    ctl, _, _, job = lab
+    call(ctl, "cancel_training", job_id=job["id"])
+    process = object()
+    def fixture_launch(args, logfile, on_start, **kwargs):
+        on_start(process)
+        raise Rejected("FIXTURE stopped during launch race")
+    with patch("airon_adaptation.sandbox.run", side_effect=fixture_launch), \
+         patch("airon_adaptation.sandbox.stop") as stop:
+        with pytest.raises(Rejected, match="launch race"):
+            ctl._execute(job, "train")
+        stop.assert_called_once_with(process)
+
+
 def test_failed_training_retains_its_log_and_cannot_register(lab):
     ctl, _, _, job = lab
     def failure(args, logfile, **kwargs):

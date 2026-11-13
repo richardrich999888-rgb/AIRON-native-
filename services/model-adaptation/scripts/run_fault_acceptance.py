@@ -78,6 +78,14 @@ def main():
                                                          "progress": observed_step}
         for thread in ctl.threads:
             thread.join(timeout=15)
+        baseline = invoke("infer", dataset_id=ds["id"])
+        if (baseline["deployment"]["active"] is not None or baseline["result"]["model"] != "baseline"
+                or len(baseline["result"]["rows"]) != ds["counts"]["test"] + ds["counts"]["regression"]
+                or invoke("get_training_status", job_id=job["id"])["status"] != "CANCELLED"):
+            raise RuntimeError("Cancellation disrupted the original model or job state")
+        report["checks"]["baseline_available_after_cancellation"] = {
+            "passed": True, "rows": len(baseline["result"]["rows"]), "active": None,
+            "isolation": baseline["result"]["isolation"]}
         malformed = ctl.root/"malformed-input"
         shutil.copytree(ctl.root/"models"/base["id"], malformed)
         (malformed/"model.safetensors").write_bytes(b"INTENTIONALLY-MALFORMED-SYNTHETIC-FAULT")

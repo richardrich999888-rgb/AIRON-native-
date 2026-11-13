@@ -270,7 +270,9 @@ class Controller:
         def started(proc):
             with self.mutex:
                 self.processes[job["id"]] = proc
-                if self._get(job["id"], "job")["status"] == "CANCELLED":
+                # Cancellation revokes this training launch, not later read-only
+                # use of its approved base/dataset for the original deployment.
+                if operation == "train" and self._get(job["id"], "job")["status"] == "CANCELLED":
                     sandbox.stop(proc)
         try:
             sandbox.run(sandbox.command(path, model, data, adapter), path/"worker.log", on_start=started,
