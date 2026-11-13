@@ -64,6 +64,16 @@ for wheel in sorted(output.glob("*.whl")):
 write_json(output/"wheelhouse.json", {"schema": "airon-wheelhouse/v1", "soup": upstream_identity(),
                                      "python": sys.version, "files": files,
                                      "dependency_closure": "REQUIRES_FRESH_OFFLINE_INSTALL_TEST"})
+tokenizers_notice = Path(args.source).resolve().parents[1]/"docs/integrations/soup/third_party/tokenizers-LICENSE.txt"
+if "tokenizers==0.23.3" in licences:
+    raw = tokenizers_notice.read_bytes()
+    destination = output/"notices"/"tokenizers"/"upstream-LICENSE"
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(raw)
+    licences["tokenizers==0.23.3"]["supplemental_upstream_notice"] = {
+        "revision": "301277072263fb3830eb66eec7e47adadf76f1dc",
+        "path": "LICENSE", "sha256": hashlib.sha256(raw).hexdigest(),
+        "scope": "Upstream Apache-2.0 licence; native dependency inventory remains separate"}
 write_json(output/"licences.json", licences)
 print("WHEELHOUSE_LICENCES="+json.dumps(licences))
 print("WHEELHOUSE_MANIFEST="+json.dumps({"files": files, "distributions": len(locked)}))

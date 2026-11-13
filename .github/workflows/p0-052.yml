@@ -92,7 +92,8 @@ jobs:
           .venv/bin/python -m playwright install --with-deps chromium
           .venv/bin/python services/model-adaptation/scripts/check_console.py --root "$RUNNER_TEMP/airon-offline-state" --output acceptance-evidence/console
       - name: Real process cancellation and malformed model rejection
-        run: .venv/bin/python services/model-adaptation/scripts/run_fault_acceptance.py --source-root "$RUNNER_TEMP/airon-offline-state" --root "$RUNNER_TEMP/airon-fault-state" --report acceptance-evidence/real-faults.json --authorize-synthetic-fault-tests
+        if: always()
+        run: .venv/bin/python services/model-adaptation/scripts/run_fault_acceptance.py --source-root "$RUNNER_TEMP/airon-state" --root "$RUNNER_TEMP/airon-fault-state" --report acceptance-evidence/real-faults.json --authorize-synthetic-fault-tests
       - name: Collect nonsecret diagnostics
         if: always()
         run: |

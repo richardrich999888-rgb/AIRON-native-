@@ -6,7 +6,7 @@ import secrets
 import threading
 from http.server import ThreadingHTTPServer
 from pathlib import Path
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 from airon_adaptation.controller import Controller
 from airon_adaptation.server import Handler
 from airon_adaptation.integrity import write_json
@@ -36,7 +36,7 @@ try:
         page.goto("http://127.0.0.1:"+str(server.server_port))
         page.locator("#token").fill(operator)
         page.locator("#connect").click()
-        page.wait_for_function("document.getElementById('training-state').textContent === 'SUCCEEDED'")
+        expect(page.locator("#training-state")).to_have_text("SUCCEEDED")
         observed = {key: page.locator("#"+key).inner_text()
                     for key in ("training-state", "routing-score", "regression-score", "active-model")}
         assert observed["active-model"] == "Original model", observed
@@ -44,12 +44,12 @@ try:
         desktop = page.screenshot(path=str(output/"console-desktop.jpeg"), type="jpeg", quality=55)
         page.set_viewport_size({"width": 390, "height": 844})
         page.screenshot(path=str(output/"console-mobile.jpeg"), type="jpeg", quality=55)
-        assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), "Mobile overflow"
+        assert page.evaluate("() => document.documentElement.scrollWidth <= window.innerWidth"), "Mobile overflow"
         page.locator("#token").fill(reviewer)
         page.locator('[data-action="start_training"]').click()
-        page.wait_for_function("document.getElementById('message').textContent.includes('not permitted')")
+        expect(page.locator("#message")).to_contain_text("not permitted")
         page.locator('[data-action="evidence"]').click()
-        page.wait_for_function("document.getElementById('result').textContent.includes('APPLICATION_SIGNED')")
+        expect(page.locator("#result")).to_contain_text("APPLICATION_SIGNED")
         assert not errors and not external, (errors, external)
         result = {"passed": True, "real_workspace": True, "observed": observed,
                   "browser_errors": errors, "external_page_requests": external,
