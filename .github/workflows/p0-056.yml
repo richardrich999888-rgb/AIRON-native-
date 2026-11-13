@@ -56,11 +56,29 @@ jobs:
           sudo mkdir /sys/fs/cgroup/airon-p056
           echo 8589934592 | sudo tee /sys/fs/cgroup/airon-p056/memory.max
           echo '200000 100000' | sudo tee /sys/fs/cgroup/airon-p056/cpu.max
-          sudo chown "$(id -u):$(id -g)" /sys/fs/cgroup/airon-p056/cgroup.procs
-          strace -ff -e trace=network -o qualification/network bash -c 'echo $$ > /sys/fs/cgroup/airon-p056/cgroup.procs; exec taskset -c 0,1 unshare --user --map-root-user --net .venv/bin/python services/unified-runtime/scripts/run_demo.py --root "$RUNNER_TEMP/unified" --report qualification/demo.json --backend llama --approve-synthetic-test-deployment'
+          qualification_status=0
+          sudo env P056_UID="$(id -u)" P056_GID="$(id -g)" AIRON_SOURCE_COMMIT="$AIRON_SOURCE_COMMIT" PYTHONPATH="$PYTHONPATH" \
+            bash docs/qualification/p0-056/helpers/enter_cgroup.sh \
+            strace -ff -e trace=network -o qualification/network \
+            taskset -c 0,1 unshare --user --map-root-user --net \
+            .venv/bin/python services/unified-runtime/scripts/run_demo.py --root "$RUNNER_TEMP/unified" --report qualification/demo.json --backend llama --approve-synthetic-test-deployment || qualification_status=$?
           cp /sys/fs/cgroup/airon-p056/memory.peak qualification/cgroup-memory-peak.txt
           cp /sys/fs/cgroup/airon-p056/memory.events qualification/cgroup-memory-events.txt
           cp /sys/fs/cgroup/airon-p056/cpu.stat qualification/cgroup-cpu-stat.txt
+          .venv/bin/python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('qualification')
+          peak=int((p/'cgroup-memory-peak.txt').read_text())
+          cpu=dict(line.split() for line in (p/'cgroup-cpu-stat.txt').read_text().splitlines())
+          events=dict(line.split() for line in (p/'cgroup-memory-events.txt').read_text().splitlines())
+          assert 0 < peak <= 8589934592, 'Missing or out-of-bounds cgroup accounting'
+          assert int(cpu['usage_usec']) > 0, 'Workload did not execute in the measured cgroup'
+          assert int(events['oom_kill']) == 0, 'Cgroup OOM killed a process'
+          assert (p/'cgroup-membership.txt').read_text().strip() == '0::/airon-p056'
+          (p/'resource-accounting.json').write_text(json.dumps({'memory_peak_bytes':peak,'cpu':cpu,'events':events,'memory_limit_bytes':8589934592,'cpu_quota':'200000 100000','membership':'0::/airon-p056','status':'PASS'},indent=2)+'\n')
+          PY
+          test "$qualification_status" -eq 0
           .venv/bin/python docs/qualification/p0-056/helpers/audit_egress.py --prefix qualification/network --expected-probes 7 --report qualification/network-audit.json
       - name: Prepare complete local wheelhouse
         if: always()
