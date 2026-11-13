@@ -50,45 +50,46 @@ jobs:
           mkdir -p qualification
           .venv/bin/python -m pytest -q tests/integration/soup tests/integration/unified --junitxml=qualification/tests.xml
           python -m unittest discover -s website/offline -p test_server.py
-      - name: Execute complete integrated slice with no external route
+      - name: Execute complete slice with four CPUs, 8 GiB and no external route
         run: |
           .venv/bin/python services/unified-runtime/scripts/provision.py --root "$RUNNER_TEMP/unified" --assets "$RUNNER_TEMP/assets" --aip-dir "$RUNNER_TEMP/aip" --bin-dir "$RUNNER_TEMP/aip/target/debug" --llama "$RUNNER_TEMP/llama-build/bin/llama-completion" --gguf "$RUNNER_TEMP/135m.gguf" --approve-synthetic-data
           sudo mkdir /sys/fs/cgroup/airon-p056
           echo 8589934592 | sudo tee /sys/fs/cgroup/airon-p056/memory.max
-          echo '200000 100000' | sudo tee /sys/fs/cgroup/airon-p056/cpu.max
+          echo '400000 100000' | sudo tee /sys/fs/cgroup/airon-p056/cpu.max
           qualification_status=0
-          sudo env P056_UID="$(id -u)" P056_GID="$(id -g)" AIRON_SOURCE_COMMIT="$AIRON_SOURCE_COMMIT" PYTHONPATH="$PYTHONPATH" \
+          sudo env P056_PROFILE=full P056_UID="$(id -u)" P056_GID="$(id -g)" AIRON_SOURCE_COMMIT="$AIRON_SOURCE_COMMIT" PYTHONPATH="$PYTHONPATH" \
             bash docs/qualification/p0-056/helpers/enter_cgroup.sh \
             strace -ff -e trace=network -o qualification/network \
-            taskset -c 0,1 unshare --user --map-root-user --net \
+            taskset -c 0-3 unshare --user --map-root-user --net \
             .venv/bin/python services/unified-runtime/scripts/run_demo.py --root "$RUNNER_TEMP/unified" --report qualification/demo.json --backend llama --approve-synthetic-test-deployment || qualification_status=$?
           cp /sys/fs/cgroup/airon-p056/memory.peak qualification/cgroup-memory-peak.txt
           cp /sys/fs/cgroup/airon-p056/memory.events qualification/cgroup-memory-events.txt
           cp /sys/fs/cgroup/airon-p056/cpu.stat qualification/cgroup-cpu-stat.txt
-          .venv/bin/python - <<'PY'
-          import json
-          from pathlib import Path
-          p=Path('qualification')
-          peak=int((p/'cgroup-memory-peak.txt').read_text())
-          cpu=dict(line.split() for line in (p/'cgroup-cpu-stat.txt').read_text().splitlines())
-          events=dict(line.split() for line in (p/'cgroup-memory-events.txt').read_text().splitlines())
-          assert 0 < peak <= 8589934592, 'Missing or out-of-bounds cgroup accounting'
-          assert int(cpu['usage_usec']) > 0, 'Workload did not execute in the measured cgroup'
-          assert int(events['oom_kill']) == 0, 'Cgroup OOM killed a process'
-          assert (p/'cgroup-membership.txt').read_text().strip() == '0::/airon-p056'
-          (p/'resource-accounting.json').write_text(json.dumps({'memory_peak_bytes':peak,'cpu':cpu,'events':events,'memory_limit_bytes':8589934592,'cpu_quota':'200000 100000','membership':'0::/airon-p056','status':'PASS'},indent=2)+'\n')
-          PY
+          .venv/bin/python docs/qualification/p0-056/helpers/check_cgroup.py --prefix qualification/cgroup --cpus 4 --membership '0::/airon-p056' --report qualification/resource-accounting.json
           test "$qualification_status" -eq 0
           .venv/bin/python docs/qualification/p0-056/helpers/audit_egress.py --prefix qualification/network --expected-probes 7 --report qualification/network-audit.json
       - name: Prepare complete local wheelhouse
         if: always()
         run: .venv/bin/python services/unified-runtime/scripts/prepare_offline.py --output "$RUNNER_TEMP/wheels"
-      - name: Fresh install and native smoke test without external network
+      - name: Fresh offline install and serving under two CPUs and 8 GiB
         run: |
           python -m venv "$RUNNER_TEMP/offline"
           unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" -m pip install --no-index --find-links "$RUNNER_TEMP/wheels" --require-hashes -r "$RUNNER_TEMP/wheels/requirements.lock"
           unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" -m pip check
-          strace -ff -e trace=network -o qualification/install-network unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" services/unified-runtime/scripts/installed_smoke.py --root "$RUNNER_TEMP/unified" --report qualification/offline-install.json --verify-adaptation
+          sudo mkdir /sys/fs/cgroup/airon-p056-minimum
+          echo 8589934592 | sudo tee /sys/fs/cgroup/airon-p056-minimum/memory.max
+          echo '200000 100000' | sudo tee /sys/fs/cgroup/airon-p056-minimum/cpu.max
+          smoke_status=0
+          sudo env P056_PROFILE=minimum P056_UID="$(id -u)" P056_GID="$(id -g)" AIRON_SOURCE_COMMIT="$AIRON_SOURCE_COMMIT" \
+            bash docs/qualification/p0-056/helpers/enter_cgroup.sh \
+            strace -ff -e trace=network -o qualification/install-network \
+            taskset -c 0,1 unshare --user --map-root-user --net env -u PYTHONPATH \
+            "$RUNNER_TEMP/offline/bin/python" services/unified-runtime/scripts/installed_smoke.py --root "$RUNNER_TEMP/unified" --report qualification/offline-install.json --verify-adaptation || smoke_status=$?
+          cp /sys/fs/cgroup/airon-p056-minimum/memory.peak qualification/minimum-cgroup-memory-peak.txt
+          cp /sys/fs/cgroup/airon-p056-minimum/memory.events qualification/minimum-cgroup-memory-events.txt
+          cp /sys/fs/cgroup/airon-p056-minimum/cpu.stat qualification/minimum-cgroup-cpu-stat.txt
+          .venv/bin/python docs/qualification/p0-056/helpers/check_cgroup.py --prefix qualification/minimum-cgroup --cpus 2 --membership '0::/airon-p056-minimum' --report qualification/minimum-resource-accounting.json
+          test "$smoke_status" -eq 0
           .venv/bin/python docs/qualification/p0-056/helpers/audit_egress.py --prefix qualification/install-network --expected-probes 1 --report qualification/install-network-audit.json
           .venv/bin/python docs/qualification/p0-056/helpers/export_public_snapshot.py --root "$RUNNER_TEMP/unified" --demo qualification/demo.json --output qualification/public-snapshot.json
           unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" docs/qualification/p0-056/helpers/verify_snapshot.py --snapshot qualification/public-snapshot.json --report qualification/snapshot-verification.json
