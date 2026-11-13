@@ -1,0 +1,320 @@
+{
+  "schema": "airon-research-sources/v1",
+  "observed_date": "2026-11-13",
+  "sources": [
+    {
+      "name": "Soup",
+      "owner_namespace": "MakazhanAlpamys",
+      "url": "https://github.com/MakazhanAlpamys/Soup.git",
+      "commit": "dfd055b2ebeec6fe3197732bca76cc71808700d3",
+      "license": "Apache-2.0",
+      "notices": [
+        {
+          "path": "research/p0-055/notices/Soup/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "path": "research/p0-055/notices/Soup/NOTICE",
+          "sha256": "255803a9703667f05fa0d0b093499b83c63561b2bd5baa7c92288b88a773ba0f"
+        }
+      ],
+      "declared_dependency_manifests": [
+        {
+          "path": "pyproject.toml",
+          "sha256": "d22c00651fdc60abf83afa323c02029a56d5bbb22213fb72c56e8a2eb6a2f4e8",
+          "text": "[build-system]\nrequires = [\"hatchling\"]\nbuild-backend = \"hatchling.build\"\n\n[project]\nname = \"soup-cli\"\nversion = \"0.77.2\"\ndescription = \"Fine-tune and post-train LLMs in one command. No SSH, no config hell.\"\nreadme = \"README.md\"\nlicense = \"Apache-2.0\"\n# Explicit, so the files that ship do not depend on hatchling's default globs (#1677).\n# An explicit list replaces the default: a file added later must be named here too.\nlicense-files = [\"LICENSE\", \"NOTICE\"]\n# Upper-bounded on purpose (#358). CI tests 3.11 / 3.12 / 3.13 and nothing above;\n# 3.10 left with #1805 (end of life on 2026-10-01), when 3.13 joined.\n# Without a ceiling, pip on 3.14+ resolves torch wheels nobody here has run, and\n# the failure is not a Soup error message \u2014 it is a loader crash inside c10.dll /\n# libc10.so before any Soup code executes, so the user has nothing to act on.\n# `tests/test_requires_python_bound.py` derives this bound from the CI matrix, so\n# widening one without the other fails the suite.\nrequires-python = \">=3.11,<3.14\"\nauthors = [\n    { name = \"Makazhan Alpamys and the Soup contributors\", email = \"team@trysoup.dev\" },\n]\nkeywords = [\"llm\", \"fine-tuning\", \"lora\", \"qlora\", \"machine-learning\"]\nclassifiers = [\n    \"Development Status :: 3 - Alpha\",\n    \"Intended Audience :: Developers\",\n    \"Intended Audience :: Science/Research\",\n    \"License :: OSI Approved :: Apache Software License\",\n    \"Programming Language :: Python :: 3\",\n    \"Topic :: Scientific/Engineering :: Artificial Intelligence\",\n]\n# Core install (`pip install soup-cli`) is intentionally light: the CLI, config\n# system, and data tools \u2014 no PyTorch. v0.71.0 split the heavy training stack\n# (torch / transformers / peft / trl / datasets / bitsandbytes / accelerate)\n# into the `[train]` extra below.\ndependencies = [\n    # 0.15.4 is the lowest Typer the CLI starts on next to any Click it can be\n    # installed with (#1802; the measured table is in\n    # tests/test_cli_dependency_floors.py). Below 0.12.4 the command tree does not\n    # build (`RuntimeError: Type not yet supported: int | None`), so no command\n    # runs, `soup --help` included. 0.12.4 - 0.15.3 start only next to Click 8.1 or\n    # older and do not ask for it; 0.15.4 does (`click<8.2`), and 0.16.0 onwards\n    # render help with Click 8.2 and newer.\n    # A floor here is a version CI runs, not one it assumes: the `transformers-floor`\n    # job installs exactly this Typer floor and the Click floor below\n    # (.github/constraints/transformers-floor.txt) and starts the CLI on them. Move a\n    # floor and its pin together; that test file refuses one without the other.\n    # Both standalone-Click and vendored-Click Typer are exercised by the floor\n    # job and the main test matrix (#1803). 0.27.3 is the validated newest release;\n    # the next minor is a fresh compatibility boundary.\n    \"typer>=0.15.4,<0.28\",\n    # click 8.5.0 drops every positional-argument description from `--help`\n    # (its Argument.__init__ overwrites the help typer sets).\n    # Older supported Typer releases require standalone Click; newer ones vendor\n    # it. Keep the declaration and help bound while the floor uses standalone\n    # Click. `tests/test_click_argument_help.py` pins the bound.\n    \"click>=8.0.0,<8.5\",\n    \"rich>=13.0.0\",\n    \"pydantic>=2.0.0\",\n    \"pyyaml>=6.0\",\n    \"huggingface-hub>=0.16.0\",\n    # Plotext 6 replaced the module-level plotting API with Figure methods.\n    # Soup supports both the 5.x and 6.x surfaces through plotext_compat (#522).\n    \"plotext>=5.2.0\",\n    # `env check` reads declared bounds via packaging (Requirement/marker/version).\n    # It ships with pip and is pulled in transitively, but `env check` degrades to\n    # a silent \"clean\" without it \u2014 the wrong direction for a checker \u2014 so it is\n    # declared explicitly (#368 review).\n    \"packaging>=21.0\",\n]\n\n[project.optional-dependencies]\n# v0.71.0 \u2014 heavy training stack. `pip install 'soup-cli[train]'` to fine-tune.\n# These were core dependencies through v0.70.0.\ntrain = [\n    # Soup's training floor is 2.6.0 because TRL preference trainers\n    # require the public FSDP2 API introduced in PyTorch 2.6.0. This also\n    # subsumes Transformers 5.16.1's torch>=2.5 requirement (#651).\n    # tests/test_issue636_torch_floor.py pins this floor against the declared\n    # transformers floor's own requirement (real metadata, on the\n    # transformers-floor CI job that installs exactly 5.16.1) and pins\n    # doctor's literal copy against this file, so neither can drift silently.\n    \"torch>=2.6.0\",\n    # 5.16.1 is the validated Qwen4-Exp floor: an outer `qwen4_exp` config\n    # selects the text-only Qwen4ExpForCausalLM, and the patch release restores\n    # tensor-parallel compatibility needed by large-model training. The v5\n    # range also keeps `[train,mlx]` resolvable because mlx-lm requires v5.\n    \"transformers>=5.16.1,<6.0.0\",\n    # 0.20 is the validated Transformers 5 adapter floor. It still needs Soup's\n    # explicit qwen3_5_text target policy below the automatic PEFT mapping layer.\n    \"peft>=0.20.0,<1.0.0\",\n    # #326 migrated the six preference trainers (bco, dpo, ipo, kto, orpo,\n    # simpo) across TRL's staged API moves using capability probes instead of\n    # version checks. That lets the supported floor move to 0.29 here.\n    #\n    # trl removed `max_prompt_length` from the preference configs in STAGES\n    # rather than in one release \u2014 which is why a single spot-check gives the\n    # wrong answer. This table is now verified the only way that settles it, by\n    # CONSTRUCTING each config with the exact kwargs the wrappers pass:\n    #\n    #   version          dpo   kto   orpo   cpo   bco\n    #   0.14.0 - 0.26.2  yes   yes   yes    yes   yes\n    #   0.27.0 - 0.27.2  yes   NO    yes    yes   yes\n    #   0.28.0           yes   NO    NO     NO    NO\n    #   0.29.0 - 1.9.2   NO    NO    NO     NO    NO\n    #\n    # There is NO successor field: `max_length` survives on every version and\n    # absorbs prompt truncation, so the migration is to stop passing the keyword\n    # to a config that no longer has it, not to rename it. The trainers now ask\n    # the config class whether it accepts the keyword (trainer/_trl_compat.py)\n    # instead of comparing versions, because a version table is exactly what was\n    # wrong twice before. On every trl that still has the field the behaviour is\n    # byte-identical \u2014 measured: the six train to identical losses on 0.26.2,\n    # 0.28.0 and 1.9.2 on the same fixture.\n    #\n    # Separately, trl 0.29.0 dropped ORPOConfig / CPOConfig / BCOConfig (and\n    # their trainers) from the public `trl` namespace. They were not deleted \u2014\n    # they live on under `trl.experimental.<algo>` \u2014 so those three trainers now\n    # fall back to that path when the public import is gone.\n    #\n    # Transformers 5 changed a private availability helper that trl<=0.28\n    # imported, which makes absent optional packages look present and prevents\n    # DPO/GRPO modules from importing (#503). trl 0.29 vendors its own probe and\n    # is the first compatible release. It also moves BasePairwiseJudge to\n    # `trl.experimental.judges`; Soup resolves that capability from either home.\n    # Keep the upper bound below trl 1 because 1.x removes the pairwise `judge=`\n    # API and is a separate online-DPO migration.\n    #\n    # The underlying bug was latent, not new: the trl imports live inside\n    # `setup()`, which no test had ever called on those wrappers, so CI stayed\n    # green while anyone pip-installing got a broken install. v0.72.4's\n    # end-to-end preference tests are what surfaced it.\n    #\n    \"trl>=0.29.0,<1.0.0\",\n    # trl imports `requests` at module scope in trl/generation/vllm_client.py,\n    # and trl.trainer.grpo_trainer and trl.experimental.online_dpo import that\n    # module unconditionally \u2014 but trl declares `requests` only under its\n    # optional `vllm` extra (true of 0.29.1 and of 1.14.1). A training install\n    # got it by accident through datasets (`requests>=2.32.2`) until datasets\n    # 5.1.0 (2026-10-05) dropped the dependency; from then on a fresh\n    # `pip install 'soup-cli[train]'` could not import GRPOTrainer or the\n    # online-DPO trainer (`ModuleNotFoundError: No module named 'requests'`).\n    # Soup now declares what its trainers need instead of inheriting it. The\n    # floor is the one datasets carried, so the resolved set does not change.\n    # No ceiling: trl leaves it unbounded. Pinned by\n    # tests/test_train_extra_declares_requests.py.\n    \"requests>=2.32.2\",\n    \"datasets>=2.14.0\",\n    \"bitsandbytes>=0.41.0\",\n    # #352: 0.27.0 added `adapter_only` to `save_fsdp_model`/`load_fsdp_model`, which\n    # transformers 5.16.1 feature-detects to keep a PEFT run's FSDP resume checkpoint\n    # to the adapter instead of the full frozen base.\n    \"accelerate>=0.27.0\",\n]\n# v0.71.0 \u2014 convenience meta-extra pulling the main optional stacks.\nall = [\"soup-cli[train,serve,ui,data,mcp]\"]\neval = [\"lm-eval>=0.4.0\"]\n# Aider's normal CLI. Its Polyglot harness is source-only, so `soup eval aider`\n# additionally requires the upstream benchmark Docker image documented in\n# docs/evaluation.md; the wheel alone cannot supply benchmark/benchmark.py.\naider = [\"aider-chat>=0.86.2,<0.87\"]\ndata = [\"datasketch>=1.6.0\", \"scikit-learn>=1.0.0\"]\n# PDF/DOCX readers for `soup data ingest`. The python-docx floor was checked by a\n# manual round trip; the pypdf floor was raised to 6.21.2 for 0.77.0.\n# CI uses stubs; real-reader tests run when the extra is installed.\ndocuments = [\"pypdf>=6.21.2\", \"python-docx>=1.2.0\"]\nwandb = [\"wandb>=0.15.0,<0.18.0\"]\n# Self-references `[train]` so CI / contributors get the full training stack\n# (CI runs `pip install -e \".[dev]\"`; without this every test would fail at\n# `import torch`).\ndev = [\"soup-cli[train,mcp,data]\", \"jsonschema>=4.18\", \"cryptography>=41.0.0\", \"reportlab>=4.0.0\", \"pytest>=7.0\", \"ruff>=0.1.0\", \"pytest-cov>=4.0\", \"pytest-timeout>=2.3.1\", \"httpx>=0.24.0\", \"mypy>=1.8.0\", \"pre-commit>=3.5.0\", \"fastapi>=0.104.0\"]\nui = [\"fastapi>=0.104.0\", \"uvicorn>=0.24.0\"]\nserve = [\"fastapi>=0.104.0\", \"uvicorn>=0.24.0\"]\nserve-fast = [\"vllm>=0.4.3\", \"fastapi>=0.104.0\", \"uvicorn>=0.24.0\"]\ngenerate = [\"httpx>=0.24.0\"]\ndeepspeed = [\"deepspeed>=0.12.0\"]\nfast = [\"unsloth>=2024.8\"]\nvision = [\"Pillow>=9.0.0\"]\n# The floor lives in TORCHAO_MIN_VERSION (src/soup_cli/utils/torchao_compat.py);\n# tests/test_issue826_torchao_class_names.py pins this line to it (#826).\nqat = [\"torchao>=0.18.0\"]\nliger = [\"liger-kernel>=0.3.0\"]\nring-attn = [\"ring-flash-attn>=0.1.0\"]\nonnx = [\"optimum[onnxruntime]>=1.16.0\"]\ntensorrt = [\"tensorrt_llm>=0.9.0\"]\naudio = [\"librosa>=0.10.0\", \"soundfile>=0.12.0\", \"torchaudio>=2.6.0,<3.0.0\"]\nsglang = [\"sglang>=0.5.1\", \"fastapi>=0.104.0\", \"uvicorn>=0.24.0\", \"httpx>=0.24.0\"]\nmlx = [\n    \"mlx>=0.20.0\",\n    \"mlx-lm>=0.31.3\",\n    # mlx-lm imports transformers at runtime; keep the standalone contract from\n    # depending on that transitive requirement remaining undeclared here.\n    \"transformers>=5.16.1,<6.0.0\",\n]\ncce = [\"cut-cross-entropy>=24.10.0\"]\ntui = [\"textual>=0.50.0\"]\n# v0.53.8 #89 \u2014 bundle MLflow / SwanLab / Trackio for `--tracker` users.\ntrackers = [\"mlflow>=2.0.0\", \"swanlab>=0.3.0\", \"trackio>=0.0.1\"]\n# v0.53.8 #85 \u2014 fsspec backends for remote dataset loading (s3 / gs / az / oci).\nremote = [\"fsspec>=2024.1.0\", \"s3fs>=2024.1.0\", \"gcsfs>=2024.1.0\", \"adlfs>=2024.1.0\"]\n# v0.53.10 #150 \u2014 bundle scikit-optimize so `soup data mix --optimize` runs the\n# Bayesian-style loop instead of falling back to the v0.48.0 Dirichlet sampler.\nmix = [\"scikit-optimize>=0.9.0\"]\n# v0.53.10 #113 \u2014 optional language detection and PII analysis.\ndata-pro = [\"langdetect>=1.0.9\", \"presidio-analyzer>=2.2.0\"]\n# v0.71.2 #185 \u2014 small offline ed25519 signing extra.\nsign = [\"cryptography>=41.0.0\"]\n# #185 \u2014 Sigstore keyless OIDC/Fulcio/Rekor stack. Kept separate so\n# air-gapped ed25519 users do not pull the network/transparency dependencies.\nsigstore = [\"sigstore>=4.4.0,<5.0.0\"]\n# v0.71.3 #181 \u2014 reportlab PDF rendering for `soup train --annex-xi *.pdf`.\npdf = [\"reportlab>=4.0.0\"]\n# v0.71.3 #180 \u2014 codecarbon offline energy/CO2 measurement for\n# `soup train --track-energy` (offline; no IP-geolocation network call).\ncarbon = [\"codecarbon>=2.0.0\"]\n# v0.71.13 #225/#227 \u2014 prompt-program / tool-schema compilers\n# (`soup compile` / `soup compile-tools`). Lazy-imported with a friendly\n# ImportError; not installed by default (heavy dependency trees).\ncompile = [\"dspy-ai>=2.5.0\", \"textgrad>=0.1.0\", \"gepa>=0.0.1\"]\n# v0.71.18 #16 \u2014 serverless cloud GPU training (`soup train --cloud modal`).\n# Lazy-imported; only needed for `--cloud-submit` (plan-only render needs no\n# dependency). Modal auth is via `modal setup`.\nmodal = [\"modal>=0.60.0\"]\n# v0.71.28 - `soup mcp serve` MCP server. The official `mcp` python SDK is\n# lazy-imported (only src/soup_cli/mcp_server/server.py touches it), so the CLI\n# stays light without it. Floor pinned to guard against SDK API churn.\n#\n# v0.72.3: capped below 2.0. The floor alone was not enough \u2014 mcp 2.0.0 removed\n# `mcp.shared.memory.create_connected_server_and_client_session` and dropped\n# `Server.list_tools`, which broke every `soup mcp serve` round-trip test on all\n# nine CI jobs the day it was published. 1.29.0 (the newest 1.x) still exposes\n# both, verified directly. Migrating to the 2.x API is its own piece of work,\n# and shipping against a major nobody has validated is not a substitute for it.\n# v0.73.4 (#296): floor raised from 1.2.0 for the sse / streamable-http\n# transports. Measured against the published wheels rather than the\n# changelog: `mcp/server/streamable_http_manager.py` first appears in\n# 1.8.0 (absent in 1.7.0) and `mcp/server/transport_security.py` in\n# 1.10.0 (absent in 1.9.4). `--transport sse` alone would have run on\n# the old floor; DNS-rebinding protection would not, and a listener\n# whose origin checking silently vanishes on an older SDK is worse than\n# a resolver error. No new package: `mcp` already requires starlette,\n# uvicorn, sse-starlette and httpx-sse.\n#\n# v0.73.4 (#322): cap lifted to `<3`. The two removals that forced it are\n# bridged rather than pinned around. `build_server` probes the `Server`\n# constructor for `on_list_tools` \u2014 2.x registers handlers there, 1.x through\n# decorators \u2014 and the round-trip tests were rebuilt on\n# `create_client_server_memory_streams`, which both majors still ship, instead\n# of the 2.x-removed `create_connected_server_and_client_session`. Verified by\n# running the MCP suite twice, once per major, not by reading release notes.\n# The three modules the sse / streamable-http transports depend on\n# (`sse`, `streamable_http_manager`, `transport_security`) all survive in 2.0.0,\n# so those needed no change at all. The floor stays 1.10.0 for the reason above.\nmcp = [\"mcp>=1.10.0,<3\"]\n\n[project.scripts]\nsoup = \"soup_cli.cli:run\"\n\n[project.urls]\nHomepage = \"https://github.com/MakazhanAlpamys/Soup\"\nRepository = \"https://github.com/MakazhanAlpamys/Soup\"\nIssues = \"https://github.com/MakazhanAlpamys/Soup/issues\"\nDiscord = \"https://discord.gg/dgd2pJcjwP\"\n\n[tool.hatch.build.targets.wheel]\npackages = [\"src/soup_cli\"]\n# v0.53.8 #93 \u2014 include bundled fixture JSONLs as package data so\n# `soup data demo` works in zipapp / namespace-package installs.\n# Hatchling's ``packages = [\"src/soup_cli\"]`` already recurses into the\n# package directory, so we use the artifacts directive (NOT\n# force-include, which double-shipped the files in v0.53.8 and produced\n# a \"duplicate filename in local headers\" 400 from PyPI upload).\nartifacts = [\n  \"src/soup_cli/data/_fixtures/*.jsonl\",\n  \"src/soup_cli/data/_fixtures/unlearning/*.jsonl\",\n  \"src/soup_cli/data/_fixtures/behavior/*.jsonl\",\n  \"src/soup_cli/data/_fixtures/gate/*.jsonl\",\n]\n\n[tool.ruff]\ntarget-version = \"py311\"\nline-length = 100\n\n[tool.ruff.lint]\nselect = [\"E\", \"F\", \"I\", \"N\", \"W\"]\n\n[tool.mypy]\n# Intentionally lenient: the codebase leans on torch / transformers / peft / trl,\n# none of which ship complete stubs. This config surfaces type issues in our own\n# code without drowning in third-party `Any`s. The CI `type-check` job is\n# non-blocking; tighten incrementally as modules gain annotations.\npython_version = \"3.11\"\nfiles = [\"src/soup_cli\"]\nignore_missing_imports = true\nfollow_imports = \"silent\"\n\n[tool.pytest.ini_options]\ntestpaths = [\"tests\"]\nmarkers = [\n    \"smoke: slow smoke tests that download models and run training (run with: pytest -m smoke)\",\n    \"unit: fast isolated tests \u2014 no subprocess, network, filesystem, or real model load\",\n    \"integration: tests that touch real subprocess, SQLite, filesystem, or HTTP\",\n    \"gpu: needs a CUDA device; skipped without one (see tests/conftest.py, #833). Run: pytest -m gpu --no-cov\",\n    \"requires_symlink: creates a symlink; skipped when this account cannot (see tests/conftest.py, #832)\",\n    \"requires_hardlink: creates a hardlink; skipped when this account or filesystem cannot\",\n]\naddopts = \"-m 'not smoke' --cov=soup_cli --cov-fail-under=77 --cov-report=term-missing:skip-covered\"\n\n[tool.coverage.run]\n# Modules that need the GPU stack to import or run: the Triton kernels and the code that imports\n# them. A CPU run can never execute them; tests/test_packed_lora_*_gpu.py covers them\n# (`pytest -m gpu --no-cov`, Linux CUDA). Everything that imports on CPU stays measured, and its\n# GPU-only functions carry a `# pragma: no cover` that names the tests.\nomit = [\n  \"*/soup_cli/kernels/packed_lora/triton/*\",\n  \"*/soup_cli/kernels/packed_lora/layers.py\",\n  \"*/soup_cli/kernels/packed_lora/model.py\",\n  \"*/soup_cli/kernels/packed_lora/runtime.py\",\n]\n"
+        },
+        {
+          "path": "benchmarks/harness/kbit_fp32_ab/requirements-tco.txt",
+          "sha256": "27bb12191e95f2b0179835a9691629fd51cc4bd32832564cb9e298f5b75d2531",
+          "text": "# Pinned stack for the #2609 step-1 A/B.  Same pins as the base harness's pin list\n# MINUS unsloth, unsloth_zoo (the Soup arm hid them\n# anyway: tco_run.py puts None in sys.modules for them) and MINUS xformers/triton/torchao which only unsloth pulled in.\n# torch 2.11.0 (cu128) is installed FIRST by run_tco.sh; nothing here may move it.\n# liger-kernel (arm D only) is installed afterwards by job_p6.sh against `pip freeze` as constraints.\nsoup-cli[train]==0.77.2\ntransformers==5.17.0\ntrl==0.29.1\npeft==0.20.0\nbitsandbytes==0.50.2\naccelerate==1.15.0\ndatasets==4.8.5\nhuggingface_hub>=0.34.0\nhf_transfer\npsutil\n"
+        }
+      ],
+      "upstream_benchmarks": "UNREPRODUCED",
+      "tracked_files": 3870
+    },
+    {
+      "name": "colibri",
+      "owner_namespace": "JustVugg",
+      "url": "https://github.com/JustVugg/colibri.git",
+      "commit": "0a5504a1dc64f86fcd0fe7db298b0448c730e7e6",
+      "license": "Apache-2.0",
+      "notices": [
+        {
+          "path": "research/p0-055/notices/colibri/LICENSE",
+          "sha256": "fb9b97e1cc193452870025f6cf501003130561681659e265e5fdf6c023f71325"
+        },
+        {
+          "path": "research/p0-055/notices/colibri/NOTICE",
+          "sha256": "c8a3ae98b85c30294ac8adeea94360dc25264dea0786a3d1ab0b48a4bc31b001"
+        },
+        {
+          "path": "research/p0-055/notices/colibri/THIRD_PARTY_NOTICES.md",
+          "sha256": "283fa1a9c27a8930340add500f2f0453dd15568ec38c21a1fff4f3d1f716ebc7"
+        }
+      ],
+      "declared_dependency_manifests": [
+        {
+          "path": "pyproject.toml",
+          "sha256": "d5e95f770686fbdc476d5477709173bb047423e85f97858ede6553b99c5cced5",
+          "text": "[build-system]\nrequires = [\"setuptools>=68.0\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"colibri-engine\"\ndynamic = [\"version\"]\ndescription = \"Tiny engine, immense model \u2014 run GLM-5.2 (744B MoE) locally\"\nreadme = \"README.md\"\nlicense = \"Apache-2.0\"\nrequires-python = \">=3.10\"\nauthors = [\n    {name = \"JustVugg\"},\n]\nclassifiers = [\n    \"Development Status :: 4 - Beta\",\n    \"Environment :: Console\",\n    \"Intended Audience :: Science/Research\",\n    \"Operating System :: POSIX :: Linux\",\n    \"Operating System :: MacOS\",\n    \"Operating System :: Microsoft :: Windows\",\n    \"Programming Language :: Python :: 3\",\n    \"Topic :: Scientific/Engineering :: Artificial Intelligence\",\n]\n\n[project.optional-dependencies]\nconvert = [\n    \"numpy\",\n    \"huggingface_hub\",\n]\noracle = [\n    \"torch>=2.0\",\n    \"transformers>=4.40\",\n    \"safetensors\",\n]\nbench = [\n    \"tokenizers\",\n    \"datasets\",\n]\nvision = [   # pictures through the gateway (the towers' preprocessors)\n    \"numpy\",\n    \"pillow\",\n]\n\n[project.scripts]\ncoli = \"colibri.cli:main\"\n\n[project.urls]\nHomepage = \"https://github.com/JustVugg/colibri\"\nIssues = \"https://github.com/JustVugg/colibri/issues\"\n\n[tool.setuptools.dynamic]\nversion = {attr = \"colibri._version.__version__\"}\n\n[tool.setuptools.packages.find]\nwhere = [\".\"]\ninclude = [\"colibri*\"]\n"
+        },
+        {
+          "path": "c/tools/requirements-kimi-k3-ref.txt",
+          "sha256": "a1c062a7e39a8b822ce212ec8fdf63e521f03ea67664c58a06be2bc1ba66224d",
+          "text": "# maintainer-only: regenerate kimi_k3_tiny/ref.json from Moonshot's own\n# modeling code (tools/make_kimi_k3_ref.py). CI never needs these.\n# transformers is pinned to the version the vendor code targets\n# (OutputRecorder and friends moved in 5.x).\ntorch\ntransformers==4.56.2\neinops\nfla-core\nnumpy\npackaging\n"
+        },
+        {
+          "path": "c/tools/requirements-deepseek-v4-tiny.txt",
+          "sha256": "d9d91cb9c217cdf079aa54a432286589d21d4081655fa5b89119f7dc62addc62",
+          "text": "--extra-index-url https://download.pytorch.org/whl/cpu\n# The +cpu local-version tag exists in the Linux and Windows wheels of the CPU\n# index; macOS wheels are CPU-only by construction and carry the plain\n# version. Same pin either way -- the marker picks the spelling per OS.\ntorch==2.13.0+cpu; sys_platform != \"darwin\"\ntorch==2.13.0; sys_platform == \"darwin\"\ntransformers==5.14.1\nsafetensors==0.8.0\n"
+        },
+        {
+          "path": "c/tools/requirements-glm53-tiny.txt",
+          "sha256": "d6f73395ebffaf45f3208ca887fcbd3149f000496ac34dc70b9fd27e4f76409f",
+          "text": "--extra-index-url https://download.pytorch.org/whl/cpu\ntorch==2.13.0+cpu; sys_platform != \"darwin\"\ntorch==2.13.0; sys_platform == \"darwin\"\ntransformers==5.16.1\nsafetensors==0.8.0\n"
+        },
+        {
+          "path": "c/tools/requirements-gguf.txt",
+          "sha256": "933df132ea6b175f865db3b2885d3bcb698f1f98a593f2bb203d4a708703c4af",
+          "text": "# Dependencies for the GGUF reader / dequant / OLMoE-profile / converter tests\n# (c/tests/test_gguf_reader.py, test_gguf_dequant.py,\n# test_gguf_olmoe_profile.py, test_convert_gguf_to_olmoe.py). Installed only by\n# the ci.yml `gguf` job; the engine-build and generic Python jobs stay lean.\n#\n# gguf is llama.cpp's gguf-py reference: test_gguf_dequant.py cross-checks our\n# dequantization against gguf.quants.dequantize. The committed golden fixture is\n# the frozen pin, so this is a minimum version that lets upstream drift surface.\n# torch is deliberately absent: the quantizer is pinned by the committed golden\n# fixture (tests/fixtures/olmoe_quantize_row_golden.npz) and the torch-based\n# cross-checks stay optional for local runs.\nnumpy>=1.26\nsafetensors>=0.4\ngguf>=0.19\n"
+        },
+        {
+          "path": "c/tools/requirements-qwenimage-tiny.txt",
+          "sha256": "98da3b9ff7d83616047040180bdfdd4fd8c7aef9bfa79545e80233078282470d",
+          "text": "# Pinned dependencies for the Qwen-Image-2.1 tiny oracle (tools/make_qwenimage_tiny.py,\n# tools/make_qwenimage_vae_tiny.py). QwenImage21Pipeline is not in a diffusers\n# release yet, so diffusers is pinned to the commit the reference was built with.\n# No torchvision: the fixture builds the processor without the video part, which\n# text-to-image never calls.\n--extra-index-url https://download.pytorch.org/whl/cpu\ntorch==2.14.0+cpu; sys_platform != \"darwin\"\ntorch==2.14.0; sys_platform == \"darwin\"\nsafetensors==0.8.0\ntransformers==5.17.0\nnumpy\npillow\ndiffusers @ git+https://github.com/huggingface/diffusers@80c7ed262aeffbeb43ef13ae04baeb9b84515a69\n"
+        },
+        {
+          "path": "c/tools/requirements-jev-sdk.txt",
+          "sha256": "2d9691cd9cfa178f8f6b8122fc1a7d69310549231f8ae6c8a543e4e309ac5c26",
+          "text": "# TypeSafe's Python SDK and what it pulls in, pinned, for tests/test_jev_sdk.py\n# (make jev-sdk-check). numpy builds the tiny fixtures the test serves, and Pillow\n# the MiMo fixture's test picture (make mimo-tiny-generate passes --vision).\ntypesafe_sdk==0.7.2\nhttpx2==2.13.1\nhttpcore2==2.13.1\npydantic==2.13.5\npydantic_core==2.46.5\ntenacity==9.1.4\ntyping_extensions==4.16.0\ntyping-inspection==0.4.4\nannotated-types==0.8.0\nanyio==4.15.1\nh11==0.16.0\nidna==3.20\ntruststore==0.10.4\nnumpy\npillow\n"
+        },
+        {
+          "path": "c/tools/requirements-kimi-k3-tiny.txt",
+          "sha256": "5248332eefefb39377bbcd44f5ec3efb0fc40a755a5b172f97e60ab462172180",
+          "text": "# tiny K3 fixture generation (CI): deterministic numpy-only weights\nnumpy>=1.24\n"
+        },
+        {
+          "path": "c/tools/requirements-mimo-tiny.txt",
+          "sha256": "50387ff3b038578a016a75040357360b5d2ae13ec152f8d27f5220b206bec2e7",
+          "text": "# tiny MiMo-V2.6 fixture generation (CI): deterministic numpy weights, and Pillow for\n# the test picture and the gateway's Qwen2-VL preprocessing (tools/qwen38_image.py)\nnumpy>=1.24\npillow>=10\n"
+        },
+        {
+          "path": "c/tools/requirements.txt",
+          "sha256": "37a90a95c2c45db11513a7549d45da222328aa41188c1150001a73631efabd8f",
+          "text": "# Python dependencies for the colibri offline converter / oracle / download tools\n# (c/tools/*.py and c/*.py). Minimum-version pins; for a fully reproducible env,\n# freeze exact versions into your own lockfile with `pip freeze > locked.txt`.\n#\n# DEVELOPMENT TOOLING ONLY \u2014 none of this is a Colibri runtime dependency. The\n# engine is a C binary; once a model (or the generated glm_tiny oracle) exists on\n# disk, running it needs no Python at all.\n#\n# Installing this whole file is only needed for the download/convert tools. To\n# generate the tiny GLM oracle (tools/make_glm_oracle.py) the direct set is just:\n#\n#     torch  transformers>=5.11  safetensors\n#\n# transformers>=5.11 is a hard requirement there, not a preference: the generator\n# exits rather than run below it, because older releases apply split-half Llama\n# RoPE and silently emit an oracle the engine cannot match (issue #281). See\n# docs/windows.md \"Generating the synthetic GLM oracle model\" for an isolated\n# CPU-only setup.\ntorch>=2.4\nsafetensors>=0.4\nhuggingface-hub>=0.24\nnumpy>=1.26\ntokenizers>=0.20\ntransformers>=5.11        # <5.11 applies split-half Llama RoPE and drifts vs the engine's interleaved MLA (issue #281)\ndatasets>=2.20\nrequests>=2.31\n\n# Optional download-fallback backends (only needed for download_fp8.py's alt paths):\n#   modelscope>=1.9\n#   hf_transfer>=0.1\n"
+        },
+        {
+          "path": "c/tools/requirements-qwen38-tiny.txt",
+          "sha256": "e5e61e276580d650a9aebf912efc907cf58330eccb009a9f19c86644a82eee6c",
+          "text": "# Pinned dependencies for the Qwen3.8-Flash-Next text oracle. Transformers\n# 5.16.1 is the first release that includes the upstream Qwen4-Exp text class.\n--extra-index-url https://download.pytorch.org/whl/cpu\ntorch==2.13.0+cpu; sys_platform != \"darwin\"\ntorch==2.13.0; sys_platform == \"darwin\"\nsafetensors==0.8.0\ntransformers==5.16.1\n"
+        }
+      ],
+      "upstream_benchmarks": "UNREPRODUCED",
+      "tracked_files": 1697
+    },
+    {
+      "name": "MoRAM",
+      "owner_namespace": "Artificer-AI-Lab",
+      "url": "https://github.com/Artificer-AI-Lab/MoRAM.git",
+      "commit": "aaa51d8ec67171e1bc5e1a1168351588561256c4",
+      "license": "Apache-2.0",
+      "notices": [
+        {
+          "path": "research/p0-055/notices/MoRAM/LICENSE",
+          "sha256": "d2a2ca587e46f821b78576c75bb27180a93dff8b0b60f00cca2a0e7c6160a88f"
+        }
+      ],
+      "declared_dependency_manifests": [
+        {
+          "path": "TRACE/requirements.txt",
+          "sha256": "b8cbc20c0767134a58ebf74b0c4d9461761375dd8b16e3d6a1c798c9cefbb8e9",
+          "text": "accelerate==1.0.1\ndatasets==2.18.0\ndeepspeed==0.15.3\nflash-attn==2.6.3\nhuggingface-hub==0.25.2\nnltk==3.9.1\nsentencepiece==0.2.1\ntimm==0.6.7\ntokenizers==0.20.3\ntorch==2.4.1\ntorchvision==0.19.1\ntransformers==4.45.2\ntriton==3.0.0\n"
+        },
+        {
+          "path": "XTAIL/requirements.txt",
+          "sha256": "b8cf6f10832dd8833580a08268e3704c7855d2fe0496e346b3bcc9a01c1a9798",
+          "text": "huggingface-hub==0.34.1\nnumpy==1.26.4\nopen-clip-torch==2.12.0\ntimm==1.0.19\ntokenizers==0.21.2\ntorch==2.7.1\ntorchvision==0.22.1\ntransformers==4.54.0\n"
+        }
+      ],
+      "upstream_benchmarks": "UNREPRODUCED",
+      "tracked_files": 243
+    },
+    {
+      "name": "kaizen",
+      "owner_namespace": "qosu",
+      "url": "https://github.com/qosu/kaizen.git",
+      "commit": "668fd603be3fd93fdb4e74573caecb6581c45651",
+      "license": "MIT",
+      "notices": [
+        {
+          "path": "research/p0-055/notices/kaizen/LICENSE",
+          "sha256": "1239cbe8fa331530f4f99148cd85567797b3d817640a6defb560980072a9ece3"
+        }
+      ],
+      "declared_dependency_manifests": [
+        {
+          "path": "requirements.txt",
+          "sha256": "b88fb97ba59c68169c1f3a074de6fbe4f1795890c299594ed9d2e18605ffd24f",
+          "text": "torch>=2.0.0\ntokenizers>=0.15.0\nhuggingface_hub>=0.20.0\nfaiss-cpu>=1.7.4\nnumpy>=1.24.0\ndatasets>=2.14.0\n"
+        }
+      ],
+      "upstream_benchmarks": "UNREPRODUCED",
+      "tracked_files": 19
+    },
+    {
+      "name": "paramem",
+      "owner_namespace": "tiberius1701d",
+      "url": "https://github.com/tiberius1701d/paramem.git",
+      "commit": "64560a9cb337779a0534a91783ec7a422501134d",
+      "license": "MIT",
+      "notices": [
+        {
+          "path": "research/p0-055/notices/paramem/LICENSE",
+          "sha256": "b2a7f220531cc4006bf618dcef75e01e41d4eef6a9f08ced7981cd5ff16bb674"
+        }
+      ],
+      "declared_dependency_manifests": [
+        {
+          "path": "pyproject.toml",
+          "sha256": "38a8f1963411166a80da7fd14ada5cd4c0b7306d435dc36d804c2807361703c7",
+          "text": "[project]\nname = \"paramem\"\nversion = \"0.1.0\"\ndescription = \"Indexed key retrieval for continual learning in personal LLM agents\"\nreadme = \"README.md\"\nlicense = {text = \"MIT\"}\nrequires-python = \">=3.11\"\nauthors = [\n    {name = \"Tobias Preusser\", email = \"tobias.preusser75@gmail.com\"}\n]\nkeywords = [\"continual-learning\", \"lora\", \"parametric-memory\", \"personal-ai\", \"edge-ai\"]\nclassifiers = [\n    \"Development Status :: 3 - Alpha\",\n    \"Intended Audience :: Science/Research\",\n    \"License :: OSI Approved :: MIT License\",\n    \"Programming Language :: Python :: 3.11\",\n    \"Topic :: Scientific/Engineering :: Artificial Intelligence\",\n]\ndependencies = [\n    \"torch>=2.0\",\n    \"transformers>=4.40\",\n    \"peft>=0.18\",\n    \"bitsandbytes>=0.43\",\n    \"sentence-transformers>=2.6\",\n    \"networkx>=3.2\",\n    \"pydantic>=2.6\",\n    \"rapidfuzz>=3.6\",\n\n    \"pyyaml>=6.0\",\n    \"python-dotenv>=1.0\",\n\n    \"fastapi>=0.110\",\n    \"uvicorn>=0.29\",\n    \"httpx>=0.27\",\n    \"py-vapid>=1.9\",\n    \"websockets>=13.0\",\n    \"cryptography>=43.0\",\n    \"pyrage>=1.3.0,<2\",\n    \"pypdf>=4.0\",\n    \"markdown-it-py>=3.0\",\n    \"fasttext-numpy2-wheel>=0.9.2\",\n    \"segno>=1.6\",\n]\n\n[project.optional-dependencies]\nanthropic = [\"anthropic>=0.80\"]\ngoogle = [\"google-genai>=1.0\"]\nall-agents = [\"anthropic>=0.80\", \"google-genai>=1.0\"]\n# pyannote-audio 4.x is mandatory with torch>=2.10: 3.x uses torchaudio.AudioMetaData,\n# removed in torchaudio 2.10. 4.x pulls torchcodec, whose libnvrtc/FFmpeg load failure\n# at import is non-fatal (torchaudio falls back to soundfile). Supersedes the old <4 pin\n# (which kept torchcodec out, but is incompatible with the torch 2.10 GPU stack).\nspeaker = [\"pyannote-audio>=4.0\"]\nwyoming = [\"wyoming>=1.8.0\"]\nstt = [\"paramem[wyoming]\", \"faster-whisper>=1.0.0\"]\ntts = [\"paramem[wyoming]\", \"piper-tts>=1.3.0\", \"onnxruntime>=1.17\"]\ntts-gpu = [\"paramem[wyoming]\", \"piper-tts>=1.3.0\", \"onnxruntime-gpu>=1.17\"]\n# Optional higher-quality TTS engine (Kokoro-82M, Apache-2.0, CPU-capable). Covers\n# en/fr/es/it/pt/hi/ja/zh (NOT German); pulls a misaki/phonemizer linguistics stack.\n# Opt-in: select \"kokoro\" per-voice in tts.voices. Not in `voice` so base installs stay lean.\nkokoro = [\"paramem[wyoming]\", \"kokoro>=0.9.4\"]\nvoice = [\"paramem[stt,tts,speaker]\"]\ndev = [\"pytest>=8.0\", \"pytest-timeout>=2.3\", \"ruff>=0.3\", \"requests>=2.32\"]\n\n[project.scripts]\nparamem = \"paramem.cli.main:main\"\n\n[tool.setuptools.packages.find]\ninclude = [\"paramem*\"]\n\n[tool.setuptools.package-data]\nparamem = [\"web/static/*\", \"web/static/**/*\", \"training/donor_fixture.json\"]\n\n[tool.ruff]\nline-length = 100\ntarget-version = \"py311\"\n\n[tool.ruff.lint]\nselect = [\"E\", \"F\", \"W\", \"I\"]\n\n[tool.ruff.lint.per-file-ignores]\n# The migration smoke embeds its fictional sessions as inline JSONL strings so\n# it is fully self-contained (no external fixture files). Those data lines are\n# inherently longer than the 100-char limit; the script's code stays within it.\n\"scripts/dev/migration_maintenance_smoke.py\" = [\"E501\"]\n\n[tool.pytest.ini_options]\ntestpaths = [\"tests\"]\npythonpath = [\".\"]\nnorecursedirs = [\"outputs\", \"*.egg-info\", \".git\", \"__pycache__\", \".tox\", \"dist\", \"build\"]\nmarkers = [\n    \"gpu: marks tests that require a GPU (deselect with '-m \\\"not gpu\\\"')\",\n    \"integration: marks subprocess-based end-to-end tests that invoke the installed paramem binary (slow; skip with '-m \\\"not integration\\\"')\",\n]\n"
+        },
+        {
+          "path": "environment.yml",
+          "sha256": "cf48990ce7544c9bf0f9b397e94920cf834cbaeb382510368b728811c68c9d54",
+          "text": "name: paramem\nchannels:\n  - conda-forge\ndependencies:\n  - python=3.11\n  - pip\n"
+        }
+      ],
+      "upstream_benchmarks": "UNREPRODUCED",
+      "tracked_files": 716
+    },
+    {
+      "name": "LoQT",
+      "owner_namespace": "sebulo",
+      "url": "https://github.com/sebulo/LoQT.git",
+      "commit": "375b41ace8dbc3b16f62a72010c945193440ac04",
+      "license": "MIT",
+      "notices": [
+        {
+          "path": "research/p0-055/notices/LoQT/LICENSE.txt",
+          "sha256": "2db04ad4a86f225a79ccd1d785a2abcfb70e1970617a81c5467d34412d408217"
+        }
+      ],
+      "declared_dependency_manifests": [
+        {
+          "path": "environment.yml",
+          "sha256": "29abca343e3f9c6ca1fbe5b54c42924d5152c45287076105c6b47819b079b87e",
+          "text": "name: loqt\nchannels:\n  - defaults\ndependencies:\n  - _libgcc_mutex=0.1=main\n  - _openmp_mutex=5.1=1_gnu\n  - bzip2=1.0.8=h5eee18b_5\n  - ca-certificates=2024.3.11=h06a4308_0\n  - ld_impl_linux-64=2.38=h1181459_1\n  - libffi=3.4.4=h6a678d5_0\n  - libgcc-ng=11.2.0=h1234567_1\n  - libgomp=11.2.0=h1234567_1\n  - libstdcxx-ng=11.2.0=h1234567_1\n  - libuuid=1.41.5=h5eee18b_0\n  - ncurses=6.4=h6a678d5_0\n  - openssl=3.0.13=h7f8727e_0\n  - pip=23.3.1=py310h06a4308_0\n  - python=3.10.14=h955ad1f_0\n  - readline=8.2=h5eee18b_0\n  - setuptools=68.2.2=py310h06a4308_0\n  - sqlite=3.41.2=h5eee18b_0\n  - tk=8.6.12=h1ccaba5_0\n  - wheel=0.41.2=py310h06a4308_0\n  - xz=5.4.6=h5eee18b_0\n  - zlib=1.2.13=h5eee18b_0\n  - pip:\n      - accelerate==0.28.0\n      - aiohttp==3.9.3\n      - aiosignal==1.3.1\n      - appdirs==1.4.4\n      - argparse==1.4.0\n      - async-timeout==4.0.3\n      - attrs==23.2.0\n      - beartype==0.17.2\n      - bitnet==0.2.4\n      - bitsandbytes==0.43.0\n      - cachetools==5.3.3\n      - certifi==2024.2.2\n      - charset-normalizer==3.3.2\n      - click==8.1.7\n      - colt5-attention==0.10.20\n      - contourpy==1.2.1\n      - cycler==0.12.1\n      - datasets==2.18.0\n      - dill==0.3.8\n      - docker-pycreds==0.4.0\n      - einops==0.7.0\n      - einops-exts==0.0.4\n      - einx==0.2.0\n      - evaluate==0.4.1\n      - exceptiongroup==1.2.0\n      - filelock==3.13.3\n      - flake8==7.0.0\n      - fonttools==4.51.0\n      - frozendict==2.4.1\n      - frozenlist==1.4.1\n      - fsspec==2024.2.0\n      - gitdb==4.0.11\n      - gitpython==3.1.43\n      - gputil==1.4.0\n      - huggingface-hub==0.22.2\n      - idna==3.6\n      - iniconfig==2.0.0\n      - jinja2==3.1.3\n      - joblib==1.3.2\n      - kiwisolver==1.4.5\n      - libcst==1.1.0\n      - lion-pytorch==0.1.4\n      - local-attention==1.9.0\n      - loguru==0.7.2\n      - markdown-it-py==3.0.0\n      - markupsafe==2.1.5\n      - matplotlib==3.8.4\n      - mccabe==0.7.0\n      - mdurl==0.1.2\n      - mpmath==1.3.0\n      - multidict==6.0.5\n      - multiprocess==0.70.16\n      - mypy-extensions==1.0.0\n      - networkx==3.3\n      - numpy==1.25.2\n      - nvidia-cublas-cu12==12.1.3.1\n      - nvidia-cuda-cupti-cu12==12.1.105\n      - nvidia-cuda-nvrtc-cu12==12.1.105\n      - nvidia-cuda-runtime-cu12==12.1.105\n      - nvidia-cudnn-cu12==8.9.2.26\n      - nvidia-cufft-cu12==11.0.2.54\n      - nvidia-curand-cu12==10.3.2.106\n      - nvidia-cusolver-cu12==11.4.5.107\n      - nvidia-cusparse-cu12==12.1.0.106\n      - nvidia-ml-py==12.535.133\n      - nvidia-nccl-cu12==2.19.3\n      - nvidia-nvjitlink-cu12==12.4.127\n      - nvidia-nvtx-cu12==12.1.105\n      - nvitop==1.3.2\n      - packaging==24.0\n      - pandas==2.2.1\n      - peft==0.10.0\n      - pillow==10.3.0\n      - pluggy==1.4.0\n      - protobuf==4.25.3\n      - psutil==5.9.8\n      - pyarrow==15.0.2\n      - pyarrow-hotfix==0.6\n      - pycodestyle==2.11.1\n      - pyflakes==3.2.0\n      - pygments==2.17.2\n      - pyparsing==3.1.2\n      - pytest==8.1.1\n      - python-dateutil==2.9.0.post0\n      - pytz==2024.1\n      - pyyaml==6.0.1\n      - regex==2023.12.25\n      - requests==2.31.0\n      - responses==0.18.0\n      - rich==13.7.1\n      - safetensors==0.4.2\n      - scikit-learn==1.4.1.post1\n      - scipy==1.9.3\n      - sentencepiece==0.2.0\n      - sentry-sdk==1.44.1\n      - setproctitle==1.3.3\n      - six==1.16.0\n      - smmap==5.0.1\n      - sympy==1.12\n      - termcolor==2.4.0\n      - threadpoolctl==3.4.0\n      - tokenizers==0.15.2\n      - tomli==2.0.1\n      - torch==2.2.0\n      - torchfix==0.4.0\n      - torchvision==0.17.0\n      - tqdm==4.66.2\n      - transformers==4.39.1\n      - triton==2.2.0\n      - typing-extensions==4.11.0\n      - typing-inspect==0.9.0\n      - tzdata==2024.1\n      - urllib3==2.2.1\n      - vector-quantize-pytorch==1.14.5\n      - wandb==0.16.6\n      - xxhash==3.4.1\n      - yarl==1.9.4\n      - zetascale==2.3.9\nprefix: /zhome/0d/2/211877/miniconda3/envs/loqt\n"
+        }
+      ],
+      "upstream_benchmarks": "UNREPRODUCED",
+      "tracked_files": 64
+    },
+    {
+      "name": "DeepSpeed",
+      "owner_namespace": "deepspeedai",
+      "url": "https://github.com/deepspeedai/DeepSpeed.git",
+      "commit": "a75ab891befa44ef235cffbb9f1662fb016a90c7",
+      "license": "Apache-2.0",
+      "notices": [
+        {
+          "path": "research/p0-055/notices/DeepSpeed/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        {
+          "path": "research/p0-055/notices/DeepSpeed/THIRD_PARTY_NOTICES.md",
+          "sha256": "968f26a1a4b27401350146a261dfde15316d959b76cd3353413543fee818f72d"
+        }
+      ],
+      "declared_dependency_manifests": [
+        {
+          "path": "requirements/requirements-deepcompile.txt",
+          "sha256": "ef08f9a897b3f957fe88becae2e8fdb516dd542295c6997b3ea74df5418c7ee0",
+          "text": "scipy\n"
+        },
+        {
+          "path": "requirements/requirements-sd.txt",
+          "sha256": "14a9d3b72396efb9e3e4c1fec858231d898df047dab2d0873da5a05eb860fa26",
+          "text": "diffusers>=0.25.0\ntriton>=2.1.0\n"
+        },
+        {
+          "path": "requirements/requirements-torchembed.txt",
+          "sha256": "9cdc25be037954e89f3d295445e582d3891330d792835eeb918bff09a1b3d989",
+          "text": "torchembed>=0.3.1\n"
+        },
+        {
+          "path": "requirements/requirements-cpu.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        },
+        {
+          "path": "requirements/requirements-autotuning.txt",
+          "sha256": "a9faa44366b3ecb4f151e45e3ed5fc8209a1dbde0a7f5111748fb5d5a5aa1595",
+          "text": "tabulate\n"
+        },
+        {
+          "path": "requirements/requirements-dev.txt",
+          "sha256": "329376fc437758b13a062738f6e2fbc47c47c5c1f826f62346cd4964a3facefc",
+          "text": "accelerate\nclang-format==18.1.3\ncomet_ml>=3.41.0\ndocutils<0.18\nfuture\nimportlib-metadata>=4\nliger-kernel>=0.8.1\nmup\npre-commit>=3.2.0\npytest>=7.2.0,<8.4.0\npytest-forked\npytest-randomly\npytest-xdist\nqtorch==0.3.0\nrecommonmark\nsphinx\nsphinx-rtd-theme\ntensorboard\ntorchvision\ntransformers>=4.51.3\nwandb\n"
+        },
+        {
+          "path": "requirements/requirements-inf.txt",
+          "sha256": "35edf2ab990bc6ebf37b36e56ec863734e37a18001f978b6d884c91dbd785d5e",
+          "text": "google\nlm-eval==0.3.0\nprotobuf\nqtorch\nsafetensors\nsentencepiece\ntransformers>=4.32.1\n"
+        },
+        {
+          "path": "requirements/requirements-autotuning-ml.txt",
+          "sha256": "6fc87d5f4a8ad7c57f29e17ac2ed17f8d103d00d87a49ebe4aad9dab7840ca4f",
+          "text": "hjson\ntabulate\nxgboost\n"
+        },
+        {
+          "path": "requirements/requirements.txt",
+          "sha256": "f3f5da9771118c071771f11715ceb699f3b4f2b8b3172f4bed17a5716cfb95a4",
+          "text": "einops\nhjson\nmsgpack\nninja\nnumpy\npackaging>=20.0\npsutil\npy-cpuinfo\npydantic>=2.0.0\ntorch>=2.0.0\ntqdm\n"
+        },
+        {
+          "path": "requirements/requirements-readthedocs.txt",
+          "sha256": "4fa9ac0a9f3cf31b5cb89570fe3664a9334657de36a20b2cdac2b230a56dd439",
+          "text": "autodoc_pydantic>=2.0.0\ndocutils<0.18\nhjson\npackaging\npsutil\npy-cpuinfo\npydantic>=2.0.0\nrecommonmark\nsphinx_rtd_theme\ntorch>=2.0.0\ntqdm\n"
+        },
+        {
+          "path": "environment.yml",
+          "sha256": "d62c2aae13df378a739d826da6997466897656104c56470544dfc8c134cc1879",
+          "text": "channels:\n  - nvidia/label/cuda-11.8.0\n  - pytorch # or pytorch-nightly\n  - conda-forge\ndependencies:\n  - pytorch\n  - torchvision\n  - torchaudio\n  - cuda\n  - pytorch-cuda=11.8\n  - compilers\n  - sysroot_linux-64==2.17\n  - gcc==11.4\n  - ninja\n  - py-cpuinfo\n  - libaio\n  - ca-certificates\n  - certifi\n  - openssl\n  - python=3.10\n  - pydantic\n"
+        },
+        {
+          "path": "setup.py",
+          "sha256": "a49a3ca46c6a85d6c3176e20d34a35eed85daa744b5d89c84981e1de08e04570",
+          "text": "# Copyright (c) Microsoft Corporation.\n# SPDX-License-Identifier: Apache-2.0\n\n# DeepSpeed Team\n\"\"\"\nDeepSpeed library\n\nTo build wheels on Windows:\n1. Install pytorch, such as pytorch 2.3 + cuda 12.1.\n2. Install visual cpp build tool.\n3. Include cuda toolkit.\n4. Launch cmd console with Administrator privilege for creating required symlink folders.\n\n\nCreate a new wheel via the following command:\nbuild_win.bat\n\nThe wheel will be located at: dist/*.whl\n\"\"\"\n\nimport pathlib\nimport os\nimport shutil\nimport sys\nimport subprocess\nfrom setuptools import setup, find_packages\nfrom setuptools.command import egg_info\nimport time\nimport typing\nimport shlex\n\ntorch_available = True\ntry:\n    import torch\nexcept ImportError:\n    torch_available = False\n    print('[WARNING] Unable to import torch, pre-compiling ops will be disabled. ' \\\n        'Please visit https://pytorch.org/ to see how to properly install torch on your system.')\n\nfrom op_builder import get_default_compute_capabilities, OpBuilder\nfrom op_builder.all_ops import ALL_OPS, accelerator_name\n\nfrom accelerator import get_accelerator\n\n# Fetch rocm state.\nis_rocm_pytorch = OpBuilder.is_rocm_pytorch()\n\nRED_START = '\\033[31m'\nRED_END = '\\033[0m'\nERROR = f\"{RED_START} [ERROR] {RED_END}\"\n\n\ndef abort(msg):\n    print(f\"{ERROR} {msg}\")\n    assert False, msg\n\n\ndef fetch_requirements(path):\n    with open(path, 'r') as fd:\n        return [r.strip() for r in fd.readlines()]\n\n\ndef is_env_set(key):\n    \"\"\"\n    Checks if an environment variable is set and not \"\".\n    \"\"\"\n    return bool(os.environ.get(key, None))\n\n\ndef get_env_if_set(key, default: typing.Any = \"\"):\n    \"\"\"\n    Returns an environment variable if it is set and not \"\",\n    otherwise returns a default value. In contrast, the fallback\n    parameter of os.environ.get() is skipped if the variable is set to \"\".\n    \"\"\"\n    return os.environ.get(key, None) or default\n\n\ninstall_requires = fetch_requirements('requirements/requirements.txt')\nextras_require = {\n    'readthedocs': fetch_requirements('requirements/requirements-readthedocs.txt'),\n    'dev': fetch_requirements('requirements/requirements-dev.txt'),\n    'autotuning': fetch_requirements('requirements/requirements-autotuning.txt'),\n    'autotuning_ml': fetch_requirements('requirements/requirements-autotuning-ml.txt'),\n    'inf': fetch_requirements('requirements/requirements-inf.txt'),\n    'sd': fetch_requirements('requirements/requirements-sd.txt'),\n    'triton': [],  # Retained for backward compatibility; PyTorch owns Triton.\n    'deepcompile': fetch_requirements('requirements/requirements-deepcompile.txt'),\n    'torchembed': fetch_requirements('requirements/requirements-torchembed.txt'),\n}\n\n# Only install pynvml on nvidia gpus.\nif torch_available and get_accelerator().device_name() == 'cuda' and not is_rocm_pytorch:\n    install_requires.append('nvidia-ml-py')\n\n# Make an [all] extra that installs all needed dependencies.\nall_extras = set()\nfor extra in extras_require.items():\n    for req in extra[1]:\n        all_extras.add(req)\nextras_require['all'] = list(all_extras)\n\ncmdclass = {}\n\n# For any pre-installed ops force disable ninja.\nif torch_available:\n    use_ninja = is_env_set(\"DS_ENABLE_NINJA\")\n    cmdclass['build_ext'] = get_accelerator().build_extension().with_options(use_ninja=use_ninja)\n\nif torch_available:\n    TORCH_MAJOR = torch.__version__.split('.')[0]\n    TORCH_MINOR = torch.__version__.split('.')[1]\nelse:\n    TORCH_MAJOR = \"0\"\n    TORCH_MINOR = \"0\"\n\nif torch_available and not get_accelerator().device_name() == 'cuda':\n    # Fix to allow docker builds, similar to https://github.com/NVIDIA/apex/issues/486.\n    print(\"[WARNING] Torch did not find cuda available, if cross-compiling or running with cpu only \"\n          \"you can ignore this message. Adding compute capability for Pascal, Volta, and Turing \"\n          \"(compute capabilities 6.0, 6.1, 6.2)\")\n    if not is_env_set(\"TORCH_CUDA_ARCH_LIST\"):\n        os.environ[\"TORCH_CUDA_ARCH_LIST\"] = get_default_compute_capabilities()\n\next_modules = []\n\n# Default to pre-install kernels to false so we rely on JIT on Linux, opposite on Windows.\nBUILD_OP_PLATFORM = 1 if sys.platform == \"win32\" else 0\nBUILD_OP_DEFAULT = int(get_env_if_set('DS_BUILD_OPS', BUILD_OP_PLATFORM))\nprint(f\"DS_BUILD_OPS={BUILD_OP_DEFAULT}\")\n\nif BUILD_OP_DEFAULT:\n    assert torch_available, \"Unable to pre-compile ops without torch installed. Please install torch before attempting to pre-compile ops.\"\n\n\ndef command_exists(cmd):\n    if sys.platform == \"win32\":\n        safe_cmd = shlex.split(f'{cmd}')\n        result = subprocess.Popen(safe_cmd, stdout=subprocess.PIPE)\n        return result.wait() == 1\n    else:\n        safe_cmd = shlex.split(f\"bash -c type {cmd}\")\n        result = subprocess.Popen(safe_cmd, stdout=subprocess.PIPE)\n        return result.wait() == 0\n\n\ndef op_envvar(op_name):\n    assert hasattr(ALL_OPS[op_name], 'BUILD_VAR'), \\\n        f\"{op_name} is missing BUILD_VAR field\"\n    return ALL_OPS[op_name].BUILD_VAR\n\n\ndef op_enabled(op_name):\n    env_var = op_envvar(op_name)\n    return int(get_env_if_set(env_var, BUILD_OP_DEFAULT))\n\n\ninstall_ops = dict.fromkeys(ALL_OPS.keys(), False)\nfor op_name, builder in ALL_OPS.items():\n    op_compatible = builder.is_compatible()\n\n    # If op is requested but not available, throw an error.\n    if op_enabled(op_name) and not op_compatible:\n        env_var = op_envvar(op_name)\n        if not is_env_set(env_var):\n            builder.warning(f\"Skip pre-compile of incompatible {op_name}; One can disable {op_name} with {env_var}=0\")\n        continue\n\n    # If op is compatible but install is not enabled (JIT mode).\n    if is_rocm_pytorch and op_compatible and not op_enabled(op_name):\n        builder.hipify_extension()\n\n    # If op install enabled, add builder to extensions.\n    if op_enabled(op_name) and op_compatible:\n        assert torch_available, f\"Unable to pre-compile {op_name}, please first install torch\"\n        install_ops[op_name] = op_enabled(op_name)\n        ext_modules.append(builder.builder())\n\n# async_io/gds load the pin_memory op's shared manager at runtime. If they are\n# precompiled but pin_memory is not, deployments without a compiler would hit a\n# runtime JIT build, so precompile pin_memory alongside them.\npin_memory_dependents = [name for name in (\"async_io\", \"gds\") if install_ops.get(name)]\nif pin_memory_dependents and not install_ops.get(\"pin_memory\"):\n    pin_memory_builder = ALL_OPS.get(\"pin_memory\")\n    if pin_memory_builder is not None and pin_memory_builder.is_compatible():\n        assert torch_available, \"Unable to pre-compile pin_memory, please first install torch\"\n        install_ops[\"pin_memory\"] = 1\n        ext_modules.append(pin_memory_builder.builder())\n    else:\n        raise RuntimeError(\n            f\"Cannot pre-compile {', '.join(pin_memory_dependents)} without pin_memory, which is required at \"\n            \"runtime but is not compatible on this platform.\")\n\nprint(f'Install Ops={install_ops}')\n\n# Write out version/git info.\nif sys.platform == \"win32\":\n    git_hash_cmd = shlex.split(\"git rev-parse --short HEAD\")\n    git_branch_cmd = shlex.split(\"git rev-parse --abbrev-ref HEAD\")\nelse:\n    git_hash_cmd = shlex.split(\"bash -c \\\"git rev-parse --short HEAD\\\"\")\n    git_branch_cmd = shlex.split(\"bash -c \\\"git rev-parse --abbrev-ref HEAD\\\"\")\nif command_exists('git') and not is_env_set('DS_BUILD_STRING'):\n    try:\n        result = subprocess.check_output(git_hash_cmd)\n        git_hash = result.decode('utf-8').strip()\n        result = subprocess.check_output(git_branch_cmd)\n        git_branch = result.decode('utf-8').strip()\n    except subprocess.CalledProcessError:\n        git_hash = \"unknown\"\n        git_branch = \"unknown\"\nelse:\n    git_hash = \"unknown\"\n    git_branch = \"unknown\"\n\nif sys.platform == \"win32\":\n    shutil.rmtree('.\\\\deepspeed\\\\ops\\\\csrc', ignore_errors=True)\n    pathlib.Path('.\\\\deepspeed\\\\ops\\\\csrc').unlink(missing_ok=True)\n    shutil.copytree('.\\\\csrc', '.\\\\deepspeed\\\\ops\\\\csrc', dirs_exist_ok=True)\n    shutil.rmtree('.\\\\deepspeed\\\\ops\\\\op_builder', ignore_errors=True)\n    pathlib.Path('.\\\\deepspeed\\\\ops\\\\op_builder').unlink(missing_ok=True)\n    shutil.copytree('.\\\\op_builder', '.\\\\deepspeed\\\\ops\\\\op_builder', dirs_exist_ok=True)\n    shutil.rmtree('.\\\\deepspeed\\\\accelerator', ignore_errors=True)\n    pathlib.Path('.\\\\deepspeed\\\\accelerator').unlink(missing_ok=True)\n    shutil.copytree('.\\\\accelerator', '.\\\\deepspeed\\\\accelerator', dirs_exist_ok=True)\n    egg_info.manifest_maker.template = 'MANIFEST_win.in'\n\n# Parse the DeepSpeed version string from version.txt.\nversion_str = open('version.txt', 'r').read().strip()\n\n# Build specifiers like .devX can be added at install time. Otherwise, add the git hash.\n# Example: `DS_BUILD_STRING=\".dev20201022\" python -m build --no-isolation`.\n\n# Building wheel for distribution, update version file.\nif is_env_set('DS_BUILD_STRING'):\n    # Build string env specified, probably building for distribution.\n    with open('build.txt', 'w') as fd:\n        fd.write(os.environ['DS_BUILD_STRING'])\n    version_str += os.environ['DS_BUILD_STRING']\nelif os.path.isfile('build.txt'):\n    # build.txt exists, probably installing from distribution.\n    with open('build.txt', 'r') as fd:\n        version_str += fd.read().strip()\nelse:\n    # None of the above, probably installing from source.\n    version_str += f'+{git_hash}'\n\ntorch_version = \".\".join([TORCH_MAJOR, TORCH_MINOR])\nbf16_support = False\n# Set cuda_version to 0.0 if cpu-only.\ncuda_version = \"0.0\"\nnccl_version = \"0.0\"\n# Set hip_version to 0.0 if cpu-only.\nhip_version = \"0.0\"\nif torch_available and torch.version.cuda is not None:\n    cuda_version = \".\".join(torch.version.cuda.split('.')[:2])\n    if sys.platform != \"win32\":\n        if isinstance(torch.cuda.nccl.version(), int):\n            # This will break if minor version > 9.\n            nccl_version = \".\".join(str(torch.cuda.nccl.version())[:2])\n        else:\n            nccl_version = \".\".join(map(str, torch.cuda.nccl.version()[:2]))\n    if hasattr(torch.cuda, 'is_bf16_supported') and torch.cuda.is_available():\n        bf16_support = torch.cuda.is_bf16_supported()\nif torch_available and hasattr(torch.version, 'hip') and torch.version.hip is not None:\n    hip_version = \".\".join(torch.version.hip.split('.')[:2])\ntorch_info = {\n    \"version\": torch_version,\n    \"bf16_support\": bf16_support,\n    \"cuda_version\": cuda_version,\n    \"nccl_version\": nccl_version,\n    \"hip_version\": hip_version\n}\n\nprint(f\"version={version_str}, git_hash={git_hash}, git_branch={git_branch}\")\nwith open('deepspeed/git_version_info_installed.py', 'w') as fd:\n    fd.write(f\"version='{version_str}'\\n\")\n    fd.write(f\"git_hash='{git_hash}'\\n\")\n    fd.write(f\"git_branch='{git_branch}'\\n\")\n    fd.write(f\"installed_ops={install_ops}\\n\")\n    fd.write(f\"accelerator_name='{accelerator_name}'\\n\")\n    fd.write(f\"torch_info={torch_info}\\n\")\n\nprint(f'install_requires={install_requires}')\nprint(f'ext_modules={ext_modules}')\n\n# Parse README.md to make long_description for PyPI page.\nthisdir = os.path.abspath(os.path.dirname(__file__))\nwith open(os.path.join(thisdir, 'README.md'), encoding='utf-8') as fin:\n    readme_text = fin.read()\n\nif sys.platform == \"win32\":\n    scripts = ['bin/deepspeed.bat', 'bin/ds', 'bin/ds_report.bat', 'bin/ds_report']\nelse:\n    scripts = [\n        'bin/deepspeed', 'bin/deepspeed.pt', 'bin/ds', 'bin/ds_ssh', 'bin/ds_report', 'bin/ds_bench', 'bin/dsr',\n        'bin/ds_nvme_tune', 'bin/ds_io'\n    ]\n\nstart_time = time.time()\n\nsetup(name='deepspeed',\n      version=version_str,\n      description='DeepSpeed library',\n      long_description=readme_text,\n      long_description_content_type='text/markdown',\n      author='DeepSpeed Team',\n      author_email='info@deepspeedai.com',\n      url='http://deepspeed.ai',\n      project_urls={\n          'Documentation': 'https://deepspeed.readthedocs.io',\n          'Source': 'https://github.com/deepspeedai/DeepSpeed',\n      },\n      install_requires=install_requires,\n      extras_require=extras_require,\n      packages=find_packages(include=['deepspeed', 'deepspeed.*']),\n      include_package_data=True,\n      scripts=scripts,\n      classifiers=[\n          'Programming Language :: Python :: 3.8', 'Programming Language :: Python :: 3.9',\n          'Programming Language :: Python :: 3.10', 'Programming Language :: Python :: 3.11',\n          'Programming Language :: Python :: 3.12'\n      ],\n      license='Apache Software License 2.0',\n      license_files=['LICENSE', 'THIRD_PARTY_NOTICES.md'],\n      ext_modules=ext_modules,\n      cmdclass=cmdclass)\n\nend_time = time.time()\nprint(f'deepspeed build time = {end_time - start_time} secs')\n"
+        }
+      ],
+      "upstream_benchmarks": "UNREPRODUCED",
+      "tracked_files": 2119
+    },
+    {
+      "name": "ASCENT",
+      "owner_namespace": "Artificer-AI-Lab",
+      "url": "https://github.com/Artificer-AI-Lab/ASCENT.git",
+      "commit": "55fb32d4081f665371cdcaf9a89f927a43470897",
+      "license": "Apache-2.0",
+      "notices": [
+        {
+          "path": "research/p0-055/notices/ASCENT/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        }
+      ],
+      "declared_dependency_manifests": [],
+      "upstream_benchmarks": "UNREPRODUCED",
+      "tracked_files": 1
+    }
+  ],
+  "qualified_soup_runtime_pin": "af2f5d5000f7baec6386a72a6d16e82383eb5303",
+  "self_direction": {
+    "official_page": "https://self-direction.github.io/",
+    "implementation": "https://self-direction.github.io/implementation.html",
+    "paper": "https://arxiv.org/abs/2610.31846",
+    "source_repository": null,
+    "status": "Official implementation link is explanatory snippets, not a runnable source release"
+  }
+}

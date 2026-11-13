@@ -1,0 +1,31 @@
+[submodule "p055-Soup"]
+	path = research/p0-055/upstream/Soup
+	url = https://github.com/MakazhanAlpamys/Soup.git
+
+[submodule "p055-colibri"]
+	path = research/p0-055/upstream/colibri
+	url = https://github.com/JustVugg/colibri.git
+
+[submodule "p055-MoRAM"]
+	path = research/p0-055/upstream/MoRAM
+	url = https://github.com/Artificer-AI-Lab/MoRAM.git
+
+[submodule "p055-kaizen"]
+	path = research/p0-055/upstream/kaizen
+	url = https://github.com/qosu/kaizen.git
+
+[submodule "p055-paramem"]
+	path = research/p0-055/upstream/paramem
+	url = https://github.com/tiberius1701d/paramem.git
+
+[submodule "p055-LoQT"]
+	path = research/p0-055/upstream/LoQT
+	url = https://github.com/sebulo/LoQT.git
+
+[submodule "p055-DeepSpeed"]
+	path = research/p0-055/upstream/DeepSpeed
+	url = https://github.com/deepspeedai/DeepSpeed.git
+
+[submodule "p055-ASCENT"]
+	path = research/p0-055/upstream/ASCENT
+	url = https://github.com/Artificer-AI-Lab/ASCENT.git
