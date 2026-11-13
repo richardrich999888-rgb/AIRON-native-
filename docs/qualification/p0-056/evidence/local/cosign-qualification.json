@@ -1,0 +1,10 @@
+{
+  "schema": "airon-cosign-offline/v1",
+  "source_commit": "195ab76b789923862345f5fa9bfe3fac6c453927",
+  "checks": {
+    "real_offline_sign_and_verify": true,
+    "tamper_rejected": true,
+    "wrong_key_rejected": true
+  },
+  "scope": "Key-based distribution signature. No transparency log, timestamp, external observer or deployment authorization. Initial default configuration attempted TUF and was rejected by offline namespace; explicit empty service configuration then passed."
+}

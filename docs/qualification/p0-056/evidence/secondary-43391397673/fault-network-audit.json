@@ -1,0 +1,191 @@
+{
+  "schema": "airon-p056-network-policy/v1",
+  "passed": true,
+  "expected_worker_probes": 3,
+  "observed_worker_probes": 3,
+  "trace_sha256": {
+    "fault-network.3911": "7c7d24f15f7d62801b41648ccc26d5baa5a3fc4386362c4425b0a53d0e116066",
+    "fault-network.3913": "7db2fc33af29cf924aced0f4ded73a2d49843f807818df15cc677038d553a29e",
+    "fault-network.3914": "fa7e833212ad4b18b1586b15d305c12ce4d36186f4cc9be3db476f6e3a08a219",
+    "fault-network.3915": "fa7e833212ad4b18b1586b15d305c12ce4d36186f4cc9be3db476f6e3a08a219",
+    "fault-network.3916": "55a5d35aa65340206a8f3ce807c1cba6768232cfe146e5285e9f90ff5cfbcc66",
+    "fault-network.3917": "fa7e833212ad4b18b1586b15d305c12ce4d36186f4cc9be3db476f6e3a08a219",
+    "fault-network.3918": "fa7e833212ad4b18b1586b15d305c12ce4d36186f4cc9be3db476f6e3a08a219",
+    "fault-network.3921": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3922": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3923": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3924": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3925": "fa7e833212ad4b18b1586b15d305c12ce4d36186f4cc9be3db476f6e3a08a219",
+    "fault-network.3926": "fa7e833212ad4b18b1586b15d305c12ce4d36186f4cc9be3db476f6e3a08a219",
+    "fault-network.3928": "fa7e833212ad4b18b1586b15d305c12ce4d36186f4cc9be3db476f6e3a08a219",
+    "fault-network.3930": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3931": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3932": "1ce4a8287804c270973dad47cf58ce6e1c45fcde251faf1ec6c04e0f0781455e",
+    "fault-network.3933": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3934": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3937": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3938": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3939": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3940": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3941": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3942": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3943": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3944": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3945": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3946": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3953": "024a6c2b2ffe830949fad3fc4dd2c1c79803716aa7fd53203539bc1e529f3b57",
+    "fault-network.3954": "60a6949a3c7223cbc875dd8496c4baa8a9a61a7bbeccf01425fcc4e70d2e8ace",
+    "fault-network.3955": "60a6949a3c7223cbc875dd8496c4baa8a9a61a7bbeccf01425fcc4e70d2e8ace",
+    "fault-network.3956": "0d59d4ac7ee3acdb3f6f2e82dd87139dda2234271525665a31cd81faa91ca32c",
+    "fault-network.3957": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "fault-network.3959": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31"
+  },
+  "allowed": [
+    {
+      "file": "fault-network.3916",
+      "line": 3,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "fault-network.3916",
+      "line": 4,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr(\"198.51.100.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "fault-network.3916",
+      "line": 5,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "fault-network.3916",
+      "line": 6,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(11434), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "fault-network.3916",
+      "line": 11,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "fault-network.3916",
+      "line": 13,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "fault-network.3916",
+      "line": 14,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "fault-network.3916",
+      "line": 16,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "fault-network.3932",
+      "line": 3,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "fault-network.3932",
+      "line": 4,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr(\"198.51.100.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "fault-network.3932",
+      "line": 5,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "fault-network.3932",
+      "line": 6,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(11434), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "fault-network.3932",
+      "line": 11,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "fault-network.3932",
+      "line": 13,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "fault-network.3932",
+      "line": 14,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "fault-network.3932",
+      "line": 16,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "fault-network.3956",
+      "line": 3,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "fault-network.3956",
+      "line": 4,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr(\"198.51.100.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "fault-network.3956",
+      "line": 5,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "fault-network.3956",
+      "line": 6,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(11434), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "fault-network.3956",
+      "line": 11,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "fault-network.3956",
+      "line": 13,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "fault-network.3956",
+      "line": 14,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "fault-network.3956",
+      "line": 16,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    }
+  ],
+  "violations": [],
+  "scope": "No unclassified IP connection or packet send in captured processes. OS namespace plus labelled application probes; not independent agent attribution."
+}

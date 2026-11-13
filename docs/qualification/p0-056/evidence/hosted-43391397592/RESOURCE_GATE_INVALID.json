@@ -1,0 +1,7 @@
+{
+  "source_revision": "104efc4ec933767ec760267785fb31406ba49a00",
+  "functional_workflow": "PASS",
+  "resource_qualification": "INVALID",
+  "reason": "cgroup process assignment failed with Permission denied; shell continued; memory.peak and CPU usage were zero. CPU affinity was set but hard memory enforcement was not established.",
+  "corrective_source": "00bb5a74051fd58bfd556703228e96a941dd7dba"
+}

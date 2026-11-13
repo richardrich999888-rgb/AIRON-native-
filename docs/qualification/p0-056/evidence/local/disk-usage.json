@@ -1,0 +1,28 @@
+{
+  "wheelhouse": {
+    "files": 337,
+    "logical_bytes": 373918912,
+    "allocated_bytes": 374738944
+  },
+  "approved_135m_models": {
+    "files": 10,
+    "logical_bytes": 543330649,
+    "allocated_bytes": 543358976
+  },
+  "packaged_llama_binaries": {
+    "files": 14,
+    "logical_bytes": 26927224,
+    "allocated_bytes": 26951680
+  },
+  "fresh_python_environment": {
+    "files": 44215,
+    "logical_bytes": 1545151374,
+    "allocated_bytes": 1654464512
+  },
+  "synthetic_workspace_after_provision_and_smoke": {
+    "files": 38,
+    "logical_bytes": 272609309,
+    "allocated_bytes": 272699392
+  },
+  "scope": "Local Linux qualification host; no GPU. Logical and allocated size differ; build/source caches and separately supplied AIP binaries excluded. Workspace contains a duplicate registered base model. Not a universal storage requirement."
+}

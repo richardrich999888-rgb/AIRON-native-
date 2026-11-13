@@ -1,0 +1,476 @@
+{
+  "schema": "airon-p056-qualification-summary/v1",
+  "programme_status": "INCOMPLETE_EXTERNAL_QUALIFICATION_AND_SCOPE_GATES",
+  "final_source_target": "0f4cd7e20f4c19577b5a73b9d1dacdc221f3085a",
+  "native_revision": "f1ba9fc2072dac1431543fd4961baaa2762b8ea9",
+  "hardware": {
+    "local": {
+      "affinity": [
+        0,
+        1
+      ],
+      "gpu": false,
+      "meminfo": "MemTotal:       10206472 kB",
+      "platform": "Linux-6.18.57-x86_64-with-glibc2.41"
+    },
+    "first_hosted": {
+      "affinity": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "cpus": 4,
+      "gpu": false,
+      "meminfo": "MemTotal:       16371436 kB",
+      "platform": "Linux-6.8.0-1070-azure-x86_64-with-glibc2.35"
+    }
+  },
+  "procedural_comparisons": {
+    "B0": {
+      "abstention_unique": 1.0,
+      "accuracy_unique": 0.0,
+      "accuracy_wilson_95": [
+        0,
+        0.113517091390478
+      ],
+      "correct_unique": 0,
+      "cpu_s_mean": 1.4679041000000004,
+      "failed": 0,
+      "incorrect_positive_unique": 0,
+      "latency_p50_s": 0.8291528655026923,
+      "latency_p95_s": 2.5639857659989502,
+      "model_calls_per_task": 1,
+      "observations": 60,
+      "peak_aggregate_rss_bytes": 373719040,
+      "tasks": 30,
+      "ttft_s": null
+    },
+    "B1": {
+      "abstention_unique": 1.0,
+      "accuracy_unique": 0.0,
+      "accuracy_wilson_95": [
+        0,
+        0.113517091390478
+      ],
+      "correct_unique": 0,
+      "cpu_s_mean": 1.8003569166666713,
+      "failed": 0,
+      "incorrect_positive_unique": 0,
+      "latency_p50_s": 1.0099891710051452,
+      "latency_p95_s": 1.5974281569942832,
+      "model_calls_per_task": 1,
+      "observations": 60,
+      "peak_aggregate_rss_bytes": 376143872,
+      "tasks": 30,
+      "ttft_s": null
+    },
+    "B2": {
+      "abstention_unique": 1.0,
+      "accuracy_unique": 0.0,
+      "accuracy_wilson_95": [
+        0,
+        0.113517091390478
+      ],
+      "correct_unique": 0,
+      "cpu_s_mean": 1.7704672666666663,
+      "failed": 0,
+      "incorrect_positive_unique": 0,
+      "latency_p50_s": 1.0241766484978143,
+      "latency_p95_s": 2.3676240439963294,
+      "model_calls_per_task": 1,
+      "observations": 60,
+      "peak_aggregate_rss_bytes": 376713216,
+      "tasks": 30,
+      "ttft_s": null
+    },
+    "B3": {
+      "abstention_unique": 0.0,
+      "accuracy_unique": 1.0,
+      "accuracy_wilson_95": [
+        0.8864829086095221,
+        1
+      ],
+      "correct_unique": 30,
+      "cpu_s_mean": 0.07198601666666266,
+      "failed": 0,
+      "incorrect_positive_unique": 0,
+      "latency_p50_s": 0.06857798499549972,
+      "latency_p95_s": 0.21390429200255312,
+      "model_calls_per_task": 0,
+      "observations": 60,
+      "peak_aggregate_rss_bytes": 48738304,
+      "tasks": 30,
+      "ttft_s": null
+    },
+    "B5": {
+      "abstention_unique": 0.0,
+      "accuracy_unique": 1.0,
+      "accuracy_wilson_95": [
+        0.8864829086095221,
+        1
+      ],
+      "correct_unique": 30,
+      "cpu_s_mean": 0.07535408333333346,
+      "failed": 0,
+      "incorrect_positive_unique": 0,
+      "latency_p50_s": 0.06716943099308992,
+      "latency_p95_s": 0.14162515600037295,
+      "model_calls_per_task": 0,
+      "observations": 60,
+      "peak_aggregate_rss_bytes": 48742400,
+      "tasks": 30,
+      "ttft_s": null
+    }
+  },
+  "protocol_sha256": "a49fc21b41e93eda897518aef938f68a328032b13c9852dfcc51046b27dbfd5b",
+  "neural_lifecycle": {
+    "source_revision": "16c6bd745edacaa4ad7b435cc52de935e1d1802f",
+    "run_id": 43385440565,
+    "gates": {
+      "01_docling_import": "PASS",
+      "02_local_index": "PASS",
+      "03_access_control": "PASS",
+      "04_grounded_local_answer": "PASS",
+      "05_learning_route": "PASS",
+      "06_propose": "PASS",
+      "07_signed_validation": "PASS",
+      "08_expert_approval": "PASS",
+      "09_activate_capability": "PASS",
+      "10_deterministic_execution": "PASS",
+      "11_outcome_memory": "PASS",
+      "12_adapter_route": "PASS",
+      "13a_baseline_model": "PASS",
+      "13b_real_soup_training": "PASS",
+      "13c_register_adapter": "PASS",
+      "14_evaluate": "PASS",
+      "15_model_review": "PASS",
+      "16_activate_model": "PASS",
+      "17_adapted_task": "PASS",
+      "18_restore_model": "PASS",
+      "18b_verify_restored_model": "PASS",
+      "18c_capability_rollback": "PASS",
+      "19_offline_evidence": "PASS"
+    },
+    "training_wall_s": 263.55182404000004,
+    "training_worker_peak_rss_kib": 2030524,
+    "test": {
+      "baseline_accuracy": 0.16666666666666666,
+      "baseline_mean_latency_seconds": 1.6304002154999846,
+      "candidate_accuracy": 0.8333333333333334,
+      "candidate_mean_latency_seconds": 2.3661658118333357,
+      "count": 6
+    },
+    "regression": {
+      "baseline_accuracy": 0.5,
+      "baseline_mean_latency_seconds": 1.0768701023332976,
+      "candidate_accuracy": 1.0,
+      "candidate_mean_latency_seconds": 1.7136373296666345,
+      "count": 6
+    },
+    "scope": "Original P0-052 small frozen set; not generalization evidence or directly comparable with procedural tasks"
+  },
+  "scale": [
+    {
+      "model": {
+        "filename": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+        "identifier": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+        "license": "Apache-2.0",
+        "revision": "9217f5db79a29953eb74d5343926648285ec7e67",
+        "sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+        "size_bytes": 491400032,
+        "status": "APPROVED_FOR_SYNTHETIC_QUALIFICATION"
+      },
+      "status": "COMPLETED",
+      "summary": {
+        "correct_unique": 5,
+        "latency_p50_s": 1.823560868993809,
+        "latency_p95_s": 2.0119189219985856,
+        "peak_aggregate_rss_bytes": 630812672,
+        "tasks": 18,
+        "training": "NOT_RUN",
+        "ttft_s": null,
+        "wilson_95": [
+          0.12499569146355474,
+          0.5087307754619452
+        ],
+        "incorrect_positive_unique": 13,
+        "abstention_rate_unique": 0.0,
+        "generation_tokens_per_second_mean": 41.18111111111111
+      }
+    },
+    {
+      "model": {
+        "filename": "qwen2.5-1.5b-instruct-q4_k_m.gguf",
+        "identifier": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+        "license": "Apache-2.0",
+        "revision": "91cad51170dc346986eccefdc2dd33a9da36ead9",
+        "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+        "size_bytes": 1117320736,
+        "status": "APPROVED_FOR_SYNTHETIC_QUALIFICATION"
+      },
+      "status": "COMPLETED",
+      "summary": {
+        "correct_unique": 9,
+        "latency_p50_s": 3.8454058860006626,
+        "latency_p95_s": 4.537476440993487,
+        "peak_aggregate_rss_bytes": 1879339008,
+        "tasks": 18,
+        "training": "NOT_RUN",
+        "ttft_s": null,
+        "wilson_95": [
+          0.2903070395897999,
+          0.7096929604102
+        ],
+        "incorrect_positive_unique": 9,
+        "abstention_rate_unique": 0.0,
+        "generation_tokens_per_second_mean": 26.470555555555553
+      }
+    },
+    {
+      "model": {
+        "filename": "qwen2.5-3b-instruct-q4_k_m.gguf",
+        "identifier": "Qwen/Qwen2.5-3B-Instruct-GGUF",
+        "license": "Qwen RESEARCH LICENSE AGREEMENT",
+        "revision": "7dabda4d13d513e3e842b20f0d435c732f172cbe",
+        "sha256": "626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d",
+        "size_bytes": 2104932768,
+        "status": "NOT_PROVISIONED_COMMERCIAL_PERMISSION_UNRESOLVED"
+      },
+      "status": "NOT_PROVISIONED_COMMERCIAL_PERMISSION_UNRESOLVED",
+      "summary": null
+    }
+  ],
+  "tests": {
+    "local_python": {
+      "passed": 141,
+      "failed": 0
+    },
+    "native_runtime_baseline": {
+      "passed": 201,
+      "failed": 0
+    },
+    "broader_native": "One ptrace-dependent local failure; retained log",
+    "legacy_gateway": {
+      "passed": 15,
+      "failed": 0
+    },
+    "snapshot_positive_negative": {
+      "passed": 7,
+      "failed": 0,
+      "source_snapshot": "104efc4ec933767ec760267785fb31406ba49a00"
+    },
+    "cargo_audit": {
+      "scanner": "0.23.0",
+      "dependency_count": 334,
+      "known_vulnerabilities": 0,
+      "database_commit": "af7b3ec33460b8e2de8d422e16d628518891a519"
+    },
+    "source_osv": {
+      "commits_queried": 11,
+      "returned_entries": 0,
+      "coverage_guaranteed": false
+    },
+    "actual_worker_resource_checks": {
+      "passed": 4,
+      "failed": 0
+    }
+  },
+  "required_metrics_not_yet_established": [
+    "time_to_first_token",
+    "resident-model steady-state throughput",
+    "general neural holdout regression",
+    "independent procedural acquisition cost",
+    "real full-disk and power-loss recovery"
+  ],
+  "raw_provenance": "evidence/local/PROVENANCE.json",
+  "final_hosted_runs": {
+    "functional_pre_cgroup_fix": {
+      "run_id": 43391397592,
+      "source": "104efc4ec933767ec760267785fb31406ba49a00",
+      "functional": "PASS",
+      "resource_accounting": "INVALID_ZERO_USAGE"
+    },
+    "fault_and_console": {
+      "run_id": 43391397673,
+      "source": "104efc4ec933767ec760267785fb31406ba49a00",
+      "status": "PASS"
+    },
+    "capped_full_workflow": {
+      "run_id": 43393285275,
+      "source": "00bb5a74051fd58bfd556703228e96a941dd7dba",
+      "status": "FAILED_TRAINING_480_SECOND_DEADLINE",
+      "resources": {
+        "memory_peak_bytes": 1940447232,
+        "cpu": {
+          "usage_usec": "937059151",
+          "user_usec": "723517562",
+          "system_usec": "213541588",
+          "core_sched.force_idle_usec": "0",
+          "nr_periods": "5489",
+          "nr_throttled": "78",
+          "throttled_usec": "227802",
+          "nr_bursts": "0",
+          "burst_usec": "0"
+        },
+        "events": {
+          "low": "0",
+          "high": "0",
+          "max": "0",
+          "oom": "0",
+          "oom_kill": "0",
+          "oom_group_kill": "0"
+        },
+        "memory_limit_bytes": 8589934592,
+        "cpu_quota": "200000 100000",
+        "membership": "0::/airon-p056",
+        "status": "PASS"
+      }
+    },
+    "separate_resource_profiles": {
+      "run_id": 43395924701,
+      "source": "0f4cd7e20f4c19577b5a73b9d1dacdc221f3085a",
+      "status": "IN_PROGRESS"
+    }
+  },
+  "optional_cosign_scan": {
+    "schema": "airon-cosign-advisory-review/v1",
+    "scanner": "govulncheck v1.9.0 binary mode",
+    "go_version": "1.27.4",
+    "source_commit": "195ab76b789923862345f5fa9bfe3fac6c453927",
+    "scope": "Optional local-key offline tool, not in serving bundle",
+    "overall": "OPEN_VERSION_RANGE_AND_FEATURE_REACHABILITY_REVIEW",
+    "findings": [
+      {
+        "id": "GO-2026-4309",
+        "summary": "Cosign verification accepts any valid Rekor entry under certain conditions in github.com/sigstore/cosign",
+        "range_matches": 815,
+        "first_match": {
+          "osv": "GO-2026-4309",
+          "fixed_version": "v3.0.4",
+          "trace": [
+            {
+              "module": "github.com/sigstore/cosign/v3",
+              "version": "v3.0.0-20261112064716-195ab76b7899"
+            }
+          ]
+        },
+        "references": [
+          {
+            "type": "ADVISORY",
+            "url": "https://github.com/sigstore/cosign/security/advisories/GHSA-whqx-f9j3-ch6m"
+          },
+          {
+            "type": "ADVISORY",
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-22703"
+          },
+          {
+            "type": "FIX",
+            "url": "https://github.com/sigstore/cosign/commit/6832fba4928c1ad69400235bbc41212de5006176"
+          },
+          {
+            "type": "FIX",
+            "url": "https://github.com/sigstore/cosign/pull/4623"
+          }
+        ],
+        "tested_path": "No Rekor service, X.509 certificate or OpenPGP input in the local public-key qualification. These configuration facts do not establish absence of vulnerabilities in other paths."
+      },
+      {
+        "id": "GO-2026-4529",
+        "summary": "Cosign considered signatures valid with expired intermediate certificates when transparency log verification is skipped in github.com/sigstore/cosign",
+        "range_matches": 815,
+        "first_match": {
+          "osv": "GO-2026-4529",
+          "fixed_version": "v3.0.5",
+          "trace": [
+            {
+              "module": "github.com/sigstore/cosign/v3",
+              "version": "v3.0.0-20261112064716-195ab76b7899"
+            }
+          ]
+        },
+        "references": [
+          {
+            "type": "ADVISORY",
+            "url": "https://github.com/sigstore/cosign/security/advisories/GHSA-wfqv-66vq-46rm"
+          },
+          {
+            "type": "ADVISORY",
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-24122"
+          },
+          {
+            "type": "FIX",
+            "url": "https://github.com/sigstore/cosign/commit/3c9a7363f563db76d78e2de2cabd945450f3781e"
+          },
+          {
+            "type": "WEB",
+            "url": "https://github.com/sigstore/cosign/releases/tag/v3.0.5"
+          }
+        ],
+        "tested_path": "No Rekor service, X.509 certificate or OpenPGP input in the local public-key qualification. These configuration facts do not establish absence of vulnerabilities in other paths."
+      },
+      {
+        "id": "GO-2026-5932",
+        "summary": "The golang.org/x/crypto/openpgp package is unmaintained, unsafe by design, and has known security issues",
+        "range_matches": 1,
+        "first_match": {
+          "osv": "GO-2026-5932",
+          "fixed_version": "v0.58.1-0.20261009181718-2f1f834330b2",
+          "trace": [
+            {
+              "module": "golang.org/x/crypto",
+              "version": "v0.58.0"
+            }
+          ]
+        },
+        "references": [
+          {
+            "type": "REPORT",
+            "url": "https://go.dev/issue/44226"
+          },
+          {
+            "type": "WEB",
+            "url": "https://go.dev/issue/81227"
+          }
+        ],
+        "tested_path": "No Rekor service, X.509 certificate or OpenPGP input in the local public-key qualification. These configuration facts do not establish absence of vulnerabilities in other paths."
+      }
+    ]
+  },
+  "packaged_installer": {
+    "source": "00bb5a74051fd58bfd556703228e96a941dd7dba",
+    "install": "PASS",
+    "smoke": "PASS",
+    "external_network": "UNAVAILABLE",
+    "adaptation": "NOT_RUN_LOCAL_AF_UNIX_PROBE_BLOCKED",
+    "raw": "evidence/local/bundle-installed-smoke.json.gz"
+  },
+  "disk_usage": {
+    "wheelhouse": {
+      "files": 337,
+      "logical_bytes": 373918912,
+      "allocated_bytes": 374738944
+    },
+    "approved_135m_models": {
+      "files": 10,
+      "logical_bytes": 543330649,
+      "allocated_bytes": 543358976
+    },
+    "packaged_llama_binaries": {
+      "files": 14,
+      "logical_bytes": 26927224,
+      "allocated_bytes": 26951680
+    },
+    "fresh_python_environment": {
+      "files": 44215,
+      "logical_bytes": 1545151374,
+      "allocated_bytes": 1654464512
+    },
+    "synthetic_workspace_after_provision_and_smoke": {
+      "files": 38,
+      "logical_bytes": 272609309,
+      "allocated_bytes": 272699392
+    },
+    "scope": "Local Linux qualification host; no GPU. Logical and allocated size differ; build/source caches and separately supplied AIP binaries excluded. Workspace contains a duplicate registered base model. Not a universal storage requirement."
+  }
+}

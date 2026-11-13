@@ -1,0 +1,44 @@
+{
+  "source_snapshot_revision": "104efc4ec933767ec760267785fb31406ba49a00",
+  "native_revision": "f1ba9fc2072dac1431543fd4961baaa2762b8ea9",
+  "verifier_sha256": "fa45e92cac8eb79b448686fa992b999f130423713776b872758eb47e209b8eb8",
+  "checks": {
+    "valid": {
+      "exit": 0,
+      "expected": "PASS",
+      "passed": true
+    },
+    "wrong_key": {
+      "exit": 1,
+      "expected": "REJECT",
+      "passed": true
+    },
+    "truncated": {
+      "exit": 1,
+      "expected": "REJECT",
+      "passed": true
+    },
+    "native_audit": {
+      "exit": 1,
+      "expected": "REJECT",
+      "passed": true
+    },
+    "capability": {
+      "exit": 1,
+      "expected": "REJECT",
+      "passed": true
+    },
+    "signed_object": {
+      "exit": 1,
+      "expected": "REJECT",
+      "passed": true
+    },
+    "empty_trust_pins": {
+      "exit": 1,
+      "expected": "REJECT",
+      "passed": true
+    }
+  },
+  "status": "PASS",
+  "custody": "Test-generated pins, same administrator. Recipients must retain trusted pins separately; no independent observation claim."
+}

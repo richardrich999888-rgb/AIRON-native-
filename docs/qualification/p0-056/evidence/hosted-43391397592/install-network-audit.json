@@ -1,0 +1,103 @@
+{
+  "schema": "airon-p056-network-policy/v1",
+  "passed": true,
+  "expected_worker_probes": 1,
+  "observed_worker_probes": 1,
+  "trace_sha256": {
+    "install-network.6285": "ccdaeb522f4469659d13cba6eaca316d29b45b02118a30a9e5e1c53f27aa7503",
+    "install-network.6286": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6287": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6288": "704694ee0642e1c5a0132608aa5f2e85070f83910cd0f67cdb7f7e4f1efaa693",
+    "install-network.6289": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6290": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6291": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6292": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6293": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6294": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6295": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6296": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6297": "6d2b4afec87e07054c00e10a1a688d9477b25f8faebd7ec254cbaa2c6f215be5",
+    "install-network.6298": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6299": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6300": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6301": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6302": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6303": "1ce4a8287804c270973dad47cf58ce6e1c45fcde251faf1ec6c04e0f0781455e",
+    "install-network.6304": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6305": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6307": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6308": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6309": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6310": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6311": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6312": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6313": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6314": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6315": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31",
+    "install-network.6316": "29d50c6fb633dc49972d8ca854afcecf7e4bb5f479cb870f89ccdf6ff854bf31"
+  },
+  "allowed": [
+    {
+      "file": "install-network.6288",
+      "line": 5,
+      "syscall": "socket(AF_INET6, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "install-network.6288",
+      "line": 6,
+      "syscall": "bind(3, {sa_family=AF_INET6, sin6_port=htons(0), sin6_flowinfo=htonl(0), inet_pton(AF_INET6, \"::1\", &sin6_addr), sin6_scope_id=0}, 28) = -1 EADDRNOTAVAIL (Cannot assign requested address)",
+      "kind": "failed_loopback_capability_probe"
+    },
+    {
+      "file": "install-network.6303",
+      "line": 3,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "install-network.6303",
+      "line": 4,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr(\"198.51.100.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "install-network.6303",
+      "line": 5,
+      "syscall": "socket(AF_INET, SOCK_STREAM|SOCK_CLOEXEC, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "install-network.6303",
+      "line": 6,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(11434), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "install-network.6303",
+      "line": 11,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "install-network.6303",
+      "line": 13,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    },
+    {
+      "file": "install-network.6303",
+      "line": 14,
+      "syscall": "socket(AF_INET, SOCK_DGRAM|SOCK_CLOEXEC|SOCK_NONBLOCK, IPPROTO_IP) = 3",
+      "kind": "socket_creation_no_egress"
+    },
+    {
+      "file": "install-network.6303",
+      "line": 16,
+      "syscall": "connect(3, {sa_family=AF_INET, sin_port=htons(53), sin_addr=inet_addr(\"127.0.0.1\")}, 16) = -1 ENETUNREACH (Network is unreachable)",
+      "kind": "deliberate_failed_isolation_probe"
+    }
+  ],
+  "violations": [],
+  "scope": "No unclassified IP connection or packet send in captured processes. OS namespace plus labelled application probes; not independent agent attribution."
+}

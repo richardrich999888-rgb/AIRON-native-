@@ -1,0 +1,15 @@
+{
+  "snapshot_sha256": "98746c073b4f8fdc5697d026595b566b1f60b31d37628babd1b4a977cee2d562",
+  "source_revision": "104efc4ec933767ec760267785fb31406ba49a00",
+  "native_revision": "f1ba9fc2072dac1431543fd4961baaa2762b8ea9",
+  "stores": {
+    "adaptation": {
+      "public_key_hex": "2ce7a5b95fb220d4172247b15a2a80bfc363372ea4ea9e1181c6f1697d8ea463",
+      "head": "1d6e70348dc4a7a70a7c76a22f97f8bb3fa6b84d3843de46c7846b07d19a8b7a"
+    },
+    "core": {
+      "public_key_hex": "24adf59967104812731bbb3117d0a4f7aa2ee55cc24fa30ff340be09b4bebb17",
+      "head": "de534e5df23030b84fd82ecbcc073067b35f8016c6cc10395749b5f0b3f5c2fc"
+    }
+  }
+}

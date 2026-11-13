@@ -1,0 +1,3 @@
+Using payload from: p056-wheels/wheelhouse.json
+Signing artifact...
+Wrote bundle to file cosign-offline/manifest.sigstore.json

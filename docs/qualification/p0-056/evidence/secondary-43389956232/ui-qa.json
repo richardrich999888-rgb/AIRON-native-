@@ -1,0 +1,13 @@
+{
+  "schema": "airon-console-qa/v1",
+  "source_revision": "3c870f4901b5646a9c6756ed7c794d8d4e60eec3",
+  "checks": {
+    "real_procedure": true,
+    "lower_clearance_view": true,
+    "mobile_no_overflow": true,
+    "anonymous": true,
+    "hostile_origin": true
+  },
+  "browser_errors": [],
+  "status": "PASS"
+}
