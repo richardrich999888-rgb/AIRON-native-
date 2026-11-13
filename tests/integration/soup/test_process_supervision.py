@@ -23,3 +23,11 @@ def test_wall_timeout_kills_launched_process(tmp_path):
         sandbox.run([sys.executable, "-c", "import time; time.sleep(30)"],
                     tmp_path/"timeout.log", on_start=observed.append, timeout=0.1)
     assert observed[0].poll() is not None
+
+
+def test_only_airon_package_is_mounted_on_pythonpath(tmp_path):
+    args = sandbox.command(tmp_path/"job", tmp_path/"model", tmp_path/"data")
+    position = args.index("/app/airon_adaptation")
+    assert args[position-2] == "--ro-bind"
+    assert args[position-1].endswith("/airon_adaptation")
+    assert args[args.index("PYTHONPATH")+1] == "/app"

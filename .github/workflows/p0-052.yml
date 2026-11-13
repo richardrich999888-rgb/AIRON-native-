@@ -74,6 +74,11 @@ jobs:
       - name: Classify complete offline network trace
         if: always()
         run: .venv/bin/python services/model-adaptation/scripts/audit_network.py --prefix acceptance-evidence/offline-network --report acceptance-evidence/network-audit.json
+      - name: Check guided console against the completed real workspace
+        run: |
+          .venv/bin/python -m pip install 'playwright==1.65.1'
+          .venv/bin/python -m playwright install --with-deps chromium
+          .venv/bin/python services/model-adaptation/scripts/check_console.py --root "$RUNNER_TEMP/airon-offline-state" --output acceptance-evidence/console
       - name: Collect nonsecret diagnostics
         if: always()
         run: |

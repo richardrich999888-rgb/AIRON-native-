@@ -8,7 +8,7 @@ from .integrity import Rejected
 
 
 def command(job, model, data, adapter=None):
-    app = Path(__file__).resolve().parent.parent
+    app = Path(__file__).resolve().parent
     env_root = Path(sys.prefix).resolve()
     runtime_root = Path(sys.base_prefix).resolve()
     args = ["unshare", "--user", "--map-root-user", "--net", "bwrap",
@@ -17,7 +17,8 @@ def command(job, model, data, adapter=None):
     for source in ("/usr", "/lib", "/lib64", str(runtime_root)):
         if Path(source).exists():
             args += ["--ro-bind", source, source]
-    args += ["--ro-bind", str(env_root), "/env", "--ro-bind", str(app), "/app",
+    args += ["--ro-bind", str(env_root), "/env", "--dir", "/app",
+             "--ro-bind", str(app), "/app/airon_adaptation",
              "--ro-bind", str(model), "/model", "--ro-bind", str(data), "/data",
              "--ro-bind", str(job / "request.json"), "/request.json",
              "--bind", str(job / "output"), "/output", "--proc", "/proc",
