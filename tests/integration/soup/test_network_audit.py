@@ -22,7 +22,7 @@ def test_only_failed_expected_connections_in_marked_windows_pass(tmp_path):
         'connect(3, {sa_family=AF_INET, sin_port=htons(443), sin_addr=inet_addr("198.51.100.1")}, 16) = -1 ENETUNREACH',
         'connect(3, {sa_family=AF_UNIX, sun_path="/tmp/airon-isolation-probe-end"}, 40) = -1 ENOENT',
     ]
-    path.write_text("\n".join(lines*9)+"\n")
+    path.write_text("\n".join(lines*11)+"\n")
     assert module.classify([path])["passed"]
     path.write_text(path.read_text().replace("= -1 ENETUNREACH", "= 0"))
     assert not module.classify([path])["passed"]

@@ -345,14 +345,35 @@ class Controller:
                     raise Rejected("Invalid evaluation metrics")
             if scores.get("count") != self._get(job["dataset_id"], "dataset")["counts"][split]:
                 raise Rejected("Evaluation did not cover frozen split")
+        knowledge_result = None
+        if self._all("knowledge"):
+            from .knowledge import approved_quote
+            knowledge = self._get("knowledge", "knowledge")
+            knowledge_path = self.root/"knowledge"
+            verify_tree(knowledge_path, knowledge["manifest"])
+            docs = json.loads((knowledge_path/"documents.json").read_text())
+            source = next(d for d in docs if d["id"] == "OPS-001")
+            item = {"question": source["questions"][0], "source_text": source["body"]}
+            _, baseline = self._execute(job, "knowledge", knowledge_request=item)
+            _, adapted = self._execute(job, "knowledge", path, knowledge_request=item)
+            knowledge_result = {"source_id": source["id"],
+                "knowledge_manifest_digest": digest(knowledge["manifest"]),
+                "question_digest": digest(item["question"]), "source_digest": digest(source["body"]),
+                "baseline_match": approved_quote(baseline.get("text"), source["body"]) is not None,
+                "candidate_match": approved_quote(adapted.get("text"), source["body"]) is not None,
+                "baseline_generation_seconds": baseline["generation_seconds"],
+                "candidate_generation_seconds": adapted["generation_seconds"],
+                "baseline_output_digest": digest(baseline.get("text")),
+                "candidate_output_digest": digest(adapted.get("text"))}
         passed = (metrics["test"]["candidate_accuracy"] > metrics["test"]["baseline_accuracy"]
                   and metrics["regression"]["baseline_accuracy"] > 0
-                  and metrics["regression"]["candidate_accuracy"] >= metrics["regression"]["baseline_accuracy"])
+                  and metrics["regression"]["candidate_accuracy"] >= metrics["regression"]["baseline_accuracy"]
+                  and (knowledge_result is None or knowledge_result["candidate_match"]))
         ident = self._new("evaluation")
         report = {"id": ident, "candidate_id": candidate_id, "candidate_digest": candidate["digest"],
                   "dataset_digest": self._get(job["dataset_id"], "dataset")["digest"],
                   "base_digest": self._get(job["base_id"], "model")["digest"], "config_digest": job["config_digest"],
-                  "metrics": metrics, "passed": passed, "run_path": run.relative_to(self.root).as_posix(),
+                  "metrics": metrics, "knowledge": knowledge_result, "passed": passed, "run_path": run.relative_to(self.root).as_posix(),
                   "policy": "strict-improvement-no-regression-v1"}
         self._put(ident, "evaluation", report)
         self._event(actor, "candidate_evaluated", report)
@@ -407,6 +428,11 @@ class Controller:
         evaluation = self._get(approval["evaluation_id"], "evaluation")
         if digest(evaluation) != approval["evaluation_digest"] or not evaluation["passed"]:
             raise Rejected("Evaluation changed after approval")
+        if evaluation.get("knowledge") is not None:
+            knowledge = self._get("knowledge", "knowledge")
+            verify_tree(self.root/"knowledge", knowledge["manifest"])
+            if digest(knowledge["manifest"]) != evaluation["knowledge"]["knowledge_manifest_digest"]:
+                raise Rejected("Knowledge corpus changed after evaluation")
         if candidate["base_id"] != deployment["base"]:
             raise Rejected("Candidate belongs to another base")
         deployment["history"].append(deployment["active"])
@@ -449,7 +475,7 @@ class Controller:
             return obj
 
     def query_knowledge(self, question, enabled, access_role, actor):
-        from .knowledge import retrieve
+        from .knowledge import approved_quote, retrieve
         if self.running:
             raise Rejected("Another worker is running")
         knowledge = self._get("knowledge", "knowledge")
@@ -466,7 +492,7 @@ class Controller:
             adapter = self._candidate(deployment["active"])[1] if deployment["active"] else None
             _, generated = self._execute(jobs[-1], "knowledge", adapter,
                 knowledge_request={"question": question, "source_text": source["body"]})
-            matched = generated.get("text", "").strip() == source["body"]
+            matched = approved_quote(generated.get("text"), source["body"]) is not None
             result = {"outcome": "ANSWERED" if matched else "ABSTAINED",
                       "answer": source["body"] if matched else "The local model did not reproduce the approved source. No answer released.",
                       "sources": [{"id": source["id"], "title": source["title"]}] if matched else [],

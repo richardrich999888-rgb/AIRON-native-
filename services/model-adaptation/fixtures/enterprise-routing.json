@@ -148,5 +148,65 @@
     "prompt": "Answer with one word only. What is the capital of Japan?",
     "answer": "Tokyo",
     "split": "regression"
+  },
+  {
+    "prompt": "Question: How are warehouse keys stored?\nApproved source text:\nStore warehouse keys in cabinet B after each shift. Record each return in the key ledger. The duty clerk checks the cabinet at closing.",
+    "answer": "Store warehouse keys in cabinet B after each shift. Record each return in the key ledger. The duty clerk checks the cabinet at closing.",
+    "split": "train"
+  },
+  {
+    "prompt": "Question: When is the visitor badge returned?\nApproved source text:\nReturn the visitor badge to reception before leaving. Sign the exit register. Reception records any badge that has not been returned.",
+    "answer": "Return the visitor badge to reception before leaving. Sign the exit register. Reception records any badge that has not been returned.",
+    "split": "train"
+  },
+  {
+    "prompt": "Question: How are damaged cartons handled?\nApproved source text:\nPlace damaged cartons on the orange shelf. Record the carton number in the local register. Ask the warehouse coordinator to inspect them.",
+    "answer": "Place damaged cartons on the orange shelf. Record the carton number in the local register. Ask the warehouse coordinator to inspect them.",
+    "split": "train"
+  },
+  {
+    "prompt": "Question: When are safety lamps tested?\nApproved source text:\nTest the safety lamps every Monday morning. Record the test result in the equipment register. Replace any lamp that fails the test.",
+    "answer": "Test the safety lamps every Monday morning. Record the test result in the equipment register. Replace any lamp that fails the test.",
+    "split": "train"
+  },
+  {
+    "prompt": "Question: How is a loan laptop returned?\nApproved source text:\nReturn the loan laptop to desk C before the due date. Bring the charger and carry case. The desk clerk checks all three items.",
+    "answer": "Return the loan laptop to desk C before the due date. Bring the charger and carry case. The desk clerk checks all three items.",
+    "split": "train"
+  },
+  {
+    "prompt": "Question: Where are signed delivery forms stored?\nApproved source text:\nStore signed delivery forms in cabinet D. Sort them by delivery date. The records clerk checks the folder count every Friday.",
+    "answer": "Store signed delivery forms in cabinet D. Sort them by delivery date. The records clerk checks the folder count every Friday.",
+    "split": "train"
+  },
+  {
+    "prompt": "Question: How are spare batteries labelled?\nApproved source text:\nLabel each spare battery with its inspection date. Store it in the marked battery rack. Remove any unit with a damaged case.",
+    "answer": "Label each spare battery with its inspection date. Store it in the marked battery rack. Remove any unit with a damaged case.",
+    "split": "train"
+  },
+  {
+    "prompt": "Question: When does the inventory count happen?\nApproved source text:\nCount the storeroom inventory on the first Tuesday of each month. Record missing items separately. The storekeeper signs the completed count.",
+    "answer": "Count the storeroom inventory on the first Tuesday of each month. Record missing items separately. The storekeeper signs the completed count.",
+    "split": "train"
+  },
+  {
+    "prompt": "Question: How are training-room bookings recorded?\nApproved source text:\nRecord each training-room booking in the local calendar. Include the organiser and start time. Release unused bookings before the session begins.",
+    "answer": "Record each training-room booking in the local calendar. Include the organiser and start time. Release unused bookings before the session begins.",
+    "split": "train"
+  },
+  {
+    "prompt": "Question: Where should damaged tools be placed?\nApproved source text:\nPlace damaged tools in the red collection tray. Attach a note describing the damage. Do not return them to the shared tool rack.",
+    "answer": "Place damaged tools in the red collection tray. Attach a note describing the damage. Do not return them to the shared tool rack.",
+    "split": "train"
+  },
+  {
+    "prompt": "Question: How are printed checklists archived?\nApproved source text:\nArchive completed printed checklists in the green binder. Put the latest checklist at the front. The shift clerk signs the binder index.",
+    "answer": "Archive completed printed checklists in the green binder. Put the latest checklist at the front. The shift clerk signs the binder index.",
+    "split": "train"
+  },
+  {
+    "prompt": "Question: How is a late courier arrival recorded?\nApproved source text:\nRecord a late courier arrival in the reception register. Include the parcel count and arrival time. Notify the receiving clerk before handing over parcels.",
+    "answer": "Record a late courier arrival in the reception register. Include the parcel count and arrival time. Notify the receiving clerk before handing over parcels.",
+    "split": "train"
   }
 ]

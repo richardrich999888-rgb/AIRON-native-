@@ -34,6 +34,11 @@ function renderSummary() {
   }
   set('active-model', deployment ? (deployment.active ? 'Adapted candidate' : 'Original model') : 'Not provisioned');
   set('deployment-detail', deployment ? 'Local deployment version ' + deployment.version : 'Prepare the approved model first.');
+  const knowledge = evaluation?.knowledge;
+  set('knowledge-evaluation', knowledge ? 'Approved document check: baseline ' +
+    (knowledge.baseline_match ? 'matched' : 'abstained') + ' → candidate ' +
+    (knowledge.candidate_match ? 'matched' : 'abstained') + '. A candidate must reproduce the full source before review.'
+    : 'Document answer check not run.');
   const approval = state.approval?.at(-1);
   const candidate = state.candidate?.find(c => c.id === approval?.candidate_id);
   const reviewed = state.evaluation?.find(e => e.id === approval?.evaluation_id);

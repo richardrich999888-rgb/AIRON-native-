@@ -1,3 +1,4 @@
+-c constraints-cpu.txt
 # CPU-first preparation. Install torch from the CPU index before this file.
 # Full resolved versions and licence metadata must be captured for each bundle.
 soup-cli @ git+https://github.com/MakazhanAlpamys/Soup.git@af2f5d5000f7baec6386a72a6d16e82383eb5303

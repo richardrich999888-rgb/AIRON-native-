@@ -46,3 +46,12 @@ def retrieve(docs, question, enabled, access_role):
         return {"outcome": "DENIED", "answer": "Your session cannot access this document.",
                 "sources": [], "model_called": False}
     return {"outcome": "SOURCE_FOUND", "source": source}
+
+
+def approved_quote(text, source):
+    """Release only the full approved text; discard any model-added framing."""
+    if not isinstance(text, str):
+        return None
+    # Formatting changes cannot add facts: output is the original approved bytes.
+    expected = " ".join(source.split())
+    return source if expected in " ".join(text.split()) else None

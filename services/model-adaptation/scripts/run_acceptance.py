@@ -88,8 +88,7 @@ def main():
             report["adapted_inference"] = invoke("infer", dataset_id=job["dataset_id"])
             report["knowledge_adapted"] = invoke("query_knowledge",
                 question="When should we inspect the cooling assembly?", enabled=["OPS-001"])
-            if (report["knowledge_baseline"]["outcome"] == "ANSWERED"
-                    and report["knowledge_adapted"]["outcome"] != "ANSWERED"):
+            if report["knowledge_adapted"]["outcome"] != "ANSWERED":
                 raise RuntimeError("Adapted knowledge response regressed; restore original model")
         finally:
             report["rollback"] = review("rollback_model")
@@ -99,6 +98,7 @@ def main():
         if [(r["prompt_sha256"], r["predicted"]) for r in before] != [(r["prompt_sha256"], r["predicted"]) for r in restored]:
             raise RuntimeError("Restored predictions do not match baseline")
         report["gates"]["activation_and_rollback"] = "PASS"
+        report["gates"]["adapted_private_knowledge_answer"] = "PASS"
         report["overall"] = "PASS_SCOPED_CPU_EXPERIMENT"
         code = 0
     except Exception as exc:

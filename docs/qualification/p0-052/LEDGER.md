@@ -36,3 +36,7 @@ Updated 13 November 2026. Status applies to the exact cited evidence, not every 
 ## Next highest-value task
 
 Complete the fresh offline workflow with full syscall classification and browser inspection; then execute real cancellation/corrupt-model checks. Preserve the observed document abstention as an open quality result rather than weakening the release validation.
+
+## Controlled retention iteration (pending real results)
+
+The routing-only adapter abstained on the real document query. The next candidate adds twelve explicitly synthetic source-copy training examples alongside the original eighteen routing records. Frozen routing/factual questions and the existing knowledge corpus are unchanged and absent from training records. The evaluation now requires an actual full-source candidate quote before deployment approval. The release validator can discard model-added framing but only returns the complete approved source, with whitespace differences ignored during matching. It never releases additional generated text. Exact dependency versions from the executed CPU stack are now constrained in source.

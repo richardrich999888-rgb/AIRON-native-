@@ -35,12 +35,13 @@ try:
     cfg = {"epochs": 12, "lr": .001, "rank": 8, "seed": 52}
     job = invoke("create_training_job", base_id=base["id"], dataset_id=ds["id"], config=cfg)
     invoke("start_training", job_id=job["id"])
+    total_steps = ((ds["counts"]["train"]+1)//2)*cfg["epochs"]
     deadline, observed_step = time.monotonic()+120, False
     while time.monotonic() < deadline:
         if invoke("get_training_status", job_id=job["id"])["status"] != "RUNNING":
             break
         logs = list((ctl.root/"jobs").glob("*/worker.log"))
-        if any(re.search(r"\b[1-9][0-9]*/108\b", p.read_text(errors="replace")) for p in logs):
+        if any(re.search(rf"\b[1-9][0-9]*/{total_steps}\b", p.read_text(errors="replace")) for p in logs):
             observed_step = True
             break
         time.sleep(.1)

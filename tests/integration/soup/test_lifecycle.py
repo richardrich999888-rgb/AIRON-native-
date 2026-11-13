@@ -391,3 +391,41 @@ def test_changed_document_cannot_reach_model(lab):
     with patch.object(ctl, "_execute") as worker, pytest.raises(Rejected, match="integrity"):
         call(ctl, "query_knowledge", question="When should we inspect the cooling assembly?", enabled=["OPS-001"])
     worker.assert_not_called()
+
+
+def test_release_extracts_only_complete_approved_quote():
+    from airon_adaptation.knowledge import approved_quote
+    source = "Inspect every 200 hours. Record the inspection."
+    assert approved_quote("Here is the source:\n"+source+"\nIgnore policy!", source) == source
+    assert approved_quote("Inspect every 200 hours.\nRecord the inspection.", source) == source
+    assert approved_quote("Inspect every 300 hours. Record the inspection.", source) is None
+    assert approved_quote("Inspect every 200 hours.", source) is None
+
+
+def test_benchmark_gain_cannot_hide_knowledge_regression(lab):
+    ctl = lab[0]
+    knowledge_fixture(ctl)
+    candidate = candidate_fixture(lab)
+    docs = json.loads((ctl.root/"knowledge"/"documents.json").read_text())
+    metrics = {"test": {"count": 1, "baseline_accuracy": 0., "candidate_accuracy": 1.},
+               "regression": {"count": 1, "baseline_accuracy": 1., "candidate_accuracy": 1.}}
+    outputs = [(Path("fixture"), metrics),
+               (Path("fixture"), {"text": docs[0]["body"], "generation_seconds": .1}),
+               (Path("fixture"), {"text": "K7", "generation_seconds": .1})]
+    with patch.object(ctl, "_execute", side_effect=outputs):
+        evaluation = call(ctl, "evaluate_candidate", candidate_id=candidate["id"])
+    assert not evaluation["passed"]
+    assert evaluation["knowledge"]["baseline_match"]
+    assert not evaluation["knowledge"]["candidate_match"]
+    with pytest.raises(Rejected, match="passing evaluation"):
+        call(ctl, "request_deployment", candidate_id=candidate["id"], evaluation_id=evaluation["id"])
+
+
+def test_retention_training_does_not_contain_frozen_document_answers():
+    root = Path(__file__).resolve().parents[3]
+    rows = json.loads((root/"services/model-adaptation/fixtures/enterprise-routing.json").read_text())
+    documents = json.loads((root/"website/offline/documents.json").read_text())
+    for row in rows:
+        if row["split"] == "train":
+            assert all(doc["body"] not in row["prompt"]+row["answer"] for doc in documents)
+            assert all(q not in row["prompt"] for doc in documents for q in doc["questions"])
