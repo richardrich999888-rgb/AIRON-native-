@@ -55,6 +55,9 @@ def main():
                                                  "dependencies": packages, "assets_manifest": manifest(assets, model=True)})
         (ctl.root/"resolved-requirements.txt").write_text(subprocess.check_output(
             [sys.executable, "-m", "pip", "freeze"], text=True))
+        print("DEPENDENCY_INVENTORY=" + json.dumps([{"name": p["name"], "version": p["version"],
+              "license": p["license_expression"] or (p["license"] or "").split("\n")[0][:160],
+              "license_files": p["license_files"]} for p in packages]))
         print(json.dumps({"root": str(ctl.root), "model_id": model["id"], "dataset_id": ds["id"], "job_id": job["id"]}))
     finally:
         ctl.close()

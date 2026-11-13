@@ -31,7 +31,8 @@ def command(job, model, data, adapter=None):
         "TRANSFORMERS_OFFLINE": "1", "HF_HUB_DISABLE_TELEMETRY": "1",
         "SOUP_TELEMETRY": "0", "WANDB_DISABLED": "true", "TOKENIZERS_PARALLELISM": "false",
         "OMP_NUM_THREADS": "2", "MKL_NUM_THREADS": "2", "OPENBLAS_NUM_THREADS": "2",
-        "PYTHONHASHSEED": "52", "CUDA_VISIBLE_DEVICES": "", "LANG": "C.UTF-8"}
+        "PYTHONHASHSEED": "52", "CUDA_VISIBLE_DEVICES": "", "LANG": "C.UTF-8",
+        "LD_LIBRARY_PATH": str(runtime_root / "lib")}
     for key, value in environment.items():
         args += ["--setenv", key, value]
     args += ["/env/bin/python", "-m", "airon_adaptation.worker"]

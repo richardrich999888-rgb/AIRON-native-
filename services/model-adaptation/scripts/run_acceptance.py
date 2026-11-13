@@ -74,7 +74,7 @@ def main():
         report["evidence"] = invoke("evidence")
         write_json(report_path, report)
         ctl.close()
-    print(json.dumps({"overall": report["overall"], "report": str(report_path), "gates": report["gates"]}))
+    print("ACCEPTANCE_REPORT=" + json.dumps(report))
     raise SystemExit(code)
 
 

@@ -13,3 +13,6 @@ airon-adaptation = "airon_adaptation.server:main"
 
 [tool.setuptools.package-data]
 airon_adaptation = ["ui/*"]
+
+[tool.setuptools.packages.find]
+include = ["airon_adaptation*"]

@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '22'
-      - run: python -m pip install 'cryptography==50.0.2' 'pytest==9.2.0'
+      - run: python -m pip install 'cryptography==50.0.2' 'pytest==9.2.0' ./services/model-adaptation
       - name: Controller and adversarial fixtures
         run: python -m pytest -q tests/integration/soup --junitxml=contract-results.xml
       - name: Existing local gateway regression
