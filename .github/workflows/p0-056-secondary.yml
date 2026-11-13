@@ -2,7 +2,7 @@ name: P0-056 real fault and console qualification
 on:
   push:
     branches: [codex/p0-056-unified-airon-runtime]
-    paths: ['.github/workflows/p0-056-secondary.yml']
+    paths: ['.github/workflows/p0-056-secondary.yml', 'services/unified-runtime/airon_runtime/ui/**']
 permissions:
   contents: read
 jobs:
