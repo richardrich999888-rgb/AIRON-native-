@@ -37,7 +37,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._reply({"error": "Invalid host"}, 403)
         files = {"/": ("index.html", "text/html; charset=utf-8"),
                  "/app.js": ("app.js", "text/javascript; charset=utf-8"),
-                 "/style.css": ("style.css", "text/css; charset=utf-8")}
+                 "/style.css": ("style.css", "text/css; charset=utf-8"),
+                 "/syntriass-logo.jpeg": ("syntriass-logo.jpeg", "image/jpeg")}
         if self.path not in files:
             return self._reply({"error": "Not found"}, 404)
         name, mime = files[self.path]

@@ -62,6 +62,7 @@ jobs:
           mkdir -p acceptance-evidence/logs
           if [ -d "$RUNNER_TEMP/airon-state/jobs" ]; then
             find "$RUNNER_TEMP/airon-state/jobs" -name worker.log -exec cp --parents {} acceptance-evidence/logs/ \;
+            find "$RUNNER_TEMP/airon-state/jobs" -name worker.log -exec tail -c 16000 {} \;
           fi
           if [ -f "$RUNNER_TEMP/airon-state/provisioning.json" ]; then
             cp "$RUNNER_TEMP/airon-state/provisioning.json" acceptance-evidence/
