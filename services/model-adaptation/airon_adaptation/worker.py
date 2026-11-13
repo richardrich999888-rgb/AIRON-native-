@@ -159,7 +159,9 @@ def train(config):
             "adapter_manifest": manifest(target, model=True), "real_training": True,
             "backend": "Soup SFTTrainerWrapper / CPU float32 LoRA",
             "loaded_parameter_dtypes": loaded_dtypes, "training_parameter_dtypes": actual_dtypes,
-            "observed_torch_threads": torch.get_num_threads()}
+            "observed_torch_threads": torch.get_num_threads(),
+            "effective_training_config": cfg.model_dump(mode="json"),
+            "effective_training_config_sha256": digest(cfg.model_dump(mode="json"))}
 
 
 def evaluation(has_adapter):
