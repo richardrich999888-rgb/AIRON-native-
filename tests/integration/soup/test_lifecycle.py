@@ -203,6 +203,24 @@ def test_cancelled_job_cannot_start_or_register(lab):
         call(ctl, "register_checkpoint", job_id=job["id"])
 
 
+def test_failed_training_retains_its_log_and_cannot_register(lab):
+    ctl, _, _, job = lab
+    def failure(args, logfile, **kwargs):
+        Path(logfile).write_text("FIXTURE loader failure\n")
+        raise Rejected("FIXTURE worker failure")
+    with patch("airon_adaptation.sandbox.run", side_effect=failure):
+        call(ctl, "start_training", job_id=job["id"])
+        for thread in ctl.threads:
+            thread.join(timeout=5)
+    failed = call(ctl, "get_training_status", job_id=job["id"])
+    assert failed["status"] == "FAILED"
+    run = safe_path(ctl.root, failed["run_path"])
+    assert (run/"worker.log").read_text() == "FIXTURE loader failure\n"
+    assert json.loads((run/"request.json").read_text())["config"] == job["config"]
+    with pytest.raises(Rejected):
+        call(ctl, "register_checkpoint", job_id=job["id"])
+
+
 def test_corrupt_checkpoint_rejected(lab):
     ctl, _, _, job = lab
     candidate_fixture(lab)

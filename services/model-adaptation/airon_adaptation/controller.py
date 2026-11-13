@@ -252,6 +252,13 @@ class Controller:
                                             "has_adapter": adapter is not None,
                                             "parent_netns": os.readlink("/proc/self/ns/net"),
                                             "knowledge_request": knowledge_request})
+            if operation == "train":
+                # Persist the run identity before execution, including loader failures
+                # and cancellation. Later inference/evaluation must not replace it.
+                current = self._get(job["id"], "job")
+                current["run_path"] = path.relative_to(self.root).as_posix()
+                with self.db:
+                    self._put(job["id"], "job", current)
         def started(proc):
             with self.mutex:
                 self.processes[job["id"]] = proc
