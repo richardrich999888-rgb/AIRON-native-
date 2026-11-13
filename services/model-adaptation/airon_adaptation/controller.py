@@ -18,8 +18,8 @@ from .integrity import Rejected, canonical, digest, manifest, safe_path, verify_
 POLICY = {
     "operator": {"prepare_dataset", "validate_dataset", "create_training_job", "start_training",
                  "get_training_status", "cancel_training", "register_checkpoint", "evaluate_candidate",
-                 "export_model", "request_deployment", "infer", "status", "evidence"},
-    "reviewer": {"approve_deployment", "activate_model", "rollback_model", "infer", "status", "evidence"}}
+                 "export_model", "request_deployment", "infer", "query_knowledge", "status", "evidence"},
+    "reviewer": {"approve_deployment", "activate_model", "rollback_model", "infer", "query_knowledge", "status", "evidence"}}
 ID = re.compile(r"[a-z]+-[a-f0-9]{16}\Z")
 
 
@@ -60,7 +60,7 @@ class Controller:
         self.db.executescript("CREATE TABLE IF NOT EXISTS objects(id TEXT PRIMARY KEY, kind TEXT, record TEXT);"
                              "CREATE TABLE IF NOT EXISTS events(seq INTEGER PRIMARY KEY, record TEXT);")
         self.db.commit()
-        for folder in ("models", "datasets", "jobs", "candidates", "exports"):
+        for folder in ("models", "datasets", "jobs", "candidates", "exports", "knowledge"):
             safe_path(self.root, folder, exists=False).mkdir(exist_ok=True, mode=0o700)
         with self.mutex, self.db:
             for job in self._all("job"):
@@ -112,8 +112,10 @@ class Controller:
             raise Rejected("Operation not permitted for this session role")
         if not isinstance(params, dict) or len(canonical(params)) > 1024*1024:
             raise Rejected("Invalid request")
-        if any(k in params for k in ("actor", "role")):
+        if any(k in params for k in ("actor", "role", "access_role")):
             raise Rejected("Client cannot set actor or role")
+        if operation == "query_knowledge":
+            params = {**params, "access_role": {"operator": "operator", "reviewer": "analyst"}[role]}
         with self.mutex, self.db:
             try:
                 return getattr(self, operation)(actor=actor, **params)
@@ -240,7 +242,7 @@ class Controller:
         thread.start()
         return job
 
-    def _execute(self, job, operation, adapter=None):
+    def _execute(self, job, operation, adapter=None, knowledge_request=None):
         with self.mutex:
             model, data = self._inputs(job)
             path = self.root/"jobs"/self._new("run")
@@ -248,7 +250,8 @@ class Controller:
             (path/"output").mkdir(mode=0o700)
             write_json(path/"request.json", {"operation": operation, "config": job["config"],
                                             "has_adapter": adapter is not None,
-                                            "parent_netns": os.readlink("/proc/self/ns/net")})
+                                            "parent_netns": os.readlink("/proc/self/ns/net"),
+                                            "knowledge_request": knowledge_request})
         def started(proc):
             with self.mutex:
                 self.processes[job["id"]] = proc
@@ -428,6 +431,56 @@ class Controller:
         self._put("deployment", "deployment", deployment)
         self._event(actor, "model_rolled_back", deployment)
         return deployment
+
+    def import_knowledge(self, source):
+        """Administrative import of the existing synthetic document fixture only."""
+        with self.mutex, self.db:
+            from .knowledge import validate_documents
+            docs = json.loads(Path(source).read_text())
+            validate_documents(docs)
+            if self._all("knowledge"):
+                raise Rejected("Knowledge already provisioned; use a fresh experiment")
+            target = self.root/"knowledge"/"documents.json"
+            write_json(target, docs)
+            obj = {"id": "knowledge", "manifest": manifest(target.parent),
+                   "source_kind": "existing-AIRON-synthetic-fixture", "count": len(docs)}
+            self._put("knowledge", "knowledge", obj)
+            self._event("provisioner", "knowledge_authorized", obj)
+            return obj
+
+    def query_knowledge(self, question, enabled, access_role, actor):
+        from .knowledge import retrieve
+        if self.running:
+            raise Rejected("Another worker is running")
+        knowledge = self._get("knowledge", "knowledge")
+        path = self.root/"knowledge"
+        verify_tree(path, knowledge["manifest"])
+        docs = json.loads((path/"documents.json").read_text())
+        result = retrieve(docs, question, enabled, access_role)
+        deployment = self._get("deployment", "deployment")
+        if result["outcome"] == "SOURCE_FOUND":
+            source = result.pop("source")
+            jobs = [j for j in self._all("job") if j["base_id"] == deployment["base"]]
+            if not jobs:
+                raise Rejected("Prepare a job for the active base first")
+            adapter = self._candidate(deployment["active"])[1] if deployment["active"] else None
+            _, generated = self._execute(jobs[-1], "knowledge", adapter,
+                knowledge_request={"question": question, "source_text": source["body"]})
+            matched = generated.get("text", "").strip() == source["body"]
+            result = {"outcome": "ANSWERED" if matched else "ABSTAINED",
+                      "answer": source["body"] if matched else "The local model did not reproduce the approved source. No answer released.",
+                      "sources": [{"id": source["id"], "title": source["title"]}] if matched else [],
+                      "model_called": True, "output_validated": matched,
+                      "generation_seconds": generated["generation_seconds"],
+                      "generated_tokens": generated["generated_tokens"],
+                      "isolation": generated["isolation"]}
+        result["deployment_version"] = deployment["version"]
+        self._event(actor, "knowledge_query", {"question_digest": digest(question),
+            "access_role": access_role, "outcome": result["outcome"],
+            "model_called": result["model_called"], "result_digest": digest(result),
+            "knowledge_manifest_digest": digest(knowledge["manifest"]),
+            "deployment_version": deployment["version"]})
+        return result
 
     def infer(self, dataset_id, actor):
         if self.running:

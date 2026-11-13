@@ -50,6 +50,8 @@ async function act(operation) {
   try {
     await refresh();
     let params = {};
+    if (operation === 'query_knowledge') params = {question: document.getElementById('question').value,
+      enabled: ['OPS-001', 'OPS-002', 'FIN-001', 'IT-001']};
     if (operation === 'infer') params = {dataset_id: latest('dataset')};
     if (['start_training','cancel_training','register_checkpoint'].includes(operation))
       params = {job_id: latest('job')};
@@ -66,6 +68,8 @@ async function act(operation) {
     }
     const response = await call(operation, params);
     result.textContent = JSON.stringify(response, null, 2);
+    if (operation === 'query_knowledge') document.getElementById('knowledge-answer').textContent =
+      response.outcome + ': ' + response.answer;
     if (operation === 'evidence') document.getElementById('details').open = true;
     message.textContent = operation === 'start_training'
       ? 'Training started. Refresh status to inspect progress.' : 'Local request completed. Review the recorded result.';

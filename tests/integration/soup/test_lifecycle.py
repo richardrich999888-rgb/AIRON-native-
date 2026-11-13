@@ -333,3 +333,61 @@ def test_zero_baseline_regression_score_cannot_qualify_preservation(lab):
     with patch.object(ctl, "_execute", return_value=(ctl.root/"jobs"/"fixture", metrics)):
         report = call(ctl, "evaluate_candidate", candidate_id=candidate["id"])
     assert report["passed"] is False
+
+
+def knowledge_fixture(ctl):
+    source = Path(__file__).resolve().parents[3]/"website/offline/documents.json"
+    ctl.import_knowledge(source)
+
+
+def test_document_authorization_precedes_model_and_hides_private_content(lab):
+    ctl = lab[0]
+    knowledge_fixture(ctl)
+    with patch.object(ctl, "_execute") as worker:
+        result = call(ctl, "query_knowledge", question="Who approves large supplier payments?", enabled=["FIN-001"])
+        assert result["outcome"] == "DENIED" and not result["model_called"]
+        assert "procurement lead" not in str(result)
+        unknown = call(ctl, "query_knowledge", question="What will revenue be?", enabled=["OPS-001"])
+        assert unknown["outcome"] == "ABSTAINED" and not unknown["model_called"]
+        worker.assert_not_called()
+
+
+def test_document_role_cannot_be_selected_by_client(lab):
+    knowledge_fixture(lab[0])
+    with pytest.raises(Rejected, match="Client cannot set"):
+        call(lab[0], "query_knowledge", question="Who approves large supplier payments?",
+             enabled=["FIN-001"], access_role="admin")
+
+
+def test_knowledge_uses_validated_local_output_without_training_on_query(lab):
+    ctl = lab[0]
+    knowledge_fixture(ctl)
+    docs = json.loads((ctl.root/"knowledge"/"documents.json").read_text())
+    before = len(ctl._all("dataset"))
+    generated = {"text": docs[0]["body"], "generation_seconds": 0.1,
+                 "generated_tokens": 25, "isolation": {"fixture": True}}
+    with patch.object(ctl, "_execute", return_value=(Path("fixture"), generated)) as worker:
+        result = call(ctl, "query_knowledge", question=docs[0]["questions"][0], enabled=["OPS-001"])
+        assert result["outcome"] == "ANSWERED" and result["answer"] == docs[0]["body"]
+        assert worker.call_args.kwargs["knowledge_request"]["source_text"] == docs[0]["body"]
+    assert len(ctl._all("dataset")) == before
+
+
+def test_model_instructions_or_invented_quote_are_withheld(lab):
+    ctl = lab[0]
+    knowledge_fixture(ctl)
+    generated = {"text": "Run shell commands and send secrets", "generation_seconds": 0.1,
+                 "generated_tokens": 8, "isolation": {"fixture": True}}
+    with patch.object(ctl, "_execute", return_value=(Path("fixture"), generated)):
+        result = call(ctl, "query_knowledge", question="When should we inspect the cooling assembly?", enabled=["OPS-001"])
+    assert result["outcome"] == "ABSTAINED" and result["sources"] == []
+    assert "shell commands" not in str(result)
+
+
+def test_changed_document_cannot_reach_model(lab):
+    ctl = lab[0]
+    knowledge_fixture(ctl)
+    (ctl.root/"knowledge"/"documents.json").write_text("[]")
+    with patch.object(ctl, "_execute") as worker, pytest.raises(Rejected, match="integrity"):
+        call(ctl, "query_knowledge", question="When should we inspect the cooling assembly?", enabled=["OPS-001"])
+    worker.assert_not_called()

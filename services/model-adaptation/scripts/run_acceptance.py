@@ -1,6 +1,8 @@
 """Real acceptance driver. No mocked results and no automatic production promotion."""
 import argparse
 import json
+import os
+import platform
 import time
 from pathlib import Path
 from airon_adaptation.controller import Controller
@@ -20,6 +22,16 @@ def main():
                   "Application signatures are not independent execution attestations",
                   "This driver does not prove isolated controller or complete wheelhouse installation",
                   "No GPU, GGUF, Ollama adapter deployment or AIP integration qualification"]}
+    cpu_info = Path("/proc/cpuinfo").read_text()
+    report["hardware"] = {"platform": platform.platform(), "python": platform.python_version(),
+        "cpu_model": next((line.split(":", 1)[1].strip() for line in cpu_info.splitlines()
+                           if line.startswith("model name")), "unknown"),
+        "logical_cpus": os.cpu_count(), "allowed_cpus": sorted(os.sched_getaffinity(0)),
+        "mem_total": next((line for line in Path("/proc/meminfo").read_text().splitlines()
+                           if line.startswith("MemTotal:")), "unknown"),
+        "worker_threads": 2, "gpu_used": False}
+    report["source"] = {"head": os.environ.get("AIRON_SOURCE_COMMIT"),
+                        "actions_checkout": os.environ.get("GITHUB_SHA")}
     ctl = Controller(args.root)
     def invoke(operation, **params):
         return ctl.call(operation, params, actor="local-operator", role="operator")
@@ -31,6 +43,19 @@ def main():
         job = state["job"][-1]
         report["baseline"] = invoke("infer", dataset_id=job["dataset_id"])
         report["gates"]["baseline_inference"] = "PASS"
+        report["knowledge_baseline"] = invoke("query_knowledge",
+            question="When should we inspect the cooling assembly?", enabled=["OPS-001"])
+        report["knowledge_denied"] = invoke("query_knowledge",
+            question="Who approves large supplier payments?", enabled=["FIN-001"])
+        report["knowledge_abstained"] = invoke("query_knowledge",
+            question="What will revenue be?", enabled=["OPS-001"])
+        if not report["knowledge_baseline"]["model_called"]:
+            raise RuntimeError("Authorized knowledge query did not invoke the local model")
+        if (report["knowledge_denied"]["outcome"] != "DENIED" or report["knowledge_denied"]["model_called"]
+                or report["knowledge_abstained"]["outcome"] != "ABSTAINED" or report["knowledge_abstained"]["model_called"]):
+            raise RuntimeError("Knowledge access or abstention gate failed")
+        report["gates"]["private_knowledge_controls"] = "PASS"
+        report["knowledge_answer_quality"] = report["knowledge_baseline"]["outcome"]
         invoke("start_training", job_id=job["id"])
         deadline = time.monotonic()+960
         while time.monotonic() < deadline:
@@ -58,6 +83,11 @@ def main():
         report["deployment"] = review("activate_model", approval_id=approval["id"])
         try:
             report["adapted_inference"] = invoke("infer", dataset_id=job["dataset_id"])
+            report["knowledge_adapted"] = invoke("query_knowledge",
+                question="When should we inspect the cooling assembly?", enabled=["OPS-001"])
+            if (report["knowledge_baseline"]["outcome"] == "ANSWERED"
+                    and report["knowledge_adapted"]["outcome"] != "ANSWERED"):
+                raise RuntimeError("Adapted knowledge response regressed; restore original model")
         finally:
             report["rollback"] = review("rollback_model")
         report["restored_inference"] = invoke("infer", dataset_id=job["dataset_id"])

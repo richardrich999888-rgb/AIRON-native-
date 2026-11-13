@@ -49,6 +49,7 @@ def main():
     ctl = Controller(args.root)
     try:
         model = ctl.import_base(assets, identifier=MODEL, revision=REVISION, license_id="Apache-2.0")
+        ctl.import_knowledge(Path(__file__).resolve().parents[3]/"website/offline/documents.json")
         rows = json.loads((Path(__file__).resolve().parents[1]/"fixtures/enterprise-routing.json").read_text())
         ds = ctl.call("prepare_dataset", {"rows": rows, "authorization": {
             "synthetic": True, "approved_for_training": True, "license": "CC0-1.0"}},

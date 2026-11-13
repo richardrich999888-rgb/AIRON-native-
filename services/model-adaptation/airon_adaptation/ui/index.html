@@ -17,7 +17,12 @@
 <section><h2>Your experiment</h2><p>Use the prepared synthetic dataset and model. Full request schemas and provisioning commands are in the local README.</p>
 <ol>
 <li><b>Deploy</b><span>Inspect the preinstalled model and approved data.</span><button data-action="status">Refresh status</button></li>
-<li><b>Understand</b><span>Run the baseline on the approved test questions.</span><button data-action="infer">Run local inference</button></li>
+<li><b>Understand</b><span>Ask an approved private document. Access is checked before the local model runs.</span>
+<label for="question">Question for the synthetic corpus</label>
+<input id="question" value="When should we inspect the cooling assembly?" maxlength="500">
+<button data-action="query_knowledge">Ask approved documents</button>
+<p id="knowledge-answer" role="status">No document answer requested.</p>
+<button data-action="infer">Run frozen benchmark</button></li>
 <li><b>Identify limitations</b><span>Inspect predictions and expected answers in the results below.</span></li>
 <li><b>Adapt</b><span>Start the prepared training job. Training cannot activate a model.</span><button data-action="start_training">Train locally</button><button data-action="cancel_training">Cancel training</button></li>
 <li><b>Verify improvement</b><span>Register the checkpoint and compare the frozen evaluation sets.</span><button data-action="register_checkpoint">Register candidate</button><button data-action="evaluate_candidate">Compare models</button></li>
@@ -27,5 +32,5 @@
 <li><b>Inspect evidence</b><span>Application signatures attest to these records. Independent execution observation is not integrated.</span><button data-action="evidence">Verify records</button><button data-action="export_model">Export candidate</button></li>
 <li><b>Roll back</b><span>Restore the previous experimental model version.</span><button data-action="rollback_model">Restore previous model</button></li>
 </ol></section><section><h2>Recorded results</h2><details id="details"><summary>Inspect exact records and verification details</summary><pre id="result">No results loaded.</pre></details></section>
-<p class="foot">Private knowledge retrieval remains in the existing Ollama demonstration. This adaptation experiment is a separate runtime; it does not change the hosted demonstration or Ollama's active model.</p>
+<p class="foot">This runtime uses the existing synthetic document corpus with its own approved model and adapter. Unknown questions abstain; restricted documents are denied. It does not change the hosted demonstration or Ollama's active model.</p>
 </main><script src="/app.js"></script></body></html>
