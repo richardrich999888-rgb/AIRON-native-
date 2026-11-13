@@ -417,6 +417,125 @@
       "source": null,
       "outcome": null,
       "verification": null
+    },
+    {
+      "path": "adapter-artifact-692a129.json",
+      "sha256": "629a1f719a0ba10d4ffb664aa63f2c49161ef218cd3e57ebe75b76d6b8d07903",
+      "source": "692a129addfbc09dd867b2018afd55f61aa23f1a",
+      "outcome": true,
+      "verification": null
+    },
+    {
+      "path": "offline-3ce3cfe.json",
+      "sha256": "47e98005265ea3f7f732c2884567ffbf5a8105f91093353c962b2b750b7c8a86",
+      "source": {
+        "actions_checkout": "0138e04b53e68591304ddce5d714c8df7ed03af7",
+        "head": "3ce3cfeb6658ae30aa8bd4c3eb39858abf2ea1a8"
+      },
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "verification": {
+        "valid": true,
+        "events": 20,
+        "head": "177217e287f90c7e395614b7d10a42bf026a5870dc8cb3a7f6c7ffbcfc78c96e",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "56669e959ecd6867c0bf355dd4c6c70b0a74f61d175fa35b13a753715155b60a"
+    },
+    {
+      "path": "faults-3ce3cfe.json",
+      "sha256": "2c842b94c02c66ee8471ba120128776e16caf103910aff932c0ebd87ffb08921",
+      "source": null,
+      "outcome": true,
+      "verification": {
+        "valid": true,
+        "events": 9,
+        "head": "f755a12496b7d389aef194880e1c77327b4bb51b1dd85a3f1985cd49788a9212",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "793a1f3c7d2e04f2483d2979a219928a9d2e4b647396fd2c80b4a288b27758ac"
+    },
+    {
+      "path": "cpu-6077c9a.json",
+      "sha256": "a3ceafe06cfbaf3ece11d442d348334757c251fb261dfa48d1aee1b25b458c31",
+      "source": {
+        "actions_checkout": "f9ca8ba54070182d43760a235fef7cdb03aca315",
+        "head": "6077c9a104c42e024ae343aafdc2cc4a91181663"
+      },
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "verification": {
+        "valid": true,
+        "events": 20,
+        "head": "48db35f22c1b9bb3e1a3c26587668d62dba81c57acd21d5919dc28a765657d22",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "c37e387ca961c3a698c6bd94131e3705f5cecf8eeacc06ccb47836ef14779fca"
+    },
+    {
+      "path": "offline-6077c9a.json",
+      "sha256": "b882ed7da618d69d26f36647e2845f90f535454efa7017f42efc7d91787c9ef8",
+      "source": {
+        "actions_checkout": "f9ca8ba54070182d43760a235fef7cdb03aca315",
+        "head": "6077c9a104c42e024ae343aafdc2cc4a91181663"
+      },
+      "outcome": "PASS_SCOPED_CPU_EXPERIMENT",
+      "verification": {
+        "valid": true,
+        "events": 20,
+        "head": "5f97775e69208b19c5062ac84de58e7d77ba2eea87c2a5a93e0cc9c6935ca518",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "92b1b6051c9cb2bbbe46127e8ce1c5fd4615badfc29f5eb9d8c1b44199e9c58e"
+    },
+    {
+      "path": "faults-6077c9a.json",
+      "sha256": "c05c8b2a423aec135847f8a5bc5452923f49153cab431304c5130d77ed294070",
+      "source": null,
+      "outcome": true,
+      "verification": {
+        "valid": true,
+        "events": 10,
+        "head": "6d97951eb000925bdeef39a3fbf40524773c9e1c750fd98002132e2beb880462",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "355bb80431c8e3e418d069cfd735957ec59f91c5b966f91f0b115377429ac325"
+    },
+    {
+      "path": "network-6077c9a.json",
+      "sha256": "12307bcbb018487a29c3b7945b04ff90d37483809f319d59e8e1a825d6fbdced",
+      "source": null,
+      "outcome": true,
+      "verification": null
+    },
+    {
+      "path": "console-6077c9a.json",
+      "sha256": "d610e4973a8c12d1e47f81ba645d1ba0ead9d0da63a26c142198e76ca462daca",
+      "source": null,
+      "outcome": true,
+      "verification": null
+    },
+    {
+      "path": "runtime-6077c9a.json",
+      "sha256": "34dc7b1f20e4dbb942785c286a4865b1a9e1f5ad3cbc9c65b580d62e89e67f6a",
+      "source": null,
+      "outcome": null,
+      "verification": null
+    },
+    {
+      "path": "adapter-artifact-6077c9a.json",
+      "sha256": "bceccd165bbac267fd496e52f954e48f82bbd4decae15d2da9c54e082af4355c",
+      "source": "6077c9a104c42e024ae343aafdc2cc4a91181663",
+      "outcome": true,
+      "verification": null
     }
   ]
 }

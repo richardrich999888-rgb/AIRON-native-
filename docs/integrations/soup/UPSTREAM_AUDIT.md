@@ -7,7 +7,7 @@ Audit date: 13 November 2026. Scope: the first CPU LoRA integration, not an exha
 - AIRON main: 04a84e64fc2be36fe03fc73006c9a42285617a02.
 - Soup: af2f5d5000f7baec6386a72a6d16e82383eb5303, package soup-cli 0.77.2, Python >=3.11,<3.14.
 - AIP main: 872dbf375838cff464eb019488c63d948015e9b8.
-- AIP P0-048 branch tip inspected at reference/README level only: 61dd73013d02ea7869de104d953f330098df1c32.
+- AIP P0-048 immutable reference inspected at README and targeted observer-source level (INDEPENDENT_OBSERVATION.md): 61dd73013d02ea7869de104d953f330098df1c32.
 - Selected model: HuggingFaceTB/SmolLM2-135M-Instruct at 12fd25f77366fa6b3b4b768ec3050bf629380bac. Model card and HF API declare Apache-2.0. This is a pretrained 135M causal model, not a random toy fixture.
 
 Sources were cloned into an isolated workspace; git status, branch lists, recent commits and dependency manifests were inspected. AIRON contained a React/Vite hosted demonstration and a separate Python/Ollama local gateway, with no pre-existing model adaptation service. The only remote AIRON branches observed were main and research/p0-053-opensource-capability-library. The P0-052 branch was created from the inspected main without modifying main.

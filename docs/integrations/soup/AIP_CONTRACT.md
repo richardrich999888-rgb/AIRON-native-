@@ -12,7 +12,7 @@ The test-only contract at AIRON ddde09b24d88dc44d9c4a662881f6bdb8c4798cd passed 
 | Verification-stage network isolation | Distinct namespace, zero routes, failed deliberate IP/DNS probes |
 | AIP checkout changed by the test | No tracked source change |
 
-Original report: ../../qualification/p0-052/evidence/aip-raw-contract-ddde09b.json. The current EVIDENCE_INDEX.json binds its bytes. The test is reproducible through tests/integration/aip-signature and .github/workflows/p0-052-aip-signature.yml. The later run 43362170890 passed the same contract on AIRON 060ff1de6cf8f6f607baca4cb1be245e13dac0bf.
+Original report: ../../qualification/p0-052/evidence/aip-raw-contract-ddde09b.json. The current EVIDENCE_INDEX.json binds its bytes. The test is reproducible through tests/integration/aip-signature and .github/workflows/p0-052-aip-signature.yml. The same contract passed again at 060ff1d (run 43362170890), 3ce3cfe (43371870508) and 6077c9a (43373086477). These repeat executions do not increase the number of independent test cases.
 
 The boundary is deliberately narrow: Python constructs AIRON's existing canonical bytes, and Rust consumes them without parsing JSON. This does not qualify Rust/Python JSON canonicalization, AIP EvidencePacket semantics, delegation or authority binding, independent signer custody, external event anchoring, Sniffer Dog observation or kernel attestation. The record assurance remains APPLICATION_SIGNED / independent execution CANNOT_PROVE.
 

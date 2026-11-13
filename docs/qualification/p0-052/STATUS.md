@@ -1,60 +1,66 @@
-# P0-052 — measured offline adaptation and current quality gate
+# P0-052 — actual offline adaptation and controlled model changes
 
-Updated 13 November 2026. Draft [PR #2](https://github.com/richardrich999888-rgb/AIRON-native-/pull/2); main is unchanged. This is an experimental qualification, not a production release.
+Updated 13 November 2026. Draft [PR #2](https://github.com/richardrich999888-rgb/AIRON-native-/pull/2); inspected main 04a84e64fc2be36fe03fc73006c9a42285617a02 is unchanged. This is an experimental CPU qualification, not a production release.
 
-## Latest experiment
+## Current result
 
-692a129addfbc09dd867b2018afd55f61aa23f1a / run 43364072232 passed genuine rehearsal training and the complete v3 offline lifecycle: routing 1/6→5/6, facts 3/6→6/6, full approved-source answer, export, explicit synthetic review, activation, rollback, fresh 63-wheel installation, network audit and browser checks. Offline training took 344.366 seconds and 1,983,160 KiB worker RSS. The overall workflow FAILED because its cancellation progress detector omitted rehearsal rows. This harness bug is now fixed with regression coverage; the real fault check must be rerun before the workflow is marked passed. Historical results below remain scoped to their cited source and will be reconciled after that rerun.
+Runtime source **6077c9a104c42e024ae343aafdc2cc4a91181663** passed every stage of [Actions run 43373086529](https://github.com/richardrich999888-rgb/AIRON-native-/actions/runs/43373086529). Genuine Soup training completed twice. The second experiment installed 63 exact wheels into a fresh environment without networking, then repeated baseline inference, authorized knowledge access, training, evaluation, export, explicit synthetic review, activation, adapted inference and rollback with the complete controller and workers isolated. Actual browser checks and real cancellation/corrupt-model tests also passed.
 
-## Historical completed vertical slice
+Routing improved from 1/6 to 5/6, factual retention from 3/6 to 6/6, and both models reproduced the complete approved source for the document question. Denied and unsupported queries stopped before model execution. Evaluation questions and factual evaluation answer strings were excluded from rehearsal. These are small development-set results, not general enterprise accuracy or an untouched scientific holdout.
 
-Source a29733297c0d022b700ffa260750ed40a4d2e48a completed [Actions run 43356140596](https://github.com/richardrich999888-rgb/AIRON-native-/actions/runs/43356140596) successfully, including both jobs and every real CPU step. It demonstrated baseline inference, approved private-document access, genuine Soup training, evaluation, scripted test approval, experimental activation, adapted inference, export, rollback, a fresh hash-locked offline installation, complete namespace isolation and syscall classification, browser evidence download, real cancellation and corrupt-model rejection.
+The final evidence/documentation commit retains these observations without changing the tested runtime, fixtures, tests or workflows. Actions tested the runtime revision above (PR merge checkout f9ca8ba54070182d43760a235fef7cdb03aca315); it did not rerun training for the subsequent documentation-only commit. Historical failed and rejected experiments remain in EXPERIMENTS.md and evidence/.
 
-Its task score remains weak: 2/6 equals the constant-label reference for the balanced three-class routing set. That run qualifies the implemented lifecycle and isolation, not useful enterprise routing quality. The current policy v3 now requires at least 50% routing accuracy as well as strict improvement, factual preservation and the full-source document answer. The broader 102-record LoRA trial at 060ff1de6cf8f6f607baca4cb1be245e13dac0bf completed 153 steps and improved routing to 3/6, but factual accuracy fell from 3/6 to 0/6. The gate rejected activation. The next mitigation reuses Soup native rehearsal to mix 24 separately authorised synthetic general-knowledge records with the existing 102 records. Frozen evaluation is unchanged and rehearsal does not contain its answer strings. No pass is inferred.
+## Latest measured offline workflow
 
-| Observation at a297332 | Actual offline result |
+| Observation | Actual result at 6077c9a |
 |---|---|
-| Base / adapter | SmolLM2-135M-Instruct; genuine rank-8 CPU LoRA |
-| Training | 45 optimizer steps; 120 changed tensors |
-| Precision / threads | All floating training parameters FP32; 2 observed torch CPU threads |
-| Training plus save | 99.931 seconds |
-| Worker wall time | 114.532 seconds |
-| Peak worker RSS | 1,726,268 KiB |
-| Hardware | AMD EPYC 7763 runner; 4 logical CPUs; 16,372,448 KiB host RAM |
+| Base model | Pinned pretrained SmolLM2-135M-Instruct; Apache-2.0 model terms retained |
+| Training input | 102 approved primary records plus 24 disjoint authorized rehearsal records, mixed by native Soup |
+| Adaptation | Rank-8 LoRA on seven attention/MLP projections; 3 epochs, LR .0003, seed 52 |
+| Real training | 189 optimizer steps; 420 changed tensors; floating training parameters checked FP32 |
+| Training plus save | 437.544 seconds; worker wall time 452.429 seconds |
+| Peak worker RSS | 2,004,656 KiB; per-process measurement, not host total or aggregate peak |
+| Hardware | AMD EPYC 7763 runner; 4 logical CPUs, 2 torch threads, 16,372,448 KiB host RAM; Python 3.12.16 |
 | GPU | Not used |
-| Routing | 1/6 → 2/6; insufficient under current v3 minimum |
-| Factual regression | 3/6 → 3/6 |
-| Approved document | Baseline and adapted answer reproduced the full approved source |
-| Restricted / unsupported documents | Denied / abstained before model execution |
-| Adapter weights | 1,858,776 bytes; safetensors |
-| Deployment / rollback | Experimental version 2 activated; version 3 restored original; predictions restored |
-| Offline install | 63 exact wheels installed into an empty environment with networking unavailable |
-| Network audit | Eleven controller/worker probe windows; no unexpected IP/DNS activity |
-| Evidence | 20 signed events; APPLICATION_SIGNED; independent execution CANNOT_PROVE |
-| Browser | Actual workspace, reviewer training denial, mobile width, evidence download and signatures passed |
-| Real faults | Optimizer-progress cancellation stopped process (-9); malformed safetensors parser rejected model |
-| Delivery | Actual primary/offline adapter files retained in the Actions evidence artifact |
+| Routing | 1/6 → 5/6; closed-choice likelihood over the fixed answer set |
+| Factual retention | 3/6 → 6/6 on the unchanged six questions |
+| Approved document | Baseline and candidate reproduced the full approved source; extra framing is discarded |
+| Routing mean evaluation latency | Baseline 3.181 s; candidate 4.463 s per prompt, including all choice scoring |
+| Factual mean evaluation latency | Baseline 2.577 s; candidate 3.660 s per prompt |
+| Document generation latency | Baseline 4.035 s; candidate 3.282 s |
+| Base / adapter weights | 269,060,552 / 9,823,216 bytes |
+| Adapter / HF export with tokenizer | 13,353,221 / 272,585,007 bytes; merged-export numerical parity not qualified |
+| Deployment and rollback | Experimental version 2 activated; version 3 restored the baseline and its predictions |
+| Offline dependencies | 63 exact wheels installed with --no-index, --no-cache-dir and --require-hashes in an isolated namespace |
+| Network observations | Eleven probe windows; all 163 downloaded raw trace files rehashed and reclassified; zero unexpected IP/DNS activity |
+| Real interruption | Cancel after optimizer step 1/756; process stopped with -9, registration denied, baseline inference then succeeded over 12 rows |
+| Actual malformed model | Safetensors parser rejected the malformed header; no candidate or activation |
+| Adapter inspection | Primary/offline weight hashes identical; 420 FP32 tensors and 210 nonzero LoRA-B tensors |
+| Evidence | 20 signed lifecycle records; source-reviewed key/head; APPLICATION_SIGNED / independent execution CANNOT_PROVE |
+| Console | Actual workspace/scores, reviewer training denial, desktop/mobile checks and raw signed download passed |
 
-Full original reports are in evidence/. The base, tokenizer, dataset, configuration, candidate, evaluation and approval digests remain attached to actual signed events. Source-reviewed report hashes/keys/heads are in EVIDENCE_INDEX.json; these are not independent enterprise identities.
+Latency excludes cold model loading and HTTP overhead. Training/save and worker wall time are separate measurements. CPU runners differ across trials: scores reproduced across observed hosts, but weight bytes are not claimed identical across hardware. Within this run, primary/offline adapter SHA-256 is 4875ff6d50e45f51cab5b5148790518c2234dd3977466b825ee06a2b6d3a53ec.
 
 ## Qualification milestones
 
-| Gate | Status | Scope |
+| Milestone | Observed status | Scope / open gate |
 |---|---|---|
-| M1 source qualification | Scoped review completed | Immutable Soup/AIRON/AIP/model references, source licences/notices and actual wheel inventory; full OS/native redistribution review remains open |
-| M2 working adapter | Passed on recorded source | Actual local Soup data loading, training and merge helper |
-| M3 genuine training | Passed on recorded source | Real changed parameters, saved/reloaded adapter; separate downloaded artifact inspection |
-| M4 model lifecycle | Passed under v2; v3 quality trial pending | Explicit role/approval gate and rollback work; current stricter task-quality requirement needs a new passing candidate |
-| M5 offline qualification | Passed for recorded v2 workflow; new trial pending | Fresh installation and complete namespace-isolated workflow; no physical/customer-site accreditation |
-| M6 assurance | Passed at application level | Signed chain, reviewed anchors, separately inspected syscall traces; AIP raw-byte interoperability passed separately; no production AIP or Sniffer Dog integration |
-| M7 demonstration | UI and reproducibility passed; stronger quality pending | Guided local console and downloadable evidence; weak routing score must remain visible |
+| M1 source qualification | Scoped review completed | Pinned source/model terms, licences/notices and actual Python wheel inventory; full OS/native redistribution review open |
+| M2 working adapter | Passed | Actual Soup data loading, replay mixing, SFT and merge helper; separately packaged upstream |
+| M3 training qualification | Passed | Genuine changed adapter, saved/reloaded and separately inspected artifact |
+| M4 model lifecycle | Passed v3 | Current quality gate, explicit role/review, activation, adapted inference and rollback; synthetic test reviewer |
+| M5 offline qualification | Passed on tested runner | Fresh dependency installation and entire workflow without external networking; no physical/customer-site accreditation |
+| M6 assurance qualification | Passed at application level | Signature chains and trace/artifact checks; actual AIP raw-byte compatibility; independent-execution gate OPEN |
+| M7 guided demonstration | Implemented and rehearsed | Local SYNTRIASS console, ten-scene guide, browser/fault checks and reproduction commands |
 
-The pre-expansion suite passed 78 tests plus the 15 existing gateway tests and eight existing website cases/build. Current source passed 85 local/controller/adversarial/retained-evidence checks, and its CI contracts job passed. Counts overlap across runs; they are not independent test totals.
+At the tested runtime revision, CI passed 111 adaptation checks (80 controller/adversarial/transport/harness checks and 31 retained-report checks), 15 original gateway tests, eight website cases and the build. The documentation commit adds ten retained reports; the unchanged suite passed 121 checks locally, including all 41 retained reports. Counts overlap across runs and must not be summed as independent tests. Separate [AIP contract run 43373086477](https://github.com/richardrich999888-rgb/AIRON-native-/actions/runs/43373086477) also passed; it is a byte-signature contract, not a full identity/observation integration.
 
-## Remaining work and limits
+## Delivered evidence and remaining gates
 
-The immediate engineering task is a v3-qualified candidate from the unchanged-evaluation, 102-record corpus. The q/v-only adapter failed routing despite genuine training; the next trial broadens the fixed LoRA target coverage. Evaluation answers are not added to training.
+Original signed reports, failures and source-reviewed anchors are retained in evidence/ and EVIDENCE_INDEX.json. BENCHMARKS.json contains machine-readable measurements. The actual adapters, raw traces and packaged notices are in [artifact 14015340252](https://github.com/richardrich999888-rgb/AIRON-native-/actions/runs/43373086529/artifacts/14015340252): ZIP SHA-256 d0998f7b453bf1e647159f50578b89bbdb45800b37205bc1aba4c569795da975, 20,020,945 bytes, recorded expiry 11 February 2027. Retain an approved copy before expiry or reproduce. Separate reinspection verified adapter manifests, signatures, all traces, 139 notices and the 63-wheel hash lock. It does not establish independent signer custody.
 
-Enterprise qualification still needs independently prepared larger benchmarks, authorised real-data ingestion, independent approver identity/key custody and external event anchoring, a tested/licensed AIP bridge and independent execution observer, customer hardware/physical isolation, cgroup aggregate limits and multi-user isolation, broader forgetting/poisoning/drift evaluation, incremental adapter learning, and export parity/GGUF/llama.cpp/Ollama deployment. No automatic harvesting, model self-modification or promotion exists.
+A larger independently prepared benchmark, authorized real-data ingestion and poisoning/drift review, independent approver identity/key custody/external anchors, a licensed full AIP/observer contract, separately administered customer hardware and physical isolation, aggregate cgroup limits/multi-user isolation, incremental adapter recovery, merged-export numerical parity and GGUF/llama.cpp/Ollama deployment remain open. INDEPENDENT_OBSERVATION.md records the actual source/capability investigation; no Sniffer Dog execution is claimed.
 
-Read REPRODUCE.md for exact installation/execution procedures, EXPERIMENTS.md for failed and superseded trials, ADVERSARIAL_MATRIX.md for test scope, and LEDGER.md for the implementation history.
+The original Ollama and hosted demos are preserved. Activation affects only the new experimental HF/PEFT runtime. No conversation harvesting, automatic promotion, uncontrolled self-modification or production readiness is claimed. The feasible experimental slice is delivered for review; broader enterprise qualification is incomplete.
+
+Read REPRODUCE.md, COMMANDS.md, CHANGED_FILES.md, DEMO_SCRIPT.md, ADVERSARIAL_MATRIX.md and LEDGER.md for setup, executed commands, changed files, demonstration, negative-test scope and outstanding work.

@@ -18,11 +18,11 @@ git diff --check
 git diff 04a84e64fc2be36fe03fc73006c9a42285617a02 --name-only
 ```
 
-At 7b964cd these checks included 93 passing pytest cases. The pytest suite contains fixture/controller tests and separately labelled retained real-evidence checks. Local model provisioning failed before download because the workspace proxy required socksio; this workspace also denies the AF_UNIX probe. No local real-training or isolation pass is claimed. The actual full experiment ran in Actions.
+At tested runtime 6077c9a the CI suite passed 111 cases. After retaining the final reports, the unchanged suite passed 121 cases locally in 4.10 seconds: 80 controller/adversarial/transport/harness checks and 41 retained-report checks. Python compilation, JavaScript syntax and git diff checks also passed. The pytest suite contains fixture/controller tests and separately labelled retained real-evidence checks. Local model provisioning failed before download because the workspace proxy required socksio; this workspace also denies the AF_UNIX probe. No local real-training or isolation pass is claimed. The actual full experiment ran in Actions.
 
-Downloaded Actions artifacts were independently checked in this workspace: compare ZIP SHA-256 against GitHub metadata, reject unsafe/duplicate/link archive paths, verify signed chains using retained key/head anchors, compare each candidate file with its signed manifest, inspect safetensors with safe_open, count 120 FP32 tensors and nonzero LoRA-B updates, and compare primary/offline adapter hashes. Original signed JSON bytes were preserved. adapter-artifact-a297332.json records those checks; the archive hash and source revision make their scope explicit.
+Downloaded Actions artifacts were independently checked in this workspace: compare ZIP SHA-256 against GitHub metadata, reject unsafe/duplicate/link archive paths, verify signed chains using retained key/head anchors, compare each candidate file with its signed manifest, inspect safetensors with safe_open, count the actual FP32 tensors and nonzero LoRA-B updates (120/60 at a297332; 420/210 at 692a129 and 6077c9a), and compare primary/offline adapter hashes. Original signed JSON bytes were preserved. adapter-artifact-a297332.json, adapter-artifact-692a129.json and adapter-artifact-6077c9a.json record those checks; the archive hash and source revision make their scope explicit.
 
-The b4b9505 and a297332 network audits were independently rerun over all 173 downloaded raw trace files; each trace hash matched their reports and the classifier again found eleven probe windows and no violations. This is separate artifact inspection, not an independent identity authority or customer-site attestation.
+The b4b9505 and a297332 network audits were independently rerun over all 173 downloaded raw trace files; the 692a129 and latest 6077c9a audits were each repeated over all 163 files. In each case, each trace hash matched their reports and the classifier again found eleven probe windows and no violations. This is separate artifact inspection, not an independent identity authority or customer-site attestation.
 
 ## Executed by the Actions contract job
 
@@ -34,7 +34,7 @@ python services/model-adaptation/scripts/verify_evidence.py \
   --expected-head 84b49c9b914d20fc596b4b4c776e22a6ff379f093c601e4291988e67eec691d6
 ```
 
-In website/offline: python -m unittest test_server.py. At the repository root: npm --prefix website ci, npm test, npm run build. Run 43359489727 passed 93 pytest checks, 15 original gateway tests, eight website cases and the build. These are separate suites; repeat runs are not additional independent test cases.
+In website/offline: python -m unittest test_server.py. At the repository root: npm --prefix website ci, npm test, npm run build. Latest full run 43373086529 passed 111 pytest checks in its contracts job, 15 original gateway tests, eight website cases and the build. These are separate suites; repeat runs are not additional independent test cases.
 
 ## Real CPU and offline execution
 
@@ -58,4 +58,8 @@ Use EVIDENCE_INDEX.json to verify retained report hashes and source-reviewed pub
 
 ## Executed AIP byte-contract experiment
 
-The separate workflow p0-052-aip-signature.yml checked out the exact AIP revision without modifying it, ran cargo +1.90.0 build --locked -p aip-crypto against its original manifest/lock, and compiled AIRON’s small Rust consumer with rustc --extern. Python prepared verified real-record bytes; an unshare network namespace then ran the actual AIP verification/tamper checks and Python verification of AIP signing. Runs 43361491548 and 43362170890 passed. See AIP_CONTRACT.md for counts and trust/licensing boundaries. No AIP source or linked binary is redistributed.
+The separate workflow p0-052-aip-signature.yml checked out the exact AIP revision without modifying it, ran cargo +1.90.0 build --locked -p aip-crypto against its original manifest/lock, and compiled AIRON’s small Rust consumer with rustc --extern. Python prepared verified real-record bytes; an unshare network namespace then ran the actual AIP verification/tamper checks and Python verification of AIP signing. Runs 43361491548, 43362170890, 43371870508 and latest 43373086477 passed. See AIP_CONTRACT.md for counts and trust/licensing boundaries. No AIP source or linked binary is redistributed.
+
+## Final evidence-only delivery
+
+The last commit uses [skip ci] because only documentation and retained evidence changed. Runtime, fixtures, tests and workflow files are byte-identical to tested 6077c9a. Before committing, git diff --name-only HEAD was checked to contain only docs/ paths, the original website/package runtime was compared with inspected main, all 41 retained reports were verified by the 121-case local suite, and the latest derived benchmark timing/count/size fields were compared directly with original reports. Final Actions conclusions were success for runs 43373086529 and 43373086477. This is not a claim that Actions reran the documentation commit.

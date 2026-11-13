@@ -15,6 +15,8 @@ Use a fresh provisioned state and the local console. Present only the observed r
 | Prove isolation | Show the separately executed isolated acceptance and trace audit | Fresh offline install, namespaces, failed deliberate probes, classified syscall trace |
 | Inspect and restore | Verify records with approved key/head, then restore original model | Application signatures, original model pointer and restored predictions |
 
+Recorded complete v3 workflow at 6077c9a (run 43373086529): 126 authorized mixed training rows, 189 genuine steps; routing 1/6→5/6 and factual retention 3/6→6/6; baseline and adapted document answers passed. State the six-case denominators and the development-set scope. Verify the current overall workflow status in STATUS.md before presenting a full qualification pass.
+
 Suggested narration: “The private documents stay on this machine. The model can be adapted here, but a training process cannot put its own result into service. We compare a candidate, review the evidence, approve a version and retain the original model for rollback.”
 
 Explain the evidence level plainly: these are signed application records and an external syscall trace from the tested runner. AIP/Sniffer Dog, independent key custody and customer-site qualification remain separate gates.

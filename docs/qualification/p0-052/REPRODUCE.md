@@ -1,6 +1,6 @@
 # Reproduce the governed local adaptation experiment
 
-Use the current PR source checkout, Linux x86-64 and Python 3.12. The measured reference runner uses Ubuntu 22.04. Python, git, bubblewrap, util-linux/unshare, strace and their native libraries must be provisioned before isolation. A Python wheelhouse does not contain the operating system.
+The fully executed reference is runtime 6077c9a104c42e024ae343aafdc2cc4a91181663, run 43373086529. The subsequent evidence/documentation commit changes no runtime, fixtures, tests or workflows. Use the PR source checkout, Linux x86-64 and Python 3.12. The measured reference runner uses Ubuntu 22.04. Python, git, bubblewrap, util-linux/unshare, strace and their native libraries must be provisioned before isolation. A Python wheelhouse does not contain the operating system.
 
 ## Connected preparation
 
@@ -37,6 +37,7 @@ This test creates an empty Python environment, then installs only the exact loca
 ## Isolate the complete controller and run the real experiment
 
 ```sh
+export AIRON_SOURCE_COMMIT=$(git rev-parse HEAD)
 mkdir -p acceptance-evidence
 AIRON_HOST_NETNS=$(readlink /proc/self/ns/net)
 strace -ff -e trace=network -o acceptance-evidence/offline-network \
@@ -82,7 +83,7 @@ python services/model-adaptation/scripts/verify_evidence.py \
 
 Use Download signed records in the console to retain the original server response. Supply both anchors from a separate trusted record. Never trust a key merely because it accompanies the evidence. Verification proves the signed record chain under that key; it does not prove truthful execution or compromise resistance of the signer.
 
-The v1 signing format uses Python's sorted ASCII JSON representation, including float spelling. Preserve original JSON bytes; reformatting through JavaScript can change 1.0 to 1 and invalidate signatures. The console download retains the response bytes, while its rendered detail view is for inspection. AIP/cross-language canonicalization remains unqualified. EVIDENCE_INDEX.json pins the retained source reports and their observed keys/heads; CI verifies all of them. These source-reviewed anchors are not independent enterprise identity or custody.
+The v1 signing format uses Python's sorted ASCII JSON representation, including float spelling. Preserve original JSON bytes; reformatting through JavaScript can change 1.0 to 1 and invalidate signatures. The console download retains the response bytes, while its rendered detail view is for inspection. Raw AIP Ed25519 byte interoperability passed separately (AIP_CONTRACT.md); independently implemented cross-language JSON canonicalization remains unqualified. EVIDENCE_INDEX.json pins the retained source reports and their observed keys/heads; CI verifies all of them. These source-reviewed anchors are not independent enterprise identity or custody.
 
 ## Tests and measurements
 

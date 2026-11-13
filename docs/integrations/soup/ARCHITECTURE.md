@@ -31,7 +31,7 @@ Model import is an administrative Python provisioning operation, intentionally a
 
 ## State and crash behavior
 
-SQLite WAL, FULL synchronous commits and signed object envelopes protect ordinary corruption and unauthorized edits without the private key. A process lock prevents concurrent controller ownership. On restart a RUNNING job becomes INTERRUPTED. It cannot be registered. No automatic unsafe optimizer deserialization or checkpoint recovery occurs.
+SQLite WAL, FULL synchronous commits and signed object envelopes protect ordinary corruption and unauthorized edits without the private key. A process lock prevents concurrent controller ownership. On restart a RUNNING job becomes INTERRUPTED. It cannot be registered. Cancelling a training job stops its training process but does not revoke later read-only inference with the approved original model/data. No automatic unsafe optimizer deserialization or checkpoint recovery occurs.
 
 Activation changes the experimental runtime's model pointer. It does not mutate weights, replace the original model or change Ollama. Inference verifies artifacts and loads the active adapter from disk. Activation is transactionally atomic; if subsequent inference fails, output is withheld and the reviewer may roll back. The acceptance driver restores the prior model even if adapted inference raises.
 
@@ -51,7 +51,7 @@ Training identity, authorizing actor, dataset/base/config digests, adapter diges
 
 ## Research decisions
 
-Incremental adapter training, merge parity beyond the selected helper, replay buffers, drift alarms and automatic monitoring remain research items. The current controller accepts only fresh LoRA jobs. Each cycle requires new authorized data, frozen evaluation and separate approval. No user-conversation harvesting, model-written control-plane changes or autonomous promotion exists.
+Incremental adapter training, merge parity beyond the selected helper, unbounded or conversation-derived replay, drift alarms and automatic monitoring remain research items. The current controller accepts only fresh LoRA jobs. Each cycle requires new authorized data, frozen evaluation and separate approval. No user-conversation harvesting, model-written control-plane changes or autonomous promotion exists.
 
 Bundle preparation is a separate trusted operation: bundle.py reuses Soup assembly, signs the archive digest, verifies every regular member against the manifest and rejects undeclared bytes. It never extracts an archive or claims dependency closure from a filename alone.
 
