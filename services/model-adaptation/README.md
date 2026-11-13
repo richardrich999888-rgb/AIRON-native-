@@ -17,7 +17,7 @@ From the repository root, with Python 3.12, git, bubblewrap and util-linux/unsha
 
 Use fresh asset and state directories for independent experiments. Provisioning downloads only the enumerated model/tokenizer files at a fixed revision, verifies the model card's declared licence, preserves the card, creates a synthetic approved dataset with fixed splits, and prepares a bounded training job. Never put customer material into this demonstration.
 
-The requirements file selects an audited Soup VCS revision and core ML versions. Transitive versions must be frozen and their licences reviewed for the deployment. Provisioning records actual installed distributions, licence metadata and pip freeze. It does not establish a fully redistributable offline wheelhouse.
+The requirements file selects an audited Soup VCS revision and core ML versions. Transitive versions must be frozen and their licences reviewed for the deployment. Provisioning records actual installed distributions, licence metadata and pip freeze. The preparation script additionally builds a hash-locked platform-specific wheelhouse and inventories packaged notices. See ../../docs/qualification/p0-052/REPRODUCE.md for the fresh offline installation and full isolation procedure. Runtime redistribution still requires reviewing the exact dependency/native-platform terms.
 
 ## Guided local console
 
@@ -26,7 +26,7 @@ The requirements file selects an audited Soup VCS revision and core ML versions.
 Open http://127.0.0.1:8766. Paste the operator token printed in the local terminal. Tokens remain in page memory only.
 
 1. Deploy: refresh status and inspect the preinstalled base and prepared data.
-2. Understand: run baseline local inference on the frozen questions.
+2. Understand: ask the approved synthetic document; inspect an answer or explicit abstention. Run the frozen benchmark separately.
 3. Identify limitations: inspect expected answers and baseline predictions.
 4. Adapt: start training. Refresh status until SUCCEEDED or FAILED.
 5. Verify: register the checkpoint, then compare baseline/candidate scores.
@@ -38,7 +38,9 @@ Open http://127.0.0.1:8766. Paste the operator token printed in the local termin
 
 The console does not automatically poll, promote, harvest conversations, modify model weights or change Ollama. Operations requiring missing input, insufficient authority or failed evaluation fail closed. The model-selection test is a closed-choice synthetic routing task, not general enterprise answer quality.
 
-The original private-document/access/abstention demonstration remains at website/offline/. It is not yet wired to the experimental adapter runtime. Do not imply that the two local processes already form one qualified enterprise product.
+The adaptation runtime imports the existing synthetic document corpus during explicit provisioning. Its query_knowledge operation enforces server-bound document roles before sending an approved source to the same active base/adapter used by the experiment. Unknown questions abstain; restricted documents never reach the model. Generated text is released only when it exactly reproduces the approved source. An abstention is a valid safety outcome, not a successful answer-quality result. No conversation is automatically added to training data.
+
+The original Ollama gateway remains unchanged and separate from this model backend. No Ollama adapter installation or production enterprise identity integration is implied.
 
 ## Reproducible experiment
 
@@ -60,7 +62,7 @@ The script returns nonzero when a gate is incomplete or fails. It writes the obs
 
 ## Tests
 
-    python -m pip install cryptography pytest ./services/model-adaptation
+    python -m pip install cryptography pytest ./services/model-adaptation 'soup-cli @ git+https://github.com/MakazhanAlpamys/Soup.git@af2f5d5000f7baec6386a72a6d16e82383eb5303'
     python -m pytest -q tests/integration/soup
     cd website/offline
     python -m unittest test_server.py
@@ -79,3 +81,7 @@ The controller tests deliberately use fixture bytes in place of models. They tes
 - fixtures/: synthetic data with a CC0 declaration.
 
 AIP and Sniffer Dog are not runtime dependencies. Application records remain APPLICATION_SIGNED / independent execution CANNOT_PROVE. See docs/integrations/soup/ARCHITECTURE.md for exact API parameters and trust boundaries.
+
+## Qualified scope
+
+Read [the qualification status](../../docs/qualification/p0-052/STATUS.md) and [the full reproduction procedure](../../docs/qualification/p0-052/REPRODUCE.md). Passing fixture tests, importing a package and completing a genuine model adaptation are separate evidence classes. Signed application evidence does not replace independent execution observation.

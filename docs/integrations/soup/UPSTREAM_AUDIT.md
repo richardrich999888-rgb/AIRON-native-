@@ -8,7 +8,7 @@ Audit date: 13 November 2026. Scope: the first CPU LoRA integration, not an exha
 - Soup: af2f5d5000f7baec6386a72a6d16e82383eb5303, package soup-cli 0.77.2, Python >=3.11,<3.14.
 - AIP main: 872dbf375838cff464eb019488c63d948015e9b8.
 - AIP P0-048 branch tip inspected at reference/README level only: 61dd73013d02ea7869de104d953f330098df1c32.
-- Proposed model: HuggingFaceTB/SmolLM2-135M-Instruct at 12fd25f77366fa6b3b4b768ec3050bf629380bac. Model card and HF API declare Apache-2.0. This is a pretrained 135M causal model, not a random toy fixture.
+- Selected model: HuggingFaceTB/SmolLM2-135M-Instruct at 12fd25f77366fa6b3b4b768ec3050bf629380bac. Model card and HF API declare Apache-2.0. This is a pretrained 135M causal model, not a random toy fixture.
 
 Sources were cloned into an isolated workspace; git status, branch lists, recent commits and dependency manifests were inspected. AIRON contained a React/Vite hosted demonstration and a separate Python/Ollama local gateway, with no pre-existing model adaptation service. The only remote AIRON branches observed were main and research/p0-053-opensource-capability-library. The P0-052 branch was created from the inspected main without modifying main.
 
@@ -19,7 +19,7 @@ Paths below are in Soup at the pinned revision. Source inspection is not an exec
 | Capability | Inspected implementation | AIRON decision |
 |---|---|---|
 | Package and dependencies | pyproject.toml, AGENTS.md, README.md | Pin a separately installed package. Core CLI is light; training extras are separate. Capture resolved inventory per preparation. |
-| SFT / LoRA / QLoRA | trainer/sft.py, config/schema.py, tests/test_smoke_train.py | Invoke SFTTrainerWrapper.setup/train, report_to=none, trust_remote_code=False. CPU float32 LoRA and quantization=none only in first slice. |
+| SFT / LoRA / QLoRA | trainer/sft.py, config/schema.py, tests/test_smoke_train.py | Invoke SFTTrainerWrapper.setup/train, report_to=none, trust_remote_code=False. CPU LoRA and quantization=none only. AIRON now explicitly converts/checks training parameters as FP32 after setup; upstream frozen-base precision is otherwise automatic. |
 | Memory-efficient training | trainer/sft.py setup/checkpointing branches | Preserve upstream implementation. Two threads, batch 2, context 256; no invented throughput claim. |
 | Layer streaming | utils/layer_stream.py planner and architecture allowlist; trainer/stream_setup.py setup sections | CUDA memory/transfer feature with RAM/disk tiers. Not enabled or qualified on CPU. No duplication or marketing claim. Runtime/backward parity suite not reproduced. |
 | Model loading | trainer/sft.py and utils/trust_remote calls; commands/export.py helper | Only local data-only artifacts with safetensors. AIRON denies custom-code metadata, unsafe extensions and arbitrary model IDs at runtime. |
@@ -38,7 +38,7 @@ No upstream source modifications are made. AIRON calls a pinned public wrapper a
 
 The checked-out LICENSE is Apache-2.0 and NOTICE identifies Makazhan Alpamys and the Soup contributors. Exact copies are retained under third_party/. Keep both with redistributed Soup wheels/source and preserve attribution. If Soup is modified later, identify changed files and retain notices. The AIRON control plane remains governed by the repository's MIT licence; it does not rebrand upstream Soup as proprietary AIRON code.
 
-dependencies.declared.json is an inventory of source-declared core and training ranges, not a complete resolved SBOM. requirements-training.txt narrows the selected CPU stack. Provisioning emits installed package versions, declared licence metadata, licence-file names and pip freeze. A clean-machine wheelhouse, hash-locked resolution and transitive redistribution review are still required before distributing an offline runtime.
+dependencies.declared.json is an inventory of source-declared core and training ranges, not a complete resolved SBOM. requirements-training.txt narrows the selected CPU stack. Provisioning emits installed package versions, declared licence metadata, licence-file names and pip freeze. prepare_wheelhouse.py builds exact local wheels, hashes and a packaged-notice inventory; the workflow tests a fresh offline install. Read STATUS.md for its executed outcome. Transitive/native redistribution review remains required before distributing a full runtime.
 
 The selected model's weight licence is checked independently from Soup's software licence; retain its model card and review its conditions. Synthetic records have their own CC0 declaration. No private conversations, customer data or externally scraped datasets are included.
 
@@ -50,7 +50,7 @@ AIP main's README declares proprietary ownership by K. NAGA SRI GANESH. Its raw 
 - No claim of exhaustive upstream vulnerability or third-party licence review.
 - Prompt-pattern quarantine and exact duplicate checks do not solve semantic poisoning or prove dataset cleanliness.
 - LoRA on one synthetic task does not demonstrate general continual learning or absence of catastrophic forgetting.
-- Existing Ollama knowledge access controls remain in the original demonstration; this experimental adaptation runtime is separate.
+- The original Ollama gateway remains intact. The adaptation runtime separately imports its synthetic corpus with server-bound access checks and exact-source model-output validation; arbitrary enterprise ingestion and Ollama deployment are not qualified.
 - Frozen evaluation scores measure closed-choice answer likelihood. They do not establish unconstrained answer quality.
 - Application signatures are not kernel observation, trusted hardware attestation or proof that the signer told the truth.
 

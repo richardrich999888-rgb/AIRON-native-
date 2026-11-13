@@ -42,7 +42,7 @@ def classify(paths):
                 violations.append({"file": path.name, "line": number, "reason": "unclassified IP activity", "detail": line})
         if inside:
             violations.append({"file": path.name, "reason": "unterminated probe window"})
-    if not hashes or windows < 7:
+    if not hashes or windows < 9:
         violations.append({"reason": "Missing trace files or complete controller/worker probe coverage", "windows": windows})
     return {"schema": "airon-syscall-audit/v1", "passed": not violations, "probe_windows": windows,
             "traces": hashes, "allowed": allowed, "violations": violations,

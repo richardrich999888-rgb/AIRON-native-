@@ -90,6 +90,8 @@ jobs:
           .venv/bin/python -m pip install 'playwright==1.65.1'
           .venv/bin/python -m playwright install --with-deps chromium
           .venv/bin/python services/model-adaptation/scripts/check_console.py --root "$RUNNER_TEMP/airon-offline-state" --output acceptance-evidence/console
+      - name: Real process cancellation and malformed model rejection
+        run: .venv/bin/python services/model-adaptation/scripts/run_fault_acceptance.py --source-root "$RUNNER_TEMP/airon-offline-state" --root "$RUNNER_TEMP/airon-fault-state" --report acceptance-evidence/real-faults.json --authorize-synthetic-fault-tests
       - name: Collect nonsecret diagnostics
         if: always()
         run: |
@@ -101,6 +103,10 @@ jobs:
           if [ -d "$RUNNER_TEMP/airon-offline-state/jobs" ]; then
             find "$RUNNER_TEMP/airon-offline-state/jobs" -name worker.log -exec cp --parents {} acceptance-evidence/logs/ \;
             find "$RUNNER_TEMP/airon-offline-state/jobs" -name worker.log -exec tail -c 16000 {} \;
+          fi
+          if [ -d "$RUNNER_TEMP/airon-fault-state/jobs" ]; then
+            find "$RUNNER_TEMP/airon-fault-state/jobs" -name worker.log -exec cp --parents {} acceptance-evidence/logs/ \;
+            find "$RUNNER_TEMP/airon-fault-state/jobs" -name worker.log -exec tail -c 16000 {} \;
           fi
           if [ -f "$RUNNER_TEMP/airon-state/provisioning.json" ]; then
             cp "$RUNNER_TEMP/airon-state/provisioning.json" acceptance-evidence/

@@ -37,9 +37,9 @@ for wheel in sorted(output.glob("*.whl")):
     locked[key] = sha
     files[wheel.name] = {"sha256": sha, "bytes": wheel.stat().st_size}
     with zipfile.ZipFile(wheel) as archive:
-        metadata_names = [n for n in archive.namelist() if n.endswith(".dist-info/METADATA")]
+        metadata_names = [n for n in archive.namelist() if n.endswith(".dist-info/METADATA") and len(Path(n).parts) == 2]
         if len(metadata_names) != 1:
-            raise RuntimeError("Wheel metadata is ambiguous")
+            raise RuntimeError("Top-level wheel metadata is ambiguous: "+wheel.name)
         meta = BytesParser().parsebytes(archive.read(metadata_names[0]))
         notices = {}
         for member in archive.namelist():

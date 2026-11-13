@@ -1,6 +1,6 @@
 # AIRON local adaptation architecture
 
-The existing hosted React demonstration and Python/Ollama gateway remain separate. The new Linux-only local control plane owns a private workspace, immutable artifact manifests, signed lifecycle records and a SQLite transaction boundary. It exposes a small loopback API with two server-bound demonstration roles.
+The existing hosted React demonstration and Python/Ollama gateway remain unchanged. The adaptation control plane now imports the same approved synthetic document corpus for its own active HF/PEFT backend. The new Linux-only local control plane owns a private workspace, immutable artifact manifests, signed lifecycle records and a SQLite transaction boundary. It exposes a small loopback API with two server-bound demonstration roles.
 
 A fixed worker imports Soup in a separate user/network/PID namespace. Its mounts contain only the Python environment, AIRON worker code, the approved base, the approved dataset, an optional registered adapter and the current job's output directory. The controller database, signing key, other job outputs, real home directory, inherited credentials and host Ollama service are not mounted. Network isolation failure causes the operation to fail; there is no unsandboxed fallback.
 
@@ -24,6 +24,7 @@ POST /api/operation with Authorization: Bearer TOKEN and JSON {"operation": "...
 | activate_model | approval_id | Reverify artifacts/report; consume version-bound approval and swap experimental active pointer atomically |
 | rollback_model | none | Verify previous artifacts then atomically restore pointer |
 | infer | dataset_id | Approved frozen prompts, local base plus active adapter; no cloud fallback |
+| query_knowledge | question, enabled document IDs | Server-bound document role, manifest verification, supported-question retrieval, isolated active-model generation and exact-source release validation |
 | status / evidence | none | Read signed state / export signed chain |
 
 Model import is an administrative Python provisioning operation, intentionally absent from HTTP. Example row: {"prompt":"Route this invoice", "answer":"K7", "split":"train"}. Dataset authorization must exactly equal {"synthetic":true,"approved_for_training":true,"license":"CC0-1.0"}. Training config example: {"epochs":3,"lr":0.001,"rank":8,"seed":52}.
@@ -38,7 +39,7 @@ Activation changes the experimental runtime's model pointer. It does not mutate 
 
 The host OS administrator and same OS account are trusted. Filesystem checks are not a defense against an administrator racing filesystem operations, altering the Python environment, replacing the signing key, rolling back the entire database or generating false records. Tokens are bearer credentials for a single-workstation demonstration, not enterprise identity, two independent human identities or multi-tenant isolation.
 
-Jobs have per-process address-space (6 GiB), CPU (600 seconds), file (1 GiB/file), descriptor and wall-clock limits. These are not cgroup aggregate memory/disk quotas. Production deployment requires a distinct service user, signed supply-chain artifacts, independent approver identity, key custody, external event anchoring and measured target-hardware resource controls.
+Jobs have per-process address-space (6 GiB), CPU (600 seconds), file (1 GiB/file), descriptor and wall-clock (300 seconds per worker) limits. These are not cgroup aggregate memory/disk quotas. Production deployment requires a distinct service user, signed supply-chain artifacts, independent approver identity, key custody, external event anchoring and measured target-hardware resource controls.
 
 ## Assurance interface
 
@@ -55,3 +56,9 @@ Incremental adapter training, merge parity beyond the selected helper, replay bu
 Bundle preparation is a separate trusted operation: bundle.py reuses Soup assembly, signs the archive digest, verifies every regular member against the manifest and rejects undeclared bytes. It never extracts an archive or claims dependency closure from a filename alone.
 
 The regression gate also requires a nonzero baseline regression score. A suite on which the baseline gets every case wrong cannot qualify preservation. The initial four arithmetic prompts produced 0/4; they were replaced, before acceptance, with a fixed six-question factual suite. Historical failure evidence is retained. The routing training and test prompts were not changed.
+
+## Knowledge and CPU precision
+
+Knowledge import is an administrative operation in explicit synthetic provisioning. The HTTP client cannot set its document role: the operator session maps to document operator, and reviewer maps to analyst. Neither grants finance-admin access. Every query records source-manifest and result digests; no query is harvested into training data. A generated paraphrase is withheld under the intentionally strict exact-source policy. Support for arbitrary enterprise document ingestion remains outside this bounded fixture.
+
+Soup's frozen-base loader preserves checkpoint precision by default. AIRON explicitly converts floating training parameters to FP32 after setup, checks every floating parameter dtype and records the loaded/actual dtypes plus torch's observed thread count. This is a wrapper policy, not a Soup source modification. Historical reports whose backend label said FP32 before this check did not measure every base tensor's dtype; do not use that label as precision evidence.
