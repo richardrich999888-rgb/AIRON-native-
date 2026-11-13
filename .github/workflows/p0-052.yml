@@ -32,3 +32,43 @@ jobs:
         with:
           name: p0-052-contract-results
           path: contract-results.xml
+  real-cpu-experiment:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Prepare bounded CPU runtime
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y bubblewrap strace
+          python -m venv .venv
+          .venv/bin/python -m pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu 'torch==2.9.1'
+          .venv/bin/python -m pip install --no-cache-dir -r services/model-adaptation/requirements-training.txt
+          .venv/bin/python -m pip install -e services/model-adaptation
+      - name: Provision pinned weights and authorised synthetic data
+        run: .venv/bin/python services/model-adaptation/scripts/provision.py --root "$RUNNER_TEMP/airon-state" --assets "$RUNNER_TEMP/airon-assets" --approve-synthetic-data
+      - name: Genuine Soup data operation under isolation
+        run: .venv/bin/python services/model-adaptation/scripts/probe_sandbox.py --root "$RUNNER_TEMP/airon-state"
+      - name: Real CPU training and governed lifecycle
+        run: |
+          mkdir -p acceptance-evidence
+          strace -ff -e trace=network -o acceptance-evidence/network .venv/bin/python services/model-adaptation/scripts/run_acceptance.py --root "$RUNNER_TEMP/airon-state" --report acceptance-evidence/acceptance.json --approve-synthetic-test-deployment
+      - name: Collect nonsecret diagnostics
+        if: always()
+        run: |
+          mkdir -p acceptance-evidence/logs
+          if [ -d "$RUNNER_TEMP/airon-state/jobs" ]; then
+            find "$RUNNER_TEMP/airon-state/jobs" -name worker.log -exec cp --parents {} acceptance-evidence/logs/ \;
+          fi
+          if [ -f "$RUNNER_TEMP/airon-state/provisioning.json" ]; then
+            cp "$RUNNER_TEMP/airon-state/provisioning.json" acceptance-evidence/
+            cp "$RUNNER_TEMP/airon-state/resolved-requirements.txt" acceptance-evidence/
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: p0-052-real-cpu-evidence
+          path: acceptance-evidence/

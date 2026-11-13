@@ -1,0 +1,142 @@
+[
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An invoice is unpaid",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: A supplier asks about payment",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An expense reimbursement is missing",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The bill has an incorrect amount",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: A purchase order needs billing review",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: A vendor requests a payment update",
+    "answer": "K7",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The supplier has not received the money for their bill",
+    "answer": "K7",
+    "split": "test"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please investigate a mismatch on this invoice",
+    "answer": "K7",
+    "split": "test"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: My login is locked",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Reset the employee password",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: I cannot access my company account",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The sign-in code is not working",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: My account access needs restoration",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The portal rejected my login credentials",
+    "answer": "M4",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: An employee cannot sign into the internal portal",
+    "answer": "M4",
+    "split": "test"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Please unlock access to my work account",
+    "answer": "M4",
+    "split": "test"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The parcel is delayed",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Where is the package",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: A shipment arrived damaged",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The courier lost the delivery",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Track the dispatch for this order",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The box was sent to the wrong address",
+    "answer": "R2",
+    "split": "train"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: Our delivery has gone missing in transit",
+    "answer": "R2",
+    "split": "test"
+  },
+  {
+    "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The courier has not delivered our shipment",
+    "answer": "R2",
+    "split": "test"
+  },
+  {
+    "prompt": "Answer with the number only. What is two plus two?",
+    "answer": "4",
+    "split": "regression"
+  },
+  {
+    "prompt": "Answer with the number only. What is three plus three?",
+    "answer": "6",
+    "split": "regression"
+  },
+  {
+    "prompt": "Answer with the number only. What is one plus one?",
+    "answer": "2",
+    "split": "regression"
+  },
+  {
+    "prompt": "Answer with the number only. What is five minus one?",
+    "answer": "4",
+    "split": "regression"
+  }
+]

@@ -163,7 +163,10 @@ def main():
     identity, isolation = upstream_identity(), isolation_probe()
     operation = request["operation"]
     if operation == "probe":
-        result = {"probe": True}
+        from soup_cli.config.schema import DataConfig
+        from soup_cli.data.loader import load_dataset
+        dataset = load_dataset(DataConfig(train="/data/train.jsonl", format="chatml", val_split=0.0))
+        result = {"probe": True, "soup_loaded_training_rows": len(dataset["train"])}
     else:
         import torch
         torch.set_num_threads(2)
