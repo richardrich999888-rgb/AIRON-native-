@@ -98,6 +98,19 @@ jobs:
         if: always()
         run: |
           mkdir -p acceptance-evidence/logs
+          .venv/bin/python services/model-adaptation/scripts/collect_runtime.py --output acceptance-evidence/runtime-prerequisites.json
+          if [ -d "$RUNNER_TEMP/airon-offline-state/candidates" ]; then
+            cp -r "$RUNNER_TEMP/airon-offline-state/candidates" acceptance-evidence/offline-candidates
+          fi
+          if [ -d "$RUNNER_TEMP/airon-state/candidates" ]; then
+            cp -r "$RUNNER_TEMP/airon-state/candidates" acceptance-evidence/primary-candidates
+          fi
+          cp services/model-adaptation/model.lock.json acceptance-evidence/
+          cp services/model-adaptation/fixtures/LICENSE.txt acceptance-evidence/SYNTHETIC-DATA-LICENSE.txt
+          cp docs/integrations/soup/third_party/Soup-LICENSE.txt acceptance-evidence/Apache-2.0.txt
+          if [ -f "$RUNNER_TEMP/airon-assets/README.md" ]; then
+            cp "$RUNNER_TEMP/airon-assets/README.md" acceptance-evidence/BASE-MODEL-CARD.md
+          fi
           if [ -d "$RUNNER_TEMP/airon-state/jobs" ]; then
             find "$RUNNER_TEMP/airon-state/jobs" -name worker.log -exec cp --parents {} acceptance-evidence/logs/ \;
             find "$RUNNER_TEMP/airon-state/jobs" -name worker.log -exec tail -c 16000 {} \;

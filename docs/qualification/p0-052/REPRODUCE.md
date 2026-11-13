@@ -95,3 +95,5 @@ npm run build
 ```
 
 The unit/adversarial suite uses explicit model fixtures. Real training results are separately produced by the acceptance driver. Preserve both positive and failed reports, exact source revision, installed dependency inventory and complete raw syscall traces.
+
+The p0-052-real-cpu-evidence Actions artifact also retains primary/offline candidate adapter directories, including the actual safetensors weights, model.lock.json, synthetic-data licence, runtime prerequisite binary hashes and linker inventory. It excludes the controller database and signing key. Check candidate files against their report manifest before loading; use only the pinned approved base. Model weights and full exports are deliberately reprovisioned from the approved model manifest, not duplicated in this small evidence artifact. The host inventory describes tested prerequisites and is not a complete OS/native SBOM.
