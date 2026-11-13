@@ -491,3 +491,56 @@ def test_copy_retention_training_uses_the_runtime_instruction(lab):
     assert messages[0][0] == {"role": "system", "content": SOURCE_COPY_INSTRUCTION}
     assert messages[0][-1]["content"] == "In cabinet Z."
     assert [message["role"] for message in messages[1]] == ["user", "assistant"]
+
+
+def test_authorized_replay_uses_native_soup_without_evaluation_leakage(lab):
+    from soup_cli.config.schema import DataConfig
+    from airon_adaptation.dataset import training_data_config, load_training_data, evaluation_rows
+    from airon_adaptation.knowledge import training_messages
+    rows = copy.deepcopy(ROWS)+[{"prompt": "Which instrument has keys?", "answer": "piano", "split": "replay"}]
+    ds = call(lab[0], "prepare_dataset", rows=rows, authorization=AUTH)
+    path = lab[0].root/"datasets"/ds["id"]
+    cfg, counts = training_data_config(path, 52)
+    assert counts == {"primary_rows": 2, "replay_rows": 1, "mixed_rows": 3}
+    previous = Path.cwd()
+    first = load_training_data(DataConfig(**cfg), counts)
+    assert Path.cwd() == previous
+    assert first == load_training_data(DataConfig(**cfg), counts)
+    actual = sorted(canonical(r).decode() for r in first["train"])
+    expected = sorted(canonical({"messages": training_messages(r)}).decode() for r in rows
+                      if r["split"] in {"train", "replay"})
+    assert actual == expected
+    assert evaluation_rows(path/"records.json") == [r for r in rows if r["split"] in {"test", "regression"}]
+
+
+def test_replay_cannot_override_authorization_or_contaminate_evaluation(lab):
+    rows = copy.deepcopy(ROWS)+[{"prompt": "Rehearsal question", "answer": "piano", "split": "replay"}]
+    with pytest.raises(Rejected):
+        call(lab[0], "prepare_dataset", rows=rows, authorization={**AUTH, "approved_for_training": False})
+    rows[-1]["prompt"] = ROWS[2]["prompt"]
+    with pytest.raises(Rejected, match="contamination"):
+        call(lab[0], "prepare_dataset", rows=rows, authorization=AUTH)
+
+
+def test_replay_pool_is_bounded_and_integrity_checked(lab):
+    rows = copy.deepcopy(ROWS)+[{"prompt": "Rehearsal question", "answer": "piano", "split": "replay"}]
+    ds = call(lab[0], "prepare_dataset", rows=rows, authorization=AUTH)
+    (lab[0].root/"datasets"/ds["id"]/"replay.jsonl").write_text("tampered")
+    with pytest.raises(Rejected):
+        call(lab[0], "validate_dataset", dataset_id=ds["id"])
+    rows += [{"prompt": "Rehearsal two", "answer": "green", "split": "replay"},
+             {"prompt": "Rehearsal three", "answer": "blue", "split": "replay"}]
+    with pytest.raises(Rejected, match="half"):
+        call(lab[0], "prepare_dataset", rows=rows, authorization=AUTH)
+
+
+def test_rehearsal_fixture_does_not_change_frozen_questions_or_use_their_answers():
+    import hashlib
+    root = Path(__file__).resolve().parents[3]
+    rows = json.loads((root/"services/model-adaptation/fixtures/enterprise-routing.json").read_text())
+    frozen = [r for r in rows if r["split"] in {"test", "regression"}]
+    assert hashlib.sha256(json.dumps(frozen, sort_keys=True).encode()).hexdigest() == \
+        "300e85dc13816de779be861f9390ac5bf923a67ff39b0789e318f64ba026d3bc"
+    replay = [r for r in rows if r["split"] == "replay"]
+    assert len(replay) == 24
+    assert not {r["answer"] for r in replay}.intersection(r["answer"] for r in frozen)

@@ -20,6 +20,9 @@ All runs below used the same pinned SmolLM2-135M-Instruct base and Soup source. 
 
 | 14ef531 / 43360855201 | 480-second training budget, unchanged q/v rank-8 LoRA | 153 steps; 139.470 s; 1,804,324 KiB RSS; routing 1/6; factual 4/6; full-source answer | v3 rejected routing; no activation |
 
+| ddde09b / 43361491412 | Repeat 102-row q/v-only configuration on AMD EPYC 9V45 | 153 steps; 166.715 s; routing 1/6; factual 4/6; full-source answer | Routing rejection reproduced |
+| 060ff1d / 43362170915 | Seven attention/MLP LoRA targets; all other learning inputs unchanged | 153 steps, 420 tensors; 222.741 s; 2,020,080 KiB; routing 3/6; factual 0/6; full-source answer | v3 rejected catastrophic forgetting |
+
 The twelve copy-training records exclude the approved document corpus and frozen question. Both evaluation data and acceptance thresholds remain unchanged across the retention trials. Candidate failures are retained with signed events, model/dataset/config hashes and real scores in evidence/. No rejected candidate was activated. An automated synthetic-test reviewer is expressly labelled and does not establish independent human authorization.
 
 Hardware varies across GitHub runners; compare each report's CPU, memory and wall-clock measurements. All qualified precision measurements above use two torch CPU threads; no GPU was used. Historical source snapshots and failures remain in Git history.

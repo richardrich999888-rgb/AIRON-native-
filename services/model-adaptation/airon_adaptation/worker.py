@@ -10,6 +10,7 @@ import time
 from pathlib import Path
 from .integrity import Rejected, digest, manifest, write_json
 from .knowledge import SOURCE_COPY_INSTRUCTION
+from .dataset import evaluation_rows, training_data_config, load_training_data
 
 SOUP_REVISION = "af2f5d5000f7baec6386a72a6d16e82383eb5303"
 
@@ -121,17 +122,16 @@ def score_rows(model, tokenizer, rows):
 def train(config):
     import torch
     from soup_cli.config.schema import SoupConfig
-    from soup_cli.data.loader import load_dataset
     from soup_cli.trainer.sft import SFTTrainerWrapper
     kind = json.loads(Path("/model/config.json").read_text())["model_type"]
     # The q/v-only trial learned the label syntax but failed the frozen routing
     # suite. Test broader native LoRA coverage without changing data or gates.
     targets = (["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
                if kind == "llama" else ["c_attn"])
+    data_config, data_counts = training_data_config("/data", config["seed"])
     cfg = SoupConfig.model_validate({
         "base": "/model", "task": "sft", "backend": "transformers", "output": "/output/training",
-        "data": {"train": "/data/train.jsonl", "format": "chatml", "val_split": 0.0,
-                 "max_length": 256},
+        "data": data_config,
         "training": {"epochs": config["epochs"], "lr": config["lr"], "batch_size": 2,
                      "gradient_accumulation_steps": 1, "lora": {"r": config["rank"], "alpha": config["rank"]*2,
                          "dropout": 0.0, "target_modules": targets},
@@ -139,7 +139,7 @@ def train(config):
                      "seed": config["seed"], "data_seed": config["seed"],
                      "gradient_checkpointing": False, "optimizer": "adamw_torch"}})
     trainer = SFTTrainerWrapper(cfg, device="cpu", report_to="none", trust_remote_code=False)
-    trainer.setup(load_dataset(cfg.data))
+    trainer.setup(load_training_data(cfg.data, data_counts))
     loaded_dtypes = sorted({str(p.dtype) for p in trainer.model.parameters() if p.is_floating_point()})
     # Soup preserves checkpoint precision for frozen bases. Explicit FP32 avoids
     # CPU-dependent BF16 emulation and matches our inference/evaluation precision.
@@ -164,13 +164,14 @@ def train(config):
             "backend": "Soup SFTTrainerWrapper / CPU float32 LoRA",
             "loaded_parameter_dtypes": loaded_dtypes, "training_parameter_dtypes": actual_dtypes,
             "observed_torch_threads": torch.get_num_threads(),
+            "training_dataset_counts": data_counts,
             "effective_training_config": cfg.model_dump(mode="json"),
             "effective_training_config_sha256": digest(cfg.model_dump(mode="json"))}
 
 
 def evaluation(has_adapter):
     import gc
-    rows = [r for r in json.loads(Path("/data/records.json").read_text()) if r["split"] != "train"]
+    rows = evaluation_rows("/data/records.json")
     model, tokenizer = load_model(False)
     baseline = score_rows(model, tokenizer, rows)
     del model
@@ -230,9 +231,10 @@ def main():
     operation = request["operation"]
     if operation == "probe":
         from soup_cli.config.schema import DataConfig
-        from soup_cli.data.loader import load_dataset
-        dataset = load_dataset(DataConfig(train="/data/train.jsonl", format="chatml", val_split=0.0))
-        result = {"probe": True, "soup_loaded_training_rows": len(dataset["train"])}
+        data_config, data_counts = training_data_config("/data", request["config"]["seed"])
+        dataset = load_training_data(DataConfig(**data_config), data_counts)
+        result = {"probe": True, "soup_loaded_training_rows": len(dataset["train"]),
+                  "training_dataset_counts": data_counts}
     else:
         import torch
         torch.set_num_threads(2)
@@ -244,7 +246,7 @@ def main():
         elif operation == "infer":
             if request["has_adapter"]:
                 model, tokenizer = load_model(True)
-                rows = [r for r in json.loads(Path("/data/records.json").read_text()) if r["split"] != "train"]
+                rows = evaluation_rows("/data/records.json")
                 result = {"rows": score_rows(model, tokenizer, rows), "model": "candidate"}
             else:
                 result = evaluation(False)

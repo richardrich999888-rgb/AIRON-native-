@@ -55,3 +55,7 @@ REPRODUCE.md contains copyable commands with operator-chosen absolute paths. Eac
 ## Read-only review without rerunning training
 
 Use EVIDENCE_INDEX.json to verify retained report hashes and source-reviewed public anchors. Inspect EXPERIMENTS.md for rejected candidates and diagnostic failures. Review the real adapter artifacts from the linked Actions runs before loading them, with the approved base/model manifest. GitHub artifact retention is finite; retain an approved copy before expiry or reproduce from source. The repository deliberately does not include the private signing key, state database, complete model weights or a full OS image.
+
+## Executed AIP byte-contract experiment
+
+The separate workflow p0-052-aip-signature.yml checked out the exact AIP revision without modifying it, ran cargo +1.90.0 build --locked -p aip-crypto against its original manifest/lock, and compiled AIRON’s small Rust consumer with rustc --extern. Python prepared verified real-record bytes; an unshare network namespace then ran the actual AIP verification/tamper checks and Python verification of AIP signing. Runs 43361491548 and 43362170890 passed. See AIP_CONTRACT.md for counts and trust/licensing boundaries. No AIP source or linked binary is redistributed.

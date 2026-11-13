@@ -152,7 +152,7 @@ class Controller:
         for row in rows:
             if not isinstance(row, dict) or set(row) != {"prompt", "answer", "split"}:
                 raise Rejected("Unknown dataset fields")
-            if row["split"] not in {"train", "test", "regression"}:
+            if row["split"] not in {"train", "replay", "test", "regression"}:
                 raise Rejected("Unknown split")
             for key in ("prompt", "answer"):
                 value = row[key]
@@ -169,6 +169,11 @@ class Controller:
         counts = {s: sum(r["split"] == s for r in rows) for s in ("train", "test", "regression")}
         if not all(counts.values()):
             raise Rejected("Training, held-out test and regression splits mandatory")
+        replay = sum(r["split"] == "replay" for r in rows)
+        if replay > counts["train"]:
+            raise Rejected("Replay cannot exceed half of the mixed training dataset")
+        if replay:
+            counts["replay"] = replay
         return counts
 
     def prepare_dataset(self, rows, authorization, actor):
@@ -183,10 +188,13 @@ class Controller:
         path = self.root/"datasets"/ident
         path.mkdir(mode=0o700)
         write_json(path/"records.json", rows)
-        with (path/"train.jsonl").open("x") as stream:
-            for row in rows:
-                if row["split"] == "train":
-                    stream.write(canonical({"messages": training_messages(row)}).decode()+"\n")
+        for split in ("train", "replay"):
+            if split not in counts:
+                continue
+            with (path/(split+".jsonl")).open("x") as stream:
+                for row in rows:
+                    if row["split"] == split:
+                        stream.write(canonical({"messages": training_messages(row)}).decode()+"\n")
         files = manifest(path)
         obj = {"id": ident, "counts": counts, "manifest": files, "digest": digest(files),
                "authorized_by": actor, "authorization": authorization}

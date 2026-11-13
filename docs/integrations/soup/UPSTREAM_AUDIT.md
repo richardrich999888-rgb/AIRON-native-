@@ -44,7 +44,7 @@ dependencies.declared.json is an inventory of source-declared core and training 
 
 The selected model's weight licence is checked independently from Soup's software licence; retain its model card and review its conditions. Synthetic records have their own CC0 declaration. No private conversations, customer data or externally scraped datasets are included.
 
-AIP main's README declares proprietary ownership by K. NAGA SRI GANESH. Its raw Ed25519 signing functions and protocol trust distinction were inspected. No AIP code is copied or added as a production dependency. Ownership/licensing and cross-language contract execution remain open.
+AIP main's README declares proprietary ownership by K. NAGA SRI GANESH. Its raw Ed25519 signing functions and protocol trust distinction were inspected. No AIP code is copied or added as a production dependency. Raw signing-byte interoperability has now been executed in a separate test-only checkout (AIP_CONTRACT.md); full EvidencePacket/identity integration, independently canonicalized JSON and production ownership/licensing remain open.
 
 ## Known boundaries
 

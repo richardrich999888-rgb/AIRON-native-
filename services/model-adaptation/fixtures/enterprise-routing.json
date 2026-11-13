@@ -568,5 +568,125 @@
     "prompt": "Assign the internal routing code for this request. Reply with the code only.\nRequest: The service desk received a new request about the damaged delivery box.",
     "answer": "R2",
     "split": "train"
+  },
+  {
+    "prompt": "What is the capital of Italy?",
+    "answer": "Rome",
+    "split": "replay"
+  },
+  {
+    "prompt": "What is the capital of Germany?",
+    "answer": "Berlin",
+    "split": "replay"
+  },
+  {
+    "prompt": "What is the capital of Spain?",
+    "answer": "Madrid",
+    "split": "replay"
+  },
+  {
+    "prompt": "What is the capital of Canada?",
+    "answer": "Ottawa",
+    "split": "replay"
+  },
+  {
+    "prompt": "What is the capital of Portugal?",
+    "answer": "Lisbon",
+    "split": "replay"
+  },
+  {
+    "prompt": "What is the capital of Australia?",
+    "answer": "Canberra",
+    "split": "replay"
+  },
+  {
+    "prompt": "What colour is fresh grass?",
+    "answer": "green",
+    "split": "replay"
+  },
+  {
+    "prompt": "What colour are ripe strawberries?",
+    "answer": "red",
+    "split": "replay"
+  },
+  {
+    "prompt": "What colour is a clear daytime sky?",
+    "answer": "blue",
+    "split": "replay"
+  },
+  {
+    "prompt": "What gas do humans need to breathe?",
+    "answer": "oxygen",
+    "split": "replay"
+  },
+  {
+    "prompt": "What animal is known for its long trunk?",
+    "answer": "elephant",
+    "split": "replay"
+  },
+  {
+    "prompt": "What instrument has black and white keys?",
+    "answer": "piano",
+    "split": "replay"
+  },
+  {
+    "prompt": "How many sides does a triangle have?",
+    "answer": "three",
+    "split": "replay"
+  },
+  {
+    "prompt": "How many wheels does a bicycle have?",
+    "answer": "two",
+    "split": "replay"
+  },
+  {
+    "prompt": "Which planet is called the red planet?",
+    "answer": "Mars",
+    "split": "replay"
+  },
+  {
+    "prompt": "What is the largest ocean?",
+    "answer": "Pacific",
+    "split": "replay"
+  },
+  {
+    "prompt": "What do cows produce that people drink?",
+    "answer": "milk",
+    "split": "replay"
+  },
+  {
+    "prompt": "What material is a window pane usually made of?",
+    "answer": "glass",
+    "split": "replay"
+  },
+  {
+    "prompt": "Which organ pumps blood around the body?",
+    "answer": "heart",
+    "split": "replay"
+  },
+  {
+    "prompt": "Which part of a plant absorbs water from soil?",
+    "answer": "roots",
+    "split": "replay"
+  },
+  {
+    "prompt": "What is the opposite of night?",
+    "answer": "day",
+    "split": "replay"
+  },
+  {
+    "prompt": "What do we call a baby dog?",
+    "answer": "puppy",
+    "split": "replay"
+  },
+  {
+    "prompt": "What tool is used to cut paper?",
+    "answer": "scissors",
+    "split": "replay"
+  },
+  {
+    "prompt": "Which star is closest to Earth?",
+    "answer": "Sun",
+    "split": "replay"
   }
 ]

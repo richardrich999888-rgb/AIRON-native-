@@ -327,6 +327,24 @@
       "source": null,
       "outcome": true,
       "verification": null
+    },
+    {
+      "path": "rejected-forgetting-060ff1d.json",
+      "sha256": "9af3966b9cff25205fc075f871bfdb9a0a47e12d0e4fd1c65899e6c936742f83",
+      "source": {
+        "head": "060ff1de6cf8f6f607baca4cb1be245e13dac0bf",
+        "actions_checkout": "78de6d5c9b21f2ea9d9fbf3702e2744f6b7f7f96"
+      },
+      "outcome": "INCOMPLETE",
+      "verification": {
+        "valid": true,
+        "events": 12,
+        "head": "934f6a917e08d16d2641f59e0db948c49a68453291d40a3fe34fe4c1a02fe17b",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "40b6c1a83cb9952e0924aef05e686c5611dd80c460a4c03241b94757bfd2afcc"
     }
   ]
 }

@@ -10,7 +10,7 @@ POST /api/operation with Authorization: Bearer TOKEN and JSON {"operation": "...
 
 | Operation | Parameters | Enforcement / upstream mapping |
 |---|---|---|
-| prepare_dataset | rows, authorization | Synthetic CC0 only, explicit training authorization, fixed schema and splits; then canonical ChatML JSONL |
+| prepare_dataset | rows, authorization | Synthetic CC0 only, explicit training authorization, fixed schema and train/replay/test/regression splits; then separate canonical ChatML primary/replay JSONL |
 | validate_dataset | dataset_id | Rehash and revalidate; Soup native loading also runs in worker |
 | create_training_job | base_id, dataset_id, config | Config only epochs/lr/rank/seed, numeric bounds; no arbitrary commands/plugins/paths |
 | start_training | job_id | One training worker; Soup SFTTrainerWrapper setup/train |
@@ -27,7 +27,7 @@ POST /api/operation with Authorization: Bearer TOKEN and JSON {"operation": "...
 | query_knowledge | question, enabled document IDs | Server-bound document role, manifest verification, supported-question retrieval, isolated active-model generation and exact-source release validation |
 | status / evidence | none | Read signed state / export signed chain |
 
-Model import is an administrative Python provisioning operation, intentionally absent from HTTP. Example row: {"prompt":"Route this invoice", "answer":"K7", "split":"train"}. Dataset authorization must exactly equal {"synthetic":true,"approved_for_training":true,"license":"CC0-1.0"}. Current qualification configuration: {"epochs":3,"lr":0.0003,"rank":8,"seed":52}.
+Model import is an administrative Python provisioning operation, intentionally absent from HTTP. Example row: {"prompt":"Route this invoice", "answer":"K7", "split":"train"}. Optional replay records require the same authorization, cross-split duplicate/quarantine checks and manifest integrity; replay cannot exceed primary training count. Native Soup replay mixing is fixed-seed and cannot enter evaluation. Dataset authorization must exactly equal {"synthetic":true,"approved_for_training":true,"license":"CC0-1.0"}. Current qualification configuration: {"epochs":3,"lr":0.0003,"rank":8,"seed":52}.
 
 ## State and crash behavior
 
@@ -45,7 +45,7 @@ Jobs have per-process address-space (6 GiB), CPU (900 seconds for training, 600 
 
 AIRON exports an airon-model-change/v1 payload inside an Ed25519 envelope. Signed bytes are ASCII canonical JSON prefixed with AIRON-MODEL-LIFECYCLE-v1 followed by a zero byte. The envelope contains SHA-256(payload) and a base64 signature. A verifier must receive the trusted public key out of band. A previous-envelope hash and sequence bind the chain; tail truncation requires an externally trusted head.
 
-The AIP bridge contract is a payload sink/signature-provider boundary for future integration, not an implemented AIP EvidencePacket. AIP's inspected raw sign_ed25519_raw/verify_ed25519_raw functions could sign the same bytes, subject to licence/ownership decision and actual cross-language tests. AIRON uses cryptography Ed25519 independently today. Never label its records AUTHORITY_BOUND, COUNTERPARTY_SIGNED or kernel-observed.
+The AIP bridge contract is a payload sink/signature-provider boundary for future integration, not an implemented AIP EvidencePacket. AIP's pinned raw sign_ed25519_raw/verify_ed25519_raw functions passed the separate test-only byte contract described in AIP_CONTRACT.md: 20 real signatures, 60 tamper rejections and a Python-verified AIP signature. This does not establish EvidencePacket semantics or independently canonicalized JSON, and production ownership/licensing remains unresolved. AIRON uses cryptography Ed25519 independently today. Never label its records AUTHORITY_BOUND, COUNTERPARTY_SIGNED or kernel-observed.
 
 Training identity, authorizing actor, dataset/base/config digests, adapter digest, evaluation report, approval, deployment version and rollback appear across linked signed events. The worker records the complete resolved Soup configuration and its digest, not only the four operator inputs. No secret material is exported. Sniffer Dog is not integrated. strace in acceptance CI provides a separate syscall trace for that runner; a trace is not cryptographically independent attestation.
 
