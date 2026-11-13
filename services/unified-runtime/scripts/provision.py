@@ -21,7 +21,7 @@ def private_json(path,value):
     write_json(path,value)
     path.chmod(0o600)
 
-def provision(root,assets,aip_dir,bin_dir,llama=None,gguf=None):
+def provision(root,assets,aip_dir,bin_dir,llama=None,gguf=None,*,capability_ids=None):
     root=Path(root).absolute(); root.mkdir(mode=0o700)
     native=root/"native"; native.mkdir(mode=0o700)
     bin_dir=Path(bin_dir).absolute(); aip_dir=Path(aip_dir).absolute()
@@ -46,7 +46,7 @@ def provision(root,assets,aip_dir,bin_dir,llama=None,gguf=None):
         "rag_k":3,"approvers":{"reviewer":reviewer["public_hex"]},"experts":{"suite-expert":expert["public_hex"]},
         "approval_policy":{"authorities":{"reviewer":{
             "expert_id":"reviewer","public_key_sha256":hashlib.sha256(bytes.fromhex(reviewer["public_hex"])).hexdigest(),
-            "tenant":"synthetic-plant","security_domain":"airon-local","capability_ids":[CAPABILITY],
+            "tenant":"synthetic-plant","security_domain":"airon-local","capability_ids":capability_ids or [CAPABILITY],
             "min_version":1,"max_version":100,"max_clearance":"restricted",
             "valid_from_ms":now-1000,"expires_at_ms":now+86400*1000,"revoked":False}}},
         "profile":"none","python":"/UNAVAILABLE_IN_LIFECYCLE","sidecar_script":"/UNAVAILABLE_IN_LIFECYCLE",
