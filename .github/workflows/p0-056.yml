@@ -53,16 +53,23 @@ jobs:
       - name: Execute complete integrated slice with no external route
         run: |
           .venv/bin/python services/unified-runtime/scripts/provision.py --root "$RUNNER_TEMP/unified" --assets "$RUNNER_TEMP/assets" --aip-dir "$RUNNER_TEMP/aip" --bin-dir "$RUNNER_TEMP/aip/target/debug" --llama "$RUNNER_TEMP/llama-build/bin/llama-completion" --gguf "$RUNNER_TEMP/135m.gguf" --approve-synthetic-data
-          strace -ff -e trace=network -o qualification/network unshare --user --map-root-user --net .venv/bin/python services/unified-runtime/scripts/run_demo.py --root "$RUNNER_TEMP/unified" --report qualification/demo.json --backend llama --approve-synthetic-test-deployment
+          sudo mkdir /sys/fs/cgroup/airon-p056
+          echo 8589934592 | sudo tee /sys/fs/cgroup/airon-p056/memory.max
+          echo '200000 100000' | sudo tee /sys/fs/cgroup/airon-p056/cpu.max
+          sudo chown "$(id -u):$(id -g)" /sys/fs/cgroup/airon-p056/cgroup.procs
+          strace -ff -e trace=network -o qualification/network bash -c 'echo $$ > /sys/fs/cgroup/airon-p056/cgroup.procs; exec taskset -c 0,1 unshare --user --map-root-user --net .venv/bin/python services/unified-runtime/scripts/run_demo.py --root "$RUNNER_TEMP/unified" --report qualification/demo.json --backend llama --approve-synthetic-test-deployment'
+          cp /sys/fs/cgroup/airon-p056/memory.peak qualification/cgroup-memory-peak.txt
+          cp /sys/fs/cgroup/airon-p056/memory.events qualification/cgroup-memory-events.txt
+          cp /sys/fs/cgroup/airon-p056/cpu.stat qualification/cgroup-cpu-stat.txt
       - name: Prepare complete local wheelhouse
         if: always()
         run: .venv/bin/python services/unified-runtime/scripts/prepare_offline.py --output "$RUNNER_TEMP/wheels"
       - name: Fresh install and native smoke test without external network
         run: |
           python -m venv "$RUNNER_TEMP/offline"
-          unshare --user --map-root-user --net "$RUNNER_TEMP/offline/bin/python" -m pip install --no-index --find-links "$RUNNER_TEMP/wheels" --require-hashes -r "$RUNNER_TEMP/wheels/requirements.lock"
-          unshare --user --map-root-user --net "$RUNNER_TEMP/offline/bin/python" -m pip check
-          unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" -c "from airon_runtime.core import Core; c=Core('$RUNNER_TEMP/unified'); r=c.call(c.principal('operator'),'execute',{'capability_id':'airon.cooling.inspection','text':'cooling hours 210 vibration 2'}); assert r['result']['cost']['model_calls']==0; c.close()"
+          unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" -m pip install --no-index --find-links "$RUNNER_TEMP/wheels" --require-hashes -r "$RUNNER_TEMP/wheels/requirements.lock"
+          unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" -m pip check
+          strace -ff -e trace=network -o qualification/install-network unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" services/unified-runtime/scripts/installed_smoke.py --root "$RUNNER_TEMP/unified" --report qualification/offline-install.json --verify-adaptation
       - name: Preserve nonsecret raw evidence
         if: always()
         run: |
