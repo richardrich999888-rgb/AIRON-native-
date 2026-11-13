@@ -59,6 +59,21 @@ jobs:
         run: |
           mkdir -p acceptance-evidence
           strace -ff -e trace=network -o acceptance-evidence/network .venv/bin/python services/model-adaptation/scripts/run_acceptance.py --root "$RUNNER_TEMP/airon-state" --report acceptance-evidence/acceptance.json --approve-synthetic-test-deployment
+      - name: Prepare hash-locked offline wheels
+        run: .venv/bin/python services/model-adaptation/scripts/prepare_wheelhouse.py --output "$RUNNER_TEMP/airon-wheels" --source services/model-adaptation
+      - name: Install fresh runtime without network
+        run: |
+          python -m venv "$RUNNER_TEMP/airon-offline-runtime"
+          unshare --user --map-root-user --net "$RUNNER_TEMP/airon-offline-runtime/bin/python" -m pip install --no-cache-dir --no-index --find-links "$RUNNER_TEMP/airon-wheels" --require-hashes -r "$RUNNER_TEMP/airon-wheels/requirements.lock"
+          cp "$RUNNER_TEMP/airon-wheels/requirements.lock" acceptance-evidence/
+          cp "$RUNNER_TEMP/airon-wheels/wheelhouse.json" acceptance-evidence/
+      - name: Repeat complete workflow with isolated controller and fresh runtime
+        run: |
+          AIRON_HOST_NETNS=$(readlink /proc/self/ns/net)
+          strace -ff -e trace=network -o acceptance-evidence/offline-network unshare --user --map-root-user --net "$RUNNER_TEMP/airon-offline-runtime/bin/python" services/model-adaptation/scripts/offline_acceptance.py --root "$RUNNER_TEMP/airon-offline-state" --assets "$RUNNER_TEMP/airon-assets" --report acceptance-evidence/offline-acceptance.json --parent-netns "$AIRON_HOST_NETNS"
+      - name: Classify complete offline network trace
+        if: always()
+        run: .venv/bin/python services/model-adaptation/scripts/audit_network.py --prefix acceptance-evidence/offline-network --report acceptance-evidence/network-audit.json
       - name: Collect nonsecret diagnostics
         if: always()
         run: |
@@ -66,6 +81,10 @@ jobs:
           if [ -d "$RUNNER_TEMP/airon-state/jobs" ]; then
             find "$RUNNER_TEMP/airon-state/jobs" -name worker.log -exec cp --parents {} acceptance-evidence/logs/ \;
             find "$RUNNER_TEMP/airon-state/jobs" -name worker.log -exec tail -c 16000 {} \;
+          fi
+          if [ -d "$RUNNER_TEMP/airon-offline-state/jobs" ]; then
+            find "$RUNNER_TEMP/airon-offline-state/jobs" -name worker.log -exec cp --parents {} acceptance-evidence/logs/ \;
+            find "$RUNNER_TEMP/airon-offline-state/jobs" -name worker.log -exec tail -c 16000 {} \;
           fi
           if [ -f "$RUNNER_TEMP/airon-state/provisioning.json" ]; then
             cp "$RUNNER_TEMP/airon-state/provisioning.json" acceptance-evidence/

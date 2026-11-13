@@ -22,15 +22,20 @@ def main():
     parser.add_argument("--root", required=True)
     parser.add_argument("--assets", required=True)
     parser.add_argument("--approve-synthetic-data", action="store_true", required=True)
+    parser.add_argument("--local-assets", action="store_true", help="Use approved local assets; never download")
     args = parser.parse_args()
     assets = Path(args.assets).absolute()
-    assets.mkdir(parents=True, exist_ok=False)
-    info = HfApi().model_info(MODEL, revision=REVISION)
-    if info.sha != REVISION or info.card_data.get("license") != "apache-2.0":
-        raise RuntimeError("Pinned model revision or declared licence differs")
-    for name in FILES:
-        cached = hf_hub_download(MODEL, name, revision=REVISION)
-        shutil.copyfile(cached, assets/name)
+    approved = json.loads((Path(__file__).resolve().parents[1]/"model.lock.json").read_text())
+    if not args.local_assets:
+        assets.mkdir(parents=True, exist_ok=False)
+        info = HfApi().model_info(MODEL, revision=REVISION)
+        if info.sha != REVISION or info.card_data.get("license") != "apache-2.0":
+            raise RuntimeError("Pinned model revision or declared licence differs")
+        for name in FILES:
+            cached = hf_hub_download(MODEL, name, revision=REVISION)
+            shutil.copyfile(cached, assets/name)
+    if manifest(assets, model=True) != approved["manifest"]:
+        raise RuntimeError("Model assets differ from approved pinned bytes")
     # Model card and declared licence retained; weight/dataset rights remain separate from Soup.
     source = upstream_identity()
     packages = []

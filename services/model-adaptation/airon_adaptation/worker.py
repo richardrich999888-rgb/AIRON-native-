@@ -12,19 +12,35 @@ from .integrity import Rejected, digest, manifest, write_json
 SOUP_REVISION = "af2f5d5000f7baec6386a72a6d16e82383eb5303"
 
 
+# Measured from the immutable VCS installation in Actions run 43339473019.
+SOUP_PYTHON_TREE = "d87ec3624378b062095b71d68baa820bf88da5e641c623c6b9ead7a1e6a4a6b4"
+
+
 def upstream_identity():
-    import soup_cli
     dist = importlib.metadata.distribution("soup-cli")
     direct = json.loads(dist.read_text("direct_url.json") or "{}")
-    if direct.get("vcs_info", {}).get("commit_id") != SOUP_REVISION or dist.version != "0.77.2":
-        raise Rejected("Install Soup from the audited immutable VCS revision")
-    root = Path(soup_cli.__file__).parent
+    vcs_revision = direct.get("vcs_info", {}).get("commit_id")
+    if dist.version != "0.77.2" or (vcs_revision and vcs_revision != SOUP_REVISION):
+        raise Rejected("Soup version or declared revision differs from the audited pin")
+    # Verify source before importing Soup; offline wheels do not retain VCS direct_url metadata.
+    root = Path(dist.locate_file("soup_cli"))
     hashes = {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
               for p in sorted(root.rglob("*.py"))}
-    return {"revision": SOUP_REVISION, "version": dist.version, "python_tree_sha256": digest(hashes)}
+    actual = digest(hashes)
+    if actual != SOUP_PYTHON_TREE:
+        raise Rejected("Installed Soup Python source differs from the audited tree")
+    return {"revision": SOUP_REVISION, "version": dist.version, "python_tree_sha256": actual}
 
 
-def isolation_probe(parent_netns):
+def _trace_probe_marker(stage):
+    # Mark deliberate probes for the external syscall-trace classifier.
+    # AF_UNIX connects to absent paths cannot reach the network.
+    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as marker:
+        marker.connect_ex("/tmp/airon-isolation-probe-" + stage)
+
+
+def isolation_probe(parent_netns, *, require_private_mounts=True):
+    _trace_probe_marker("begin")
     namespace = os.readlink("/proc/self/ns/net")
     routes = [line for line in Path("/proc/self/net/route").read_text().splitlines() if line.strip()]
     if namespace == parent_netns:
@@ -47,8 +63,9 @@ def isolation_probe(parent_netns):
         dns = {"blocked": True, "errno": exc.errno}
     else:
         raise Rejected("Unexpected DNS resolution")
-    if Path("/home/agent").exists() or Path("/workspace").exists():
+    if require_private_mounts and (Path("/home/agent").exists() or Path("/workspace").exists()):
         raise Rejected("Host administrative paths unexpectedly visible")
+    _trace_probe_marker("end")
     return {"net_namespace": os.readlink("/proc/self/ns/net"), "route_count": 0,
             "dns_probe": dns, "connect_probes": failures,
             "assurance": "OS_NAMESPACE_AND_APPLICATION_PROBE"}

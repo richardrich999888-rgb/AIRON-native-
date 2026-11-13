@@ -44,14 +44,16 @@ def run(args, logfile, *, on_start=lambda process: None, timeout=900):
         proc = subprocess.Popen(args, stdin=subprocess.DEVNULL, stdout=log, stderr=log,
                                 start_new_session=True, close_fds=True,
                                 env={"PATH": "/usr/bin:/bin"})
-        on_start(proc)
         try:
+            on_start(proc)
             code = proc.wait(timeout=timeout)
+            if code != 0:
+                raise Rejected(f"Isolated worker failed with exit {code}; inspect job log")
         except subprocess.TimeoutExpired as exc:
-            stop(proc)
             raise Rejected("Worker exceeded wall-clock limit") from exc
-        if code != 0:
-            raise Rejected(f"Isolated worker failed with exit {code}; inspect job log")
+        finally:
+            # Includes callback failures and interrupts; never orphan a launched job.
+            stop(proc)
 
 
 def stop(proc):
