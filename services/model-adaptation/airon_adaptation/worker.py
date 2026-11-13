@@ -24,9 +24,13 @@ def upstream_identity():
     return {"revision": SOUP_REVISION, "version": dist.version, "python_tree_sha256": digest(hashes)}
 
 
-def isolation_probe():
-    if len(Path("/proc/net/route").read_text().splitlines()) != 1:
-        raise Rejected("Worker unexpectedly has network routes")
+def isolation_probe(parent_netns):
+    namespace = os.readlink("/proc/self/ns/net")
+    routes = [line for line in Path("/proc/self/net/route").read_text().splitlines() if line.strip()]
+    if namespace == parent_netns:
+        raise Rejected("Worker retained controller network namespace: " + namespace)
+    if not routes or not routes[0].startswith("Iface") or len(routes) != 1:
+        raise Rejected("Worker route inspection failed: " + repr({"namespace": namespace, "parent": parent_netns, "routes": routes}))
     failures = []
     for address in (("198.51.100.1", 443), ("127.0.0.1", 11434)):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
@@ -160,7 +164,7 @@ def main():
     os.umask(0o077)
     start = time.perf_counter()
     request = json.loads(Path("/request.json").read_text())
-    identity, isolation = upstream_identity(), isolation_probe()
+    identity, isolation = upstream_identity(), isolation_probe(request["parent_netns"])
     operation = request["operation"]
     if operation == "probe":
         from soup_cli.config.schema import DataConfig

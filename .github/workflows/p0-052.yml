@@ -51,7 +51,10 @@ jobs:
       - name: Provision pinned weights and authorised synthetic data
         run: .venv/bin/python services/model-adaptation/scripts/provision.py --root "$RUNNER_TEMP/airon-state" --assets "$RUNNER_TEMP/airon-assets" --approve-synthetic-data
       - name: Genuine Soup data operation under isolation
-        run: .venv/bin/python services/model-adaptation/scripts/probe_sandbox.py --root "$RUNNER_TEMP/airon-state"
+        run: |
+          readlink /proc/self/ns/net
+          unshare --user --map-root-user --net /bin/sh -c 'readlink /proc/self/ns/net; cat /proc/self/net/route'
+          .venv/bin/python services/model-adaptation/scripts/probe_sandbox.py --root "$RUNNER_TEMP/airon-state"
       - name: Real CPU training and governed lifecycle
         run: |
           mkdir -p acceptance-evidence

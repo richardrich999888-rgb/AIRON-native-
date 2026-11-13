@@ -284,3 +284,9 @@ def test_interrupted_job_recovered_fail_closed(tmp_path):
         assert call(reopened, "get_training_status", job_id=ident)["status"] == "INTERRUPTED"
     finally:
         reopened.close()
+
+
+@pytest.mark.parametrize("field", ["synthetic", "approved_for_training"])
+def test_authorization_requires_boolean_not_numeric_equivalent(lab, field):
+    with pytest.raises(Rejected):
+        call(lab[0], "prepare_dataset", rows=ROWS, authorization={**AUTH, field: 1})

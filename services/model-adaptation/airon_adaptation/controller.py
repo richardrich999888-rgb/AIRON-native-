@@ -170,7 +170,11 @@ class Controller:
 
     def prepare_dataset(self, rows, authorization, actor):
         counts = self._validate_rows(rows)
-        if authorization != {"synthetic": True, "approved_for_training": True, "license": "CC0-1.0"}:
+        if (not isinstance(authorization, dict)
+                or set(authorization) != {"synthetic", "approved_for_training", "license"}
+                or authorization["synthetic"] is not True
+                or authorization["approved_for_training"] is not True
+                or authorization["license"] != "CC0-1.0"):
             raise Rejected("Only explicitly approved CC0 synthetic data accepted")
         ident = self._new("dataset")
         path = self.root/"datasets"/ident
@@ -243,7 +247,8 @@ class Controller:
             path.mkdir(mode=0o700)
             (path/"output").mkdir(mode=0o700)
             write_json(path/"request.json", {"operation": operation, "config": job["config"],
-                                            "has_adapter": adapter is not None})
+                                            "has_adapter": adapter is not None,
+                                            "parent_netns": os.readlink("/proc/self/ns/net")})
         def started(proc):
             with self.mutex:
                 self.processes[job["id"]] = proc
