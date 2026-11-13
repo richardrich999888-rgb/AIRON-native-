@@ -1,0 +1,14 @@
+[
+ {"id":"dev-01","text":"cooling hours 199 vibration 4.5","expected":"CONTINUE","counterexample":true},
+ {"id":"dev-02","text":"cooling hours 200 vibration 4.5","expected":"INSPECT","counterexample":true},
+ {"id":"dev-03","text":"cooling hours 201 vibration 4.5","expected":"INSPECT","counterexample":false},
+ {"id":"dev-04","text":"cooling hours 10 vibration 4.6","expected":"STOP_AND_NOTIFY","counterexample":true},
+ {"id":"dev-05","text":"cooling hours 250 vibration 5","expected":"STOP_AND_NOTIFY","counterexample":true},
+ {"id":"dev-06","text":"cooling hours 0 vibration 0","expected":"CONTINUE","counterexample":false},
+ {"id":"dev-07","text":"cooling compressor hours 250 vibration 5","expected":"OUT_OF_SCOPE","counterexample":true},
+ {"id":"dev-08","text":"cooling hours 150","expected":"INSUFFICIENT_INPUT","counterexample":true},
+ {"id":"dev-09","text":"cooling vibration 2","expected":"INSUFFICIENT_INPUT","counterexample":true},
+ {"id":"dev-10","text":"battery hours 250 vibration 5","expected":"NOT_APPLICABLE","counterexample":true},
+ {"id":"dev-11","text":"cooling hours 50 vibration 1","expected":"CONTINUE","counterexample":false},
+ {"id":"dev-12","text":"cooling hours 300 vibration 3","expected":"INSPECT","counterexample":false}
+]

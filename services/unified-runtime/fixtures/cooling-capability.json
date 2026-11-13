@@ -1,0 +1,21 @@
+{
+  "id": "airon.cooling.inspection", "version": 1,
+  "intended_task": "Classify a synthetic cooling assembly maintenance report; take no physical action",
+  "outcomes": ["INSPECT", "STOP_AND_NOTIFY", "CONTINUE", "OUT_OF_SCOPE", "INSUFFICIENT_INPUT"],
+  "applicability": {"any_terms": ["cooling"], "min_inputs_present": 1},
+  "procedure": {
+    "inputs": [
+      {"name": "hours", "kind": "cued", "cues": ["hours"]},
+      {"name": "vibration", "kind": "cued", "cues": ["vibration"]}
+    ],
+    "text_guards": [{"any_terms": ["compressor"], "outcome": "OUT_OF_SCOPE"}],
+    "numeric_guards": [{"when": "vibration > 4.5", "outcome": "STOP_AND_NOTIFY"}],
+    "missing_input_outcome": "INSUFFICIENT_INPUT", "derive": [],
+    "rules": [{"when": "hours >= 200", "outcome": "INSPECT"}],
+    "default_outcome": "CONTINUE"
+  },
+  "required": {"tenant": "synthetic-plant", "min_clearance": "restricted", "security_domain": "airon-local"},
+  "dependencies": {"knowledge": {"maintenance": "BOUND_BY_NATIVE_PROPOSAL"}, "policy_version": "airon-maintenance-v1", "execution_model_sha256": null},
+  "evidence_refs": ["maintenance"], "failure_conditions": ["Missing or ambiguous readings require an expert"],
+  "tests": [], "proposed_by": "operator"
+}
