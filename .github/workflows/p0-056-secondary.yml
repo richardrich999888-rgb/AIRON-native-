@@ -50,7 +50,9 @@ jobs:
           c.close()
           PY
       - name: Browser and HTTP authorization checks
-        run: .venv/bin/python services/unified-runtime/scripts/qualify_console.py --root "$RUNNER_TEMP/console" --output qualification/console
+        run: |
+          .venv/bin/python services/unified-runtime/scripts/qualify_console.py --root "$RUNNER_TEMP/console" --output qualification/console
+          .venv/bin/python docs/qualification/p0-056/helpers/audit_egress.py --prefix qualification/fault-network --expected-probes 3 --report qualification/fault-network-audit.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

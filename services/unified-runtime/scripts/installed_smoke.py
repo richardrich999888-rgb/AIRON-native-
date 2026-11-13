@@ -20,7 +20,10 @@ if __name__=='__main__':
             path=Path(package.__file__).resolve()
             assert path.is_relative_to(Path(sys.prefix).resolve()),'Import came from outside fresh venv'
             r['checks'][package.__name__]=str(path)
-        assert len(Path('/proc/net/route').read_text().splitlines())==1,'External route exists'
+        # Some procfs providers omit the header for an empty namespace.
+        routes=[line for line in Path('/proc/self/net/route').read_text().splitlines() if line.strip()]
+        if routes and routes[0].split()[0]=='Iface':routes=routes[1:]
+        assert not routes,'External route exists'
         c=Core(a.root)
         try:
             actor=c.principal('operator')

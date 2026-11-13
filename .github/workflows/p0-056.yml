@@ -61,6 +61,7 @@ jobs:
           cp /sys/fs/cgroup/airon-p056/memory.peak qualification/cgroup-memory-peak.txt
           cp /sys/fs/cgroup/airon-p056/memory.events qualification/cgroup-memory-events.txt
           cp /sys/fs/cgroup/airon-p056/cpu.stat qualification/cgroup-cpu-stat.txt
+          .venv/bin/python docs/qualification/p0-056/helpers/audit_egress.py --prefix qualification/network --expected-probes 7 --report qualification/network-audit.json
       - name: Prepare complete local wheelhouse
         if: always()
         run: .venv/bin/python services/unified-runtime/scripts/prepare_offline.py --output "$RUNNER_TEMP/wheels"
@@ -70,6 +71,9 @@ jobs:
           unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" -m pip install --no-index --find-links "$RUNNER_TEMP/wheels" --require-hashes -r "$RUNNER_TEMP/wheels/requirements.lock"
           unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" -m pip check
           strace -ff -e trace=network -o qualification/install-network unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" services/unified-runtime/scripts/installed_smoke.py --root "$RUNNER_TEMP/unified" --report qualification/offline-install.json --verify-adaptation
+          .venv/bin/python docs/qualification/p0-056/helpers/audit_egress.py --prefix qualification/install-network --expected-probes 1 --report qualification/install-network-audit.json
+          .venv/bin/python docs/qualification/p0-056/helpers/export_public_snapshot.py --root "$RUNNER_TEMP/unified" --demo qualification/demo.json --output qualification/public-snapshot.json
+          unshare --user --map-root-user --net env -u PYTHONPATH "$RUNNER_TEMP/offline/bin/python" docs/qualification/p0-056/helpers/verify_snapshot.py --snapshot qualification/public-snapshot.json --report qualification/snapshot-verification.json
       - name: Preserve nonsecret raw evidence
         if: always()
         run: |
