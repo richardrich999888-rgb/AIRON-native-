@@ -302,6 +302,31 @@
         "truncation_checked": true
       },
       "public_key_hex": "866c8979f904a849431f50dea8dd5f2fecbcada56b6a17fc5671b7e61d96f536"
+    },
+    {
+      "path": "rejected-routing-14ef531.json",
+      "sha256": "6f6293c2a45df6717008e3a94cd9879309552a3a921e9415e0a28f4102dd2087",
+      "source": {
+        "head": "14ef5317954d3ed38df87ea3bd5d5d4f0bc123eb",
+        "actions_checkout": "e561171dea4650db8051e4f42e32787b3445368f"
+      },
+      "outcome": "INCOMPLETE",
+      "verification": {
+        "valid": true,
+        "events": 12,
+        "head": "cb78c1978d169deabd115565564df987e362187a531596f04a01ae937f02b4f4",
+        "level": "APPLICATION_SIGNED",
+        "independent_execution": "CANNOT_PROVE",
+        "truncation_checked": true
+      },
+      "public_key_hex": "3d480fe6e6f08138d996faef840545a2a78a1a69d01e123fc3ee86bf87f2d083"
+    },
+    {
+      "path": "aip-raw-contract-ddde09b.json",
+      "sha256": "ed7099d98ec63c222709636d15ccf386e889c20cc189ebcd4cff81525443a335",
+      "source": null,
+      "outcome": true,
+      "verification": null
     }
   ]
 }

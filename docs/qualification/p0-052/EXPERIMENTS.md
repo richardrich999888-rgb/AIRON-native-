@@ -18,6 +18,8 @@ All runs below used the same pinned SmolLM2-135M-Instruct base and Soup source. 
 | 0f46ef0 / 43358210167 | 102 train records; aligned copy instruction; LR .0003; v3 minimum 50% routing | Reached 92/153 steps; SIGSEGV during asynchronous 120-second diagnostic dump | No registration or activation; quality not evaluated |
 | 7b964cd / 43359489727 | Remove periodic diagnostic stack walk only | Reached 149/153 steps; stopped at 300 seconds by external wall limit; no recurrence of diagnostic SIGSEGV | No candidate or activation; next trial changes training-only time budget |
 
+| 14ef531 / 43360855201 | 480-second training budget, unchanged q/v rank-8 LoRA | 153 steps; 139.470 s; 1,804,324 KiB RSS; routing 1/6; factual 4/6; full-source answer | v3 rejected routing; no activation |
+
 The twelve copy-training records exclude the approved document corpus and frozen question. Both evaluation data and acceptance thresholds remain unchanged across the retention trials. Candidate failures are retained with signed events, model/dataset/config hashes and real scores in evidence/. No rejected candidate was activated. An automated synthetic-test reviewer is expressly labelled and does not establish independent human authorization.
 
 Hardware varies across GitHub runners; compare each report's CPU, memory and wall-clock measurements. All qualified precision measurements above use two torch CPU threads; no GPU was used. Historical source snapshots and failures remain in Git history.

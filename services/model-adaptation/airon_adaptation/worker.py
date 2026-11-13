@@ -124,7 +124,10 @@ def train(config):
     from soup_cli.data.loader import load_dataset
     from soup_cli.trainer.sft import SFTTrainerWrapper
     kind = json.loads(Path("/model/config.json").read_text())["model_type"]
-    targets = ["q_proj", "v_proj"] if kind == "llama" else ["c_attn"]
+    # The q/v-only trial learned the label syntax but failed the frozen routing
+    # suite. Test broader native LoRA coverage without changing data or gates.
+    targets = (["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+               if kind == "llama" else ["c_attn"])
     cfg = SoupConfig.model_validate({
         "base": "/model", "task": "sft", "backend": "transformers", "output": "/output/training",
         "data": {"train": "/data/train.jsonl", "format": "chatml", "val_split": 0.0,

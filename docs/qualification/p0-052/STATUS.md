@@ -6,7 +6,7 @@ Updated 13 November 2026. Draft [PR #2](https://github.com/richardrich999888-rgb
 
 Source a29733297c0d022b700ffa260750ed40a4d2e48a completed [Actions run 43356140596](https://github.com/richardrich999888-rgb/AIRON-native-/actions/runs/43356140596) successfully, including both jobs and every real CPU step. It demonstrated baseline inference, approved private-document access, genuine Soup training, evaluation, scripted test approval, experimental activation, adapted inference, export, rollback, a fresh hash-locked offline installation, complete namespace isolation and syscall classification, browser evidence download, real cancellation and corrupt-model rejection.
 
-Its task score remains weak: 2/6 equals the constant-label reference for the balanced three-class routing set. That run qualifies the implemented lifecycle and isolation, not useful enterprise routing quality. The current policy v3 now requires at least 50% routing accuracy as well as strict improvement, factual preservation and the full-source document answer. The 102-record training trial at 0f46ef0cec0450f28c0112f4746a8501c2ca1386 failed at step 92/153 with SIGSEGV during a diagnostic traceback. The 7b964cd follow-up removed that diagnostic and reached 149/153 steps before its 300-second limit. The next trial changes only the training time budget to 480 wall seconds / 900 CPU seconds; no pass is inferred.
+Its task score remains weak: 2/6 equals the constant-label reference for the balanced three-class routing set. That run qualifies the implemented lifecycle and isolation, not useful enterprise routing quality. The current policy v3 now requires at least 50% routing accuracy as well as strict improvement, factual preservation and the full-source document answer. The 102-record trial at 14ef5317954d3ed38df87ea3bd5d5d4f0bc123eb completed 153 genuine steps but routing remained 1/6; factual 4/6 and the full-source answer passed. The current v3 gate correctly rejected deployment. A controlled follow-up broadens rank-8 LoRA from q/v to seven attention/MLP projections with all data, learning parameters and evaluation unchanged. No pass is inferred.
 
 | Observation at a297332 | Actual offline result |
 |---|---|
@@ -42,14 +42,14 @@ Full original reports are in evidence/. The base, tokenizer, dataset, configurat
 | M3 genuine training | Passed on recorded source | Real changed parameters, saved/reloaded adapter; separate downloaded artifact inspection |
 | M4 model lifecycle | Passed under v2; v3 quality trial pending | Explicit role/approval gate and rollback work; current stricter task-quality requirement needs a new passing candidate |
 | M5 offline qualification | Passed for recorded v2 workflow; new trial pending | Fresh installation and complete namespace-isolated workflow; no physical/customer-site accreditation |
-| M6 assurance | Passed at application level | Signed chain, reviewed anchors, separately inspected syscall traces; AIP/Sniffer Dog remain unintegrated |
+| M6 assurance | Passed at application level | Signed chain, reviewed anchors, separately inspected syscall traces; AIP raw-byte interoperability passed separately; no production AIP or Sniffer Dog integration |
 | M7 demonstration | UI and reproducibility passed; stronger quality pending | Guided local console and downloadable evidence; weak routing score must remain visible |
 
 The pre-expansion suite passed 78 tests plus the 15 existing gateway tests and eight existing website cases/build. Current source passed 85 local/controller/adversarial/retained-evidence checks, and its CI contracts job passed. Counts overlap across runs; they are not independent test totals.
 
 ## Remaining work and limits
 
-The immediate engineering task is the unchanged-evaluation, 102-record training trial under policy v3. It expands routing examples and aligns copy-training instructions with inference; it does not add evaluation answers to training.
+The immediate engineering task is a v3-qualified candidate from the unchanged-evaluation, 102-record corpus. The q/v-only adapter failed routing despite genuine training; the next trial broadens the fixed LoRA target coverage. Evaluation answers are not added to training.
 
 Enterprise qualification still needs independently prepared larger benchmarks, authorised real-data ingestion, independent approver identity/key custody and external event anchoring, a tested/licensed AIP bridge and independent execution observer, customer hardware/physical isolation, cgroup aggregate limits and multi-user isolation, broader forgetting/poisoning/drift evaluation, incremental adapter learning, and export parity/GGUF/llama.cpp/Ollama deployment. No automatic harvesting, model self-modification or promotion exists.
 
