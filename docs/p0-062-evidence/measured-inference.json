@@ -1,0 +1,21 @@
+{
+  "outcome": "Answered",
+  "answer": "The amber spindle interval is 72 hours.",
+  "citation": {
+    "document": 3,
+    "title": "workshop-note.pdf",
+    "sha256": "985005a1ff2580f7ebfc4c2cd8cf72f84b6f93221775706c396b0d380db6684d",
+    "version": 1,
+    "teaching": null,
+    "page": 2,
+    "chunk": 2,
+    "excerpt": "The amber spindle interval is 72 hours."
+  },
+  "engine": "Ollama · source-constrained generation",
+  "model": "qwen2.5:0.5b",
+  "usage": {
+    "durationMs": 1463.293,
+    "inputTokens": 63,
+    "outputTokens": 16
+  }
+}

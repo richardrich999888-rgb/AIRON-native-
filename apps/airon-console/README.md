@@ -1,6 +1,6 @@
 # SYNTRIASS Labs · AIRON Native
 
-[Launch the CIIC console and follow the five-minute demonstration](../../docs/CIIC_DEMO_GUIDE.md). [Source provenance and retained notices](PROVENANCE.md).
+[Launch the local console and follow Shreyas’s five-minute walkthrough](../../docs/P0-062_DEMONSTRATION.md). [Measured results and screenshots](../../docs/p0-062-evidence/README.md). [Source provenance and retained notices](PROVENANCE.md).
 
 ## Original VANIAN application reference
 
