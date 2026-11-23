@@ -18,7 +18,7 @@
   align-items: center;
   gap: 6px;
   border-radius: 6px;
-  background: #f2ecfe;
+  background: var(--brand-wash);
   padding: 5px 9px;
   color: #502b94;
 }
@@ -45,7 +45,7 @@
 }
 .intelligence-card h2 svg,
 .intel-kpis svg {
-  color: #7435c6;
+  color: var(--brand);
 }
 .intelligence-card form {
   display: grid;

@@ -4,4 +4,4 @@ The original application is `apps/vanian-console/` from [AIP-agent-identity-prot
 
 The upstream third-party inventory is preserved in UPSTREAM-THIRD-PARTY.md. Replay notices, public trust anchors, fixture notices, WASI shim license, shadcn and Vite notices remain in their original relative locations. The original README and preview PNGs document the pinned VANIAN source. Preserve them for comparison.
 
-The displayed company mark is cropped from the destination's existing `website/public/syntriass-logo.jpeg`. The new local knowledge service imports AIRON's existing maintenance corpus, normalization, loopback Ollama transport, model discovery and exact-source validation from `website/offline/`.
+The displayed SYNTRIASS emblem and wordmark are extracted from the corporate artwork supplied on 23 November 2026. The emblem retains its cyan-to-magenta direction and the wordmark retains its magenta-to-cyan direction. The browser icon uses the same emblem. The new local knowledge service imports AIRON's existing maintenance corpus, normalization, loopback Ollama transport, model discovery and exact-source validation from `website/offline/`.

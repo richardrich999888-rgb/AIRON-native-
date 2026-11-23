@@ -4,7 +4,7 @@
 
 ## Original VANIAN application reference
 
-An enterprise evaluation console built with Next.js-compatible Vinext, React, TypeScript, TanStack Table and Query, ECharts, React Flow, Three.js and Cloudflare D1. VANIAN’s uploaded orbital mark and wordmark are displayed from the original image.
+An enterprise evaluation console built with Next.js-compatible Vinext, React, TypeScript, TanStack Table and Query, ECharts, React Flow, Three.js and Cloudflare D1. The console displays the SYNTRIASS emblem and wordmark supplied for AIRON Native.
 
 ## Start an evaluation
 

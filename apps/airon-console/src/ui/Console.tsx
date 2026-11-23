@@ -927,7 +927,7 @@ function Workspace({ initial }: { initial: string }) {
               <I n="menu" />
             </button>
             <div className="crumb">
-              <I n="panel" size={16} />
+              <img className="crumb-mark" src="/brand/syntriass-mark.png" alt="" />
               <span>AIRON Native</span>
               <i>/</i>
               <span>{page.section}</span>

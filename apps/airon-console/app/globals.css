@@ -14,13 +14,20 @@
 }
 :root {
   color-scheme: light;
+  --syntriass-magenta: #b519e6;
+  --syntriass-violet: #8246e6;
+  --syntriass-blue: #4f7ee8;
+  --syntriass-cyan: #02c7e9;
+  --brand-gradient: linear-gradient(100deg, var(--syntriass-magenta), var(--syntriass-violet) 34%, var(--syntriass-blue) 67%, var(--syntriass-cyan));
+  --brand-wash: linear-gradient(100deg, #f7eafa, #f0ecfc 42%, #e5f6fa);
+  --brand-action: linear-gradient(105deg, #9221bc, #6241aa 38%, #3657aa 70%, #076e85);
   --canvas: #f8f7fc;
   --surface: #fff;
   --ink: #171625;
   --muted: #676477;
   --faint: #777389;
   --line: #e8e3f2;
-  --brand: #6422e8;
+  --brand: #6540ad;
   --soft: #f2ecfc;
   --side: #fcfbff;
   --plot-grid: #e7e2f0;
@@ -167,6 +174,7 @@ small {
 }
 .brand-area {
   height: 68px;
+  background: var(--brand-gradient) left bottom / 100% 2px no-repeat;
   display: flex;
   align-items: center;
   padding: 0 22px;
@@ -180,12 +188,18 @@ small {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  mix-blend-mode: multiply;
+  color: #201b32;
 }
-.brand > svg {
-  width: 43px;
-  height: 35px;
-  display: block;
+.brand .syntriass-mark {
+  width: 41px;
+  height: 47px;
+  object-fit: contain;
+  flex: none;
+}
+.brand-type b {
+  font-size: 20px;
+  line-height: 1.15;
+  letter-spacing: -.045em;
 }
 .brand-type {
   display: flex;
@@ -193,12 +207,16 @@ small {
   align-items: flex-start;
   gap: 4px;
 }
-.brand-type svg {
+.brand-type small img {
+  width: 65px;
+  height: auto;
   display: block;
-  width: 112px;
-  height: 14px;
 }
 .brand-type small {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-transform: uppercase;
   font-family: Inter, sans-serif;
   letter-spacing: 1.02px;
   font-size: 8px;
@@ -341,13 +359,13 @@ small {
 }
 .nav-children a[aria-current] {
   color: #6326bf;
-  background: #eee4fb;
+  background: var(--brand-wash);
   font-weight: 650;
 }
 .nav-children a i {
   width: 5px;
   height: 5px;
-  background: #8c4ce0;
+  background: var(--syntriass-violet);
   border-radius: 50%;
 }
 .nav-bottom {
@@ -362,7 +380,7 @@ small {
   gap: 10px;
   width: 100%;
   padding: 8px 10px;
-  background: linear-gradient(100deg, #f3eefb, #f8f4fc);
+  background: var(--brand-wash);
   border: 1px solid #e5d9f4;
   border-radius: 8px;
   color: #5b3685;
@@ -463,8 +481,12 @@ small {
   font-size: 12px;
   color: #736c81;
 }
-.crumb > svg {
-  color: #8c8299;
+.crumb-mark {
+  display: block;
+  flex: none;
+  width: 18px;
+  height: 21px;
+  object-fit: contain;
 }
 .crumb i {
   font-style: normal;
@@ -1250,11 +1272,12 @@ small {
 }
 .btn.primary {
   color: white;
-  background: #6b31cb;
-  border: 1px solid #6324c5;
+  background: var(--brand-action);
+  border: 1px solid transparent;
 }
 .btn.primary:hover:not(:disabled) {
-  background: #5722b2;
+  background: var(--brand-action);
+  filter: brightness(.92);
 }
 .btn.small {
   min-height: 29px;
@@ -2161,7 +2184,7 @@ blockquote {
   line-height: 1.6;
   margin: 7px 0 13px;
 }
-.brand-motion > svg {
+.brand-motion .syntriass-mark {
   animation: brand-in 0.45s ease-out;
 }
 .command-view {
@@ -2183,7 +2206,7 @@ blockquote {
   --ink: #171625;
   --muted: #676477;
   --line: #e8e3f2;
-  --brand: #6422e8;
+  --brand: #6540ad;
   --soft: #f2ecfc;
   --faint: #777389;
   color: #171625;
@@ -2289,9 +2312,6 @@ blockquote {
 @media (max-width: 1000px) {
   .app-shell {
     grid-template-columns: 190px minmax(0, 1fr);
-  }
-  .brand-type svg {
-    width: 98px;
   }
   .brand-type small {
     font-size: 7px;
@@ -2416,8 +2436,9 @@ blockquote {
   .crumb {
     gap: 7px;
   }
-  .crumb > svg {
-    display: none;
+  .crumb-mark {
+    width: 20px;
+    height: 24px;
   }
   .page-wrap {
     padding: 20px 16px 32px;
@@ -2683,7 +2704,7 @@ blockquote {
   display: grid;
   place-items: center;
   min-height: 100dvh;
-  background: radial-gradient(ellipse at 50% 45%, #f2e6ff, #f8f7fc 65%);
+  background: radial-gradient(ellipse at 24% 36%, #f3e6fa, transparent 58%), radial-gradient(ellipse at 80% 65%, #dff4fa, transparent 55%), var(--canvas);
 }
 .login .card {
   width: min(400px, 92vw);
@@ -2724,10 +2745,3 @@ blockquote {
 .rotate {
   transform: rotate(180deg);
 }
-.btn.primary {
-  background: #6422e8;
-  border-color: #6422e8;
-}
-
-.brand .syntriass-mark {width:38px;height:40px;object-fit:contain;border-radius:8px;background:#0d0737}
-.brand-type b {font-size:20px;line-height:1.15;letter-spacing:-.045em;color:var(--text, #201b32)}

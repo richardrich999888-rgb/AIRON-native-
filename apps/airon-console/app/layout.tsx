@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "AIRON Native · SYNTRIASS Labs",
   description:
     "Enterprise-Owned Sovereign Intelligence",
-  icons: { icon: "/brand/syntriass-mark.png" },
+  icons: { icon: { url: "/brand/icon.png", type: "image/png", sizes: "64x64" } },
 };
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

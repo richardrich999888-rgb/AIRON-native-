@@ -217,13 +217,14 @@ export function Brand({
   return (
     <span
       className={"brand " + (motion ? "brand-motion" : "")}
+      role="img"
       aria-label="SYNTRIASS Labs · AIRON Native"
     >
       <img className="syntriass-mark" src="/brand/syntriass-mark.png" alt="" />
       {!short && (
         <span className="brand-type">
           <b>AIRON Native</b>
-          <small>SYNTRIASS LABS</small>
+          <small><img src="/brand/syntriass-wordmark.png" alt="" /> Labs</small>
         </span>
       )}
     </span>

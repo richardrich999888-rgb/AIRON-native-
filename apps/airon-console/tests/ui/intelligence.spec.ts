@@ -81,6 +81,14 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
       page.getByText("AI activity over time", { exact: true }),
     ).toBeVisible();
     await expect(page).toHaveTitle(/AIRON Native/);
+    const brand = page.getByRole("img", { name: "SYNTRIASS Labs · AIRON Native" }).first();
+    await expect(brand).toBeVisible();
+    await expect.poll(() => brand.locator("img").evaluateAll((images) =>
+      images.every((img) => (img as HTMLImageElement).naturalWidth > 0) && images.length === 2,
+    )).toBe(true);
+    await expect(page.locator(".nav-children [aria-current]").first()).toHaveCSS(
+      "background-image", /linear-gradient/,
+    );
     await shot(page, "01-dashboard");
     await page
       .getByRole("link", { name: "Knowledge Vault", exact: true })
@@ -227,6 +235,7 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
     ).toBe(true);
+    await expect(page.locator(".crumb-mark")).toBeVisible();
     await page.getByRole("button", { name: "Open navigation" }).click();
     await expect(
       page.getByRole("link", { name: "Private AI Workspace", exact: true }),
