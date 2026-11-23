@@ -25,6 +25,7 @@ import {
   Field,
 } from "./primitives";
 import Intelligence from "./Intelligence";
+import { localRoutes } from "./LocalRuntime";
 import { intelligenceGroup } from "../intelligence-navigation";
 import Home from "./Home";
 import Module from "./Modules";
@@ -567,6 +568,8 @@ function Workspace({ initial }: { initial: string }) {
     page = bySlug[slug] ?? bySlug.home,
     intelligence = page.section === intelligenceGroup,
     search = location.searchParams,
+    localView = localRoutes.has(slug) && search.get("source") === "local",
+    local = intelligence || localView,
     mode: Mode = search.get("mode") === "live" ? "live" : "demo";
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const toast = useCallback((s: string) => {
@@ -630,7 +633,7 @@ function Workspace({ initial }: { initial: string }) {
     queryKey: ["session", mode],
     queryFn: () =>
       request<{ role: Role }>("session", "demo", new URLSearchParams()),
-    enabled: ready && !intelligence && mode === "demo",
+    enabled: ready && !local && mode === "demo",
     staleTime: 60000,
     retry: false,
   });
@@ -646,7 +649,7 @@ function Workspace({ initial }: { initial: string }) {
     queryFn: () =>
       request<Bundle>(page.api, mode, new URLSearchParams(location.search)),
     enabled:
-      ready && !intelligence && (mode === "live" || sessionQuery.isSuccess),
+      ready && !local && (mode === "live" || sessionQuery.isSuccess),
     staleTime: 20000,
     retry: false,
   });
@@ -791,7 +794,7 @@ function Workspace({ initial }: { initial: string }) {
             intelligence ? "Inspect local runtime" : "Workspace and environment"
           }
           onClick={() =>
-            intelligence ? go("sovereign-runtime") : modal("mode")
+            local ? go("sovereign-runtime") : modal("mode")
           }
         >
           <span className="org-mark">
@@ -942,7 +945,7 @@ function Workspace({ initial }: { initial: string }) {
                 <span className="search-label">Search workspace</span>
                 <kbd>⌘ K</kbd>
               </button>
-              {!intelligence && (
+              {!local && (
                 <>
                   <button
                     className="icon-btn notify"
@@ -975,10 +978,10 @@ function Workspace({ initial }: { initial: string }) {
                   <p>
                     {isHome
                       ? "AI activity, risk and agent accountability across your organization."
-                      : page.description}
+                      : localView ? "Activity recorded by this AIRON installation." : page.description}
                   </p>
                 </div>
-                {!intelligence && (
+                {!local && (
                   <div className="global-filters">
                     <Select
                       value={search.get("days") || "7"}
@@ -1013,8 +1016,11 @@ function Workspace({ initial }: { initial: string }) {
                   </div>
                 )}
               </div>
-              {intelligence ? (
-                <Intelligence key={slug} slug={slug} go={go} />
+              {local ? (
+                <>
+                  {localView && <button className="btn" onClick={() => set({source:null})}>Return to {mode === "demo" ? "evaluation" : "connected"} data</button>}
+                  <Intelligence key={slug} slug={slug} go={go} />
+                </>
               ) : (
                 <>
                   <div className="mode-row">
@@ -1028,6 +1034,7 @@ function Workspace({ initial }: { initial: string }) {
                         : "Live environment"}
                       <I n="down" size={11} />
                     </button>
+                    {localRoutes.has(slug) && <button className="btn" onClick={() => set({source:"local"})}>Local Runtime</button>}
                     <span className="provenance-divider" />
                     {data ? (
                       <ProvenanceLine

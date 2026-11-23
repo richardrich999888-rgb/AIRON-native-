@@ -1,6 +1,14 @@
 "use client";
-import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type FormEvent,
+  type ReactNode,
+} from "react";
 import { Field, I } from "./primitives";
+import { LocalRuntime, localRoutes } from "./LocalRuntime";
+import { call } from "./knowledge-api";
 import "./intelligence.css";
 
 type Doc = {
@@ -10,6 +18,10 @@ type Doc = {
   hash: string;
   actor: string;
   origin: string;
+  format: string;
+  pages: number;
+  chunks: number;
+  file_sha256?: string;
   at: string;
 };
 type Teaching = {
@@ -43,12 +55,26 @@ type State = {
   events: Log[];
   asOf: string;
 };
-type Info = { demo: boolean; people: Record<string, string>; model: string };
+type Info = {
+  instance: string;
+  demo: boolean;
+  people: Record<string, string>;
+  model: string;
+};
 type Answer = {
   outcome: string;
   answer: string;
   engine: string;
+  model?: string;
+  usage?: {
+    durationMs: number;
+    inputTokens: number | null;
+    outputTokens: number | null;
+  };
   citation?: {
+    page?: number;
+    chunk?: number;
+    excerpt?: string;
     document: number;
     title: string;
     version: number;
@@ -65,36 +91,6 @@ type Runtime = {
   cpuSeconds: number;
 };
 
-async function call<T>(
-  op: string,
-  token: string,
-  data: unknown = {},
-): Promise<T> {
-  if (location.origin !== "http://127.0.0.1:8787")
-    throw new Error(
-      "Open the local console at http://127.0.0.1:8787 to pair this workspace.",
-    );
-  let response: Response;
-  try {
-    response = await fetch("http://127.0.0.1:8766/knowledge/" + op, {
-      method: "POST",
-      cache: "no-store",
-      credentials: "omit",
-      headers: {
-        "Content-Type": "application/json",
-        ...(token ? { Authorization: "Bearer " + token } : {}),
-      },
-      body: JSON.stringify(data),
-    });
-  } catch {
-    throw new Error(
-      "Local repository unavailable. Start the knowledge service and reconnect.",
-    );
-  }
-  const body = (await response.json()) as T & { error?: string };
-  if (!response.ok) throw new Error(body.error || "Local operation failed.");
-  return body;
-}
 const question1 = "When should we inspect the cooling assembly?";
 const question2 = "Which register records the cooling assembly handover?";
 const when = (at: string) => new Date(at).toLocaleString();
@@ -218,6 +214,11 @@ export default function Intelligence({
   const [correction, setCorrection] = useState(""),
     [note, setNote] = useState(""),
     [doc, docSet] = useState("");
+  const lock = useRef(false);
+  const [file, selectFile] = useState<File>();
+  const fileInput = useRef<HTMLInputElement>(null);
+  const [selectedModel, selectModel] = useState("");
+  const [requestId, setRequestId] = useState("");
   const [runtime, setRuntime] = useState<Runtime>();
   useEffect(() => {
     let active = true;
@@ -240,7 +241,54 @@ export default function Intelligence({
       active = false;
     };
   }, [generation]);
+  useEffect(() => {
+    if (
+      !token ||
+      (slug !== "private-ai-workspace" && slug !== "intelligence-overview")
+    )
+      return;
+    let active = true;
+    const refresh = () => {
+      if (slug === "private-ai-workspace") {
+        void call<Runtime>("runtime", token)
+          .then((status) => {
+            if (active) {
+              setRuntime(status);
+              selectModel((prev) =>
+                status.models.includes(prev)
+                  ? prev
+                  : status.models.includes(status.configured)
+                    ? status.configured
+                    : status.models[0] || "",
+              );
+            }
+          })
+          .catch((e) => {
+            if (active) fail(e.message);
+          });
+      } else {
+        void call<State>("state", token)
+          .then((value) => {
+            if (active) setState(value);
+          })
+          .catch((e) => {
+            if (active) fail(e.message);
+          });
+      }
+    };
+    refresh();
+    const channel = new BroadcastChannel("airon-knowledge");
+    channel.onmessage = refresh;
+    window.addEventListener("focus", refresh);
+    return () => {
+      active = false;
+      channel.close();
+      window.removeEventListener("focus", refresh);
+    };
+  }, [token, slug, generation]);
   async function action(work: () => Promise<void>) {
+    if (lock.current) return;
+    lock.current = true;
     working(true);
     fail("");
     say("");
@@ -249,6 +297,7 @@ export default function Intelligence({
     } catch (e) {
       fail(e instanceof Error ? e.message : "Operation failed.");
     } finally {
+      lock.current = false;
       working(false);
     }
   }
@@ -270,6 +319,9 @@ export default function Intelligence({
     await call(op, token, data);
     setState(await call<State>("state", token));
     setMatches(null);
+    const channel = new BroadcastChannel("airon-knowledge");
+    channel.postMessage("changed");
+    channel.close();
     say(message);
   }
   function disconnect() {
@@ -278,6 +330,8 @@ export default function Intelligence({
     setState(undefined);
     setAnswer(undefined);
     setRuntime(undefined);
+    selectFile(undefined);
+    selectModel("");
     setMatches(null);
     setQuestion("");
     setCorrection("");
@@ -477,9 +531,14 @@ export default function Intelligence({
                       <summary>{d.title}</summary>
                       <p>{d.body}</p>
                       <small>
-                        {d.origin} · {d.actor} · {when(d.at)}
+                        Indexed · {d.format.toUpperCase()} · {d.chunks} chunk(s)
+                        · {d.pages} page(s) · {d.origin} · {d.actor} ·{" "}
+                        {when(d.at)}
                       </small>
-                      <code>{d.hash}</code>
+                      <code>Text SHA-256 · {d.hash}</code>
+                      {d.file_sha256 && (
+                        <code>File SHA-256 · {d.file_sha256}</code>
+                      )}
                       {admin && (
                         <button
                           className="btn"
@@ -526,32 +585,59 @@ export default function Intelligence({
                     <form
                       onSubmit={(e) =>
                         submit(e, async () => {
-                          await change(
-                            "import",
-                            { title, body, question: sourceQuestion },
-                            "Document stored locally.",
-                          );
+                          if (file) {
+                            const content = await new Promise<string>(
+                              (resolve, reject) => {
+                                const reader = new FileReader();
+                                reader.onerror = () =>
+                                  reject(Error("The file could not be read."));
+                                reader.onload = () =>
+                                  resolve(String(reader.result).split(",")[1]);
+                                reader.readAsDataURL(file);
+                              },
+                            );
+                            await change(
+                              "upload",
+                              {
+                                title,
+                                question: sourceQuestion,
+                                filename: file.name,
+                                content,
+                              },
+                              "Document stored locally.",
+                            );
+                          } else {
+                            await change(
+                              "import",
+                              { title, body, question: sourceQuestion },
+                              "Document stored locally.",
+                            );
+                          }
+                          selectFile(undefined);
+                          if (fileInput.current) fileInput.current.value = "";
                           titleSet("");
                           bodySet("");
                           sqSet("");
                         })
                       }
                     >
-                      <Field label="Text or Markdown file">
+                      <Field label="TXT, Markdown or PDF file">
                         <input
                           type="file"
-                          accept=".txt,.md,text/plain,text/markdown"
+                          ref={fileInput}
+                          accept=".txt,.md,.pdf"
+                          disabled={busy}
                           onChange={(e) => {
-                            const f = e.target.files?.[0];
-                            if (f)
-                              void action(async () => {
-                                if (f.size > 32000)
-                                  throw Error(
-                                    "Choose a text file under 32 KB.",
-                                  );
-                                bodySet(await f.text());
-                                titleSet(f.name);
-                              });
+                            const next = e.target.files?.[0];
+                            if (next && next.size > 2 * 1024 * 1024) {
+                              fail("Choose a file of at most 2 MiB.");
+                              e.target.value = "";
+                              selectFile(undefined);
+                              return;
+                            }
+                            fail("");
+                            selectFile(next);
+                            if (next) titleSet(next.name);
                           }}
                         />
                       </Field>
@@ -563,17 +649,18 @@ export default function Intelligence({
                           onChange={(e) => titleSet(e.target.value)}
                         />
                       </Field>
-                      <Field label="Source text">
-                        <textarea
-                          required
-                          value={body}
-                          maxLength={32000}
-                          onChange={(e) => bodySet(e.target.value)}
-                        />
-                      </Field>
-                      <Field label="Question supported by this excerpt">
+                      {!file && (
+                        <Field label="Source text">
+                          <textarea
+                            required
+                            value={body}
+                            maxLength={32000}
+                            onChange={(e) => bodySet(e.target.value)}
+                          />
+                        </Field>
+                      )}
+                      <Field label="Question supported by this excerpt (optional)">
                         <input
-                          required
                           value={sourceQuestion}
                           maxLength={500}
                           onChange={(e) => sqSet(e.target.value)}
@@ -597,9 +684,20 @@ export default function Intelligence({
                   onSubmit={(e) =>
                     submit(e, async () => {
                       setAnswer(undefined);
-                      setAnswer(
-                        await call<Answer>("ask", token, { question, engine }),
-                      );
+                      const id = crypto.randomUUID();
+                      if (engine === "ollama") setRequestId(id);
+                      try {
+                        setAnswer(
+                          await call<Answer>("ask", token, {
+                            question,
+                            engine,
+                            model: selectedModel,
+                            requestId: id,
+                          }),
+                        );
+                      } finally {
+                        setRequestId("");
+                      }
                     })
                   }
                 >
@@ -611,11 +709,44 @@ export default function Intelligence({
                       <option value="extract">
                         Deterministic source excerpt
                       </option>
-                      <option value="ollama">
-                        Local Ollama · {info?.model || "unconfigured"}
-                      </option>
+                      <option value="ollama">Local Ollama</option>
                     </select>
                   </Field>
+                  {engine === "ollama" && (
+                    <>
+                      <Field label="Installed local model">
+                        <select
+                          value={selectedModel}
+                          onChange={(e) => selectModel(e.target.value)}
+                          disabled={busy}
+                        >
+                          {!runtime?.models.length && (
+                            <option value="">
+                              No installed model detected
+                            </option>
+                          )}
+                          {runtime?.models.map((name) => (
+                            <option key={name}>{name}</option>
+                          ))}
+                        </select>
+                      </Field>
+                      {!runtime?.models.length && (
+                        <p>
+                          {runtime?.status || "Checking local runtime…"}. To add
+                          a model, run <code>ollama pull qwen2.5:0.5b</code> on
+                          the host, then refresh.
+                        </p>
+                      )}
+                      <button
+                        type="button"
+                        className="btn"
+                        disabled={busy}
+                        onClick={() => retry(generation + 1)}
+                      >
+                        Refresh model list
+                      </button>
+                    </>
+                  )}
                   <Field label="Technical question">
                     <textarea
                       required
@@ -641,9 +772,34 @@ export default function Intelligence({
                       ))}
                     </div>
                   )}
-                  <button className="btn primary" disabled={busy}>
+                  <button
+                    className="btn primary"
+                    disabled={busy || (engine === "ollama" && !selectedModel)}
+                  >
                     Ask workspace
                   </button>
+                  {requestId && (
+                    <button
+                      className="btn"
+                      type="button"
+                      onClick={() =>
+                        void call<{ cancelled: boolean }>("cancel", token, {
+                          requestId,
+                        })
+                          .then((result) =>
+                            say(
+                              result.cancelled
+                                ? "Cancellation requested."
+                                : "The request already ended.",
+                            ),
+                          )
+                          .catch((e) => fail(e.message))
+                      }
+                    >
+                      Cancel inference
+                    </button>
+                  )}
+                  {busy && <p role="status">Processing request…</p>}
                 </form>
               </Panel>
               <Panel
@@ -653,7 +809,18 @@ export default function Intelligence({
                 {answer ? (
                   <div aria-live="polite">
                     <p>{answer.answer}</p>
-                    <small>{answer.engine}</small>
+                    <small>
+                      {answer.engine}
+                      {answer.model && " · " + answer.model}
+                    </small>
+                    {answer.usage && (
+                      <p>
+                        Model request · {answer.usage.durationMs.toFixed(1)} ms
+                        · {answer.usage.inputTokens ?? "Unreported"} input
+                        tokens · {answer.usage.outputTokens ?? "Unreported"}{" "}
+                        output tokens
+                      </p>
+                    )}
                     {answer.citation && (
                       <dl>
                         <dt>Source</dt>
@@ -667,6 +834,30 @@ export default function Intelligence({
                             : "Document version"}
                         </dt>
                         <dd>v{answer.citation.version}</dd>
+                        {answer.citation.chunk && (
+                          <>
+                            <dt>Passage</dt>
+                            <dd>
+                              {answer.citation.page
+                                ? "Page " + answer.citation.page + " · "
+                                : ""}
+                              Chunk {answer.citation.chunk}
+                            </dd>
+                          </>
+                        )}
+                        {answer.citation.excerpt && (
+                          <>
+                            <dt>Evidence</dt>
+                            <dd>
+                              <details>
+                                <summary>Inspect cited passage</summary>
+                                <blockquote>
+                                  {answer.citation.excerpt}
+                                </blockquote>
+                              </details>
+                            </dd>
+                          </>
+                        )}
                         <dt>Source SHA-256</dt>
                         <dd>
                           <code>{answer.citation.sha256}</code>
@@ -846,8 +1037,9 @@ export default function Intelligence({
                   <dd>127.0.0.1:11434</dd>
                   <dt>Configuration</dt>
                   <dd>
-                    Launch the service with <code>--model MODEL_TAG</code> to
-                    select an installed model.
+                    Select an installed model in Private AI Workspace. A host
+                    operator can set a default with{" "}
+                    <code>--model MODEL_TAG</code>.
                   </dd>
                 </dl>
                 <button
@@ -861,6 +1053,41 @@ export default function Intelligence({
                 >
                   Probe local runtime
                 </button>
+                {admin && info?.demo && (
+                  <button
+                    className="btn"
+                    disabled={busy}
+                    onClick={() =>
+                      void action(async () => {
+                        await call("restart", token);
+                        disconnect();
+                        infoSet(undefined);
+                        for (let n = 0; n < 30; n++) {
+                          await new Promise((resolve) =>
+                            setTimeout(resolve, 250),
+                          );
+                          try {
+                            const next = await call<Info>("info", "");
+                            if (next.instance !== info.instance) {
+                              infoSet(next);
+                              say(
+                                "Repository restarted. Open the workspace to inspect persisted records.",
+                              );
+                              return;
+                            }
+                          } catch {
+                            /* The listener closes during restart. */
+                          }
+                        }
+                        throw Error(
+                          "Repository is restarting. Reconnect when ready.",
+                        );
+                      })
+                    }
+                  >
+                    Restart local repository
+                  </button>
+                )}
               </Panel>
               <Panel title="Runtime measurements" icon="server">
                 {runtime ? (
@@ -889,6 +1116,18 @@ export default function Intelligence({
                 </p>
               </Panel>
             </div>
+          )}
+          {(localRoutes.has(slug) ||
+            slug === "intelligence-overview" ||
+            slug === "sovereign-runtime") && (
+            <LocalRuntime
+              key={token}
+              slug={slug}
+              token={token}
+              role={state.role}
+              go={go}
+              revision={runtime?.at || state.asOf}
+            />
           )}
           {slug === "trust-evidence" && (
             <div className="intel-grid">

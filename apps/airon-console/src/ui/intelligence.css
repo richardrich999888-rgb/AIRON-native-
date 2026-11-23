@@ -230,3 +230,9 @@
   .knowledge-lineage { grid-template-columns: 1fr; gap: 12px; }
   .knowledge-lineage li + li::before { width: 2px; height: 12px; top: -13px; left: 22px; }
 }
+.local-operations > header { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap }
+.local-operations > header h2 { margin:4px 0 }
+.local-operations > header small { color:#52447b; font-weight:600 }
+.local-operations dl { max-width:54rem }
+.local-operations dd, .intelligence-card blockquote { overflow-wrap:anywhere; min-width:0 }
+.local-operations .intel-row { margin-top:8px }

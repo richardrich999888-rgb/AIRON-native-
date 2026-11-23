@@ -1,8 +1,12 @@
 """Pair a browser with a loopback-only AIRON knowledge repository."""
 import argparse
+from contextlib import nullcontext
+import inference
+import measurements
 import json
 import os
 import secrets
+import sys
 import sqlite3
 from contextlib import closing
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -43,7 +47,8 @@ class Handler(BaseHTTPRequestHandler):
             if self.headers.get_content_type() != "application/json":
                 raise Problem(415,"JSON required.")
             length = int(self.headers.get("Content-Length",0))
-            if not 0 < length <= 200000:
+            limit = 2_850_000 if self.path == "/knowledge/upload" else 200000
+            if not 0 < length <= limit:
                 raise Problem(413,"Invalid request size.")
             data=json.loads(self.rfile.read(length))
             if not isinstance(data,dict):
@@ -52,7 +57,7 @@ class Handler(BaseHTTPRequestHandler):
             if not self.path.startswith("/knowledge/"):
                 raise Problem(404,"Unknown path.")
             if op == "info":
-                return self.respond({"demo":self.server.demo,"people":PEOPLE,"model":self.server.model})
+                return self.respond({"demo":self.server.demo,"people":PEOPLE,"model":self.server.model,"instance":self.server.instance})
             if op == "pair" and self.server.demo:
                 actor=data.get("actor")
                 if actor not in PEOPLE:
@@ -62,9 +67,42 @@ class Handler(BaseHTTPRequestHandler):
             actor = next((a for a,k in self.server.keys.items() if secrets.compare_digest("Bearer "+k,auth)),None)
             if not actor:
                 raise Problem(401,"Pair an authorized identity in this browser.")
-            with closing(connect(self.server.path)) as db, db:
-                db.execute("BEGIN" if op in ("state","runtime","search") else "BEGIN IMMEDIATE")
-                result=perform(db,actor,op,data,self.server.model)
+            if op == "restart":
+                if not self.server.demo or PEOPLE[actor] != "Administrator":
+                    raise Problem(403, "Only the sample workspace administrator can restart this service from the console.")
+                self.server.restarting = True
+                self.respond({"status": "Restarting"}, 202)
+                self.server.shutdown()
+                return
+            if op == "cancel":
+                return self.respond(inference.stop(actor, data.get("requestId")))
+            measured = {"ask":"workspace.ask", "search":"vault.search", "import":"document.ingest",
+                        "upload":"document.ingest", "import-sample":"document.ingest", "propose":"knowledge.propose",
+                        "review":"knowledge.review", "runtime":"runtime.probe", "export":"knowledge.export",
+                        "verify-archive":"tool.verify_archive"}
+            with closing(connect(self.server.path)) as db:
+                if op in measured:
+                    records = []
+                    try:
+                        with db:
+                            with measurements.trace(measured[op], actor) as (records, root):
+                                if op in ("review", "propose", "export"):
+                                    db.execute("BEGIN IMMEDIATE")
+                                slot = (inference.request_slot(actor, data.get("requestId"))
+                                        if op == "ask" and data.get("engine") == "ollama" else nullcontext())
+                                with slot as cancel:
+                                    result = perform(db, actor, op, data, self.server.model, cancel)
+                                root["outcome"] = result.get("outcome", result.get("status", "Completed"))
+                                root["document"] = result.get("document") or (result.get("citation") or {}).get("document")
+                                root["model"] = result.get("model")
+                            measurements.save(db, records)
+                    except Exception:
+                        with db:
+                            measurements.save(db, records)
+                        raise
+                else:
+                    with db:
+                        result = perform(db, actor, op, data, self.server.model)
             self.respond(result)
         except Problem as exc:
             self.respond({"error":str(exc)},exc.status)
@@ -88,6 +126,10 @@ def main():
     path=workspace/"knowledge.sqlite"
     initialize(path)
     server=ThreadingHTTPServer(("127.0.0.1",8766),Handler)
+    # Drain bounded in-flight work before re-executing and rotating pairing keys.
+    server.daemon_threads = False
+    server.restarting = False
+    server.instance = secrets.token_hex(12)
     server.keys={person:secrets.token_urlsafe(32) for person in PEOPLE}
     server.ui="http://127.0.0.1:8787"
     server.demo,server.path,server.model=args.demo_personas,str(path),args.model
@@ -101,6 +143,8 @@ def main():
         pass
     finally:
         server.server_close()
+    if server.restarting:
+        os.execv(sys.executable, [sys.executable, *sys.argv])
 
 if __name__=="__main__":
     main()

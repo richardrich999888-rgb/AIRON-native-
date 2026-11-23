@@ -2,7 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { spawn } from "node:child_process";
 import { once } from "node:events";
-import { mkdtemp, mkdir, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { testSite } from "../support/site.mjs";
@@ -20,7 +20,7 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
       ["intelligence/local_api.py", "--demo-personas", "--directory", root],
       { stdio: "ignore" },
     );
-  let service = start();
+  const service = start();
   const ready = () =>
     expect
       .poll(async () => {
@@ -52,7 +52,9 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
   const shot = async (p: Page, name: string) => {
     await p.evaluate(() => document.fonts.ready);
     if (/^0[2-8]-/.test(name) || name === "12-mobile-vault") {
-      await expect(p.locator(".intel-strip")).toContainText("Local knowledge workspace");
+      await expect(p.locator(".intel-strip")).toContainText(
+        "Local knowledge workspace",
+      );
       await expect(p.locator("body")).not.toContainText(/\bCIIC\b/i);
     }
     if (
@@ -172,7 +174,7 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
     await expect(
       page.getByText("Maintenance document imported."),
     ).toBeVisible();
-    await page.getByLabel("Text or Markdown file").setInputFiles({
+    await page.getByLabel("TXT, Markdown or PDF file").setInputFiles({
       name: "fixture.md",
       mimeType: "text/markdown",
       buffer: Buffer.from("North bay uses the fictional register NB-3."),
@@ -199,7 +201,11 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
     };
     await ask(page, "Inspection interval");
     await expect(
-      page.getByText(/Inspect the cooling assembly every 200 operating hours/),
+      page
+        .locator(".intelligence-card p")
+        .filter({
+          hasText: /Inspect the cooling assembly every 200 operating hours/,
+        }),
     ).toBeVisible();
     await shot(page, "04-private-workspace");
     await ask(page, "Handover register");
@@ -238,9 +244,16 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
     await shot(page, "05-expert-teach");
     await page.getByRole("button", { name: "Approve and activate" }).click();
     await expect(page.getByText("Approved procedure activated.")).toBeVisible();
-    await stop();
-    service = start();
-    await ready();
+    await route(page, "sovereign-runtime", "Sovereign Runtime");
+    await pair(page, "Mira");
+    await page
+      .getByRole("button", { name: "Restart local repository" })
+      .click();
+    await expect(
+      page.getByText(
+        "Repository restarted. Open the workspace to inspect persisted records.",
+      ),
+    ).toBeVisible({ timeout: 20000 });
     const second = await browser.newContext({
       viewport: { width: 1440, height: 960 },
     });
@@ -250,10 +263,12 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
       await pair(p, "Nila");
       await ask(p, "Handover register");
       await expect(
-        p.getByText(
-          "Record the cooling assembly handover in the fictional shift register MH-04.",
-          { exact: true },
-        ),
+        p
+          .locator(".intelligence-card p")
+          .filter({
+            hasText:
+              "Record the cooling assembly handover in the fictional shift register MH-04.",
+          }),
       ).toBeVisible();
     } finally {
       await second.close();
@@ -316,6 +331,126 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
     await expect(page.getByLabel("Cost dimension")).toHaveValue("Model");
     await expect(page.locator(".costchart svg")).toBeVisible();
     await shot(page, "10-ai-finops");
+    // A real, two-page PDF has no registered question. Retrieval must find page two.
+    await route(page, "knowledge-vault", "Knowledge Vault");
+    const overview = await context.newPage();
+    await route(overview, "intelligence-overview", "Intelligence Overview");
+    await pair(overview, "Mira");
+    const sourceCount = overview.getByRole("button", {
+      name: /Source documents/,
+    });
+    await expect(sourceCount).toContainText("2");
+    await page
+      .getByLabel("TXT, Markdown or PDF file")
+      .setInputFiles("tests/fixtures/workshop-note.pdf");
+    await page.getByRole("button", { name: "Save document" }).click();
+    await expect(page.getByText("Document stored locally.")).toBeVisible();
+    await expect(sourceCount).toContainText("3");
+    await overview.close();
+    await page.getByText("workshop-note.pdf", { exact: true }).click();
+    await expect(page.getByText(/Indexed · PDF · 2 chunk/)).toBeVisible();
+    await shot(page, "14-pdf-ingestion");
+    await route(page, "private-ai-workspace", "Private AI Workspace");
+    await page
+      .getByLabel("Technical question")
+      .fill("What is the amber spindle interval?");
+    await page.getByRole("button", { name: "Ask workspace" }).click();
+    await expect(page.getByText("Page 2 · Chunk 2")).toBeVisible();
+    await page.getByText("Inspect cited passage").click();
+    await expect(page.locator("blockquote")).toHaveText(
+      "The amber spindle interval is 72 hours.",
+    );
+    await shot(page, "15-pdf-citation");
+    if (process.env.AIRON_TEST_MODEL) {
+      const model = process.env.AIRON_TEST_MODEL;
+      await page.getByLabel("Answer engine").selectOption("ollama");
+      await page
+        .getByLabel("Installed local model")
+        .selectOption(model, { timeout: 30000 });
+      const response = page.waitForResponse(
+        (r) =>
+          r.url().endsWith("/knowledge/ask") && r.request().method() === "POST",
+        { timeout: 100000 },
+      );
+      await page.getByRole("button", { name: "Ask workspace" }).click();
+      const payload = await (await response).json();
+      expect(payload.outcome).toBe("Answered");
+      expect(payload.model).toBe(model);
+      expect(payload.usage.inputTokens).toBeGreaterThan(0);
+      expect(payload.usage.outputTokens).toBeGreaterThan(0);
+      expect(payload.usage.durationMs).toBeGreaterThan(0);
+      await expect(
+        page.getByText(/Ollama · source-constrained generation/),
+      ).toBeVisible();
+      await shot(page, "16-ollama-answer");
+      if (output)
+        await writeFile(
+          join(output, "measured-inference.json"),
+          JSON.stringify(payload, null, 2),
+        );
+    }
+    await route(page, "verification", "Verification");
+    await page
+      .getByRole("button", { name: "Local Runtime", exact: true })
+      .click();
+    await page
+      .getByRole("button", { name: "Run archive verification" })
+      .click();
+    await expect(
+      page.getByText("CannotProve · ActionEvidenceUnavailable"),
+    ).toBeVisible();
+    await shot(page, "17-tool-verification");
+    for (const [slug, title] of [
+      ["ai-agents", "AI Agents"],
+      ["agent-lineage", "Agent Lineage"],
+      ["agent-inventory", "Agent Inventory"],
+      ["evidence-audit", "Execution Evidence"],
+    ]) {
+      await route(page, slug, title);
+      await page
+        .getByRole("button", { name: "Local Runtime", exact: true })
+        .click();
+      await expect(
+        page.getByText("CannotProve · ActionEvidenceUnavailable"),
+      ).toBeVisible();
+    }
+    for (const [slug, title] of [
+      ["runtime-activity", "Runtime Activity"],
+      ["conversations", "Conversation Explorer"],
+      ["token-usage", "Token Usage"],
+      ["ai-finops", "Spending"],
+    ]) {
+      await route(page, slug, title);
+      await page
+        .getByRole("button", { name: "Local Runtime", exact: true })
+        .click();
+      const panel = page.getByRole("region", {
+        name: "Local Runtime measurements",
+      });
+      await expect(panel.getByText(/Local Runtime · Workspace/)).toBeVisible();
+      if (slug === "runtime-activity") {
+        await expect(
+          panel.getByText(/tool.verify_archive · Completed/),
+        ).toBeVisible();
+        await shot(page, "18-local-runtime");
+      } else if (slug === "conversations") {
+        await expect(
+          panel.getByText(/workspace.ask · Answered/).first(),
+        ).toBeVisible();
+      } else if (process.env.AIRON_TEST_MODEL) {
+        await expect(
+          panel.getByText(/model.inference · Completed/),
+        ).toBeVisible();
+        await shot(
+          page,
+          slug === "ai-finops" ? "20-local-spending" : "19-local-tokens",
+        );
+      } else {
+        await expect(
+          panel.getByText("No matching local activity yet."),
+        ).toBeVisible();
+      }
+    }
     await page.setViewportSize({ width: 390, height: 844 });
     await route(page, "knowledge-vault", "Knowledge Vault");
     await expect(
