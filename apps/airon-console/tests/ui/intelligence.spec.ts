@@ -51,10 +51,22 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
   const output = process.env.CIIC_CAPTURE_DIR;
   const shot = async (p: Page, name: string) => {
     await p.evaluate(() => document.fonts.ready);
-    if (name.includes("login") || /^0[2-8]-/.test(name) || name === "12-mobile-vault") {
-      const scan = await new AxeBuilder({ page: p }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
-      expect.soft(scan.violations.filter((v) => v.impact === "serious" || v.impact === "critical")
-        .map((v) => [v.id, v.nodes.map((n) => n.target)]), name).toEqual([]);
+    if (
+      name.includes("login") ||
+      /^0[2-8]-/.test(name) ||
+      name === "12-mobile-vault"
+    ) {
+      const scan = await new AxeBuilder({ page: p })
+        .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+        .analyze();
+      expect
+        .soft(
+          scan.violations
+            .filter((v) => v.impact === "serious" || v.impact === "critical")
+            .map((v) => [v.id, v.nodes.map((n) => n.target)]),
+          name,
+        )
+        .toEqual([]);
     }
     if (output) {
       await mkdir(output, { recursive: true });
@@ -84,27 +96,67 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
   try {
     await ready();
     await page.goto(ui + "/login");
-    await expect(page.getByRole("link", { name: "Sign in to workspace" })).toHaveAttribute("href", "/signin-with-chatgpt?return_to=%2F");
+    await expect(
+      page.getByRole("link", { name: "Sign in to workspace" }),
+    ).toHaveAttribute("href", "/signin-with-chatgpt?return_to=%2F");
     await expect(page.locator(".welcome-art img")).toBeVisible();
+    await expect(page.locator('link[rel="manifest"]')).toHaveAttribute(
+      "href",
+      "/manifest.webmanifest",
+    );
+    await expect(page.locator('link[rel="apple-touch-icon"]')).toHaveAttribute(
+      "href",
+      "/brand/icon-180.png",
+    );
+    const manifest = await (
+      await page.request.get(ui + "/manifest.webmanifest")
+    ).json();
+    expect(manifest.icons.map((icon: { sizes: string }) => icon.sizes)).toEqual(
+      ["192x192", "512x512"],
+    );
+    for (const icon of manifest.icons) {
+      const dimensions = await page.evaluate(async (src: string) => {
+        const image = new Image();
+        image.src = src;
+        await image.decode();
+        return [image.naturalWidth, image.naturalHeight].join("x");
+      }, icon.src);
+      expect(dimensions).toBe(icon.sizes);
+    }
     await shot(page, "00-login");
-    if (output) await page.locator(".welcome-frame").screenshot({ path: join(output, "reference-login-desktop.png") });
+    await expect(page.locator(".welcome-frame")).toHaveScreenshot(
+      "login-desktop.png",
+    );
     await page.setViewportSize({ width: 390, height: 844 });
     await shot(page, "11-mobile-login");
-    if (output) await page.locator(".welcome-frame").screenshot({ path: join(output, "reference-login-mobile.png") });
+    await expect(page.locator(".welcome-frame")).toHaveScreenshot(
+      "login-mobile.png",
+    );
     await page.setViewportSize({ width: 1440, height: 960 });
     await page.goto(ui);
     await expect(
       page.getByText("AI activity over time", { exact: true }),
     ).toBeVisible();
     await expect(page).toHaveTitle(/AIRON Native/);
-    const brand = page.getByRole("img", { name: "SYNTRIASS Labs · AIRON Native" }).first();
+    const brand = page
+      .getByRole("img", { name: "SYNTRIASS Labs · AIRON Native" })
+      .first();
     await expect(brand).toBeVisible();
-    await expect.poll(() => brand.locator("img").evaluateAll((images) =>
-      images.every((img) => (img as HTMLImageElement).naturalWidth > 0) && images.length === 2,
-    )).toBe(true);
-    await expect(page.locator(".nav-children [aria-current]").first()).toHaveCSS(
-      "background-image", /linear-gradient/,
-    );
+    await expect
+      .poll(() =>
+        brand
+          .locator("img")
+          .evaluateAll(
+            (images) =>
+              images.every(
+                (img) => (img as HTMLImageElement).naturalWidth > 0,
+              ) && images.length === 2,
+          ),
+      )
+      .toBe(true);
+    await expect(
+      page.locator(".nav-children [aria-current]").first(),
+    ).toHaveCSS("background-image", /linear-gradient/);
     await shot(page, "01-dashboard");
     await page
       .getByRole("link", { name: "Knowledge Vault", exact: true })
@@ -116,13 +168,11 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
     await expect(
       page.getByText("Maintenance document imported."),
     ).toBeVisible();
-    await page
-      .getByLabel("Text or Markdown file")
-      .setInputFiles({
-        name: "fixture.md",
-        mimeType: "text/markdown",
-        buffer: Buffer.from("North bay uses the fictional register NB-3."),
-      });
+    await page.getByLabel("Text or Markdown file").setInputFiles({
+      name: "fixture.md",
+      mimeType: "text/markdown",
+      buffer: Buffer.from("North bay uses the fictional register NB-3."),
+    });
     await page
       .getByLabel("Question supported by this excerpt")
       .fill("Which north bay register?");
@@ -231,12 +281,26 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
       page.getByRole("heading", { name: "Ownership boundary" }),
     ).toBeVisible();
     const lineage = page.getByRole("list", { name: "Selected source lineage" });
-    await expect(lineage.getByRole("listitem")).toHaveText(["Imported byMira", "Approved versions1", "Answers using those versions1"]);
-    if (output) await page.locator(".intelligence-heading").screenshot({ path: join(output, "reference-intelligence-masthead.png") });
-    if (output) await lineage.screenshot({ path: join(output, "reference-source-lineage.png") });
-    await page.getByLabel("Trace a source document").selectOption({ label: "fixture.md" });
-    await expect(lineage.getByRole("listitem")).toHaveText(["Imported byMira", "Approved versions0", "Answers using those versions0"]);
-    await page.getByLabel("Trace a source document").selectOption({ label: "Equipment inspection protocol" });
+    await expect(lineage.getByRole("listitem")).toHaveText([
+      "Imported byMira",
+      "Approved versions1",
+      "Answers using those versions1",
+    ]);
+    await expect(page.locator(".intelligence-heading")).toHaveScreenshot(
+      "intelligence-masthead.png",
+    );
+    await expect(lineage).toHaveScreenshot("source-lineage.png");
+    await page
+      .getByLabel("Trace a source document")
+      .selectOption({ label: "fixture.md" });
+    await expect(lineage.getByRole("listitem")).toHaveText([
+      "Imported byMira",
+      "Approved versions0",
+      "Answers using those versions0",
+    ]);
+    await page
+      .getByLabel("Trace a source document")
+      .selectOption({ label: "Equipment inspection protocol" });
     await shot(page, "02-intelligence-overview");
     await route(page, "agent-lineage", "Agent Lineage");
     await expect(page.locator(".vgraph-node").first()).toBeVisible();

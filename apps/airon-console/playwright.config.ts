@@ -3,6 +3,12 @@ export default defineConfig({
   testDir: "./tests/ui",
   timeout: 90000,
   workers: 1,
+  expect: {
+    toHaveScreenshot: {
+      pathTemplate: "{testDir}/visual-baselines/{testFileName}/{arg}{ext}",
+      maxDiffPixelRatio: 0.007,
+    },
+  },
   retries: 0,
   reporter: "line",
   outputDir: ".sites-runtime/ui-results",

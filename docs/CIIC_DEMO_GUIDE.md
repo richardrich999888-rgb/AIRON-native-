@@ -77,17 +77,17 @@ flowchart TD
 
 ## Recorded application screens
 
-These ten 1440 × 960 PNGs were captured from the built application in Chromium. The intelligence records come from the scripted fictional maintenance walkthrough. The inherited security and FinOps views show their labeled synthetic tenant.
+These Chromium captures show the built application at 1440 × 960 on desktop and 390 × 844 on mobile. The intelligence records come from the scripted fictional maintenance walkthrough. The inherited security and FinOps views show their labeled synthetic tenant.
 
 | | |
 | --- | --- |
+| [Workspace sign-in](ciic-screens/00-login.png) | [Mobile sign-in](ciic-screens/11-mobile-login.png) |
 | [Security dashboard](ciic-screens/01-dashboard.png) | [Intelligence Overview](ciic-screens/02-intelligence-overview.png) |
 | [Knowledge Vault](ciic-screens/03-knowledge-vault.png) | [Private AI Workspace](ciic-screens/04-private-workspace.png) |
 | [Expert Teach](ciic-screens/05-expert-teach.png) | [Institutional Memory](ciic-screens/06-institutional-memory.png) |
 | [Sovereign Runtime](ciic-screens/07-sovereign-runtime.png) | [Trust & Evidence](ciic-screens/08-trust-evidence.png) |
 | [Agent Lineage](ciic-screens/09-agent-lineage.png) | [AI FinOps · Spending](ciic-screens/10-ai-finops.png) |
-
-[Download all ten PNGs from the CI run](https://github.com/richardrich999888-rgb/AIRON-native-/actions/runs/45204756788/artifacts/14832089365).
+| [Mobile Knowledge Vault](ciic-screens/12-mobile-vault.png) | [Mobile navigation](ciic-screens/13-mobile-navigation.png) |
 
 ## Reproduce validation and capture
 
@@ -104,14 +104,14 @@ CIIC_CAPTURE_DIR="$PWD/../../docs/ciic-screens" npx playwright test tests/ui/int
 npm run test:ui
 ```
 
-Use an unused 8766/8787 port pair for the intelligence browser test. It provisions a disposable local repository, imports an actual file through the UI, switches identities, restarts the service, opens a second browser context and inspects the exported JSON. It captures the dashboard, seven intelligence pages, Agent Lineage and Spending. The original native qualification script can additionally run all optional tests with a pinned AIP checkout and Rust 1.99.1. The AIRON CIIC workflow builds and exercises the original app before testing the rebrand. Its screenshot artifact is named **CIIC-console-screens**.
+Use an unused 8766/8787 port pair for the intelligence browser test. It provisions a disposable local repository, imports an actual file through the UI, switches identities, restarts the service, opens a second browser context and inspects the exported JSON. It captures sign-in, the dashboard, seven intelligence pages, Agent Lineage, Spending and mobile navigation. The original native qualification script can additionally run all optional tests with a pinned AIP checkout and Rust 1.99.1. The AIRON CIIC workflow builds and exercises the original app before testing the rebrand. Its screenshot artifact is named **CIIC-console-screens**.
 
 
-## Local validation record
+## P0-060 local validation record
 
 The pinned application and branded application both passed production builds under Node 24.22.3. The branded TypeScript check passed. ESLint reported zero errors and 22 warnings. The core suite passed 20 tests, including both navigation-preservation assertions, with six native-binary-dependent checks skipped locally. Eight ownership and access tests passed, including re-opening the store, concurrent review, source ambiguity and unavailable inference. All eight existing AIRON website engine tests passed. Browser and full native qualification use the GitHub runner because this local shell disallows browser sockets.
 
-## Hosted qualification — 23 November 2026
+## P0-060 hosted qualification — 23 November 2026
 
 [Completed GitHub Actions run](https://github.com/richardrich999888-rgb/AIRON-native-/actions/runs/45204756788) for implementation commit `0b579ac08c69a6345d585f38dc241b87a2b40efd`.
 
