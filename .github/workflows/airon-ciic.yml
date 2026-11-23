@@ -1,0 +1,59 @@
+name: AIRON CIIC console
+on:
+  push:
+    branches: [feature/airon-native-ciic-enterprise-intelligence]
+    paths: ['apps/airon-console/**', 'website/offline/**', 'docs/CIIC_NAVIGATION_BASELINE.json', '.github/workflows/airon-ciic.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  acceptance:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: apps/airon-console
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: apps/airon-console/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Check the given VANIAN baseline
+        run: |
+          git init "$RUNNER_TEMP/aip"
+          git -C "$RUNNER_TEMP/aip" remote add origin https://github.com/richardrich999888-rgb/AIP-agent-identity-protocol-
+          git -C "$RUNNER_TEMP/aip" fetch --depth=1 origin e574a03206d29a4cf1d4fd8637231999f43b2aaf
+          git -C "$RUNNER_TEMP/aip" checkout --detach FETCH_HEAD
+          cd "$RUNNER_TEMP/aip/apps/vanian-console"
+          npm ci
+          npm run build
+          npx playwright test --grep 'home drill-down counts'
+      - run: python3 -m unittest discover -s intelligence -v
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Capture the ownership workflow
+        env:
+          CIIC_CAPTURE_DIR: ${{ runner.temp }}/ciic-screens
+        run: npx playwright test tests/ui/intelligence.spec.ts
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: CIIC-console-screens
+          path: ${{ runner.temp }}/ciic-screens/*.png
+          if-no-files-found: warn
+          retention-days: 60
+      - name: Provision pinned AIP native verifier tools
+        run: |
+          git -C "$RUNNER_TEMP/aip" fetch --depth=1 origin d8ea36255d311b10b9b5b6e844336058622d45c6
+          rustup toolchain install 1.99.1 --profile minimal
+      - name: Run native, core and browser regression suites
+        env:
+          AIP_CHECKOUT: ${{ runner.temp }}/aip
+        run: npm run verify:aip-console

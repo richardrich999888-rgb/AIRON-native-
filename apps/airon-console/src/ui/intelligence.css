@@ -1,0 +1,144 @@
+.intelligence {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+.intel-strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  border-bottom: 1px solid #e7e2ee;
+  padding: 0 0 12px;
+  color: #635970;
+  font-size: 12px;
+}
+.intel-strip > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 6px;
+  background: #f2ecfe;
+  padding: 5px 9px;
+  color: #502b94;
+}
+.intel-strip .text-btn {
+  margin-left: auto;
+}
+.intel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.intelligence-card {
+  padding: 20px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.intelligence-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 16px;
+  margin: 0 0 15px;
+}
+.intelligence-card h2 svg,
+.intel-kpis svg {
+  color: #7435c6;
+}
+.intelligence-card form {
+  display: grid;
+  gap: 12px;
+  margin: 14px 0;
+  align-items: start;
+}
+.intelligence-card form > button,
+.intelligence-card > .btn {
+  justify-self: start;
+}
+.intelligence-card :is(input, textarea, select) {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid #dcd6e6;
+  border-radius: 7px;
+  padding: 8px 10px;
+  color: #291d39;
+  background: white;
+}
+.intelligence-card textarea {
+  min-height: 75px;
+  resize: vertical;
+}
+.intelligence-card :is(small, p, dd) {
+  line-height: 1.55;
+}
+.intelligence-card dl {
+  display: grid;
+  grid-template-columns: minmax(95px, 0.5fr) 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.intelligence-card dt,
+.intelligence-card small {
+  color: #625c70;
+}
+.intelligence-card dd {
+  margin: 0;
+}
+.intelligence-card code {
+  display: block;
+  overflow-wrap: anywhere;
+  font: 11px/1.6 monospace;
+}
+.intel-row {
+  border-top: 1px solid #ebe7f0;
+  padding: 12px 0;
+}
+.intel-row summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.intel-row small {
+  display: block;
+}
+.intel-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.intel-kpis button {
+  text-align: left;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+}
+.intel-kpis strong {
+  grid-column: 1/-1;
+  font-size: 32px;
+  line-height: 1.1;
+}
+.intel-error,
+.intel-notice {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #fff2e9;
+  color: #75370e;
+}
+.intel-notice {
+  background: #f1edf8;
+  color: #463361;
+}
+@media (max-width: 780px) {
+  .intel-grid,
+  .intel-kpis {
+    grid-template-columns: 1fr;
+  }
+  .intelligence-card {
+    padding: 14px;
+  }
+}

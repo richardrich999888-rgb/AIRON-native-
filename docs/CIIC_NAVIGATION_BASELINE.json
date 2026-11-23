@@ -1,0 +1,387 @@
+{
+  "source": "e574a03206d29a4cf1d4fd8637231999f43b2aaf",
+  "groups": [
+    {
+      "section": "Overview",
+      "icon": "panel",
+      "routes": [
+        {
+          "slug": "home",
+          "title": "Home",
+          "icon": "home",
+          "api": "overview",
+          "path": "/home"
+        },
+        {
+          "slug": "security-posture",
+          "title": "Security Posture",
+          "icon": "shield",
+          "api": "posture",
+          "path": "/security-posture"
+        }
+      ]
+    },
+    {
+      "section": "Discovery",
+      "icon": "scan",
+      "routes": [
+        {
+          "slug": "ai-applications",
+          "title": "AI Applications",
+          "icon": "apps",
+          "api": "discovery/apps",
+          "path": "/ai-applications"
+        },
+        {
+          "slug": "app-catalog",
+          "title": "App Catalog",
+          "icon": "book",
+          "api": "discovery/catalog",
+          "path": "/app-catalog"
+        },
+        {
+          "slug": "ai-agents",
+          "title": "AI Agents",
+          "icon": "bot",
+          "api": "discovery/agents",
+          "path": "/ai-agents"
+        },
+        {
+          "slug": "shadow-ai",
+          "title": "Shadow AI",
+          "icon": "scan",
+          "api": "discovery/shadow",
+          "path": "/shadow-ai"
+        },
+        {
+          "slug": "mcp-servers",
+          "title": "MCP Servers",
+          "icon": "network",
+          "api": "discovery/mcp",
+          "path": "/mcp-servers"
+        }
+      ]
+    },
+    {
+      "section": "Analytics",
+      "icon": "chart",
+      "routes": [
+        {
+          "slug": "behavioral-activity",
+          "title": "Behavioral Activity",
+          "icon": "chart",
+          "api": "analytics/behavioral-activity",
+          "path": "/behavioral-activity"
+        },
+        {
+          "slug": "data-analytics",
+          "title": "Data Protection",
+          "icon": "chart",
+          "api": "analytics/data-analytics",
+          "path": "/data-analytics"
+        },
+        {
+          "slug": "risk-analysis",
+          "title": "Risk Analysis",
+          "icon": "chart",
+          "api": "analytics/risk-analysis",
+          "path": "/risk-analysis"
+        },
+        {
+          "slug": "ai-adoption",
+          "title": "AI Adoption",
+          "icon": "chart",
+          "api": "analytics/ai-adoption",
+          "path": "/ai-adoption"
+        },
+        {
+          "slug": "roi",
+          "title": "ROI",
+          "icon": "chart",
+          "api": "analytics/roi",
+          "path": "/roi"
+        },
+        {
+          "slug": "analytics",
+          "title": "Analytics",
+          "icon": "chart",
+          "api": "analytics",
+          "path": "/analytics"
+        }
+      ]
+    },
+    {
+      "section": "Conversations",
+      "icon": "message",
+      "routes": [
+        {
+          "slug": "conversations",
+          "title": "Conversation Explorer",
+          "icon": "message",
+          "api": "conversations",
+          "path": "/conversations"
+        },
+        {
+          "slug": "intent-classification",
+          "title": "Intent Classification",
+          "icon": "list",
+          "api": "intents",
+          "path": "/intent-classification"
+        }
+      ]
+    },
+    {
+      "section": "Security",
+      "icon": "outline",
+      "routes": [
+        {
+          "slug": "alerts",
+          "title": "Alerts",
+          "icon": "bell",
+          "api": "alerts",
+          "path": "/alerts"
+        },
+        {
+          "slug": "investigations",
+          "title": "Investigations",
+          "icon": "case",
+          "api": "investigations",
+          "path": "/investigations"
+        },
+        {
+          "slug": "runtime-protection",
+          "title": "Runtime Protection",
+          "icon": "shield",
+          "api": "protection/runtime",
+          "path": "/runtime-protection"
+        },
+        {
+          "slug": "guardrails",
+          "title": "Guardrails",
+          "icon": "sliders",
+          "api": "guardrails",
+          "path": "/guardrails"
+        },
+        {
+          "slug": "model-protection",
+          "title": "Model Protection",
+          "icon": "shield",
+          "api": "protection/models",
+          "path": "/model-protection"
+        },
+        {
+          "slug": "data-protection",
+          "title": "Data Protection",
+          "icon": "lock",
+          "api": "protection/data",
+          "path": "/data-protection"
+        },
+        {
+          "slug": "ai-red-teaming",
+          "title": "AI Red Teaming",
+          "icon": "target",
+          "api": "red-teaming",
+          "path": "/ai-red-teaming"
+        }
+      ]
+    },
+    {
+      "section": "Governance",
+      "icon": "landmark",
+      "routes": [
+        {
+          "slug": "policies",
+          "title": "Policies",
+          "icon": "policy",
+          "api": "policies",
+          "path": "/policies"
+        },
+        {
+          "slug": "users-groups",
+          "title": "Users",
+          "icon": "users",
+          "api": "users",
+          "path": "/users-groups"
+        },
+        {
+          "slug": "groups",
+          "title": "Groups",
+          "icon": "users",
+          "api": "groups",
+          "path": "/groups"
+        },
+        {
+          "slug": "compliance",
+          "title": "Compliance",
+          "icon": "clipboard",
+          "api": "compliance",
+          "path": "/compliance"
+        },
+        {
+          "slug": "ai-governance",
+          "title": "AI Governance",
+          "icon": "landmark",
+          "api": "governance",
+          "path": "/ai-governance"
+        }
+      ]
+    },
+    {
+      "section": "Agent Accountability",
+      "icon": "fingerprint",
+      "routes": [
+        {
+          "slug": "sniffer-dog",
+          "title": "Sniffer Dog",
+          "icon": "radar",
+          "api": "snifferdog/events",
+          "path": "/sniffer-dog"
+        },
+        {
+          "slug": "identity-authorization",
+          "title": "AIP Identity",
+          "icon": "key",
+          "api": "identity",
+          "path": "/identity-authorization"
+        },
+        {
+          "slug": "agent-lineage",
+          "title": "Agent Lineage",
+          "icon": "lineage",
+          "api": "agents/lineage",
+          "path": "/agent-lineage"
+        },
+        {
+          "slug": "ghost-orphan-agents",
+          "title": "Ghost & Orphan AI",
+          "icon": "ghost",
+          "api": "discovery/exceptions",
+          "path": "/ghost-orphan-agents"
+        },
+        {
+          "slug": "attribution",
+          "title": "Human vs Agent Attribution",
+          "icon": "fingerprint",
+          "api": "attribution",
+          "path": "/attribution"
+        },
+        {
+          "slug": "agent-inventory",
+          "title": "Agent Inventory",
+          "icon": "inventory",
+          "api": "discovery/inventory",
+          "path": "/agent-inventory"
+        },
+        {
+          "slug": "runtime-activity",
+          "title": "Runtime Activity",
+          "icon": "activity",
+          "api": "runtime",
+          "path": "/runtime-activity"
+        }
+      ]
+    },
+    {
+      "section": "Evidence",
+      "icon": "filecheck",
+      "routes": [
+        {
+          "slug": "evidence-audit",
+          "title": "Execution Evidence",
+          "icon": "filecheck",
+          "api": "evidence",
+          "path": "/evidence-audit"
+        },
+        {
+          "slug": "verification",
+          "title": "Verification",
+          "icon": "checkcircle",
+          "api": "verification",
+          "path": "/verification"
+        },
+        {
+          "slug": "audit-trails",
+          "title": "Audit Trails",
+          "icon": "history",
+          "api": "audit",
+          "path": "/audit-trails"
+        }
+      ]
+    },
+    {
+      "section": "AI FinOps",
+      "icon": "wallet",
+      "routes": [
+        {
+          "slug": "ai-finops",
+          "title": "Spending",
+          "icon": "wallet",
+          "api": "finops",
+          "path": "/ai-finops"
+        },
+        {
+          "slug": "token-usage",
+          "title": "Token Usage",
+          "icon": "cpu",
+          "api": "finops/tokens",
+          "path": "/token-usage"
+        },
+        {
+          "slug": "cost-optimization",
+          "title": "Cost Optimization",
+          "icon": "sliders",
+          "api": "finops/optimization",
+          "path": "/cost-optimization"
+        }
+      ]
+    },
+    {
+      "section": "Administration",
+      "icon": "sliders",
+      "routes": [
+        {
+          "slug": "integrations",
+          "title": "Integrations",
+          "icon": "plug",
+          "api": "integrations",
+          "path": "/integrations"
+        },
+        {
+          "slug": "deployments",
+          "title": "Deployments",
+          "icon": "server",
+          "api": "admin/deployments",
+          "path": "/deployments"
+        },
+        {
+          "slug": "sso",
+          "title": "SSO & SCIM",
+          "icon": "fingerprint",
+          "api": "admin/sso",
+          "path": "/sso"
+        },
+        {
+          "slug": "rbac",
+          "title": "Roles & Permissions",
+          "icon": "key",
+          "api": "admin/rbac",
+          "path": "/rbac"
+        },
+        {
+          "slug": "billing",
+          "title": "Billing",
+          "icon": "wallet",
+          "api": "admin/billing",
+          "path": "/billing"
+        },
+        {
+          "slug": "settings",
+          "title": "Settings",
+          "icon": "settings",
+          "api": "settings",
+          "path": "/settings"
+        }
+      ]
+    }
+  ]
+}
