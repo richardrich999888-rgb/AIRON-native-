@@ -212,8 +212,10 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
     await shot(page, "09-agent-lineage");
     await route(page, "ai-finops", "Spending");
     await expect(
-      page.getByText("Cost allocation records", { exact: true }),
+      page.getByRole("heading", { name: /^Cost allocation records/ }),
     ).toBeVisible();
+    await expect(page.getByLabel("Cost dimension")).toHaveValue("Model");
+    await expect(page.locator(".costchart svg")).toBeVisible();
     await shot(page, "10-ai-finops");
     await page.setViewportSize({ width: 390, height: 844 });
     await route(page, "knowledge-vault", "Knowledge Vault");
