@@ -175,6 +175,15 @@ interface Output {
   "tool-runs": { runs: Run[] };
 }
 
+export class KnowledgeError extends Error {
+  constructor(
+    public status: number,
+    message: string,
+  ) {
+    super(message);
+  }
+}
+
 export function call<K extends keyof Input>(
   op: K,
   token: string,
@@ -197,6 +206,9 @@ export async function call<K extends keyof Output>(
   try {
     response = await fetch("http://127.0.0.1:8766/knowledge/" + op, {
       method: "POST",
+      signal: AbortSignal.timeout(
+        op === "ask" ? 150000 : op === "info" ? 4000 : 40000,
+      ),
       cache: "no-store",
       credentials: "omit",
       headers: {
@@ -211,6 +223,10 @@ export async function call<K extends keyof Output>(
     );
   }
   const body = (await response.json()) as Output[K] & { error?: string };
-  if (!response.ok) throw new Error(body.error || "Local operation failed.");
+  if (!response.ok)
+    throw new KnowledgeError(
+      response.status,
+      body.error || "Local operation failed.",
+    );
   return body;
 }

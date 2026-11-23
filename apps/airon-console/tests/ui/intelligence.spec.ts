@@ -47,6 +47,7 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
   const context = await browser.newContext({
     viewport: { width: 1440, height: 960 },
   });
+  context.setDefaultTimeout(20000);
   const page = await context.newPage();
   const output = process.env.CIIC_CAPTURE_DIR;
   const shot = async (p: Page, name: string) => {
@@ -89,6 +90,10 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
     ).toBeVisible();
   };
   const pair = async (p: Page, actor: string) => {
+    const switcher = p.getByRole("button", { name: "Switch identity" });
+    await expect(
+      switcher.or(p.getByLabel("Sample workspace profile")),
+    ).toBeVisible();
     if (await p.getByRole("button", { name: "Switch identity" }).isVisible())
       await p.getByRole("button", { name: "Switch identity" }).click();
     await p.getByLabel("Sample workspace profile").selectOption(actor);
@@ -256,6 +261,7 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
       viewport: { width: 1440, height: 960 },
     });
     try {
+      second.setDefaultTimeout(20000);
       const p = await second.newPage();
       await route(p, "private-ai-workspace", "Private AI Workspace");
       await pair(p, "Nila");
@@ -548,6 +554,17 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
       page.getByRole("link", { name: "Private AI Workspace", exact: true }),
     ).toBeVisible();
     await shot(page, "13-mobile-navigation");
+  } catch (error) {
+    if (output) {
+      await mkdir(output, { recursive: true });
+      await page
+        .screenshot({
+          path: join(output, "rehearsal-error.png"),
+          timeout: 5000,
+        })
+        .catch(() => {});
+    }
+    throw error;
   } finally {
     await context.close();
     await stop();

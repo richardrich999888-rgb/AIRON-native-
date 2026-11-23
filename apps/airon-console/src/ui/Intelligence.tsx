@@ -10,6 +10,7 @@ import { Field, I } from "./primitives";
 import { LocalRuntime, localRoutes } from "./LocalRuntime";
 import {
   call,
+  KnowledgeError,
   type Doc,
   type Teaching,
   type State,
@@ -155,15 +156,24 @@ export default function Intelligence({
     (async () => {
       const metadata = await call("info", "");
       if (!active) return;
-      infoSet(metadata);
       const saved = sessionStorage.getItem("airon-local-pairing");
       if (saved) {
-        const snapshot = await call("state", saved);
-        if (active) {
+        try {
+          const snapshot = await call("state", saved);
+          if (!active) return;
           setToken(saved);
           setState(snapshot);
+        } catch (error) {
+          if (!active) return;
+          if (!(error instanceof KnowledgeError) || error.status !== 401)
+            throw error;
+          sessionStorage.removeItem("airon-local-pairing");
+          setToken("");
+          setState(undefined);
+          say("The local pairing expired. Open the workspace again.");
         }
       }
+      if (active) infoSet(metadata);
     })().catch((e) => {
       if (active) fail(e.message);
     });
