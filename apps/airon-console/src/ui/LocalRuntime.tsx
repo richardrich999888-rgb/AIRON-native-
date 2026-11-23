@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { call } from "./knowledge-api";
+import { call, type Metrics, type Run } from "./knowledge-api";
 
 const views = {
   "runtime-activity": "Runtime Activity",
@@ -21,53 +21,6 @@ const agentViews = new Set([
   "evidence-audit",
   "verification",
 ]);
-type Operation = {
-  id: number;
-  actor: string;
-  operation: string;
-  outcome: string;
-  at: string;
-  durationMs: number;
-  model: string | null;
-  document: number | null;
-  inputTokens: number | null;
-  outputTokens: number | null;
-  traceId: string;
-  spanId: string;
-};
-type Metrics = {
-  scope: string;
-  instrumentation: string;
-  rows: Operation[];
-  summary: {
-    operations: number;
-    modelRequests: number;
-    inputTokens: number | null;
-    outputTokens: number | null;
-    modelLatencyMs: number | null;
-    unsuccessful: number;
-    metered: number;
-  };
-};
-type Run = {
-  id: string;
-  at: string;
-  actor: string;
-  agent: string;
-  tool: string;
-  report: {
-    verdict: string;
-    reason: string;
-    archiveSha256: string;
-    archivedEvents: number;
-    observerHead: string;
-    pid: number;
-    parentPid: number;
-    authorization: boolean;
-    receipt: boolean;
-  };
-};
-
 export function LocalRuntime({
   slug,
   token,
@@ -101,11 +54,9 @@ export function LocalRuntime({
           ? "tool.verify_archive"
           : undefined;
     async function read() {
-      const metrics = await call<Metrics>("measurements", token, { kind });
+      const metrics = await call("measurements", token, { kind });
       const result =
-        agent && allowed
-          ? await call<{ runs: Run[] }>("tool-runs", token)
-          : { runs: [] };
+        agent && allowed ? await call("tool-runs", token) : { runs: [] };
       if (active) {
         setData(metrics);
         setRuns(result.runs);
@@ -186,6 +137,43 @@ export function LocalRuntime({
                 </>
               )}
             </dl>
+          )}
+          {modelUsage && data.models.length > 0 && (
+            <div className="local-models">
+              <table>
+                <caption>Usage by installed model</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Model</th>
+                    <th scope="col">Calls</th>
+                    <th scope="col">Input tokens</th>
+                    <th scope="col">Output tokens</th>
+                    <th scope="col">Mean latency</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.models.map((m) => (
+                    <tr key={m.model ?? ""}>
+                      <th scope="row">{m.model || "Unspecified"}</th>
+                      <td>
+                        <meter
+                          aria-label={
+                            (m.model || "Unspecified") + " share of model calls"
+                          }
+                          min={0}
+                          max={data.summary.modelRequests}
+                          value={m.requests}
+                        />
+                        {m.requests}
+                      </td>
+                      <td>{m.inputTokens ?? "Unreported"}</td>
+                      <td>{m.outputTokens ?? "Unreported"}</td>
+                      <td>{m.latencyMs.toFixed(1)} ms</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
           {overview ? (
             <nav aria-label="Explore local measurements" className="btn-group">

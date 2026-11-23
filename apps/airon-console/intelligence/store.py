@@ -166,6 +166,10 @@ def perform(db, actor, op, data, configured_model="", cancel=None):
         doc = data.get("document")
         if type(doc) is not int or not db.execute("SELECT 1 FROM documents WHERE id=?",(doc,)).fetchone():
             raise Problem(422,"Select an existing source.")
+        duplicate = db.execute("""SELECT id FROM teachings WHERE actor=? AND qkey=? AND answer=?
+            AND doc=? AND note=? AND status='Pending' LIMIT 1""", (actor, key(question), answer, doc, note)).fetchone()
+        if duplicate:
+            raise Problem(409, "This correction is already pending review.")
         ident = db.execute("INSERT INTO teachings(question,qkey,answer,doc,note,actor,at) VALUES(?,?,?,?,?,?,?)",
                            (question,key(question),answer,doc,note,actor,now())).lastrowid
         event(db,actor,"Correction submitted",{"teaching":ident,"document":doc})

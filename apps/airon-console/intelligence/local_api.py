@@ -16,6 +16,8 @@ from store import PEOPLE, Problem, connect, initialize, perform
 
 
 class Handler(BaseHTTPRequestHandler):
+    timeout = 20
+
     def log_message(self, *args):
         pass
 

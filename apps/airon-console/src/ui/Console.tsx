@@ -611,6 +611,8 @@ function Workspace({ initial }: { initial: string }) {
       for (const k of ["group", "days", "mode"])
         if (!next.searchParams.has(k) && at.searchParams.has(k))
           next.searchParams.set(k, at.searchParams.get(k)!);
+      if (at.searchParams.get("source") === "local" && localRoutes.has(next.pathname.split("/").at(-1) || "") && !next.searchParams.has("source"))
+        next.searchParams.set("source", "local");
       write(next.pathname + next.search);
       D(null);
       Mobile(false);
@@ -791,7 +793,7 @@ function Workspace({ initial }: { initial: string }) {
         <button
           className="org-switch"
           title={
-            intelligence ? "Inspect local runtime" : "Workspace and environment"
+            local ? "Inspect local runtime" : "Workspace and environment"
           }
           onClick={() =>
             local ? go("sovereign-runtime") : modal("mode")
@@ -803,7 +805,7 @@ function Workspace({ initial }: { initial: string }) {
           <span>
             <b>AIRON Native workspace</b>
             <small>
-              {intelligence
+              {local
                 ? "Local knowledge repository"
                 : mode === "demo"
                   ? "Demo organization"

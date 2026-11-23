@@ -236,3 +236,8 @@
 .local-operations dl { max-width:54rem }
 .local-operations dd, .intelligence-card blockquote { overflow-wrap:anywhere; min-width:0 }
 .local-operations .intel-row { margin-top:8px }
+.local-models { overflow-x:auto; margin:1rem 0 }
+.local-models table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; text-align:left }
+.local-models caption { text-align:left; font-weight:600; margin-bottom:.5rem }
+.local-models :is(td,th) { padding:.6rem; border-bottom:1px solid #d9dfeb }
+.local-models meter { width:4rem; vertical-align:middle; margin-right:.4rem; accent-color:#5740af }

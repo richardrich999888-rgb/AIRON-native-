@@ -6,11 +6,13 @@ import io
 import json
 from pathlib import Path
 import re
+from threading import BoundedSemaphore
 import subprocess
 import sys
 
 MAX_FILE = 2 * 1024 * 1024
 MAX_TEXT = 160_000
+PDF_SLOTS = BoundedSemaphore(2)
 CHUNK = 1000
 STOP = set("a an the what which when where how why is are was were be does do did should shall must can could would we i our in on of to for and from with at by please tell me about my according document file protocol".split())
 
@@ -61,11 +63,15 @@ def decode_upload(name, encoded):
     if kind == ".pdf":
         if not raw.startswith(b"%PDF-"):
             raise Problem(422, "This file has no PDF header.")
+        if not PDF_SLOTS.acquire(blocking=False):
+            raise Problem(429, "The PDF parser is busy. Try again shortly.")
         try:
             process = subprocess.run([sys.executable, __file__, "--pdf"], input=raw,
                                      capture_output=True, timeout=12, check=False)
         except subprocess.TimeoutExpired as exc:
             raise Problem(422, "PDF conversion exceeded its time limit.") from exc
+        finally:
+            PDF_SLOTS.release()
         if process.returncode == 3:
             raise Problem(503, "Install the pinned PDF parser on a supported Linux host.")
         if process.returncode:

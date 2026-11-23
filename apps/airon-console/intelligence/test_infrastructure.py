@@ -2,6 +2,8 @@ import base64
 import hashlib
 from pathlib import Path
 import unittest
+from uuid import uuid4
+from inference import request_slot
 from contextlib import closing
 
 import test_access
@@ -53,6 +55,23 @@ class Infrastructure(unittest.TestCase):
         self.assertIsNone(result["summary"]["inputTokens"])
         self.assertEqual(self.post("restart",{},"unit-test-admin")[0],403)
         self.assertEqual(self.post("verify-archive",{},"unit-test-employee")[0],403)
+
+    def test_cancellation_requires_the_request_owner(self):
+        request_id = str(uuid4())
+        with request_slot("Dev", request_id) as slot:
+            self.assertFalse(self.post("cancel", {"requestId":request_id}, "unit-test-admin")[1]["cancelled"])
+            self.assertFalse(slot.stopped)
+            self.assertTrue(self.post("cancel", {"requestId":request_id}, "unit-test-employee")[1]["cancelled"])
+            self.assertTrue(slot.stopped)
+        self.assertFalse(self.post("cancel", {"requestId":request_id}, "unit-test-employee")[1]["cancelled"])
+
+    def test_duplicate_pending_proposal_is_rejected(self):
+        self.server.keys["Leela"]="unit-test-expert"
+        self.upload("source.txt",b"An approved workshop checklist.")
+        proposal=dict(question="Which spindle register?", answer="Register AL-5.", note="Shift addendum.", document=1)
+        self.assertEqual(self.post("propose",proposal,"unit-test-expert")[0],200)
+        self.assertEqual(self.post("propose",proposal,"unit-test-expert")[0],409)
+        self.assertEqual(len(self.post("state",{},"unit-test-admin")[1]["teachings"]),1)
 
     def test_migration_backfills_legacy_sources_once(self):
         self.upload("legacy.txt",b"Legacy copper valve records.")

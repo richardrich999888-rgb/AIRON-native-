@@ -86,5 +86,11 @@ def read(db, actor, workspace_wide, kind=None):
         avg(CASE WHEN operation='model.inference' THEN durationMs END) AS modelLatencyMs,
         count(CASE WHEN outcome IN ('Failed','Withheld','Unavailable') THEN 1 END) AS unsuccessful
         FROM operations""" + where, params).fetchone())
-    return dict(source="Local Runtime", scope="Workspace" if workspace_wide else "Your activity",
+    models = []
+    if kind == "model.inference":
+        models = [dict(row) for row in db.execute("""SELECT model,count(*) AS requests,
+            sum(inputTokens) AS inputTokens,sum(outputTokens) AS outputTokens,
+            avg(durationMs) AS latencyMs FROM operations""" + where +
+            " GROUP BY model ORDER BY requests DESC,model", params)]
+    return dict(models=models, source="Local Runtime", scope="Workspace" if workspace_wide else "Your activity",
                 instrumentation="OpenTelemetry SDK" if tracer else "Local timer", rows=records, summary=summary)

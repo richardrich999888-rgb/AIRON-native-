@@ -8,88 +8,18 @@ import {
 } from "react";
 import { Field, I } from "./primitives";
 import { LocalRuntime, localRoutes } from "./LocalRuntime";
-import { call } from "./knowledge-api";
+import {
+  call,
+  type Doc,
+  type Teaching,
+  type State,
+  type Info,
+  type Answer,
+  type Runtime,
+  type Input,
+  type Mutation,
+} from "./knowledge-api";
 import "./intelligence.css";
-
-type Doc = {
-  id: number;
-  title: string;
-  body: string;
-  hash: string;
-  actor: string;
-  origin: string;
-  format: string;
-  pages: number;
-  chunks: number;
-  file_sha256?: string;
-  at: string;
-};
-type Teaching = {
-  id: number;
-  question: string;
-  answer: string;
-  note: string;
-  actor: string;
-  source: string;
-  source_hash: string;
-  reviewer: string;
-  reviewed: string;
-  status: string;
-  version: number;
-  reuse: number;
-  doc: number;
-};
-type Log = {
-  id: number;
-  actor: string;
-  at: string;
-  action: string;
-  detail: string;
-};
-type State = {
-  actor: string;
-  role: string;
-  documents: Doc[];
-  teachings: Teaching[];
-  memory: Teaching[];
-  events: Log[];
-  asOf: string;
-};
-type Info = {
-  instance: string;
-  demo: boolean;
-  people: Record<string, string>;
-  model: string;
-};
-type Answer = {
-  outcome: string;
-  answer: string;
-  engine: string;
-  model?: string;
-  usage?: {
-    durationMs: number;
-    inputTokens: number | null;
-    outputTokens: number | null;
-  };
-  citation?: {
-    page?: number;
-    chunk?: number;
-    excerpt?: string;
-    document: number;
-    title: string;
-    version: number;
-    sha256: string;
-    teaching: number | null;
-  };
-};
-type Runtime = {
-  models: string[];
-  configured: string;
-  status: string;
-  at: string;
-  databaseBytes: number;
-  cpuSeconds: number;
-};
 
 const question1 = "When should we inspect the cooling assembly?";
 const question2 = "Which register records the cooling assembly handover?";
@@ -223,12 +153,12 @@ export default function Intelligence({
   useEffect(() => {
     let active = true;
     (async () => {
-      const metadata = await call<Info>("info", "");
+      const metadata = await call("info", "");
       if (!active) return;
       infoSet(metadata);
       const saved = sessionStorage.getItem("airon-local-pairing");
       if (saved) {
-        const snapshot = await call<State>("state", saved);
+        const snapshot = await call("state", saved);
         if (active) {
           setToken(saved);
           setState(snapshot);
@@ -250,7 +180,7 @@ export default function Intelligence({
     let active = true;
     const refresh = () => {
       if (slug === "private-ai-workspace") {
-        void call<Runtime>("runtime", token)
+        void call("runtime", token)
           .then((status) => {
             if (active) {
               setRuntime(status);
@@ -267,7 +197,7 @@ export default function Intelligence({
             if (active) fail(e.message);
           });
       } else {
-        void call<State>("state", token)
+        void call("state", token)
           .then((value) => {
             if (active) setState(value);
           })
@@ -307,17 +237,21 @@ export default function Intelligence({
   }
   async function pair() {
     const key = info?.demo
-      ? (await call<{ token: string }>("pair", "", { actor: person })).token
+      ? (await call("pair", "", { actor: person })).token
       : secret;
-    const current = await call<State>("state", key);
+    const current = await call("state", key);
     sessionStorage.setItem("airon-local-pairing", key);
     setToken(key);
     setState(current);
     secretSet("");
   }
-  async function change(op: string, data: unknown, message: string) {
+  async function change<K extends Mutation>(
+    op: K,
+    data: Input[K],
+    message: string,
+  ) {
     await call(op, token, data);
-    setState(await call<State>("state", token));
+    setState(await call("state", token));
     setMatches(null);
     const channel = new BroadcastChannel("airon-knowledge");
     channel.postMessage("changed");
@@ -500,11 +434,7 @@ export default function Intelligence({
                       setMatches(
                         query.trim()
                           ? (
-                              await call<{ documents: { id: number }[] }>(
-                                "search",
-                                token,
-                                { query },
-                              )
+                              await call("search", token, { query })
                             ).documents.map((d) => d.id)
                           : null,
                       );
@@ -688,7 +618,7 @@ export default function Intelligence({
                       if (engine === "ollama") setRequestId(id);
                       try {
                         setAnswer(
-                          await call<Answer>("ask", token, {
+                          await call("ask", token, {
                             question,
                             engine,
                             model: selectedModel,
@@ -783,7 +713,7 @@ export default function Intelligence({
                       className="btn"
                       type="button"
                       onClick={() =>
-                        void call<{ cancelled: boolean }>("cancel", token, {
+                        void call("cancel", token, {
                           requestId,
                         })
                           .then((result) =>
@@ -1047,7 +977,7 @@ export default function Intelligence({
                   disabled={busy}
                   onClick={() =>
                     void action(async () =>
-                      setRuntime(await call<Runtime>("runtime", token)),
+                      setRuntime(await call("runtime", token)),
                     )
                   }
                 >
@@ -1067,7 +997,7 @@ export default function Intelligence({
                             setTimeout(resolve, 250),
                           );
                           try {
-                            const next = await call<Info>("info", "");
+                            const next = await call("info", "");
                             if (next.instance !== info.instance) {
                               infoSet(next);
                               say(
