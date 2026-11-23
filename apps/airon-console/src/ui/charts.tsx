@@ -4,12 +4,12 @@ import type { Count, Point } from "../types";
 import { useDesk } from "./context";
 import { I, fmt, money } from "./primitives";
 const colors = [
-  "#702ced",
-  "#aa7af1",
-  "#cbb4f1",
-  "#e4d7f6",
-  "#786e99",
-  "#c8b9df",
+  "var(--syntriass-violet)",
+  "var(--syntriass-blue)",
+  "var(--syntriass-magenta)",
+  "var(--syntriass-cyan)",
+  "#766193",
+  "#667e99",
 ];
 const riskColors: Record<string, string> = {
   Critical: "#c62b49",
@@ -40,7 +40,7 @@ export function Spark({ values, color }: { values: number[]; color: string }) {
       viewBox="0 0 100 31"
     >
       <defs>
-        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={id} x1="0" y1="0" x2="0%" y2="100%">
           <stop offset="0" stopColor={color} stopOpacity=".18" />
           <stop offset="1" stopColor={color} stopOpacity=".01" />
         </linearGradient>
@@ -113,9 +113,9 @@ export function TimeChart({
         onMouseLeave={() => H(null)}
       >
         <defs>
-          <linearGradient id={"area" + id} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#8542ea" stopOpacity=".10" />
-            <stop offset="1" stopColor="#a36add" stopOpacity=".015" />
+          <linearGradient id={"area" + id} x1="0" y1="0" x2="0%" y2="100%">
+            <stop offset="0" stopColor="var(--syntriass-blue)" stopOpacity=".10" />
+            <stop offset="1" stopColor="var(--syntriass-cyan)" stopOpacity=".015" />
           </linearGradient>
         </defs>
         {Array.from({ length: ticks + 1 }, (_, i) => {
@@ -146,7 +146,7 @@ export function TimeChart({
             <path
               d={a}
               fill="none"
-              stroke="#783be1"
+              stroke="var(--chart-primary)"
               strokeWidth="2.4"
               vectorEffect="non-scaling-stroke"
               strokeLinejoin="round"
@@ -155,7 +155,7 @@ export function TimeChart({
               <path
                 d={line(other)}
                 fill="none"
-                stroke="#ab8add"
+                stroke="var(--chart-secondary)"
                 strokeDasharray="5 4"
                 strokeWidth="2"
                 vectorEffect="non-scaling-stroke"
@@ -208,7 +208,10 @@ export function TimeChart({
               onBlur={() => H(null)}
               onClick={() => onDay?.(p.at)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") onDay?.(p.at);
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onDay?.(p.at);
+                }
               }}
             />
           </g>
@@ -227,7 +230,7 @@ export function TimeChart({
               cx={x(hover)}
               cy={y(vals[hover])}
               r="4"
-              fill="#7637e2"
+              fill="var(--chart-primary)"
               stroke="white"
               strokeWidth="2"
             />
@@ -390,7 +393,7 @@ export function CostChart({ items }: { items: Count[] }) {
       const data = items.slice(0, 8).reverse();
       instance.setOption({
         animation: false,
-        textStyle: { fontFamily: "Inter Variable, sans-serif", fontSize: 11 },
+        textStyle: { fontFamily: "Inter, sans-serif", fontSize: 11 },
         grid: { left: 115, right: 35, top: 10, bottom: 34 },
         tooltip: { trigger: "axis", valueFormatter: (n: number) => money(n) },
         xAxis: {
@@ -409,7 +412,13 @@ export function CostChart({ items }: { items: Count[] }) {
             type: "bar",
             data: data.map((x) => x.value),
             barMaxWidth: 19,
-            itemStyle: { color: "#8a50e9", borderRadius: [0, 4, 4, 0] },
+            itemStyle: {
+              color: new ec.graphic.LinearGradient(0, 0, 1, 0, [
+                { offset: 0, color: getComputedStyle(ref.current).getPropertyValue("--syntriass-violet").trim() },
+                { offset: 1, color: getComputedStyle(ref.current).getPropertyValue("--syntriass-blue").trim() },
+              ]),
+              borderRadius: [0, 4, 4, 0],
+            },
           },
         ],
       });

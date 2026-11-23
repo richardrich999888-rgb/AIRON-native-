@@ -142,3 +142,91 @@
     padding: 14px;
   }
 }
+
+.intelligence-card, .intel-kpis button {
+  background: #fff;
+  border: 1px solid #dce1ed;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px #26355407;
+}
+.intelligence-card { padding: clamp(16px, 1.65vw, 25px); }
+.intelligence-card h2 {
+  letter-spacing: -.025em;
+  color: #172135;
+}
+.intelligence-card h2 svg, .intel-kpis button > svg {
+  box-sizing: content-box;
+  padding: 7px;
+  background: var(--brand-wash);
+  border: 1px solid #e0ddf2;
+  border-radius: 9px;
+}
+.intelligence-card .field { min-width: 0; }
+.intelligence-card :is(input, select, textarea) {
+  background: #fcfdff;
+  border-color: #b7c1d2;
+  min-height: 38px;
+}
+.intelligence-card dl { row-gap: 14px; }
+.intelligence-card code { font-family: var(--mono); color: #454b67; }
+.intel-row { border-color: #e2e6ef; }
+.intel-row summary:hover { color: #503197; }
+.intel-row p { margin: 6px 0; }
+.intel-kpis button {
+  grid-template-columns: auto 1fr auto;
+  color: #38435a;
+}
+.intel-kpis button:hover {
+  border-color: #ad9bd9;
+  box-shadow: 0 3px 12px #44368812;
+}
+.intel-kpis strong {
+  grid-column: auto;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.055em;
+  color: #222943;
+}
+.knowledge-lineage {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 18px 0 0;
+  padding: 0;
+  gap: 24px;
+}
+.knowledge-lineage li {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: center;
+  gap: 3px 12px;
+  padding: 14px;
+  background: #f6f7fc;
+  border: 1px solid #dbe1ef;
+  border-radius: 9px;
+}
+.knowledge-lineage li + li::before {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  left: -25px;
+  top: 50%;
+  background: var(--brand-gradient);
+}
+.knowledge-lineage li svg {
+  align-self: center;
+  grid-row: span 2;
+  color: var(--brand);
+}
+.knowledge-lineage li span { font-size: 12px; color: #4e586e; }
+.knowledge-lineage li strong { font-size: 17px; color: #202a40; }
+.intelligence-card:has(.knowledge-lineage) .field { max-width: 32rem; }
+.intelligence-card:has(.knowledge-lineage) select { margin-top: 4px; }
+@media (max-width: 780px) {
+  .intel-kpis { gap: 8px; }
+  .intel-kpis button { padding: 10px 14px; }
+  .intel-kpis strong { font-size: 24px; }
+  .knowledge-lineage { grid-template-columns: 1fr; gap: 12px; }
+  .knowledge-lineage li + li::before { width: 2px; height: 12px; top: -13px; left: 22px; }
+}

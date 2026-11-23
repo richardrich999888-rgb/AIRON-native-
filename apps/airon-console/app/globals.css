@@ -14,22 +14,24 @@
 }
 :root {
   color-scheme: light;
-  --syntriass-magenta: #b519e6;
-  --syntriass-violet: #8246e6;
-  --syntriass-blue: #4f7ee8;
-  --syntriass-cyan: #02c7e9;
+  --syntriass-magenta: #b719e4;
+  --syntriass-violet: #8248e8;
+  --syntriass-blue: #4e79e7;
+  --syntriass-cyan: #03c6e9;
+  --chart-primary: color-mix(in srgb, var(--syntriass-violet) 85%, #172135);
+  --chart-secondary: color-mix(in srgb, var(--syntriass-cyan) 58%, #172135);
   --brand-gradient: linear-gradient(100deg, var(--syntriass-magenta), var(--syntriass-violet) 34%, var(--syntriass-blue) 67%, var(--syntriass-cyan));
-  --brand-wash: linear-gradient(100deg, #f7eafa, #f0ecfc 42%, #e5f6fa);
-  --brand-action: linear-gradient(105deg, #9221bc, #6241aa 38%, #3657aa 70%, #076e85);
-  --canvas: #f8f7fc;
+  --brand-wash: linear-gradient(100deg, color-mix(in srgb, var(--syntriass-magenta) 9%, white), color-mix(in srgb, var(--syntriass-violet) 10%, white) 42%, color-mix(in srgb, var(--syntriass-cyan) 10%, white));
+  --brand-action: linear-gradient(105deg, color-mix(in srgb, var(--syntriass-magenta) 67%, #172135), color-mix(in srgb, var(--syntriass-violet) 72%, #172135) 38%, color-mix(in srgb, var(--syntriass-blue) 65%, #172135) 70%, color-mix(in srgb, var(--syntriass-cyan) 45%, #172135));
+  --canvas: #f8f9fd;
   --surface: #fff;
-  --ink: #171625;
+  --ink: #172135;
   --muted: #676477;
   --faint: #777389;
   --line: #e8e3f2;
   --brand: #6540ad;
   --soft: #f2ecfc;
-  --side: #fcfbff;
+  --side: #fcfcff;
   --plot-grid: #e7e2f0;
   --radius: 11px;
   --mono: "JetBrains Mono", monospace;
@@ -360,6 +362,7 @@ small {
 .nav-children a[aria-current] {
   color: #6326bf;
   background: var(--brand-wash);
+  box-shadow: inset 2px 0 var(--syntriass-violet);
   font-weight: 650;
 }
 .nav-children a i {
@@ -929,10 +932,10 @@ small {
 }
 .legend i {
   width: 14px;
-  border-top: 2px solid #783be1;
+  border-top: 2px solid var(--chart-primary);
 }
 .legend .dashed {
-  border-top: 2px dashed #ab8add;
+  border-top: 2px dashed var(--chart-secondary);
 }
 .chart-wrap {
   position: relative;
@@ -2190,7 +2193,7 @@ blockquote {
 .command-view {
   color: var(--ink);
   --canvas: #151020;
-  --side: #fcfbff;
+  --side: #fcfcff;
   --surface: #231b31;
   --ink: #f2ecfa;
   --muted: #c2b6ce;
@@ -2203,13 +2206,13 @@ blockquote {
 .command-view .sidebar,
 .command-view .topbar {
   --surface: #fff;
-  --ink: #171625;
+  --ink: #172135;
   --muted: #676477;
   --line: #e8e3f2;
   --brand: #6540ad;
   --soft: #f2ecfc;
   --faint: #777389;
-  color: #171625;
+  color: #172135;
 }
 .command-view .card h3,
 .command-view .module-tools strong {
@@ -2700,25 +2703,6 @@ blockquote {
   }
 }
 
-.login {
-  display: grid;
-  place-items: center;
-  min-height: 100dvh;
-  background: radial-gradient(ellipse at 24% 36%, #f3e6fa, transparent 58%), radial-gradient(ellipse at 80% 65%, #dff4fa, transparent 55%), var(--canvas);
-}
-.login .card {
-  width: min(400px, 92vw);
-  padding: 35px;
-}
-.login h1 {
-  font-size: 23px;
-  margin: 30px 0 9px;
-}
-.login p {
-  margin-bottom: 19px;
-  color: var(--muted);
-}
-
 .nav-head > span,
 .global-search kbd,
 .searchbox kbd {
@@ -2744,4 +2728,124 @@ blockquote {
 }
 .rotate {
   transform: rotate(180deg);
+}
+
+/* The identity panels use the original raster art at its native aspect ratio. */
+.welcome-art, .page-heading.intelligence-heading {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: #101728;
+  background-image:
+    radial-gradient(ellipse at top right, #19495c88, transparent 53%),
+    radial-gradient(ellipse at bottom left, #452b616b, transparent 57%);
+}
+.welcome-art::before, .intelligence-heading::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #b7c8e756 .85px, transparent 1px);
+  background-size: 18px 18px;
+  mask-image: linear-gradient(110deg, transparent 12%, black);
+}
+.welcome-art::after, .intelligence-heading::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 3px;
+  background: var(--brand-gradient);
+}
+.login {
+  min-height: 100dvh;
+  padding: clamp(20px, 6vw, 90px);
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at 12% 74%, #e8e2f5, transparent 58%), #f5f7fb;
+}
+.welcome-frame {
+  width: min(1060px, 100%);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid #d8dce7;
+  box-shadow: 0 26px 80px #202e4a19;
+  background: white;
+}
+.welcome-art {
+  display: grid;
+  place-items: center;
+  min-height: clamp(385px, 59vh, 600px);
+  padding: 50px;
+}
+.welcome-art img {
+  display: block;
+  width: min(88%, 370px);
+  height: auto;
+}
+.welcome-entry {
+  align-self: center;
+  padding: clamp(30px, 4.4vw, 72px);
+}
+.welcome-entry .welcome-product {
+  margin: 0 0 18px;
+  font: 650 13px/1.3 var(--mono);
+  color: #59418d;
+}
+.welcome-entry h1 {
+  font-size: clamp(32px, 3.4vw, 52px);
+  line-height: 1.04;
+  letter-spacing: -.055em;
+  margin-bottom: 18px;
+}
+.welcome-entry p {
+  line-height: 1.65;
+  color: #536075;
+}
+.welcome-entry .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 28px;
+  padding: 13px 18px;
+  font-size: 14px;
+}
+.page-heading.intelligence-heading {
+  padding: clamp(22px, 2.4vw, 34px);
+  margin-bottom: 16px;
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 1px #9dbaf526;
+}
+.intelligence-heading > div {
+  width: 100%;
+  padding-right: 120px;
+  background: url("/brand/syntriass-mark.png") right center / auto 100% no-repeat;
+}
+.intelligence-heading .heading-wordmark {
+  display: block;
+  width: 112px;
+  height: auto;
+  margin-bottom: 13px;
+}
+.page-heading.intelligence-heading h1 {
+  color: #f8faff;
+  font-size: clamp(26px, 2.5vw, 38px);
+  line-height: 1.12;
+  letter-spacing: -.045em;
+}
+.page-heading.intelligence-heading p {
+  color: #c9d3e6;
+  max-width: 65ch;
+  margin-top: 8px;
+}
+@media (max-width: 680px) {
+  .welcome-frame { grid-template-columns: 1fr; max-width: 440px; }
+  .welcome-art { min-height: 0; padding: clamp(25px, 8vw, 50px); }
+  .welcome-art img { width: min(58%, 165px); }
+  .welcome-entry { padding: 30px 26px 34px; }
+  .page-heading.intelligence-heading { padding: 20px; }
+  .intelligence-heading > div { padding-right: 0; background: none; }
+  .intelligence-heading .heading-wordmark { width: 96px; }
 }

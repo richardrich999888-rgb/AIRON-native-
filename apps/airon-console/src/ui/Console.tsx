@@ -214,7 +214,7 @@ function Tour({
       >
         <div className="tour-cap">
           {welcome ? (
-            <Brand short motion />
+            <Brand />
           ) : (
             <span className="tour-symbol">
               <I n={done ? "checkcircle" : "guide"} />
@@ -935,7 +935,7 @@ function Workspace({ initial }: { initial: string }) {
               <b>{page.title}</b>
             </div>
             <div className="top-actions">
-              <button className="global-search" onClick={() => modal("search")}>
+              <button className="global-search" aria-label="Search workspace" onClick={() => modal("search")}>
                 <I n="search" size={15} />
                 <span>Search workspace</span>
                 <kbd>⌘ K</kbd>
@@ -966,8 +966,9 @@ function Workspace({ initial }: { initial: string }) {
           </header>
           <main id="main" ref={scroller} className="workspace-canvas">
             <div className="page-wrap">
-              <div className="page-heading">
+              <div className={intelligence ? "page-heading intelligence-heading" : "page-heading"}>
                 <div>
+                  {intelligence && <img className="heading-wordmark" src="/brand/syntriass-wordmark.png" alt="SYNTRIASS" />}
                   <h1>{isHome ? "Security overview" : page.title}</h1>
                   <p>
                     {isHome

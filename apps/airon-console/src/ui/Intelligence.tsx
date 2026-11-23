@@ -117,6 +117,35 @@ function Panel({
     </section>
   );
 }
+function KnowledgeLineage({ documents, memory }: { documents: Doc[]; memory: Teaching[] }) {
+  const [selectedId, select] = useState<number>();
+  const source = documents.find((entry) => entry.id === selectedId)
+    ?? documents.find((entry) => memory.some((version) => version.doc === entry.id))
+    ?? documents[0];
+  const versions = memory.filter((version) => version.doc === source?.id);
+  const reuse = versions.reduce((count, version) => count + version.reuse, 0);
+  return (
+    <Panel title="Knowledge lineage" icon="lineage">
+      {source ? (
+        <>
+          <Field label="Trace a source document">
+            <select value={source.id} onChange={(event) => select(Number(event.target.value))}>
+              {documents.map((entry) => <option key={entry.id} value={entry.id}>{entry.title}</option>)}
+            </select>
+          </Field>
+          <ol className="knowledge-lineage" aria-label="Selected source lineage" aria-live="polite">
+            <li><I n="file" /><span>Imported by</span><strong>{source.actor}</strong></li>
+            <li><I n="bookmarked" /><span>Approved versions</span><strong>{versions.length}</strong></li>
+            <li><I n="message" /><span>Answers using those versions</span><strong>{reuse}</strong></li>
+          </ol>
+        </>
+      ) : (
+        <p>Import a document in Knowledge Vault to trace its approved versions and reuse.</p>
+      )}
+    </Panel>
+  );
+}
+
 function exportJson(data: unknown) {
   const url = URL.createObjectURL(
     new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }),
@@ -342,6 +371,7 @@ export default function Intelligence({
                   </button>
                 ))}
               </div>
+              <KnowledgeLineage documents={documents} memory={memory} />
               <div className="intel-grid">
                 <Panel title="Ownership boundary" icon="globelock">
                   <dl>
