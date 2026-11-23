@@ -7,12 +7,12 @@ Use Linux, Node 24, Python 3.12 with SQLite FTS5 and a Chromium-based browser. T
 ```sh
 git clone --branch feature/airon-native-ciic-enterprise-intelligence https://github.com/richardrich999888-rgb/AIRON-native-.git
 cd AIRON-native-/apps/airon-console
-python3 -m venv .venv
-.venv/bin/pip install --require-hashes -r intelligence/requirements.txt
+python3 -m venv "$HOME/.airon-venvs/console"
+"$HOME/.airon-venvs/console/bin/pip" install --require-hashes -r intelligence/requirements.txt
 npm ci
 npm run build
 npm run db:local
-PYTHON="$PWD/.venv/bin/python" npm run ciic -- --demo-personas --directory "$HOME/.airon-presenter" --model qwen2.5:0.5b
+PYTHON="$HOME/.airon-venvs/console/bin/python" npm run ciic -- --demo-personas --directory "$HOME/.airon-presenter" --model qwen2.5:0.5b
 ```
 
 Open **http://127.0.0.1:8787/knowledge-vault**. Demo profiles allow the presenter to switch between fictional users. Use this mode with presentation data only. Omit `--demo-personas` for operator-issued pairing keys. The two modes use separate databases. Ordinary users cannot upload, approve or export. The service checks Host, origin and bearer identity on the loopback interface. The Enterprise Intelligence pairing and inherited console authentication have distinct scopes.
@@ -22,6 +22,7 @@ For local model generation, provision Ollama and the model on the same machine b
 ```sh
 docker run -d --name airon-ollama -p 127.0.0.1:11434:11434 -v airon-models:/root/.ollama -e OLLAMA_NO_CLOUD=1 ollama/ollama:0.40.17@sha256:ccc42bcd3d5fcf7ab0d532b300382154e1a4da56fc666bdb313b78ebdd912754
 docker exec airon-ollama ollama pull qwen2.5:0.5b
+curl -fsS http://127.0.0.1:11434/api/tags | python3 -c 'import json,sys; assert any(m["name"]=="qwen2.5:0.5b" and m["digest"]=="a8b0c51577010a279d933d14c2a8ab4b268079d44c5c8830c0a93900f1827c67" for m in json.load(sys.stdin)["models"])'
 ```
 
 ## Shreyas’s five-minute script

@@ -2,6 +2,8 @@
 
 SYNTRIASS Labs · Enterprise-Owned Sovereign Intelligence
 
+[Current launch instructions and five-minute script for the PDF, local model and telemetry walkthrough](P0-062_DEMONSTRATION.md). The maintenance example below remains available for deterministic rehearsal.
+
 Demonstrate an employee getting an answer from a maintenance record, a second question exceeding the record, and a separately reviewed correction becoming reusable, exportable organizational knowledge. The application keeps the knowledge, versions and review trail in a local SQLite database.
 
 ## Launch

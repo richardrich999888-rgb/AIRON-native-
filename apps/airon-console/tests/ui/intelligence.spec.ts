@@ -201,11 +201,9 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
     };
     await ask(page, "Inspection interval");
     await expect(
-      page
-        .locator(".intelligence-card p")
-        .filter({
-          hasText: /Inspect the cooling assembly every 200 operating hours/,
-        }),
+      page.locator(".intelligence-card p").filter({
+        hasText: /Inspect the cooling assembly every 200 operating hours/,
+      }),
     ).toBeVisible();
     await shot(page, "04-private-workspace");
     await ask(page, "Handover register");
@@ -263,12 +261,10 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
       await pair(p, "Nila");
       await ask(p, "Handover register");
       await expect(
-        p
-          .locator(".intelligence-card p")
-          .filter({
-            hasText:
-              "Record the cooling assembly handover in the fictional shift register MH-04.",
-          }),
+        p.locator(".intelligence-card p").filter({
+          hasText:
+            "Record the cooling assembly handover in the fictional shift register MH-04.",
+        }),
       ).toBeVisible();
     } finally {
       await second.close();
@@ -389,6 +385,75 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
           JSON.stringify(payload, null, 2),
         );
     }
+    // Rehearse the presenter's PDF through every knowledge ownership stage.
+    const handover = "Which register records the spindle handover?";
+    const procedure = "Record the spindle handover in register MH-04.";
+    const askTyped = async (question: string) => {
+      await page.getByLabel("Technical question").fill(question);
+      await page.getByRole("button", { name: "Ask workspace" }).click();
+    };
+    await pair(page, "Dev");
+    await askTyped(handover);
+    await expect(
+      page.getByRole("heading", { name: "Abstained" }),
+    ).toBeVisible();
+    await route(page, "expert-teach", "Expert Teach");
+    await pair(page, "Leela");
+    await page.getByLabel("Supported question", { exact: true }).fill(handover);
+    await page.getByLabel("Proposed procedure").fill(procedure);
+    await page
+      .getByLabel("Related vault document")
+      .selectOption({ label: "workshop-note.pdf" });
+    await page
+      .getByLabel("Supporting evidence or reference")
+      .fill("Workshop shift addendum, section 2, supplied by the shift lead.");
+    await page.getByRole("button", { name: "Submit for review" }).click();
+    await expect(
+      page.getByText("Submitted for independent review."),
+    ).toBeVisible();
+    await pair(page, "Ravi");
+    await page.getByRole("button", { name: "Approve and activate" }).click();
+    await expect(page.getByText("Approved procedure activated.")).toBeVisible();
+    await route(page, "private-ai-workspace", "Private AI Workspace");
+    await pair(page, "Nila");
+    await askTyped(handover);
+    await expect(
+      page.locator(".intelligence-card p").filter({ hasText: procedure }),
+    ).toBeVisible();
+    await route(page, "institutional-memory", "Institutional Memory");
+    await pair(page, "Mira");
+    const version = page.locator("details").filter({ hasText: handover });
+    await expect(version).toContainText("approved by Ravi");
+    await expect(version).toContainText("1 reuse");
+    const exportFile = page.waitForEvent("download");
+    await page
+      .getByRole("button", { name: "Export approved knowledge" })
+      .click();
+    const exportedFile = await exportFile;
+    const fileStream = await exportedFile.createReadStream();
+    const pieces = [];
+    for await (const piece of fileStream!) pieces.push(piece);
+    const records = JSON.parse(Buffer.concat(pieces).toString());
+    const savedVersion = records.approved.find(
+      (item: { question: string }) => item.question === handover,
+    );
+    expect(savedVersion).toMatchObject({
+      actor: "Leela",
+      reviewer: "Ravi",
+      source: "workshop-note.pdf",
+      version: 1,
+      reuse: 1,
+    });
+    await route(page, "trust-evidence", "Trust & Evidence");
+    const approval = page
+      .locator("details")
+      .filter({ hasText: "Correction approved · Ravi" })
+      .first();
+    await approval.locator("summary").click();
+    await expect(approval.locator("code")).toContainText(
+      '"teaching": ' + savedVersion.id,
+    );
+    await shot(page, "21-pdf-approval");
     await route(page, "verification", "Verification");
     await page
       .getByRole("button", { name: "Local Runtime", exact: true })
@@ -451,6 +516,21 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
         ).toBeVisible();
       }
     }
+    await route(page, "sovereign-runtime", "Sovereign Runtime");
+    await page
+      .getByRole("button", { name: "Restart local repository" })
+      .click();
+    await expect(
+      page.getByText(
+        "Repository restarted. Open the workspace to inspect persisted records.",
+      ),
+    ).toBeVisible({ timeout: 20000 });
+    await pair(page, "Mira");
+    await route(page, "institutional-memory", "Institutional Memory");
+    await expect(
+      page.locator("details").filter({ hasText: handover }),
+    ).toContainText(procedure);
+    await shot(page, "22-pdf-memory-after-restart");
     await page.setViewportSize({ width: 390, height: 844 });
     await route(page, "knowledge-vault", "Knowledge Vault");
     await expect(
