@@ -21,6 +21,20 @@ Open **http://127.0.0.1:8787/intelligence-overview** on the same computer. The U
 
 For a locally controlled evaluation, omit `--demo-personas`. The launcher uses a separate `enterprise/` database and prints separate ephemeral pairing keys. Distribute each key only to its assigned operator. In either mode the inherited security dashboard has its own demo session and live-data boundary. To select an installed local Ollama model, append `--model YOUR_LOCAL_TAG` and choose **Local Ollama** in the workspace. Initial dependency installation requires network access. The deterministic route requires no model download.
 
+## What to say on each Enterprise Intelligence page
+
+Open with “I’ll show you how a maintenance record becomes an answer an employee can check, and how a gap in that record becomes a procedure a second employee can use.”
+
+| Page in sidebar order | What to show and say |
+| --- | --- |
+| Intelligence Overview | “Select a source document. We can see who imported it, how many approved versions came from it, and how often those versions were used to answer a question.” |
+| Knowledge Vault | “Here is the original inspection protocol. An administrator can import a text or Markdown file. We can open the record, read the source, and check who imported it and its SHA-256 fingerprint.” |
+| Private AI Workspace | “When should we inspect the cooling assembly? The answer is every 200 operating hours, and here is the document it came from. Now I’ll ask which register records the handover. That detail is missing, so AIRON abstains.” |
+| Expert Teach | “The expert proposes the handover procedure, links the source and adds a supporting reference. A separate reviewer checks the change and decides whether to activate it.” |
+| Institutional Memory | “A second employee can now ask the handover question. This page shows the approved answer, its version, the expert, the reviewer and the reuse count. An administrator can export the knowledge.” |
+| Sovereign Runtime | “Let’s check what is running on this computer. The probe reports local database size, service CPU time and availability of the configured Ollama model. This walkthrough uses the source-excerpt engine.” |
+| Trust & Evidence | “Here we can follow the handover question from abstention to approval and release of an answer. Each event shows the actor, time and details. These are local application records. The AIP verification button opens the separate execution-evidence verifier.” |
+
 ## Five-minute presentation
 
 | Time | Presenter action | Evidence to show |
