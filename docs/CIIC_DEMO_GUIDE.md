@@ -1,4 +1,4 @@
-# AIRON Native for CIIC
+# AIRON Native enterprise intelligence walkthrough
 
 SYNTRIASS Labs · Enterprise-Owned Sovereign Intelligence
 
@@ -25,7 +25,7 @@ For a locally controlled evaluation, omit `--demo-personas`. The launcher uses a
 
 | Time | Presenter action | Evidence to show |
 | --- | --- | --- |
-| 0:00–0:40 | Open Intelligence Overview as Mira, then Knowledge Vault. Click **Import fictional maintenance document**. Expand the document. | The local record contains its actual source text, origin, timestamp and SHA-256. |
+| 0:00–0:40 | Open Intelligence Overview as Mira, then Knowledge Vault. Click **Import sample maintenance document**. Expand the document. | The local record contains its actual source text, origin, timestamp and SHA-256. |
 | 0:40–1:25 | Open Private AI Workspace, switch to Dev. Select **Inspection interval** and **Ask workspace**. Then ask **Handover register**. | The first answer quotes the maintenance source. The second abstains because the imported document does not identify a handover register. |
 | 1:25–2:20 | In Expert Teach switch to Leela. Enter the exact handover question below, the proposed answer, the related vault document and the supporting reference. Submit for review. | The proposal identifies its author and remains pending. |
 | 2:20–3:00 | Switch to Ravi, inspect the evidence and choose **Approve and activate**. | The reviewer decision assigns version 1. Further approved revisions receive new version numbers. |
@@ -69,7 +69,7 @@ flowchart TD
 
 **Implemented.** Local TXT/Markdown import, SQLite storage, FTS5 vault search, deterministic supported-question lookup, cited excerpts, abstention, proposal and review, immutable version history via the API, reuse counting, audit and export. Local model selection and failure handling use AIRON’s existing Ollama adapter. The runtime reports measured database size and model availability.
 
-**Simulated.** Maintenance documents and named personas in CIIC mode are fictional. Picking an identity in this mode is a presentation convenience. The original security dashboard’s synthetic telemetry is separately labeled.
+**Simulated.** The built-in maintenance document and selectable profiles are samples. Picking an identity in this mode is a presentation convenience. The original security dashboard’s synthetic telemetry is separately labeled.
 
 **Planned.** Production identity federation for the knowledge service, granular document ACLs, multi-organization provisioning, encryption/key custody, independently signed knowledge records and richer semantic retrieval. All paired identities in one knowledge workspace can read its imported documents.
 

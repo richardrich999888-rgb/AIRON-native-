@@ -56,7 +56,7 @@ class Handler(BaseHTTPRequestHandler):
             if op == "pair" and self.server.demo:
                 actor=data.get("actor")
                 if actor not in PEOPLE:
-                    raise Problem(400,"Unknown demonstration identity.")
+                    raise Problem(400,"Unknown sample workspace profile.")
                 return self.respond({"token":self.server.keys[actor]})
             auth = self.headers.get("Authorization","")
             actor = next((a for a,k in self.server.keys.items() if secrets.compare_digest("Bearer "+k,auth)),None)
@@ -76,7 +76,7 @@ class Handler(BaseHTTPRequestHandler):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--demo-personas",action="store_true",help="Allow local CIIC viewers to select fictional identities.")
+    parser.add_argument("--demo-personas",action="store_true",help="Allow local viewers to select sample workspace profiles.")
     parser.add_argument("--directory",type=Path,default=Path.home()/".airon-native")
     parser.add_argument("--model",default="",help="Existing local Ollama model tag")
     args=parser.parse_args()

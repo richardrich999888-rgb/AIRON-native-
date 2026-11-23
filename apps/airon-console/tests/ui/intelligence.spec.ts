@@ -51,6 +51,10 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
   const output = process.env.CIIC_CAPTURE_DIR;
   const shot = async (p: Page, name: string) => {
     await p.evaluate(() => document.fonts.ready);
+    if (/^0[2-8]-/.test(name) || name === "12-mobile-vault") {
+      await expect(p.locator(".intel-strip")).toContainText("Local knowledge workspace");
+      await expect(p.locator("body")).not.toContainText(/\bCIIC\b/i);
+    }
     if (
       name.includes("login") ||
       /^0[2-8]-/.test(name) ||
@@ -85,7 +89,7 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
   const pair = async (p: Page, actor: string) => {
     if (await p.getByRole("button", { name: "Switch identity" }).isVisible())
       await p.getByRole("button", { name: "Switch identity" }).click();
-    await p.getByLabel("Demonstration identity").selectOption(actor);
+    await p.getByLabel("Sample workspace profile").selectOption(actor);
     await p
       .getByRole("button", { name: "Open workspace", exact: true })
       .click();
@@ -163,7 +167,7 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
       .click();
     await pair(page, "Mira");
     await page
-      .getByRole("button", { name: "Import fictional maintenance document" })
+      .getByRole("button", { name: "Import sample maintenance document" })
       .click();
     await expect(
       page.getByText("Maintenance document imported."),

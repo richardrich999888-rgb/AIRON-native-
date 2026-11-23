@@ -299,11 +299,7 @@ export default function Intelligence({
       <div className="intel-strip">
         <span>
           <I n="database" size={14} />
-          {info
-            ? info.demo
-              ? "CIIC demonstration · fictional identities"
-              : "Local enterprise repository"
-            : "Local knowledge service"}
+          {info ? "Local knowledge workspace" : "Local knowledge service"}
         </span>
         {state && (
           <>
@@ -346,7 +342,7 @@ export default function Intelligence({
           ) : (
             <form onSubmit={(e) => submit(e, pair)}>
               {info.demo ? (
-                <Field label="Demonstration identity">
+                <Field label="Sample workspace profile">
                   <select
                     value={person}
                     onChange={(e) => personSet(e.target.value)}
@@ -415,7 +411,7 @@ export default function Intelligence({
                     <dt>Workspace</dt>
                     <dd>
                       {info?.demo
-                        ? "Fictional maintenance evaluation"
+                        ? "Maintenance workspace · sample profiles"
                         : "Operator-controlled directory"}
                     </dd>
                     <dt>Model deployment</dt>
@@ -525,7 +521,7 @@ export default function Intelligence({
                         )
                       }
                     >
-                      Import fictional maintenance document
+                      Import sample maintenance document
                     </button>
                     <form
                       onSubmit={(e) =>
