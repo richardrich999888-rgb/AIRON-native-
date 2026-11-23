@@ -75,6 +75,20 @@ flowchart TD
 
 **Research.** Model-weight adaptation, autonomous continual learning and compute optimization remain separate research tracks. Approving a procedure updates retrieval data. Installed-model inference requires its own measured run. Air-gap operation, model-weight ownership and production certification are outside this qualification.
 
+## Recorded application screens
+
+These ten 1440 × 960 PNGs were captured from the built application in Chromium. The intelligence records come from the scripted fictional maintenance walkthrough. The inherited security and FinOps views show their labeled synthetic tenant.
+
+| | |
+| --- | --- |
+| [Security dashboard](ciic-screens/01-dashboard.png) | [Intelligence Overview](ciic-screens/02-intelligence-overview.png) |
+| [Knowledge Vault](ciic-screens/03-knowledge-vault.png) | [Private AI Workspace](ciic-screens/04-private-workspace.png) |
+| [Expert Teach](ciic-screens/05-expert-teach.png) | [Institutional Memory](ciic-screens/06-institutional-memory.png) |
+| [Sovereign Runtime](ciic-screens/07-sovereign-runtime.png) | [Trust & Evidence](ciic-screens/08-trust-evidence.png) |
+| [Agent Lineage](ciic-screens/09-agent-lineage.png) | [AI FinOps · Spending](ciic-screens/10-ai-finops.png) |
+
+[Download all ten PNGs from the CI run](https://github.com/richardrich999888-rgb/AIRON-native-/actions/runs/45204756788/artifacts/14832089365).
+
 ## Reproduce validation and capture
 
 From apps/airon-console:
@@ -96,3 +110,18 @@ Use an unused 8766/8787 port pair for the intelligence browser test. It provisio
 ## Local validation record
 
 The pinned application and branded application both passed production builds under Node 24.22.3. The branded TypeScript check passed. ESLint reported zero errors and 22 warnings. The core suite passed 20 tests, including both navigation-preservation assertions, with six native-binary-dependent checks skipped locally. Eight ownership and access tests passed, including re-opening the store, concurrent review, source ambiguity and unavailable inference. All eight existing AIRON website engine tests passed. Browser and full native qualification use the GitHub runner because this local shell disallows browser sockets.
+
+## Hosted qualification — 23 November 2026
+
+[Completed GitHub Actions run](https://github.com/richardrich999888-rgb/AIRON-native-/actions/runs/45204756788) for implementation commit `0b579ac08c69a6345d585f38dc241b87a2b40efd`.
+
+| Check | Result |
+| --- | --- |
+| Original pinned VANIAN app | Clean dependency install, production build and rendered Home drill-down passed before testing the branded copy. |
+| AIRON build and static checks | Production build and TypeScript passed. ESLint reported 0 errors and 22 warnings. |
+| Knowledge ownership and access | 8 Python tests passed. |
+| Native verifier, adapters and navigation | 26 tests passed, including previously skipped native cases. Zero failures and zero skips. |
+| Browser qualification | All 17 Playwright cases passed without retries, including inherited security interactions, accessible/mobile navigation, the full maintenance workflow, actual file import, independent review, persisted cross-user reuse and inspected JSON download. |
+| Screens | 10 actual application screenshots captured. |
+
+During the first capture the FinOps check used an exact text selector, while the original table heading includes its live row count. The corrected test checks the named heading, selected allocation dimension and rendered SVG chart. The subsequent run passed. The production UI used the deterministic extraction engine for the maintenance demo. These results qualify that demonstrated path and the tested AIP cases.
