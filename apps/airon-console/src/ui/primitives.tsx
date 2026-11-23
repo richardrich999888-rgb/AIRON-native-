@@ -224,7 +224,7 @@ export function Brand({
       {!short && (
         <span className="brand-type">
           <b>AIRON Native</b>
-          <small><img src="/brand/syntriass-wordmark.png" alt="" /> Labs</small>
+          <small><img src="/brand/syntriass-wordmark.png" alt="" /></small>
         </span>
       )}
     </span>

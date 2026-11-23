@@ -53,7 +53,7 @@ test("operator imports, teaches, approves, retrieves after restart and exports o
     await p.evaluate(() => document.fonts.ready);
     if (name.includes("login") || /^0[2-8]-/.test(name) || name === "12-mobile-vault") {
       const scan = await new AxeBuilder({ page: p }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
-      expect(scan.violations.filter((v) => v.impact === "serious" || v.impact === "critical")
+      expect.soft(scan.violations.filter((v) => v.impact === "serious" || v.impact === "critical")
         .map((v) => [v.id, v.nodes.map((n) => n.target)]), name).toEqual([]);
     }
     if (output) {

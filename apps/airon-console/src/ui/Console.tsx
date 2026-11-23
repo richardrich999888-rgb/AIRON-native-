@@ -770,7 +770,7 @@ function Workspace({ initial }: { initial: string }) {
     <>
       <div className="brand-area">
         <button
-          aria-label="AIRON Native home"
+          aria-label="SYNTRIASS Labs · AIRON Native home"
           className="brand-button"
           onClick={() => go("home")}
         >
@@ -914,13 +914,15 @@ function Workspace({ initial }: { initial: string }) {
             onClick={() => Mobile(false)}
           />
         )}
-        <aside className={"sidebar " + (mobile ? "mobile-open" : "")}>
+        <aside id="console-navigation" className={"sidebar " + (mobile ? "mobile-open" : "")}>
           {navigation}
         </aside>
         <div className="workspace">
           <header className="topbar">
             <button
               aria-label="Open navigation"
+              aria-expanded={mobile}
+              aria-controls="console-navigation"
               className="mobile-menu icon-btn"
               onClick={() => Mobile(true)}
             >
@@ -935,9 +937,9 @@ function Workspace({ initial }: { initial: string }) {
               <b>{page.title}</b>
             </div>
             <div className="top-actions">
-              <button className="global-search" aria-label="Search workspace" onClick={() => modal("search")}>
+              <button className="global-search" aria-keyshortcuts="Control+K Meta+K" onClick={() => modal("search")}>
                 <I n="search" size={15} />
-                <span>Search workspace</span>
+                <span className="search-label">Search workspace</span>
                 <kbd>⌘ K</kbd>
               </button>
               {!intelligence && (
